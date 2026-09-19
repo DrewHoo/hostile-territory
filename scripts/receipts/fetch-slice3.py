@@ -71,10 +71,20 @@ def slug_for(team):
     return re.sub(r"\s+", "-", s.strip())
 
 
+# The bare `<season+1>` year picker sometimes resolves to a snapshot taken BEFORE
+# that season finished (blank result cells). For those pages we pin an explicit
+# post-season timestamp instead.
+TIMESTAMP_OVERRIDES = {
+    ("Michigan", 2017): "20180701",
+    ("Nebraska", 2010): "20110701",
+}
+
+
 def wayback_url(team, season):
+    stamp = TIMESTAMP_OVERRIDES.get((team, season), str(season + 1))
     return (
-        "https://web.archive.org/web/%d/https://www.sports-reference.com/cfb/schools/%s/%d-schedule.html"
-        % (season + 1, slug_for(team), season)
+        "https://web.archive.org/web/%s/https://www.sports-reference.com/cfb/schools/%s/%d-schedule.html"
+        % (stamp, slug_for(team), season)
     )
 
 

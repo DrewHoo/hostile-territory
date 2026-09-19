@@ -251,6 +251,12 @@ def rank_and_name(cell):
     return None, cell.strip()
 
 
+def days(iso):
+    import datetime
+    y, m, d = (int(x) for x in iso.split("-"))
+    return datetime.date(y, m, d).toordinal()
+
+
 def to_int(s):
     try:
         return int(s)
@@ -294,6 +300,38 @@ def do_build():
                         row = c
                         break
                 row = row or cands[0]
+            date_note = None
+            if row is None:
+                # SR occasionally dates a game one day off from the worklist. Match on
+                # opponent within a two-day window and report the date difference.
+                near = []
+                for r in rows:
+                    d = row_date(r)
+                    if not d:
+                        continue
+                    _, opp = rank_and_name(get(r, "opp_name"))
+                    if opp in names(g["away_team"]) and abs(days(d) - days(g["date"])) <= 2:
+                        near.append((abs(days(d) - days(g["date"])), d, r))
+                if near:
+                    near.sort(key=lambda x: x[0])
+                    row = near[0][2]
+                    date_note = ("SR dates this game %s, the worklist says %s"
+                                 % (near[0][1], g["date"]))
+            if row is not None and not (get(row, "game_result") or "") and \
+                    not (get(row, "points") or ""):
+                out.append({
+                    "date": g["date"], "away_team": g["away_team"], "home_team": team,
+                    "season": season, "source_url": url, "quote": " | ".join(row["txts"]),
+                    "sr_home_rank": rank_and_name(get(row, "school_name"))[0],
+                    "sr_away_rank": rank_and_name(get(row, "opp_name"))[0],
+                    "sr_home_points": None, "sr_away_points": None,
+                    "site_marker": get(row, "game_location") or "",
+                    "status": "page_missing",
+                    "note": ("The only archived snapshot of the %d %s schedule page predates "
+                             "the season: the row for this game carries no result or score, so "
+                             "there is nothing to verify against." % (season, team)),
+                })
+                continue
             if row is None:
                 out.append({
                     "date": g["date"], "away_team": g["away_team"], "home_team": team,
@@ -312,6 +350,8 @@ def do_build():
             hp = to_int(get(row, "points"))
             ap = to_int(get(row, "opp_points"))
             problems = []
+            if date_note:
+                problems.append(date_note)
             if not row.get("aligned", True):
                 problems.append("could not align row cells to table headers")
             if hname not in names(team):

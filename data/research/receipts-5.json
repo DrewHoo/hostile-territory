@@ -33,14 +33,14 @@
   "home_team": "Oregon",
   "season": 2001,
   "source_url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/oregon/2001-schedule.html",
-  "quote": "",
-  "sr_home_rank": null,
+  "quote": "7 | Oct 20, 2001 | Sat | (5) Oregon |  | Stanford | Pac-10 | L | 42 | 49 | 6 | 1 | L 1 | ",
+  "sr_home_rank": 5,
   "sr_away_rank": null,
-  "sr_home_points": null,
-  "sr_away_points": null,
-  "site_marker": null,
+  "sr_home_points": 42,
+  "sr_away_points": 49,
+  "site_marker": "",
   "status": "discrepancy",
-  "note": "No schedule row on the 2001 Oregon page for 2001-10-19."
+  "note": "SR dates this game 2001-10-20, the worklist says 2001-10-19"
  },
  {
   "date": "2001-11-03",
@@ -1944,8 +1944,8 @@
   "sr_home_points": null,
   "sr_away_points": null,
   "site_marker": "",
-  "status": "discrepancy",
-  "note": "home AP rank 22 vs worklist 9; score home None-None vs worklist home 38-6; home result '', expected 'W' for visitor L"
+  "status": "page_missing",
+  "note": "The only archived snapshot of the 2024 SMU schedule page predates the season: the row for this game carries no result or score, so there is nothing to verify against."
  },
  {
   "date": "2007-10-20",
@@ -3745,14 +3745,14 @@
   "home_team": "Texas",
   "season": 2001,
   "source_url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/texas/2001-schedule.html",
-  "quote": "",
-  "sr_home_rank": null,
-  "sr_away_rank": null,
-  "sr_home_points": null,
-  "sr_away_points": null,
-  "site_marker": null,
+  "quote": "7 | Oct 20, 2001 | Sat | (9) Texas |  | (14) Colorado | Big 12 | W | 41 | 7 | 6 | 1 | W 2 | ",
+  "sr_home_rank": 9,
+  "sr_away_rank": 14,
+  "sr_home_points": 41,
+  "sr_away_points": 7,
+  "site_marker": "",
   "status": "discrepancy",
-  "note": "No schedule row on the 2001 Texas page for 2001-10-19."
+  "note": "SR dates this game 2001-10-20, the worklist says 2001-10-19"
  },
  {
   "date": "2001-12-01",

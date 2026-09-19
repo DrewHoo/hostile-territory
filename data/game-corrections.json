@@ -1,22 +1,135 @@
 {
-  "version": 1,
-  "note": "Evidence-backed fixes to candidate rows where the bulk sources are wrong. 'exclude' removes a game that is not a true road game; 'patch' fixes a field. Every entry names its evidence. Applied by build-records before the join.",
-  "corrections": [
-    { "date": "2001-10-27", "away_team": "Georgia", "home_team": "Florida", "action": "exclude", "reason": "Florida-Georgia is played in Jacksonville; SR site marker N (receipts-2)." },
-    { "date": "2002-11-02", "away_team": "Florida", "home_team": "Georgia", "action": "exclude", "reason": "Jacksonville; SR site marker N (receipts-2)." },
-    { "date": "2003-11-01", "away_team": "Georgia", "home_team": "Florida", "action": "exclude", "reason": "Jacksonville, same series siting as the receipted 2001/2002/2007 rows." },
-    { "date": "2005-10-29", "away_team": "Georgia", "home_team": "Florida", "action": "exclude", "reason": "Jacksonville, same series siting as the receipted 2001/2002/2007 rows. (1994 and 1995 stay: home-and-home during Gator Bowl reconstruction.)" },
-    { "date": "2007-10-27", "away_team": "Georgia", "home_team": "Florida", "action": "exclude", "reason": "Jacksonville; SR site marker N (receipts-2)." },
-    { "date": "2007-11-24", "away_team": "Missouri", "home_team": "Kansas", "action": "exclude", "reason": "Border War at Arrowhead Stadium; SR site marker N (receipts-2)." },
-    { "date": "2001-12-08", "away_team": "Tennessee", "home_team": "LSU", "action": "exclude", "reason": "SEC Championship Game; candidate row's own venue field says Georgia Dome." },
-    { "date": "2002-12-07", "away_team": "Georgia", "home_team": "Arkansas", "action": "exclude", "reason": "SEC Championship Game; venue Georgia Dome." },
-    { "date": "2003-12-06", "away_team": "LSU", "home_team": "Georgia", "action": "exclude", "reason": "SEC Championship Game; venue Georgia Dome and SR site marker N (receipts-2)." },
-    { "date": "2004-12-04", "away_team": "Auburn", "home_team": "Tennessee", "action": "exclude", "reason": "SEC Championship Game; venue Georgia Dome." },
-    { "date": "2005-12-03", "away_team": "Georgia", "home_team": "LSU", "action": "exclude", "reason": "SEC Championship Game; venue Georgia Dome." },
-    { "date": "2006-12-02", "away_team": "Arkansas", "home_team": "Florida", "action": "exclude", "reason": "SEC Championship Game; venue Georgia Dome and SR site marker N (receipts-2)." },
-    { "date": "2007-12-01", "away_team": "Tennessee", "home_team": "LSU", "action": "exclude", "reason": "SEC Championship Game; venue Georgia Dome." },
-    { "date": "2007-12-01", "away_team": "Oklahoma", "home_team": "Missouri", "action": "exclude", "reason": "Big 12 Championship Game; venue Alamodome. (UTSA's 2022 CUSA title game stays: the Alamodome is UTSA's home stadium.)" },
-    { "date": "2003-08-23", "away_team": "California", "home_team": "Kansas State", "action": "patch", "patch": { "away_points": 28, "home_points": 42 }, "reason": "cfbfastR row carries 10-7; SR reads W 42-28 in two independent snapshots (receipts-2)." },
-    { "date": "2001-10-18", "away_team": "Boise State", "home_team": "Fresno State", "action": "patch", "patch": { "date": "2001-10-19" }, "reason": "Friday game; the UTC-8h kickoff shift moved it a day early. SR dates it Oct 19 (receipts-2)." }
-  ]
+ "version": 1,
+ "note": "Evidence-backed fixes to candidate rows where the bulk sources are wrong. 'exclude' removes a game that is not a true road game; 'patch' fixes a field. Every entry names its evidence. Applied by build-records before the join.",
+ "corrections": [
+  {
+   "date": "2001-10-27",
+   "away_team": "Georgia",
+   "home_team": "Florida",
+   "action": "exclude",
+   "reason": "Florida-Georgia is played in Jacksonville; SR site marker N (receipts-2)."
+  },
+  {
+   "date": "2002-11-02",
+   "away_team": "Florida",
+   "home_team": "Georgia",
+   "action": "exclude",
+   "reason": "Jacksonville; SR site marker N (receipts-2)."
+  },
+  {
+   "date": "2003-11-01",
+   "away_team": "Georgia",
+   "home_team": "Florida",
+   "action": "exclude",
+   "reason": "Jacksonville, same series siting as the receipted 2001/2002/2007 rows."
+  },
+  {
+   "date": "2005-10-29",
+   "away_team": "Georgia",
+   "home_team": "Florida",
+   "action": "exclude",
+   "reason": "Jacksonville, same series siting as the receipted 2001/2002/2007 rows. (1994 and 1995 stay: home-and-home during Gator Bowl reconstruction.)"
+  },
+  {
+   "date": "2007-10-27",
+   "away_team": "Georgia",
+   "home_team": "Florida",
+   "action": "exclude",
+   "reason": "Jacksonville; SR site marker N (receipts-2)."
+  },
+  {
+   "date": "2007-11-24",
+   "away_team": "Missouri",
+   "home_team": "Kansas",
+   "action": "exclude",
+   "reason": "Border War at Arrowhead Stadium; SR site marker N (receipts-2)."
+  },
+  {
+   "date": "2001-12-08",
+   "away_team": "Tennessee",
+   "home_team": "LSU",
+   "action": "exclude",
+   "reason": "SEC Championship Game; candidate row's own venue field says Georgia Dome."
+  },
+  {
+   "date": "2002-12-07",
+   "away_team": "Georgia",
+   "home_team": "Arkansas",
+   "action": "exclude",
+   "reason": "SEC Championship Game; venue Georgia Dome."
+  },
+  {
+   "date": "2003-12-06",
+   "away_team": "LSU",
+   "home_team": "Georgia",
+   "action": "exclude",
+   "reason": "SEC Championship Game; venue Georgia Dome and SR site marker N (receipts-2)."
+  },
+  {
+   "date": "2004-12-04",
+   "away_team": "Auburn",
+   "home_team": "Tennessee",
+   "action": "exclude",
+   "reason": "SEC Championship Game; venue Georgia Dome."
+  },
+  {
+   "date": "2005-12-03",
+   "away_team": "Georgia",
+   "home_team": "LSU",
+   "action": "exclude",
+   "reason": "SEC Championship Game; venue Georgia Dome."
+  },
+  {
+   "date": "2006-12-02",
+   "away_team": "Arkansas",
+   "home_team": "Florida",
+   "action": "exclude",
+   "reason": "SEC Championship Game; venue Georgia Dome and SR site marker N (receipts-2)."
+  },
+  {
+   "date": "2007-12-01",
+   "away_team": "Tennessee",
+   "home_team": "LSU",
+   "action": "exclude",
+   "reason": "SEC Championship Game; venue Georgia Dome."
+  },
+  {
+   "date": "2007-12-01",
+   "away_team": "Oklahoma",
+   "home_team": "Missouri",
+   "action": "exclude",
+   "reason": "Big 12 Championship Game; venue Alamodome. (UTSA's 2022 CUSA title game stays: the Alamodome is UTSA's home stadium.)"
+  },
+  {
+   "date": "2003-08-23",
+   "away_team": "California",
+   "home_team": "Kansas State",
+   "action": "patch",
+   "patch": {
+    "away_points": 28,
+    "home_points": 42
+   },
+   "reason": "cfbfastR row carries 10-7; SR reads W 42-28 in two independent snapshots (receipts-2)."
+  },
+  {
+   "date": "2001-10-18",
+   "away_team": "Boise State",
+   "home_team": "Fresno State",
+   "action": "patch",
+   "patch": {
+    "date": "2001-10-19"
+   },
+   "reason": "Friday game; the UTC-8h kickoff shift moved it a day early. SR dates it Oct 19 (receipts-2)."
+  },
+  {
+   "date": "2001-10-19",
+   "away_team": "UCLA",
+   "home_team": "California",
+   "action": "patch",
+   "patch": {
+    "date": "2001-10-20"
+   },
+   "reason": "2001 midnight-ET placeholder timestamp shifted a day early by the UTC-8h fix; SR dates it Oct 20 (receipts-6)."
+  }
+ ]
 }
