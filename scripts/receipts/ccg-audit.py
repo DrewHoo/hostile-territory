@@ -58,9 +58,10 @@ SLUG_EXCEPTIONS = {
 
 # The <season+1> year picker occasionally lands on a pre/mid-season snapshot
 # (unplayed games, "TBD" kickoff times). These pages get an explicit timestamp.
+# UNLV's own 2024 schedule page has only pre/early-season captures, so that game
+# is read from Boise State's page, whose last capture (Dec 25, 2024) is post-game.
 PICKER = {
-    "UNLV|2024": "20250601",
-    "Troy|2025": "20260601",
+    "Boise State|2024": "20241225124425",
 }
 
 # Nine away-team schedule pages have no Wayback capture at all (CDX returns zero
@@ -77,7 +78,52 @@ HOME_SIDE = {
     "Houston|2021": "Cincinnati",
     "New Mexico State|2023": "Liberty",
     "SMU|2023": "Tulane",
-    "Troy|2025": "James Madison",
+    "UNLV|2024": "Boise State",
+}
+
+# Two suspects have no archived Sports-Reference schedule page on EITHER side
+# (CDX returns zero captures for both teams' <season>-schedule.html, and the
+# season-summary snapshots carry no schedule table). These fall back to other SR
+# pages that do have captures, quoted verbatim below.
+#
+# Akron|2020 leans on the boxscore page title. SR writes "X at Y" for a road game
+# and "X vs Y" for a neutral-site one — calibrated against three games already in
+# this set whose schedule pages agree: 2002-12-07 "Oklahoma vs Colorado" (Big 12
+# CG, Houston, 'N'), 2007-12-01 "Virginia Tech vs Boston College" (ACC CG,
+# Jacksonville, 'N'), and 2011-12-02 "UCLA at Oregon" (Pac-12 CG at Autzen, '@').
+SPECIAL = {
+    "Akron|2020": {
+        "verdict": "road",
+        "source_url": ("https://web.archive.org/web/20230608171621id_/"
+                       "https://www.sports-reference.com/cfb/boxscores/2020-12-12-buffalo.html"),
+        "quote": ("Akron at Buffalo Box Score, December 12, 2020 | College Football at "
+                  "Sports-Reference.com"),
+        "note": ("neither akron/2020-schedule.html nor buffalo/2020-schedule.html has any "
+                 "Wayback capture; SR's boxscore page titles this game 'Akron AT Buffalo', "
+                 "and SR writes 'vs' (not 'at') for its neutral-site games"),
+    },
+    "Troy|2025": {
+        "verdict": "road",
+        "source_url": ("https://web.archive.org/web/20260218070136id_/"
+                       "https://www.sports-reference.com/cfb/years/2025-schedule.html"),
+        "quote": "880 | 16 | Dec 5, 2025 | 7:00 PM | Fri | (19) James Madison | 31 |  | Troy | 14 |",
+        "note": ("troy/2025-schedule.html has one capture (Aug 31, 2025, preseason) and "
+                 "james-madison/2025-schedule.html one (Sep 6, 2025); SR's 2025 season "
+                 "schedule page carries the played game, with the site marker between "
+                 "winner James Madison and loser Troy EMPTY, i.e. JMU was at home, and an "
+                 "empty notes cell"),
+    },
+    "SMU|2023": {
+        "verdict": "road",
+        "source_url": ("https://web.archive.org/web/20251006214757id_/"
+                       "https://www.sports-reference.com/cfb/conferences/american/2023-schedule.html"),
+        "quote": ("57 | Dec 2, 2023 | 4:00 PM | Sat | (25) Southern Methodist | 26 | @ | "
+                  "(17) Tulane | 14 |"),
+        "note": ("neither southern-methodist/2023-schedule.html nor tulane/2023-schedule.html "
+                 "has any Wayback capture; the AAC 2023 conference schedule page puts '@' "
+                 "between winner SMU and loser Tulane, i.e. played at Tulane, and its notes "
+                 "cell is empty"),
+    },
 }
 
 MONTHS = {m: i + 1 for i, m in enumerate(
@@ -144,8 +190,14 @@ def title_ok(title, team, slug, season):
     return False
 
 
-def snapshot_unplayed(path):
-    """True when the snapshot predates the season (no game has a result yet)."""
+def snapshot_unplayed(path, season, want_dates):
+    """True when the snapshot predates the games we need.
+
+    The <season+1> picker lands on whatever capture is closest, which for a few
+    teams is a preseason page: every row is there but nothing has a score yet, so
+    the championship-week row may be missing entirely or carry no result. Either
+    way the snapshot cannot settle the suspect, so treat it as unusable.
+    """
     try:
         h = open(path, encoding="utf-8", errors="replace").read()
     except OSError:
@@ -159,31 +211,36 @@ def snapshot_unplayed(path):
         return False
     if not rows:
         return False
-    played = 0
+    i_pts = hidx(headers, "Pts")
     for cells in rows:
         try:
             dcell, site, opp, notes = row_fields(headers, cells)
         except ValueError:
             continue
-        i_pts = hidx(headers, "Pts")
-        if i_pts is not None and len(cells) > i_pts and cells[i_pts]["text"]:
-            played += 1
-    return played == 0
+        if norm_date(dcell["text"], dcell.get("csk"), season) not in want_dates:
+            continue
+        if i_pts is None or len(cells) <= i_pts:
+            return False
+        return not cells[i_pts]["text"]
+    return True
 
 
 def do_fetch(limit=None, sleep_s=4.5):
     os.makedirs(CACHE, exist_ok=True)
     suspects = json.load(open(SUSPECTS))
     meta = json.load(open(META)) if os.path.exists(META) else {}
-    pages, seen = [], set()
+    pages, seen, dates = [], set(), {}
     for s in suspects:
         key = "%s|%d" % (s["away_team"], s["season"])
+        dates.setdefault(key, set()).add(s["date"])
         if key not in seen:
             seen.add(key)
             pages.append((s["away_team"], s["season"]))
     n = 0
     for team, season in pages:
         key = "%s|%d" % (team, season)
+        if key in SPECIAL:
+            continue
         side = "home" if key in HOME_SIDE else "away"
         page_team = HOME_SIDE.get(key, team)
         slug = slugify(page_team)
@@ -202,7 +259,7 @@ def do_fetch(limit=None, sleep_s=4.5):
             time.sleep(60)
             code, eff, size = curl(url, dest)
         title = get_title(dest)
-        stale = code == "200" and snapshot_unplayed(dest)
+        stale = code == "200" and snapshot_unplayed(dest, season, dates[key])
         ok = code == "200" and title_ok(title, page_team, slug, season) and not stale
         attempts = list(prev.get("attempts", []))
         attempts.append({"code": code, "effective_url": eff, "size": size,
@@ -349,6 +406,10 @@ def do_parse():
                "home_team": s["home_team"], "season": s["season"],
                "verdict": "unresolved", "source_url": (m or {}).get("url", ""),
                "quote": "", "note": ""}
+        if key in SPECIAL:
+            row.update(SPECIAL[key])
+            out.append(row)
+            continue
         if not m or not m.get("ok"):
             last = ((m or {}).get("attempts") or [{}])[-1]
             row["note"] = "no usable Wayback snapshot (code=%s, title=%r)" % (
@@ -426,6 +487,10 @@ def write_notes(out):
     L.append("site-marker cell between the School and Opponent columns is the verdict:")
     L.append("`@` = SR agrees it was a true road game, `N` = SR calls it neutral.")
     L.append("")
+    L.append("Campus-hosted championship games (the 2011 Pac-12 CG at Autzen, the CUSA /")
+    L.append("AAC / MWC / Sun Belt title games at the higher seed) come back `@`, so they stay")
+    L.append("road games. Only the seven below are neutral.")
+    L.append("")
     L.append("## Counts")
     L.append("")
     L.append("| verdict | games |")
@@ -478,6 +543,31 @@ def write_notes(out):
             if r["quote"]:
                 L.append("  - row: `%s`" % r["quote"])
             L.append("  - source: %s" % r["source_url"])
+        L.append("")
+
+    fallbacks = [r for r in out
+                 if "read from the home team's page" in (r["note"] or "")
+                 or "/cfb/years/" in r["source_url"]
+                 or "/cfb/conferences/" in r["source_url"]
+                 or "/cfb/boxscores/" in r["source_url"]]
+    if fallbacks:
+        L.append("## Sourcing exceptions")
+        L.append("")
+        L.append("%d of the 93 could not be read off the away team's own schedule page — the "
+                 "Wayback" % len(fallbacks))
+        L.append("Machine has no post-game capture of it (CDX returns zero snapshots, or only")
+        L.append("preseason ones, and SR's season-summary snapshots carry no schedule table).")
+        L.append("Each fell back to another Sports-Reference page that *is* captured. On the home")
+        L.append("team's page, and on SR's conference / season schedule pages, an EMPTY site")
+        L.append("marker means the named home team played at home — so the visitor was on the")
+        L.append("road; `N` still means neutral.")
+        L.append("")
+        L.append("| date | game | verdict | fell back to |")
+        L.append("| --- | --- | --- | --- |")
+        for r in fallbacks:
+            L.append("| %s | %s at %s | %s | %s |" % (
+                r["date"], r["away_team"], r["home_team"], r["verdict"],
+                r["source_url"].split("sports-reference.com")[-1] or r["source_url"]))
         L.append("")
 
     L.append("## Road — confirmed true road games, leave alone")

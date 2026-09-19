@@ -275,6 +275,27 @@
     "date": "2001-10-20"
    },
    "reason": "2001 midnight-ET placeholder shifted a day early; SR dates it Oct 20 (receipts-4)."
+  },
+  {
+   "date": "2002-12-07",
+   "away_team": "Oklahoma",
+   "home_team": "Colorado",
+   "action": "exclude",
+   "reason": "Big 12 Championship in Houston; SR site marker N (ccg-audit)."
+  },
+  {
+   "date": "2006-12-02",
+   "away_team": "Wake Forest",
+   "home_team": "Georgia Tech",
+   "action": "exclude",
+   "reason": "ACC Championship in Jacksonville; SR site marker N (ccg-audit)."
+  },
+  {
+   "date": "2007-12-01",
+   "away_team": "Virginia Tech",
+   "home_team": "Boston College",
+   "action": "exclude",
+   "reason": "ACC Championship in Jacksonville; SR site marker N (ccg-audit)."
   }
  ]
 }
