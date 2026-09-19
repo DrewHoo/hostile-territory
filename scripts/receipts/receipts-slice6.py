@@ -71,7 +71,8 @@ def cache_path(slug, season):
 
 def curl(url, dest):
     r = subprocess.run(
-        ["curl", "-sL", "--max-time", "120", "-o", dest, "-w", "%{http_code}\t%{url_effective}\t%{size_download}", url],
+        ["curl", "-sL", "--max-time", "75", "--connect-timeout", "20", "-o", dest,
+         "-w", "%{http_code}\t%{url_effective}\t%{size_download}", url],
         capture_output=True, text=True)
     parts = (r.stdout or "\t\t").split("\t")
     code = parts[0] or "000"
@@ -104,7 +105,7 @@ def title_ok(title, team, slug, season):
     return False
 
 
-def do_fetch(limit=None):
+def do_fetch(limit=None, sleep_s=4.5, max_attempts=99):
     os.makedirs(CACHE, exist_ok=True)
     work = json.load(open(WORKLIST))["work"]
     meta = json.load(open(META)) if os.path.exists(META) else {}
@@ -113,33 +114,23 @@ def do_fetch(limit=None):
         team, season = page["home_team"], page["season"]
         slug = slugify(team)
         key = "%s|%d" % (team, season)
-        if key in meta and meta[key].get("ok"):
+        if key in meta and (meta[key].get("ok") or len(meta[key].get("attempts", [])) >= max_attempts):
             continue
         if limit is not None and n >= limit:
             break
         n += 1
         url = page_url(slug, season)
         dest = cache_path(slug, season)
-        attempts = []
-        ok = False
-        for attempt in range(2):
-            code, eff, size = curl(url, dest)
-            title = get_title(dest)
-            good = code == "200" and title_ok(title, team, slug, season)
-            attempts.append({"code": code, "effective_url": eff, "size": size, "title": title})
-            if good:
-                ok = True
-                break
-            if code in ("429", "503", "500", "502", "504", "000"):
-                time.sleep(60)
-            else:
-                break
-            time.sleep(4)
+        attempts = list((meta.get(key) or {}).get("attempts", []))
+        code, eff, size = curl(url, dest)
+        title = get_title(dest)
+        ok = code == "200" and title_ok(title, team, slug, season)
+        attempts.append({"code": code, "effective_url": eff, "size": size, "title": title})
         meta[key] = {"team": team, "season": season, "slug": slug, "url": url,
                      "cache": dest, "ok": ok, "attempts": attempts}
         json.dump(meta, open(META, "w"), indent=1)
-        print(("OK  " if ok else "BAD ") + key + "  " + str(attempts[-1]["title"])[:70], flush=True)
-        time.sleep(4.5)
+        print(("OK  " if ok else "BAD ") + key + "  code=" + code + " " + str(title)[:60], flush=True)
+        time.sleep(sleep_s)
     print("fetched %d pages this run; %d ok / %d total" %
           (n, sum(1 for v in meta.values() if v["ok"]), len(meta)), flush=True)
 
@@ -373,10 +364,9 @@ def do_parse():
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "fetch"
     if cmd == "fetch":
-        lim = None
-        if "--only" in sys.argv:
-            lim = int(sys.argv[sys.argv.index("--only") + 1])
-        do_fetch(lim)
+        def arg(name, cast, default):
+            return cast(sys.argv[sys.argv.index(name) + 1]) if name in sys.argv else default
+        do_fetch(arg("--only", int, None), arg("--sleep", float, 4.5), arg("--max-attempts", int, 99))
     elif cmd == "parse":
         do_parse()
     else:

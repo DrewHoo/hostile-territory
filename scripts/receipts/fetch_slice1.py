@@ -124,7 +124,8 @@ def fetch_all(retry=False):
     os.makedirs(CACHE, exist_ok=True)
     pages = load_worklist()
     attempts = (1, 2, 3, 4) if retry else (1, 2)
-    gap = 12.0 if retry else 4.5
+    # Wayback throttles hard at ~13 req/min, so default well below the 4s floor
+    gap = float(os.environ.get("RECEIPTS_GAP", 12.0 if retry else 8.0))
     for i, page in enumerate(pages, 1):
         team, season = page["home_team"], page["season"]
         path = cache_path(team, season)

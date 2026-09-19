@@ -59,7 +59,7 @@ function GamePopover({ pop, onClose, matchCount }) {
 
 export default function App() {
   const [cut, setCut] = useState(10) // opponent ranked within this
-  const [minGames, setMinGames] = useState(5)
+  const [minGames, setMinGames] = useState(4)
   const [activeOnly, setActiveOnly] = useState(true)
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(null)
@@ -81,7 +81,7 @@ export default function App() {
     const c = readParam('cut')
     if (c === '25') setCut(25)
     const m = readParam('min')
-    if (m && ['1', '5', '10'].includes(m)) setMinGames(+m)
+    if (m && ['1', '4', '10'].includes(m)) setMinGames(+m)
     if (readParam('all') === '1') setActiveOnly(false)
     const coach = readParam('coach')
     if (coach && DATA.coaches.some((x) => x.n === coach)) { setOpen(coach); setActiveOnly(false) }
@@ -162,8 +162,8 @@ export default function App() {
           <button className={cut === 25 ? 'on' : ''} onClick={() => setAndWrite(setCut, 'cut', 25, 10)}>Top 25</button>
         </div>
         <div className="toggle" role="group" aria-label="Minimum games">
-          {[1, 5, 10].map((m) => (
-            <button key={m} className={minGames === m ? 'on' : ''} onClick={() => setAndWrite(setMinGames, 'min', m, 5)}>{m}+ games</button>
+          {[1, 4, 10].map((m) => (
+            <button key={m} className={minGames === m ? 'on' : ''} onClick={() => setAndWrite(setMinGames, 'min', m, 4)}>{m === 1 ? 'all' : `${m}+ games`}</button>
           ))}
         </div>
         <label>
