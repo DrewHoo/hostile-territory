@@ -24,7 +24,7 @@ const fmtPct = (p) => (p >= 1 ? '1.000' : p.toFixed(3).replace(/^0/, ''))
 
 // One popover at a time, anchored to the hovered/tapped stamp. Fixed
 // positioning, clamped to the viewport, flipped below when near the top.
-function GamePopover({ pop, onClose, matchCount }) {
+function GamePopover({ pop, onClose }) {
   useEffect(() => {
     const close = (e) => { if (!e.target.closest?.('.popover') && !e.target.closest?.('.chip')) onClose() }
     const esc = (e) => { if (e.key === 'Escape') onClose() }
@@ -55,9 +55,6 @@ function GamePopover({ pop, onClose, matchCount }) {
         <span><i>{g[D_SCHOOL]}:</i> {coach}{g[D_INT] ? ' (interim)' : ''}</span>
         {g[D_HC] ? <span><i>{g[D_OPP]}:</i> {g[D_HC]}</span> : null}
       </div>
-      {matchCount > 0 && (
-        <div className="pop-hl mono">lighting up {matchCount} other road trip{matchCount === 1 ? '' : 's'} to {g[D_OPP]}</div>
-      )}
     </div>
   )
 }
@@ -118,16 +115,6 @@ export default function App() {
   // Highlight every OTHER coach's road game at the same host while a game is
   // hovered or selected. The active coach's own row stays unlit.
   const hlOpp = pop ? pop.g[D_OPP] : null
-  const hlCount = useMemo(() => {
-    if (!hlOpp) return 0
-    let n = 0
-    for (const c of rows) {
-      if (c.n === pop.coach) continue
-      for (const g of c.games) if (g[D_OPP] === hlOpp) n++
-    }
-    return n
-  }, [hlOpp, pop, rows])
-
   const toggleOpen = (name) => {
     const next = open === name ? null : name
     setOpen(next)
@@ -251,7 +238,7 @@ export default function App() {
       </div>
 
       <footer>Data: Sports-Reference, College Poll Archive, cfbfastR. Rules and receipts above.</footer>
-      <GamePopover pop={pop} onClose={() => setPop(null)} matchCount={hlCount} />
+      <GamePopover pop={pop} onClose={() => setPop(null)} />
     </main>
   )
 }

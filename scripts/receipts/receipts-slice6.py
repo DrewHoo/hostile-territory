@@ -281,7 +281,13 @@ def do_parse():
         key = "%s|%d" % (team, season)
         info = meta.get(key)
         wl_games = page["games"]
-        if not info or not info.get("ok"):
+        # Trust the cached file, not the fetch bookkeeping: a curl that timed out
+        # after writing a complete page still leaves a usable snapshot on disk.
+        usable = False
+        if info and os.path.exists(info["cache"]):
+            t = get_title(info["cache"])
+            usable = title_ok(t, team, slugify(team), season)
+        if not usable:
             for g in wl_games:
                 out.append({
                     "date": g["date"], "away_team": g["away_team"], "home_team": team, "season": season,
@@ -294,6 +300,8 @@ def do_parse():
                 })
             continue
         h = open(info["cache"], encoding="utf-8", errors="replace").read()
+        cap = re.search(r"/web/(\d{14})/", h)
+        capture = cap.group(1) if cap else "unknown"
         tbl = extract_table(h)
         if not tbl:
             for g in wl_games:
@@ -344,6 +352,19 @@ def do_parse():
                 "sr_home_points": pts, "sr_away_points": opp_pts,
                 "site_marker": site,
             })
+            if res.strip() == "" and pts is None and opp_pts is None:
+                # Snapshot predates the game: the row exists but is unplayed, so it
+                # cannot serve as a receipt. Not an SR disagreement -- no receipt.
+                rec["sr_home_points"] = None
+                rec["sr_away_points"] = None
+                rec["status"] = "page_missing"
+                rec["note"] = ("only a pre-game Wayback capture of this page exists (%s-%s-%s); "
+                               "the schedule row is present but unplayed (no result, no score), "
+                               "so the game could not be verified. Later pickers redirect to the "
+                               "same capture. Quote is the pre-game row." % (
+                                   capture[0:4], capture[4:6], capture[6:8]))
+                out.append(rec)
+                continue
             problems = []
             if len(matches) > 1:
                 problems.append("%d rows share date %s" % (len(matches), g["date"]))

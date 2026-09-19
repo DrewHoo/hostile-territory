@@ -1,0 +1,746 @@
+[
+ {
+  "date": "1990-12-01",
+  "away_team": "Florida",
+  "home_team": "Florida State",
+  "home_rank_ap": 8,
+  "season": 1990,
+  "venue": null
+ },
+ {
+  "date": "1990-12-01",
+  "away_team": "Texas A&M",
+  "home_team": "Texas",
+  "home_rank_ap": 5,
+  "season": 1990,
+  "venue": null
+ },
+ {
+  "date": "1995-12-02",
+  "away_team": "Texas",
+  "home_team": "Texas A&M",
+  "home_rank_ap": 16,
+  "season": 1995,
+  "venue": null
+ },
+ {
+  "date": "1999-12-04",
+  "away_team": "Temple",
+  "home_team": "Miami (FL)",
+  "home_rank_ap": 23,
+  "season": 1999,
+  "venue": null
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Auburn",
+  "home_team": "LSU",
+  "home_rank_ap": 22,
+  "season": 2001,
+  "venue": "Tiger Stadium"
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Colorado",
+  "home_team": "Texas",
+  "home_rank_ap": 3,
+  "season": 2001,
+  "venue": null
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Houston",
+  "home_team": "Georgia",
+  "home_rank_ap": 16,
+  "season": 2001,
+  "venue": "Sanford Stadium"
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Miami (FL)",
+  "home_team": "Virginia Tech",
+  "home_rank_ap": 14,
+  "season": 2001,
+  "venue": "Lane Stadium"
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Oregon State",
+  "home_team": "Oregon",
+  "home_rank_ap": 4,
+  "season": 2001,
+  "venue": "Autzen Stadium"
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Tennessee",
+  "home_team": "Florida",
+  "home_rank_ap": 2,
+  "season": 2001,
+  "venue": null
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Utah State",
+  "home_team": "Fresno State",
+  "home_rank_ap": 21,
+  "season": 2001,
+  "venue": "Bulldog Stadium"
+ },
+ {
+  "date": "2002-12-07",
+  "away_team": "Oklahoma",
+  "home_team": "Colorado",
+  "home_rank_ap": 12,
+  "season": 2002,
+  "venue": null
+ },
+ {
+  "date": "2002-12-07",
+  "away_team": "Virginia Tech",
+  "home_team": "Miami (FL)",
+  "home_rank_ap": 1,
+  "season": 2002,
+  "venue": null
+ },
+ {
+  "date": "2003-12-04",
+  "away_team": "Miami (OH)",
+  "home_team": "Bowling Green",
+  "home_rank_ap": 20,
+  "season": 2003,
+  "venue": "Doyt Perry Stadium"
+ },
+ {
+  "date": "2003-12-06",
+  "away_team": "Kansas State",
+  "home_team": "Oklahoma",
+  "home_rank_ap": 1,
+  "season": 2003,
+  "venue": null
+ },
+ {
+  "date": "2003-12-06",
+  "away_team": "Oregon State",
+  "home_team": "USC",
+  "home_rank_ap": 2,
+  "season": 2003,
+  "venue": "Los Angeles Memorial Coliseum"
+ },
+ {
+  "date": "2004-12-04",
+  "away_team": "Colorado",
+  "home_team": "Oklahoma",
+  "home_rank_ap": 2,
+  "season": 2004,
+  "venue": null
+ },
+ {
+  "date": "2004-12-04",
+  "away_team": "Virginia Tech",
+  "home_team": "Miami (FL)",
+  "home_rank_ap": 9,
+  "season": 2004,
+  "venue": null
+ },
+ {
+  "date": "2005-12-02",
+  "away_team": "Louisiana Tech",
+  "home_team": "Fresno State",
+  "home_rank_ap": 23,
+  "season": 2005,
+  "venue": "Bulldog Stadium"
+ },
+ {
+  "date": "2005-12-03",
+  "away_team": "UCLA",
+  "home_team": "USC",
+  "home_rank_ap": 1,
+  "season": 2005,
+  "venue": "Los Angeles Memorial Coliseum"
+ },
+ {
+  "date": "2006-12-02",
+  "away_team": "Nebraska",
+  "home_team": "Oklahoma",
+  "home_rank_ap": 8,
+  "season": 2006,
+  "venue": null
+ },
+ {
+  "date": "2006-12-02",
+  "away_team": "Oregon State",
+  "home_team": "Hawaii",
+  "home_rank_ap": 24,
+  "season": 2006,
+  "venue": "Aloha Stadium"
+ },
+ {
+  "date": "2006-12-02",
+  "away_team": "Rutgers",
+  "home_team": "West Virginia",
+  "home_rank_ap": 15,
+  "season": 2006,
+  "venue": "Mountaineer Field at Milan Puskar Stadium"
+ },
+ {
+  "date": "2006-12-02",
+  "away_team": "Stanford",
+  "home_team": "California",
+  "home_rank_ap": 21,
+  "season": 2006,
+  "venue": "California Memorial Stadium"
+ },
+ {
+  "date": "2006-12-02",
+  "away_team": "UConn",
+  "home_team": "Louisville",
+  "home_rank_ap": 6,
+  "season": 2006,
+  "venue": "Papa John's Cardinal Stadium"
+ },
+ {
+  "date": "2006-12-02",
+  "away_team": "Wake Forest",
+  "home_team": "Georgia Tech",
+  "home_rank_ap": 23,
+  "season": 2006,
+  "venue": null
+ },
+ {
+  "date": "2007-12-01",
+  "away_team": "Arizona",
+  "home_team": "Arizona State",
+  "home_rank_ap": 13,
+  "season": 2007,
+  "venue": "Sun Devil Stadium"
+ },
+ {
+  "date": "2007-12-01",
+  "away_team": "Oregon State",
+  "home_team": "Oregon",
+  "home_rank_ap": 18,
+  "season": 2007,
+  "venue": "Autzen Stadium"
+ },
+ {
+  "date": "2007-12-01",
+  "away_team": "Pittsburgh",
+  "home_team": "West Virginia",
+  "home_rank_ap": 2,
+  "season": 2007,
+  "venue": "Mountaineer Field at Milan Puskar Stadium"
+ },
+ {
+  "date": "2007-12-01",
+  "away_team": "UCLA",
+  "home_team": "USC",
+  "home_rank_ap": 8,
+  "season": 2007,
+  "venue": "Los Angeles Memorial Coliseum"
+ },
+ {
+  "date": "2007-12-01",
+  "away_team": "Virginia Tech",
+  "home_team": "Boston College",
+  "home_rank_ap": 12,
+  "season": 2007,
+  "venue": null
+ },
+ {
+  "date": "2007-12-01",
+  "away_team": "Washington",
+  "home_team": "Hawaii",
+  "home_rank_ap": 11,
+  "season": 2007,
+  "venue": "Aloha Stadium"
+ },
+ {
+  "date": "2009-12-03",
+  "away_team": "Oregon State",
+  "home_team": "Oregon",
+  "home_rank_ap": 7,
+  "season": 2009,
+  "venue": "Autzen Stadium"
+ },
+ {
+  "date": "2009-12-05",
+  "away_team": "Arizona",
+  "home_team": "USC",
+  "home_rank_ap": 20,
+  "season": 2009,
+  "venue": "Los Angeles Memorial Coliseum"
+ },
+ {
+  "date": "2009-12-05",
+  "away_team": "Cincinnati",
+  "home_team": "Pittsburgh",
+  "home_rank_ap": 14,
+  "season": 2009,
+  "venue": "Heinz Field"
+ },
+ {
+  "date": "2009-12-05",
+  "away_team": "New Mexico State",
+  "home_team": "Boise State",
+  "home_rank_ap": 6,
+  "season": 2009,
+  "venue": "Albertsons Stadium"
+ },
+ {
+  "date": "2010-12-04",
+  "away_team": "Rutgers",
+  "home_team": "West Virginia",
+  "home_rank_ap": 23,
+  "season": 2010,
+  "venue": "Mountaineer Field at Milan Puskar Stadium"
+ },
+ {
+  "date": "2010-12-04",
+  "away_team": "UNLV",
+  "home_team": "Hawaii",
+  "home_rank_ap": 25,
+  "season": 2010,
+  "venue": "Aloha Stadium"
+ },
+ {
+  "date": "2010-12-04",
+  "away_team": "Utah State",
+  "home_team": "Boise State",
+  "home_rank_ap": 9,
+  "season": 2010,
+  "venue": "Albertsons Stadium"
+ },
+ {
+  "date": "2011-12-02",
+  "away_team": "UCLA",
+  "home_team": "Oregon",
+  "home_rank_ap": 8,
+  "season": 2011,
+  "venue": null
+ },
+ {
+  "date": "2011-12-03",
+  "away_team": "Iowa State",
+  "home_team": "Kansas State",
+  "home_rank_ap": 16,
+  "season": 2011,
+  "venue": "Bill Snyder Family Football Stadium"
+ },
+ {
+  "date": "2011-12-03",
+  "away_team": "New Mexico",
+  "home_team": "Boise State",
+  "home_rank_ap": 9,
+  "season": 2011,
+  "venue": "Albertsons Stadium"
+ },
+ {
+  "date": "2011-12-03",
+  "away_team": "Oklahoma",
+  "home_team": "Oklahoma State",
+  "home_rank_ap": 3,
+  "season": 2011,
+  "venue": "Boone Pickens Stadium"
+ },
+ {
+  "date": "2011-12-03",
+  "away_team": "Southern Miss",
+  "home_team": "Houston",
+  "home_rank_ap": 7,
+  "season": 2011,
+  "venue": null
+ },
+ {
+  "date": "2011-12-03",
+  "away_team": "Texas",
+  "home_team": "Baylor",
+  "home_rank_ap": 19,
+  "season": 2011,
+  "venue": "Floyd Casey Stadium"
+ },
+ {
+  "date": "2011-12-03",
+  "away_team": "UNLV",
+  "home_team": "TCU",
+  "home_rank_ap": 18,
+  "season": 2011,
+  "venue": "Amon G. Carter Stadium"
+ },
+ {
+  "date": "2012-12-01",
+  "away_team": "Texas",
+  "home_team": "Kansas State",
+  "home_rank_ap": 7,
+  "season": 2012,
+  "venue": "Bill Snyder Family Football Stadium"
+ },
+ {
+  "date": "2013-12-07",
+  "away_team": "Oklahoma",
+  "home_team": "Oklahoma State",
+  "home_rank_ap": 6,
+  "season": 2013,
+  "venue": "Boone Pickens Stadium"
+ },
+ {
+  "date": "2013-12-07",
+  "away_team": "Stanford",
+  "home_team": "Arizona State",
+  "home_rank_ap": 11,
+  "season": 2013,
+  "venue": "Sun Devil Stadium"
+ },
+ {
+  "date": "2013-12-07",
+  "away_team": "Texas",
+  "home_team": "Baylor",
+  "home_rank_ap": 9,
+  "season": 2013,
+  "venue": "Floyd Casey Stadium"
+ },
+ {
+  "date": "2013-12-07",
+  "away_team": "Utah State",
+  "home_team": "Fresno State",
+  "home_rank_ap": 24,
+  "season": 2013,
+  "venue": "Bulldog Stadium"
+ },
+ {
+  "date": "2014-12-06",
+  "away_team": "Fresno State",
+  "home_team": "Boise State",
+  "home_rank_ap": 22,
+  "season": 2014,
+  "venue": "Albertsons Stadium"
+ },
+ {
+  "date": "2014-12-06",
+  "away_team": "Iowa State",
+  "home_team": "TCU",
+  "home_rank_ap": 4,
+  "season": 2014,
+  "venue": "Amon G. Carter Stadium"
+ },
+ {
+  "date": "2014-12-06",
+  "away_team": "Kansas State",
+  "home_team": "Baylor",
+  "home_rank_ap": 5,
+  "season": 2014,
+  "venue": "McLane Stadium"
+ },
+ {
+  "date": "2014-12-06",
+  "away_team": "Oklahoma State",
+  "home_team": "Oklahoma",
+  "home_rank_ap": 18,
+  "season": 2014,
+  "venue": "Memorial Stadium (Norman, OK)"
+ },
+ {
+  "date": "2015-12-05",
+  "away_team": "Temple",
+  "home_team": "Houston",
+  "home_rank_ap": 17,
+  "season": 2015,
+  "venue": "TDECU Stadium"
+ },
+ {
+  "date": "2015-12-05",
+  "away_team": "Texas",
+  "home_team": "Baylor",
+  "home_rank_ap": 12,
+  "season": 2015,
+  "venue": "McLane Stadium"
+ },
+ {
+  "date": "2016-12-03",
+  "away_team": "Baylor",
+  "home_team": "West Virginia",
+  "home_rank_ap": 14,
+  "season": 2016,
+  "venue": "Milan Puskar Stadium"
+ },
+ {
+  "date": "2016-12-03",
+  "away_team": "Oklahoma State",
+  "home_team": "Oklahoma",
+  "home_rank_ap": 7,
+  "season": 2016,
+  "venue": "Memorial Stadium (Norman, OK)"
+ },
+ {
+  "date": "2016-12-03",
+  "away_team": "Temple",
+  "home_team": "Navy",
+  "home_rank_ap": 20,
+  "season": 2016,
+  "venue": "Navy-Marine Corps Memorial Stadium"
+ },
+ {
+  "date": "2017-12-02",
+  "away_team": "Memphis",
+  "home_team": "UCF",
+  "home_rank_ap": 12,
+  "season": 2017,
+  "venue": "FBC Mortgage Stadium"
+ },
+ {
+  "date": "2018-12-01",
+  "away_team": "Fresno State",
+  "home_team": "Boise State",
+  "home_rank_ap": 19,
+  "season": 2018,
+  "venue": "Albertsons Stadium"
+ },
+ {
+  "date": "2018-12-01",
+  "away_team": "Memphis",
+  "home_team": "UCF",
+  "home_rank_ap": 7,
+  "season": 2018,
+  "venue": "FBC Mortgage Stadium"
+ },
+ {
+  "date": "2019-12-07",
+  "away_team": "Cincinnati",
+  "home_team": "Memphis",
+  "home_rank_ap": 16,
+  "season": 2019,
+  "venue": "Simmons Bank Liberty Stadium"
+ },
+ {
+  "date": "2019-12-07",
+  "away_team": "Hawaii",
+  "home_team": "Boise State",
+  "home_rank_ap": 19,
+  "season": 2019,
+  "venue": "Albertsons Stadium"
+ },
+ {
+  "date": "2019-12-07",
+  "away_team": "Louisiana",
+  "home_team": "Appalachian State",
+  "home_rank_ap": 20,
+  "season": 2019,
+  "venue": "Kidd Brewer Stadium"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "Baylor",
+  "home_team": "Oklahoma",
+  "home_rank_ap": 13,
+  "season": 2020,
+  "venue": "Memorial Stadium (Norman, OK)"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "BYU",
+  "home_team": "Coastal Carolina",
+  "home_rank_ap": 14,
+  "season": 2020,
+  "venue": "Brooks Stadium (SC)"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "Indiana",
+  "home_team": "Wisconsin",
+  "home_rank_ap": 18,
+  "season": 2020,
+  "venue": "Camp Randall Stadium"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "Rice",
+  "home_team": "Marshall",
+  "home_rank_ap": 15,
+  "season": 2020,
+  "venue": "Joan C. Edwards Stadium"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "Stanford",
+  "home_team": "Washington",
+  "home_rank_ap": 23,
+  "season": 2020,
+  "venue": "Husky Stadium"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "Syracuse",
+  "home_team": "Notre Dame",
+  "home_rank_ap": 2,
+  "season": 2020,
+  "venue": "Notre Dame Stadium"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "West Virginia",
+  "home_team": "Iowa State",
+  "home_rank_ap": 12,
+  "season": 2020,
+  "venue": "Jack Trice Stadium"
+ },
+ {
+  "date": "2020-12-06",
+  "away_team": "Washington State",
+  "home_team": "USC",
+  "home_rank_ap": 16,
+  "season": 2020,
+  "venue": "Los Angeles Memorial Coliseum"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "Akron",
+  "home_team": "Buffalo",
+  "home_rank_ap": 24,
+  "season": 2020,
+  "venue": "UB Stadium"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "Illinois",
+  "home_team": "Northwestern",
+  "home_rank_ap": 15,
+  "season": 2020,
+  "venue": "Ryan Field"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "LSU",
+  "home_team": "Florida",
+  "home_rank_ap": 6,
+  "season": 2020,
+  "venue": "Ben Hill Griffin Stadium"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "North Carolina",
+  "home_team": "Miami (FL)",
+  "home_rank_ap": 9,
+  "season": 2020,
+  "venue": "Hard Rock Stadium"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "San Diego State",
+  "home_team": "BYU",
+  "home_rank_ap": 14,
+  "season": 2020,
+  "venue": "LaVell Edwards Stadium"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "Utah",
+  "home_team": "Colorado",
+  "home_rank_ap": 21,
+  "season": 2020,
+  "venue": "Folsom Field"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "Wisconsin",
+  "home_team": "Iowa",
+  "home_rank_ap": 19,
+  "season": 2020,
+  "venue": "Kinnick Stadium"
+ },
+ {
+  "date": "2020-12-18",
+  "away_team": "Oregon",
+  "home_team": "USC",
+  "home_rank_ap": 13,
+  "season": 2020,
+  "venue": "Los Angeles Memorial Coliseum"
+ },
+ {
+  "date": "2020-12-19",
+  "away_team": "Tulsa",
+  "home_team": "Cincinnati",
+  "home_rank_ap": 6,
+  "season": 2020,
+  "venue": "Nippert Stadium"
+ },
+ {
+  "date": "2021-12-04",
+  "away_team": "Appalachian State",
+  "home_team": "Louisiana",
+  "home_rank_ap": 20,
+  "season": 2021,
+  "venue": "Cajun Field"
+ },
+ {
+  "date": "2021-12-04",
+  "away_team": "Houston",
+  "home_team": "Cincinnati",
+  "home_rank_ap": 3,
+  "season": 2021,
+  "venue": "Nippert Stadium"
+ },
+ {
+  "date": "2021-12-04",
+  "away_team": "Utah State",
+  "home_team": "San Diego State",
+  "home_rank_ap": 19,
+  "season": 2021,
+  "venue": "StubHub Center"
+ },
+ {
+  "date": "2022-12-03",
+  "away_team": "UCF",
+  "home_team": "Tulane",
+  "home_rank_ap": 18,
+  "season": 2022,
+  "venue": "Yulman Stadium"
+ },
+ {
+  "date": "2023-12-01",
+  "away_team": "New Mexico State",
+  "home_team": "Liberty",
+  "home_rank_ap": 20,
+  "season": 2023,
+  "venue": "Williams Stadium (VA)"
+ },
+ {
+  "date": "2023-12-02",
+  "away_team": "SMU",
+  "home_team": "Tulane",
+  "home_rank_ap": 17,
+  "season": 2023,
+  "venue": "Yulman Stadium"
+ },
+ {
+  "date": "2024-12-06",
+  "away_team": "Tulane",
+  "home_team": "Army",
+  "home_rank_ap": 24,
+  "season": 2024,
+  "venue": "Michie Stadium"
+ },
+ {
+  "date": "2024-12-06",
+  "away_team": "UNLV",
+  "home_team": "Boise State",
+  "home_rank_ap": 10,
+  "season": 2024,
+  "venue": "Albertsons Stadium"
+ },
+ {
+  "date": "2025-12-05",
+  "away_team": "North Texas",
+  "home_team": "Tulane",
+  "home_rank_ap": 21,
+  "season": 2025,
+  "venue": "Yulman Stadium"
+ },
+ {
+  "date": "2025-12-05",
+  "away_team": "Troy",
+  "home_team": "James Madison",
+  "home_rank_ap": 19,
+  "season": 2025,
+  "venue": "Bridgeforth Stadium"
+ }
+]
