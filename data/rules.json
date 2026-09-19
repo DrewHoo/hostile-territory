@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "updated": "2026-09-19",
+  "definitions": {
+    "road_game": "Team is the away team and neutral_site is false. Bowls, kickoff classics, and conference championship games are neutral. CFP first-round campus games count as road.",
+    "top10_at_kickoff": "Opponent ranked 1-10 in the most recent AP poll published before the game date. Preseason poll covers games before the first regular-season poll. AP poll only.",
+    "since": "1990 season onward, postseason included with its season.",
+    "coach_of_record": "Head coach on the game date. Interim coaches count as themselves with interim: true.",
+    "in_scope_coach": "Any FBS head coach with a tenure overlapping a school-season listed in power_conference_eras. All of a scoped coach's FBS HC games count toward the record, including G5 stints."
+  },
+  "power_conference_eras": {
+    "ACC": "1990-present",
+    "Big Ten": "1990-present",
+    "SEC": "1990-present",
+    "Pac-10/Pac-12": "1990-2023",
+    "Big 12": "1996-present",
+    "Big 8": "1990-1995",
+    "SWC": "1990-1995",
+    "Big East (football)": "1991-2012",
+    "major_independents": "Notre Dame 1990-present; Miami, Florida State, Penn State, others count via their independent years before joining a conference"
+  },
+  "school_assignments": {
+    "sec": ["Alabama", "Arkansas", "Auburn", "Florida", "Georgia", "Kentucky", "LSU", "Ole Miss", "Mississippi State", "Missouri", "South Carolina", "Tennessee", "Texas", "Texas A&M", "Oklahoma", "Vanderbilt"],
+    "big-ten": ["Illinois", "Indiana", "Iowa", "Maryland", "Michigan", "Michigan State", "Minnesota", "Nebraska", "Northwestern", "Ohio State", "Oregon", "Penn State", "Purdue", "Rutgers", "UCLA", "USC", "Washington", "Wisconsin"],
+    "big-12": ["Arizona", "Arizona State", "Baylor", "BYU", "Cincinnati", "Colorado", "Houston", "Iowa State", "Kansas", "Kansas State", "Oklahoma State", "TCU", "Texas Tech", "UCF", "Utah", "West Virginia"],
+    "acc": ["Boston College", "California", "Clemson", "Duke", "Florida State", "Georgia Tech", "Louisville", "Miami (FL)", "NC State", "North Carolina", "Pittsburgh", "SMU", "Stanford", "Syracuse", "Virginia", "Virginia Tech", "Wake Forest"],
+    "legacy-and-independents": ["Oregon State", "Washington State", "Notre Dame", "Temple", "UConn", "South Florida", "Rice"]
+  },
+  "notes": "school_assignments is the union of every school that spent time in a power conference 1990-present, grouped for research agents by current or longest affiliation. Tenure coverage per school runs 1990 to present regardless of which conference the school was in for a given season."
+}

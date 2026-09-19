@@ -3,23 +3,23 @@
 // equal the GitHub repo name, because the site serves at https://<domain>/<repo>/.
 export default {
   // The custom domain on your <owner>.github.io index site.
-  domain: 'example.com',
+  domain: 'drewhoover.com',
 
   // <title>, og:title, twitter:title. Under 60 characters, phrased the way
   // someone would type the search.
-  title: 'Twelve months of something',
+  title: "Every Coach's Road Record vs Top-10 Teams Since 1990",
 
   // Meta description and og:description. The first ~155 characters are the
   // search snippet, so the payoff goes first.
   description:
-    'A starter chart with three series, touch-friendly hover, and a shareable URL. Replace the data, keep the plumbing.',
+    'Lane Kiffin is 1-8 on the road against top-10 teams. Every head coach\'s true road record vs AP top-10 opponents since 1990, with a receipt for every game.',
 
   // Second line on the OG image. Short.
-  ogSubtitle: 'Replace the data, keep the plumbing.',
+  ogSubtitle: 'Every coach\'s true road record vs the AP top 10 since 1990',
 
   // Alt text for the OG image, for screen readers on social platforms.
-  ogImageAlt: 'A stylized line chart rising left to right on a dark background.',
+  ogImageAlt: 'Hostile Territory: a floodlit night leaderboard of coaches\' road records against AP top-10 teams.',
 
   // Used by the favicon and the OG image. Pick something from your data.
-  accent: '#1f4e8c',
+  accent: '#ffb52e',
 }
