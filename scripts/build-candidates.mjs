@@ -160,6 +160,20 @@ export function loadCfbfastrGames(firstSeason, lastSeason) {
   const dir = path.join(RAW, 'cfbfastr');
   const games = [];
   const skipped = { nonFbsAway: 0, noScore: 0 };
+  // A few hundred rows carry no away_division. Build the season's FBS set from
+  // the rows that do, and hold division-less visitors to membership in it, so
+  // an FCS money-game visitor can't slip through as a road team.
+  const fbsBySeason = new Map();
+  for (let year = firstSeason; year <= lastSeason; year++) {
+    const file = path.join(dir, `cfb_schedules_${year}.csv`);
+    if (!fs.existsSync(file)) continue;
+    const set = new Set();
+    for (const r of parseCsv(fs.readFileSync(file, 'utf8'))) {
+      if (r.home_division === 'fbs') set.add(r.home_team);
+      if (r.away_division === 'fbs') set.add(r.away_team);
+    }
+    fbsBySeason.set(year, set);
+  }
   for (let year = firstSeason; year <= lastSeason; year++) {
     const file = path.join(dir, `cfb_schedules_${year}.csv`);
     if (!fs.existsSync(file)) continue;
@@ -172,6 +186,10 @@ export function loadCfbfastrGames(firstSeason, lastSeason) {
       }
       // FCS/DII/DIII visitors can't have an in-scope FBS head coach.
       if (r.away_division && r.away_division !== 'NA' && r.away_division !== 'fbs') {
+        skipped.nonFbsAway++;
+        continue;
+      }
+      if ((!r.away_division || r.away_division === 'NA') && !fbsBySeason.get(year)?.has(r.away_team)) {
         skipped.nonFbsAway++;
         continue;
       }
