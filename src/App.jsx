@@ -19,7 +19,7 @@ function tally(games) {
 
 // One popover at a time, anchored to the hovered/tapped stamp. Fixed
 // positioning, clamped to the viewport, flipped below when near the top.
-function GamePopover({ pop, onClose }) {
+function GamePopover({ pop, onClose, matchCount }) {
   useEffect(() => {
     const close = (e) => { if (!e.target.closest?.('.popover') && !e.target.closest?.('.chip')) onClose() }
     const esc = (e) => { if (e.key === 'Escape') onClose() }
@@ -50,6 +50,9 @@ function GamePopover({ pop, onClose }) {
         <span><i>{g[D_SCHOOL]}:</i> {coach}{g[D_INT] ? ' (interim)' : ''}</span>
         {g[D_HC] ? <span><i>{g[D_OPP]}:</i> {g[D_HC]}</span> : null}
       </div>
+      {matchCount > 0 && (
+        <div className="pop-hl mono">lighting up {matchCount} other road trip{matchCount === 1 ? '' : 's'} to {g[D_OPP]}</div>
+      )}
     </div>
   )
 }
@@ -106,6 +109,19 @@ export default function App() {
     const c = DATA.coaches.find((x) => x.n === 'Lane Kiffin')
     return c ? tally(c.g.filter((g) => g[D_RANK] <= 10)) : null
   }, [])
+
+  // Highlight every OTHER coach's road game at the same host while a game is
+  // hovered or selected. The active coach's own row stays unlit.
+  const hlOpp = pop ? pop.g[D_OPP] : null
+  const hlCount = useMemo(() => {
+    if (!hlOpp) return 0
+    let n = 0
+    for (const c of rows) {
+      if (c.n === pop.coach) continue
+      for (const g of c.games) if (g[D_OPP] === hlOpp) n++
+    }
+    return n
+  }, [hlOpp, pop, rows])
 
   const toggleOpen = (name) => {
     const next = open === name ? null : name
@@ -167,7 +183,11 @@ export default function App() {
               </span>
               <span className="dots" aria-label={`${c.w} wins, ${c.l} losses`}>
                 {c.games.map((g, i) => (
-                  <span key={i} className={`chip ${g[D_RES].toLowerCase()}`} {...chipHandlers(g, c.n)}>
+                  <span
+                    key={i}
+                    className={`chip ${g[D_RES].toLowerCase()}${hlOpp && c.n !== pop.coach && g[D_OPP] === hlOpp ? ' hl' : ''}`}
+                    {...chipHandlers(g, c.n)}
+                  >
                     {g[D_RES]}
                   </span>
                 ))}
@@ -225,7 +245,7 @@ export default function App() {
       </div>
 
       <footer>Data: Sports-Reference, College Poll Archive, cfbfastR. Rules and receipts above.</footer>
-      <GamePopover pop={pop} onClose={() => setPop(null)} />
+      <GamePopover pop={pop} onClose={() => setPop(null)} matchCount={hlCount} />
     </main>
   )
 }
