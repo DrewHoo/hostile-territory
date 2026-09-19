@@ -135,28 +135,23 @@ export default function App() {
 
   return (
     <main>
-      <div className="field-rule"><span>Official Program · Night Edition</span></div>
+      <div className="field-rule" aria-hidden="true"></div>
       <h1>Hostile Territory</h1>
       <div className="dateline">Road games vs the AP Top 10 · 1990 – present</div>
-      <p className="sub">
-        ESPN flashed a graphic: Lane Kiffin is 1–8 on the road against top-10 teams. This is that
-        record for every head coach since 1990.
-      </p>
-
       {kiffin && (
         <div className="hero-stat">
           <div className="num">{kiffin.w}–{kiffin.l}</div>
           <div className="why">
-            <b>Lane Kiffin</b>, on the road against the AP top 10. The number that started this.
-            Is it bad? Depends what good looks like.
+            <b>Lane Kiffin</b>, on the road against the AP top 10. Is it bad? Depends what good
+            looks like.
           </div>
         </div>
       )}
 
       <h2>Every coach since 1990</h2>
       <div className="h2-note">
-        Each stamp is one true road game against a team ranked in the AP top {cut} at kickoff, in
-        order — the logo is the host, and a lit stamp is a win. Tap a coach for the road log.
+        One logo per true road game against a top-{cut} team, in order. Tap a game for details,
+        or a coach for the full log.
       </div>
 
       <div className="filters">
@@ -227,7 +222,7 @@ export default function App() {
       <div className="legend">
         <span><span className="chip w">W</span> Win</span>
         <span><span className="chip l">L</span> Loss</span>
-        <span className="legend-note">stamps carry the host team's mark</span>
+        <span className="legend-note">each mark is the host team</span>
       </div>
 
       <h2>What counts as a road game</h2>
@@ -246,7 +241,6 @@ export default function App() {
           No total on this page was reported by anyone — records are computed by joining three
           sources: game results (cfbfastR 2001–2025, jhowell.net 1990–2000), weekly AP polls
           (College Poll Archive), and coaching tenures researched row by row with a citation each.
-          The build fails if any school-season lacks a coach or the join disagrees with itself.
         </p>
       </div>
 

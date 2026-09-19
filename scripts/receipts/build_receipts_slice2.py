@@ -71,6 +71,11 @@ NAME_ALIASES = {
     "Texas A&M": {"Texas A&M", "Texas AM"},
     "Miami (FL)": {"Miami FL", "Miami (Fla.)", "Miami"},
     "Miami (OH)": {"Miami OH", "Miami (Ohio)"},
+    "UAB": {"Alabama-Birmingham", "Alabama Birmingham"},
+    "Southern Miss": {"Southern Mississippi"},
+    "Florida International": {"FIU"},
+    "Texas State": {"Southwest Texas State", "Texas State-San Marcos"},
+    "Louisiana-Monroe": {"Northeast Louisiana"},
 }
 
 # SR display nicknames, used only as a soft sanity check on the page title.
@@ -114,14 +119,25 @@ def fetch_all(work, cache_dir, sleep_s=4.5):
         if key in meta and meta[key].get("ok") and os.path.exists(dest):
             continue
         url = wayback_url(team, season)
-        attempts = 0
         code, eff = 0, ""
-        while attempts < 2:
-            attempts += 1
+        http_failures = 0   # 429/5xx: spec says back off 60s, two in a row means give up
+        transport_tries = 0  # curl exit 7 etc: Wayback refusing the connection, retry quickly
+        while True:
             code, eff = curl(url, dest)
             if code == 200:
                 break
-            if code == 429 or code >= 500 or code == 0:
+            if code == 0:
+                transport_tries += 1
+                if transport_tries > 6:
+                    break
+                sys.stderr.write("  retry %s %d (curl transport failure %d)\n"
+                                 % (team, season, transport_tries))
+                time.sleep(6)
+                continue
+            if code == 429 or code >= 500:
+                http_failures += 1
+                if http_failures >= 2:
+                    break
                 sys.stderr.write("  backoff %s %d (code %s)\n" % (team, season, code))
                 time.sleep(60)
                 continue
@@ -328,7 +344,8 @@ def build(work, cache_dir):
         for g in page["games"]:
             date = g["date"]
             cand = by_date.get(date, [])
-            notes = []
+            notes = []   # substantive: forces "discrepancy"
+            soft = []    # cosmetic (spelling, duplicate-date tiebreak): still "confirmed"
             if not cand:
                 out.append({
                     "date": date, "away_team": g["away_team"], "home_team": team,
@@ -348,7 +365,7 @@ def build(work, cache_dir):
                     if parsed and names_match(g["away_team"], RANK_RE.sub("", parsed["opp"])):
                         cells = c
                         break
-                notes.append("%d rows share date %s; matched on opponent" % (len(cand), date))
+                soft.append("%d schedule rows share date %s; matched on opponent" % (len(cand), date))
             quote = " | ".join(c["text"] for c in cells)
             parsed = locate_game_cells(cells, team)
             if not parsed:
@@ -376,6 +393,9 @@ def build(work, cache_dir):
                 notes.append("school cell reads %r, expected %s" % (sr_school, team))
             if not names_match(g["away_team"], sr_opp):
                 notes.append("opponent cell reads %r, expected %s" % (sr_opp, g["away_team"]))
+            elif norm(sr_opp) != norm(g["away_team"]):
+                soft.append("SR spells the opponent %r; worklist calls it %s (same school)"
+                            % (sr_opp, g["away_team"]))
             if site != "":
                 notes.append("site marker is %r, not empty: SR does not treat this as a true road game for %s"
                              % (site, g["away_team"]))
@@ -392,7 +412,7 @@ def build(work, cache_dir):
                 notes.append("home-side result %r; worklist visitor result %s implies home %s"
                              % (parsed["result"], g["result"], expect_home_result))
 
-            hard = [n for n in notes if not n.startswith("2 rows") and "matched on opponent" not in n]
+            hard = notes
             status = "confirmed" if not hard else "discrepancy"
             row = {
                 "date": date, "away_team": g["away_team"], "home_team": team,
@@ -401,8 +421,9 @@ def build(work, cache_dir):
                 "sr_home_points": sr_home_points, "sr_away_points": sr_away_points,
                 "site_marker": site, "status": status,
             }
-            if notes:
-                row["note"] = "; ".join(notes)
+            all_notes = notes + soft
+            if all_notes:
+                row["note"] = "; ".join(all_notes)
             out.append(row)
             if status != "confirmed":
                 problems.append(("discrepancy", team, season,

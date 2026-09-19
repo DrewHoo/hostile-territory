@@ -144,6 +144,8 @@ def fetch_all(retry=False):
                 capture_output=True, text=True,
             )
             code = (p.stdout or "").strip()[-3:]
+            if code != "200" and p.stderr:
+                print("   curl stderr: %s" % p.stderr.strip()[:200])
             if code == "200" and os.path.getsize(path + ".part") > 5000:
                 os.replace(path + ".part", path)
                 ok = True

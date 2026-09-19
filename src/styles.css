@@ -32,9 +32,8 @@ main { max-width: 940px; margin: 0 auto; padding: 48px 20px 80px; position: rela
 
 .mono { font-family: 'IBM Plex Mono', monospace; }
 
-.field-rule { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; color: var(--ink-faint); }
+.field-rule { display: flex; align-items: center; margin-bottom: 28px; }
 .field-rule::before, .field-rule::after { content: ''; flex: 1; border-top: 2px dashed rgba(239, 230, 217, 0.35); }
-.field-rule span { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap; }
 
 h1 {
   font-family: 'Graduate', serif; font-weight: 400; text-align: center;
