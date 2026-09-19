@@ -85,6 +85,8 @@ export default function App() {
     const m = readParam('min')
     if (m && ['1', '4', '10'].includes(m)) setMinGames(+m)
     if (readParam('all') === '1') setActiveOnly(false)
+    const q = readParam('q')
+    if (q) setQuery(q)
     const coach = readParam('coach')
     if (coach && DATA.coaches.some((x) => x.n === coach)) { setOpen(coach); setActiveOnly(false) }
   }, [])
@@ -157,7 +159,7 @@ export default function App() {
           <input type="checkbox" checked={activeOnly} onChange={(e) => { setActiveOnly(e.target.checked); writeParam('all', e.target.checked ? null : '1') }} />
           current coaches only
         </label>
-        <input type="search" placeholder="coach or school" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Filter by coach or school" />
+        <input type="search" placeholder="coach or school" value={query} onChange={(e) => { setQuery(e.target.value); writeParam('q', e.target.value || null) }} aria-label="Filter by coach or school" />
       </div>
 
       <div className="board">
