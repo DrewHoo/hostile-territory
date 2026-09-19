@@ -1,0 +1,3687 @@
+{
+ "slice": 5,
+ "pages": 100,
+ "games": 308,
+ "work": [
+  {
+   "home_team": "Oregon",
+   "season": 2001,
+   "games": [
+    {
+     "date": "2001-12-01",
+     "away_team": "Oregon State",
+     "coach": "Dennis Erickson",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 17
+    },
+    {
+     "date": "2001-09-01",
+     "away_team": "Wisconsin",
+     "coach": "Barry Alvarez",
+     "home_rank_ap": 7,
+     "away_rank_ap": 22,
+     "result": "L",
+     "away_points": 28,
+     "home_points": 31
+    },
+    {
+     "date": "2001-10-19",
+     "away_team": "Stanford",
+     "coach": "Tyrone Willingham",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 49,
+     "home_points": 42
+    },
+    {
+     "date": "2001-11-03",
+     "away_team": "Arizona State",
+     "coach": "Dirk Koetter",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 42
+    },
+    {
+     "date": "2001-09-22",
+     "away_team": "USC",
+     "coach": "Pete Carroll",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 22,
+     "home_points": 24
+    },
+    {
+     "date": "2001-09-08",
+     "away_team": "Utah",
+     "coach": "Ron McBride",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 24
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2002,
+   "games": [
+    {
+     "date": "2002-10-19",
+     "away_team": "Arizona State",
+     "coach": "Dirk Koetter",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 45,
+     "home_points": 42
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2003,
+   "games": [
+    {
+     "date": "2003-09-27",
+     "away_team": "Washington State",
+     "coach": "Bill Doba",
+     "home_rank_ap": 10,
+     "away_rank_ap": 21,
+     "result": "W",
+     "away_points": 55,
+     "home_points": 16
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2005,
+   "games": [
+    {
+     "date": "2005-11-19",
+     "away_team": "Oregon State",
+     "coach": "Mike Riley",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 56
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2007,
+   "games": [
+    {
+     "date": "2007-11-03",
+     "away_team": "Arizona State",
+     "coach": "Dennis Erickson",
+     "home_rank_ap": 4,
+     "away_rank_ap": 6,
+     "result": "L",
+     "away_points": 23,
+     "home_points": 35
+    },
+    {
+     "date": "2007-10-27",
+     "away_team": "USC",
+     "coach": "Pete Carroll",
+     "home_rank_ap": 5,
+     "away_rank_ap": 9,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 24
+    },
+    {
+     "date": "2007-10-13",
+     "away_team": "Washington State",
+     "coach": "Bill Doba",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 53
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2009,
+   "games": [
+    {
+     "date": "2009-12-03",
+     "away_team": "Oregon State",
+     "coach": "Mike Riley",
+     "home_rank_ap": 7,
+     "away_rank_ap": 13,
+     "result": "L",
+     "away_points": 33,
+     "home_points": 37
+    },
+    {
+     "date": "2009-10-31",
+     "away_team": "USC",
+     "coach": "Pete Carroll",
+     "home_rank_ap": 10,
+     "away_rank_ap": 4,
+     "result": "L",
+     "away_points": 20,
+     "home_points": 47
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2010,
+   "games": [
+    {
+     "date": "2010-10-21",
+     "away_team": "UCLA",
+     "coach": "Rick Neuheisel",
+     "home_rank_ap": 1,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 60
+    },
+    {
+     "date": "2010-10-02",
+     "away_team": "Stanford",
+     "coach": "Jim Harbaugh",
+     "home_rank_ap": 4,
+     "away_rank_ap": 9,
+     "result": "L",
+     "away_points": 31,
+     "home_points": 52
+    },
+    {
+     "date": "2010-11-06",
+     "away_team": "Washington",
+     "coach": "Steve Sarkisian",
+     "home_rank_ap": 1,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 16,
+     "home_points": 53
+    },
+    {
+     "date": "2010-11-26",
+     "away_team": "Arizona",
+     "coach": "Mike Stoops",
+     "home_rank_ap": 1,
+     "away_rank_ap": 20,
+     "result": "L",
+     "away_points": 29,
+     "home_points": 48
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2011,
+   "games": [
+    {
+     "date": "2011-11-26",
+     "away_team": "Oregon State",
+     "coach": "Mike Riley",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 49
+    },
+    {
+     "date": "2011-12-02",
+     "away_team": "UCLA",
+     "coach": "Rick Neuheisel",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 31,
+     "home_points": 49
+    },
+    {
+     "date": "2011-10-15",
+     "away_team": "Arizona State",
+     "coach": "Dennis Erickson",
+     "home_rank_ap": 9,
+     "away_rank_ap": 18,
+     "result": "L",
+     "away_points": 27,
+     "home_points": 41
+    },
+    {
+     "date": "2011-10-06",
+     "away_team": "California",
+     "coach": "Jeff Tedford",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 15,
+     "home_points": 43
+    },
+    {
+     "date": "2011-11-19",
+     "away_team": "USC",
+     "coach": "Lane Kiffin",
+     "home_rank_ap": 4,
+     "away_rank_ap": 18,
+     "result": "W",
+     "away_points": 38,
+     "home_points": 35
+    },
+    {
+     "date": "2011-10-29",
+     "away_team": "Washington State",
+     "coach": "Paul Wulff",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 28,
+     "home_points": 43
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2012,
+   "games": [
+    {
+     "date": "2012-09-01",
+     "away_team": "Arkansas State",
+     "coach": "Gus Malzahn",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 34,
+     "home_points": 57
+    },
+    {
+     "date": "2012-10-06",
+     "away_team": "Washington",
+     "coach": "Steve Sarkisian",
+     "home_rank_ap": 2,
+     "away_rank_ap": 23,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 52
+    },
+    {
+     "date": "2012-11-17",
+     "away_team": "Stanford",
+     "coach": "David Shaw",
+     "home_rank_ap": 1,
+     "away_rank_ap": 14,
+     "result": "W",
+     "away_points": 17,
+     "home_points": 14
+    },
+    {
+     "date": "2012-09-22",
+     "away_team": "Arizona",
+     "coach": "Rich Rodriguez",
+     "home_rank_ap": 3,
+     "away_rank_ap": 22,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 49
+    },
+    {
+     "date": "2012-10-27",
+     "away_team": "Colorado",
+     "coach": "Jon Embree",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 70
+    },
+    {
+     "date": "2012-09-08",
+     "away_team": "Fresno State",
+     "coach": "Tim DeRuyter",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 25,
+     "home_points": 42
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2013,
+   "games": [
+    {
+     "date": "2013-10-19",
+     "away_team": "Washington State",
+     "coach": "Mike Leach",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 38,
+     "home_points": 62
+    },
+    {
+     "date": "2013-09-14",
+     "away_team": "Tennessee",
+     "coach": "Butch Jones",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 59
+    },
+    {
+     "date": "2013-11-16",
+     "away_team": "Utah",
+     "coach": "Kyle Whittingham",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 44
+    },
+    {
+     "date": "2013-09-28",
+     "away_team": "California",
+     "coach": "Sonny Dykes",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 16,
+     "home_points": 55
+    },
+    {
+     "date": "2013-10-26",
+     "away_team": "UCLA",
+     "coach": "Jim L. Mora",
+     "home_rank_ap": 2,
+     "away_rank_ap": 12,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 42
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2014,
+   "games": [
+    {
+     "date": "2014-09-06",
+     "away_team": "Michigan State",
+     "coach": "Mark Dantonio",
+     "home_rank_ap": 3,
+     "away_rank_ap": 7,
+     "result": "L",
+     "away_points": 27,
+     "home_points": 46
+    },
+    {
+     "date": "2014-11-01",
+     "away_team": "Stanford",
+     "coach": "David Shaw",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 16,
+     "home_points": 45
+    },
+    {
+     "date": "2014-10-02",
+     "away_team": "Arizona",
+     "coach": "Rich Rodriguez",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 31,
+     "home_points": 24
+    },
+    {
+     "date": "2014-11-22",
+     "away_team": "Colorado",
+     "coach": "Mike MacIntyre",
+     "home_rank_ap": 3,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 44
+    },
+    {
+     "date": "2014-10-18",
+     "away_team": "Washington",
+     "coach": "Chris Petersen",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 20,
+     "home_points": 45
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2019,
+   "games": [
+    {
+     "date": "2019-11-16",
+     "away_team": "Arizona",
+     "coach": "Kevin Sumlin",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 6,
+     "home_points": 34
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2021,
+   "games": [
+    {
+     "date": "2021-10-30",
+     "away_team": "Colorado",
+     "coach": "Karl Dorrell",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 29,
+     "home_points": 52
+    },
+    {
+     "date": "2021-10-15",
+     "away_team": "California",
+     "coach": "Justin Wilcox",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 24
+    },
+    {
+     "date": "2021-09-25",
+     "away_team": "Arizona",
+     "coach": "Jedd Fisch",
+     "home_rank_ap": 3,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 19,
+     "home_points": 41
+    },
+    {
+     "date": "2021-11-13",
+     "away_team": "Washington State",
+     "coach": "Jake Dickert",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 38
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2022,
+   "games": [
+    {
+     "date": "2022-10-22",
+     "away_team": "UCLA",
+     "coach": "Chip Kelly",
+     "home_rank_ap": 10,
+     "away_rank_ap": 9,
+     "result": "L",
+     "away_points": 30,
+     "home_points": 45
+    },
+    {
+     "date": "2022-11-12",
+     "away_team": "Washington",
+     "coach": "Kalen DeBoer",
+     "home_rank_ap": 6,
+     "away_rank_ap": 24,
+     "result": "W",
+     "away_points": 37,
+     "home_points": 34
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2023,
+   "games": [
+    {
+     "date": "2023-11-04",
+     "away_team": "California",
+     "coach": "Justin Wilcox",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 19,
+     "home_points": 63
+    },
+    {
+     "date": "2023-11-11",
+     "away_team": "USC",
+     "coach": "Lincoln Riley",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 27,
+     "home_points": 36
+    },
+    {
+     "date": "2023-11-24",
+     "away_team": "Oregon State",
+     "coach": "Jonathan Smith",
+     "home_rank_ap": 6,
+     "away_rank_ap": 15,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 31
+    },
+    {
+     "date": "2023-10-21",
+     "away_team": "Washington State",
+     "coach": "Jake Dickert",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 38
+    },
+    {
+     "date": "2023-09-23",
+     "away_team": "Colorado",
+     "coach": "Deion Sanders",
+     "home_rank_ap": 10,
+     "away_rank_ap": 19,
+     "result": "L",
+     "away_points": 6,
+     "home_points": 42
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2024,
+   "games": [
+    {
+     "date": "2024-10-26",
+     "away_team": "Illinois",
+     "coach": "Bret Bielema",
+     "home_rank_ap": 1,
+     "away_rank_ap": 20,
+     "result": "L",
+     "away_points": 9,
+     "home_points": 38
+    },
+    {
+     "date": "2024-11-09",
+     "away_team": "Maryland",
+     "coach": "Mike Locksley",
+     "home_rank_ap": 1,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 18,
+     "home_points": 39
+    },
+    {
+     "date": "2024-10-12",
+     "away_team": "Ohio State",
+     "coach": "Ryan Day",
+     "home_rank_ap": 3,
+     "away_rank_ap": 2,
+     "result": "L",
+     "away_points": 31,
+     "home_points": 32
+    },
+    {
+     "date": "2024-11-30",
+     "away_team": "Washington",
+     "coach": "Jedd Fisch",
+     "home_rank_ap": 1,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 49
+    },
+    {
+     "date": "2024-10-04",
+     "away_team": "Michigan State",
+     "coach": "Jonathan Smith",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 31
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon",
+   "season": 2025,
+   "games": [
+    {
+     "date": "2025-09-06",
+     "away_team": "Oklahoma State",
+     "coach": "Mike Gundy",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 3,
+     "home_points": 69
+    },
+    {
+     "date": "2025-10-25",
+     "away_team": "Wisconsin",
+     "coach": "Luke Fickell",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 21
+    },
+    {
+     "date": "2025-11-14",
+     "away_team": "Minnesota",
+     "coach": "P. J. Fleck",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 42
+    },
+    {
+     "date": "2025-11-22",
+     "away_team": "USC",
+     "coach": "Lincoln Riley",
+     "home_rank_ap": 6,
+     "away_rank_ap": 16,
+     "result": "L",
+     "away_points": 27,
+     "home_points": 42
+    },
+    {
+     "date": "2025-10-11",
+     "away_team": "Indiana",
+     "coach": "Curt Cignetti",
+     "home_rank_ap": 3,
+     "away_rank_ap": 7,
+     "result": "W",
+     "away_points": 30,
+     "home_points": 20
+    },
+    {
+     "date": "2025-09-20",
+     "away_team": "Oregon State",
+     "coach": "Trent Bray",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 41
+    },
+    {
+     "date": "2025-12-20",
+     "away_team": "James Madison",
+     "coach": "Bob Chesney",
+     "home_rank_ap": 5,
+     "away_rank_ap": 19,
+     "result": "L",
+     "away_points": 34,
+     "home_points": 51
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon State",
+   "season": 2000,
+   "games": [
+    {
+     "date": "2000-11-18",
+     "away_team": "Oregon",
+     "coach": "Mike Bellotti",
+     "home_rank_ap": 8,
+     "away_rank_ap": 5,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 23
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon State",
+   "season": 2012,
+   "games": [
+    {
+     "date": "2012-10-20",
+     "away_team": "Utah",
+     "coach": "Kyle Whittingham",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 21
+    }
+   ]
+  },
+  {
+   "home_team": "Oregon State",
+   "season": 2023,
+   "games": [
+    {
+     "date": "2023-11-18",
+     "away_team": "Washington",
+     "coach": "Kalen DeBoer",
+     "home_rank_ap": 10,
+     "away_rank_ap": 5,
+     "result": "W",
+     "away_points": 22,
+     "home_points": 20
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 1991,
+   "games": [
+    {
+     "date": "1991-11-16",
+     "away_team": "Notre Dame",
+     "coach": "Lou Holtz",
+     "home_rank_ap": 8,
+     "away_rank_ap": 12,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 35
+    },
+    {
+     "date": "1991-09-28",
+     "away_team": "Boston College",
+     "coach": "Tom Coughlin",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 28
+    },
+    {
+     "date": "1991-10-19",
+     "away_team": "Rutgers",
+     "coach": "Doug Graber",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 37
+    },
+    {
+     "date": "1991-10-26",
+     "away_team": "West Virginia",
+     "coach": "Don Nehlen",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 6,
+     "home_points": 51
+    },
+    {
+     "date": "1991-09-07",
+     "away_team": "Cincinnati",
+     "coach": "Tim Murphy",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 81
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 1992,
+   "games": [
+    {
+     "date": "1992-10-10",
+     "away_team": "Miami (FL)",
+     "coach": "Dennis Erickson",
+     "home_rank_ap": 7,
+     "away_rank_ap": 2,
+     "result": "W",
+     "away_points": 17,
+     "home_points": 14
+    },
+    {
+     "date": "1992-10-17",
+     "away_team": "Boston College",
+     "coach": "Tom Coughlin",
+     "home_rank_ap": 9,
+     "away_rank_ap": 20,
+     "result": "W",
+     "away_points": 35,
+     "home_points": 32
+    },
+    {
+     "date": "1992-09-12",
+     "away_team": "Temple",
+     "coach": "Jerry Berndt",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 8,
+     "home_points": 49
+    },
+    {
+     "date": "1992-09-26",
+     "away_team": "Maryland",
+     "coach": "Mark Duffner",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 49
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 1993,
+   "games": [
+    {
+     "date": "1993-10-16",
+     "away_team": "Michigan",
+     "coach": "Gary Moeller",
+     "home_rank_ap": 7,
+     "away_rank_ap": 18,
+     "result": "W",
+     "away_points": 21,
+     "home_points": 13
+    },
+    {
+     "date": "1993-09-25",
+     "away_team": "Rutgers",
+     "coach": "Doug Graber",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 31
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 1994,
+   "games": [
+    {
+     "date": "1994-11-19",
+     "away_team": "Northwestern",
+     "coach": "Gary Barnett",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 45
+    },
+    {
+     "date": "1994-09-17",
+     "away_team": "Iowa",
+     "coach": "Hayden Fry",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 61
+    },
+    {
+     "date": "1994-10-29",
+     "away_team": "Ohio State",
+     "coach": "John Cooper",
+     "home_rank_ap": 1,
+     "away_rank_ap": 21,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 63
+    },
+    {
+     "date": "1994-11-26",
+     "away_team": "Michigan State",
+     "coach": "George Perles",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 31,
+     "home_points": 59
+    },
+    {
+     "date": "1994-09-10",
+     "away_team": "USC",
+     "coach": "John Robinson",
+     "home_rank_ap": 8,
+     "away_rank_ap": 14,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 38
+    },
+    {
+     "date": "1994-09-24",
+     "away_team": "Rutgers",
+     "coach": "Doug Graber",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 27,
+     "home_points": 55
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 1995,
+   "games": [
+    {
+     "date": "1995-09-30",
+     "away_team": "Wisconsin",
+     "coach": "Barry Alvarez",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 17,
+     "home_points": 9
+    },
+    {
+     "date": "1995-09-09",
+     "away_team": "Texas Tech",
+     "coach": "Spike Dykes",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 23,
+     "home_points": 24
+    },
+    {
+     "date": "1995-09-16",
+     "away_team": "Temple",
+     "coach": "Ron Dickerson",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 66
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 1996,
+   "games": [
+    {
+     "date": "1996-11-23",
+     "away_team": "Michigan State",
+     "coach": "Nick Saban",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 29,
+     "home_points": 32
+    },
+    {
+     "date": "1996-10-19",
+     "away_team": "Iowa",
+     "coach": "Hayden Fry",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 21,
+     "home_points": 20
+    },
+    {
+     "date": "1996-10-12",
+     "away_team": "Purdue",
+     "coach": "Jim Colletto",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 31
+    },
+    {
+     "date": "1996-09-07",
+     "away_team": "Louisville",
+     "coach": "Ron Cooper",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 24
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 1997,
+   "games": [
+    {
+     "date": "1997-10-18",
+     "away_team": "Minnesota",
+     "coach": "Glen Mason",
+     "home_rank_ap": 1,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 15,
+     "home_points": 16
+    },
+    {
+     "date": "1997-11-22",
+     "away_team": "Wisconsin",
+     "coach": "Barry Alvarez",
+     "home_rank_ap": 6,
+     "away_rank_ap": 24,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 35
+    },
+    {
+     "date": "1997-09-06",
+     "away_team": "Pittsburgh",
+     "coach": "Walt Harris",
+     "home_rank_ap": 1,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 34
+    },
+    {
+     "date": "1997-10-11",
+     "away_team": "Ohio State",
+     "coach": "John Cooper",
+     "home_rank_ap": 2,
+     "away_rank_ap": 7,
+     "result": "L",
+     "away_points": 27,
+     "home_points": 31
+    },
+    {
+     "date": "1997-11-08",
+     "away_team": "Michigan",
+     "coach": "Lloyd Carr",
+     "home_rank_ap": 2,
+     "away_rank_ap": 4,
+     "result": "W",
+     "away_points": 34,
+     "home_points": 8
+    },
+    {
+     "date": "1997-09-13",
+     "away_team": "Temple",
+     "coach": "Ron Dickerson",
+     "home_rank_ap": 1,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 52
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 1998,
+   "games": [
+    {
+     "date": "1998-10-31",
+     "away_team": "Illinois",
+     "coach": "Ron Turner",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 27
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 1999,
+   "games": [
+    {
+     "date": "1999-11-06",
+     "away_team": "Minnesota",
+     "coach": "Glen Mason",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 24,
+     "home_points": 23
+    },
+    {
+     "date": "1999-09-11",
+     "away_team": "Pittsburgh",
+     "coach": "Walt Harris",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 20
+    },
+    {
+     "date": "1999-10-16",
+     "away_team": "Ohio State",
+     "coach": "John Cooper",
+     "home_rank_ap": 2,
+     "away_rank_ap": 18,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 23
+    },
+    {
+     "date": "1999-11-13",
+     "away_team": "Michigan",
+     "coach": "Lloyd Carr",
+     "home_rank_ap": 6,
+     "away_rank_ap": 16,
+     "result": "W",
+     "away_points": 31,
+     "home_points": 27
+    },
+    {
+     "date": "1999-09-25",
+     "away_team": "Indiana",
+     "coach": "Cam Cameron",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 45
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 2005,
+   "games": [
+    {
+     "date": "2005-11-05",
+     "away_team": "Wisconsin",
+     "coach": "Barry Alvarez",
+     "home_rank_ap": 10,
+     "away_rank_ap": 14,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 35
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 2008,
+   "games": [
+    {
+     "date": "2008-11-22",
+     "away_team": "Michigan State",
+     "coach": "Mark Dantonio",
+     "home_rank_ap": 7,
+     "away_rank_ap": 17,
+     "result": "L",
+     "away_points": 18,
+     "home_points": 49
+    },
+    {
+     "date": "2008-10-18",
+     "away_team": "Michigan",
+     "coach": "Rich Rodriguez",
+     "home_rank_ap": 3,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 46
+    },
+    {
+     "date": "2008-11-15",
+     "away_team": "Indiana",
+     "coach": "Bill Lynch",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 34
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 2009,
+   "games": [
+    {
+     "date": "2009-09-26",
+     "away_team": "Iowa",
+     "coach": "Kirk Ferentz",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 21,
+     "home_points": 10
+    },
+    {
+     "date": "2009-09-19",
+     "away_team": "Temple",
+     "coach": "Al Golden",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 6,
+     "home_points": 31
+    },
+    {
+     "date": "2009-09-12",
+     "away_team": "Syracuse",
+     "coach": "Doug Marrone",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 28
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 2016,
+   "games": [
+    {
+     "date": "2016-11-26",
+     "away_team": "Michigan State",
+     "coach": "Mark Dantonio",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 12,
+     "home_points": 45
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 2017,
+   "games": [
+    {
+     "date": "2017-10-21",
+     "away_team": "Michigan",
+     "coach": "Jim Harbaugh",
+     "home_rank_ap": 2,
+     "away_rank_ap": 19,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 42
+    },
+    {
+     "date": "2017-09-30",
+     "away_team": "Indiana",
+     "coach": "Tom Allen",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 45
+    },
+    {
+     "date": "2017-09-02",
+     "away_team": "Akron",
+     "coach": "Terry Bowden",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 52
+    },
+    {
+     "date": "2017-09-09",
+     "away_team": "Pittsburgh",
+     "coach": "Pat Narduzzi",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 33
+    },
+    {
+     "date": "2017-09-16",
+     "away_team": "Georgia State",
+     "coach": "Shawn Elliott",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 56
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 2018,
+   "games": [
+    {
+     "date": "2018-10-13",
+     "away_team": "Michigan State",
+     "coach": "Mark Dantonio",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 21,
+     "home_points": 17
+    },
+    {
+     "date": "2018-09-29",
+     "away_team": "Ohio State",
+     "coach": "Urban Meyer",
+     "home_rank_ap": 9,
+     "away_rank_ap": 4,
+     "result": "W",
+     "away_points": 27,
+     "home_points": 26
+    },
+    {
+     "date": "2018-09-01",
+     "away_team": "Appalachian State",
+     "coach": "Scott Satterfield",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 38,
+     "home_points": 45
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 2019,
+   "games": [
+    {
+     "date": "2019-10-19",
+     "away_team": "Michigan",
+     "coach": "Jim Harbaugh",
+     "home_rank_ap": 7,
+     "away_rank_ap": 16,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 28
+    },
+    {
+     "date": "2019-11-16",
+     "away_team": "Indiana",
+     "coach": "Tom Allen",
+     "home_rank_ap": 9,
+     "away_rank_ap": 24,
+     "result": "L",
+     "away_points": 27,
+     "home_points": 34
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 2021,
+   "games": [
+    {
+     "date": "2021-10-23",
+     "away_team": "Illinois",
+     "coach": "Bret Bielema",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 20,
+     "home_points": 18
+    },
+    {
+     "date": "2021-10-02",
+     "away_team": "Indiana",
+     "coach": "Tom Allen",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 24
+    },
+    {
+     "date": "2021-09-18",
+     "away_team": "Auburn",
+     "coach": "Bryan Harsin",
+     "home_rank_ap": 10,
+     "away_rank_ap": 22,
+     "result": "L",
+     "away_points": 20,
+     "home_points": 28
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 2023,
+   "games": [
+    {
+     "date": "2023-09-23",
+     "away_team": "Iowa",
+     "coach": "Kirk Ferentz",
+     "home_rank_ap": 7,
+     "away_rank_ap": 24,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 31
+    },
+    {
+     "date": "2023-11-11",
+     "away_team": "Michigan",
+     "coach": "Jim Harbaugh",
+     "home_rank_ap": 9,
+     "away_rank_ap": 2,
+     "result": "W",
+     "away_points": 24,
+     "home_points": 15
+    },
+    {
+     "date": "2023-10-28",
+     "away_team": "Indiana",
+     "coach": "Tom Allen",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 33
+    },
+    {
+     "date": "2023-09-02",
+     "away_team": "West Virginia",
+     "coach": "Neal Brown",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 15,
+     "home_points": 38
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 2024,
+   "games": [
+    {
+     "date": "2024-09-28",
+     "away_team": "Illinois",
+     "coach": "Bret Bielema",
+     "home_rank_ap": 9,
+     "away_rank_ap": 19,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 21
+    },
+    {
+     "date": "2024-11-30",
+     "away_team": "Maryland",
+     "coach": "Mike Locksley",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 44
+    },
+    {
+     "date": "2024-11-02",
+     "away_team": "Ohio State",
+     "coach": "Ryan Day",
+     "home_rank_ap": 3,
+     "away_rank_ap": 4,
+     "result": "W",
+     "away_points": 20,
+     "home_points": 13
+    },
+    {
+     "date": "2024-11-09",
+     "away_team": "Washington",
+     "coach": "Jedd Fisch",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 6,
+     "home_points": 35
+    },
+    {
+     "date": "2024-12-21",
+     "away_team": "SMU",
+     "coach": "Rhett Lashlee",
+     "home_rank_ap": 5,
+     "away_rank_ap": 12,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 38
+    },
+    {
+     "date": "2024-10-05",
+     "away_team": "UCLA",
+     "coach": "DeShaun Foster",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 11,
+     "home_points": 27
+    }
+   ]
+  },
+  {
+   "home_team": "Penn State",
+   "season": 2025,
+   "games": [
+    {
+     "date": "2025-09-27",
+     "away_team": "Oregon",
+     "coach": "Dan Lanning",
+     "home_rank_ap": 3,
+     "away_rank_ap": 6,
+     "result": "W",
+     "away_points": 30,
+     "home_points": 24
+    }
+   ]
+  },
+  {
+   "home_team": "Pittsburgh",
+   "season": 2009,
+   "games": [
+    {
+     "date": "2009-11-14",
+     "away_team": "Notre Dame",
+     "coach": "Charlie Weis",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 22,
+     "home_points": 27
+    }
+   ]
+  },
+  {
+   "home_team": "Purdue",
+   "season": 2004,
+   "games": [
+    {
+     "date": "2004-10-16",
+     "away_team": "Wisconsin",
+     "coach": "Barry Alvarez",
+     "home_rank_ap": 5,
+     "away_rank_ap": 10,
+     "result": "W",
+     "away_points": 20,
+     "home_points": 17
+    }
+   ]
+  },
+  {
+   "home_team": "Rutgers",
+   "season": 2007,
+   "games": [
+    {
+     "date": "2007-09-29",
+     "away_team": "Maryland",
+     "coach": "Ralph Friedgen",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 34,
+     "home_points": 24
+    }
+   ]
+  },
+  {
+   "home_team": "SMU",
+   "season": 2024,
+   "games": [
+    {
+     "date": "2024-11-30",
+     "away_team": "California",
+     "coach": "Justin Wilcox",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 6,
+     "home_points": 38
+    }
+   ]
+  },
+  {
+   "home_team": "South Carolina",
+   "season": 2007,
+   "games": [
+    {
+     "date": "2007-10-20",
+     "away_team": "Vanderbilt",
+     "coach": "Bobby Johnson",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 17,
+     "home_points": 6
+    }
+   ]
+  },
+  {
+   "home_team": "South Carolina",
+   "season": 2011,
+   "games": [
+    {
+     "date": "2011-10-01",
+     "away_team": "Auburn",
+     "coach": "Gene Chizik",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 16,
+     "home_points": 13
+    }
+   ]
+  },
+  {
+   "home_team": "South Carolina",
+   "season": 2012,
+   "games": [
+    {
+     "date": "2012-10-06",
+     "away_team": "Georgia",
+     "coach": "Mark Richt",
+     "home_rank_ap": 6,
+     "away_rank_ap": 5,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 35
+    },
+    {
+     "date": "2012-09-22",
+     "away_team": "Missouri",
+     "coach": "Gary Pinkel",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 31
+    },
+    {
+     "date": "2012-09-08",
+     "away_team": "East Carolina",
+     "coach": "Ruffin McNeill",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 48
+    }
+   ]
+  },
+  {
+   "home_team": "South Carolina",
+   "season": 2013,
+   "games": [
+    {
+     "date": "2013-11-30",
+     "away_team": "Clemson",
+     "coach": "Dabo Swinney",
+     "home_rank_ap": 10,
+     "away_rank_ap": 6,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 31
+    },
+    {
+     "date": "2013-08-29",
+     "away_team": "North Carolina",
+     "coach": "Larry Fedora",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 27
+    }
+   ]
+  },
+  {
+   "home_team": "South Carolina",
+   "season": 2014,
+   "games": [
+    {
+     "date": "2014-08-28",
+     "away_team": "Texas A&M",
+     "coach": "Kevin Sumlin",
+     "home_rank_ap": 9,
+     "away_rank_ap": 21,
+     "result": "W",
+     "away_points": 52,
+     "home_points": 28
+    }
+   ]
+  },
+  {
+   "home_team": "South Florida",
+   "season": 2007,
+   "games": [
+    {
+     "date": "2007-10-13",
+     "away_team": "UCF",
+     "coach": "George O'Leary",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 12,
+     "home_points": 64
+    }
+   ]
+  },
+  {
+   "home_team": "South Florida",
+   "season": 2008,
+   "games": [
+    {
+     "date": "2008-10-02",
+     "away_team": "Pittsburgh",
+     "coach": "Dave Wannstedt",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 26,
+     "home_points": 21
+    }
+   ]
+  },
+  {
+   "home_team": "Stanford",
+   "season": 1992,
+   "games": [
+    {
+     "date": "1992-10-17",
+     "away_team": "Arizona",
+     "coach": "Dick Tomey",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 21,
+     "home_points": 6
+    }
+   ]
+  },
+  {
+   "home_team": "Stanford",
+   "season": 2010,
+   "games": [
+    {
+     "date": "2010-11-27",
+     "away_team": "Oregon State",
+     "coach": "Mike Riley",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 38
+    },
+    {
+     "date": "2010-11-06",
+     "away_team": "Arizona",
+     "coach": "Mike Stoops",
+     "home_rank_ap": 10,
+     "away_rank_ap": 13,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 42
+    }
+   ]
+  },
+  {
+   "home_team": "Stanford",
+   "season": 2011,
+   "games": [
+    {
+     "date": "2011-10-01",
+     "away_team": "UCLA",
+     "coach": "Rick Neuheisel",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 19,
+     "home_points": 45
+    },
+    {
+     "date": "2011-11-26",
+     "away_team": "Notre Dame",
+     "coach": "Brian Kelly",
+     "home_rank_ap": 4,
+     "away_rank_ap": 22,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 28
+    },
+    {
+     "date": "2011-11-19",
+     "away_team": "California",
+     "coach": "Jeff Tedford",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 28,
+     "home_points": 31
+    },
+    {
+     "date": "2011-10-22",
+     "away_team": "Washington",
+     "coach": "Steve Sarkisian",
+     "home_rank_ap": 7,
+     "away_rank_ap": 22,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 65
+    },
+    {
+     "date": "2011-11-12",
+     "away_team": "Oregon",
+     "coach": "Chip Kelly",
+     "home_rank_ap": 3,
+     "away_rank_ap": 6,
+     "result": "W",
+     "away_points": 53,
+     "home_points": 30
+    },
+    {
+     "date": "2011-09-03",
+     "away_team": "San Jose State",
+     "coach": "Mike MacIntyre",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 3,
+     "home_points": 57
+    },
+    {
+     "date": "2011-10-08",
+     "away_team": "Colorado",
+     "coach": "Jon Embree",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 48
+    }
+   ]
+  },
+  {
+   "home_team": "Stanford",
+   "season": 2012,
+   "games": [
+    {
+     "date": "2012-11-30",
+     "away_team": "UCLA",
+     "coach": "Jim L. Mora",
+     "home_rank_ap": 8,
+     "away_rank_ap": 17,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 27
+    }
+   ]
+  },
+  {
+   "home_team": "Stanford",
+   "season": 2013,
+   "games": [
+    {
+     "date": "2013-11-30",
+     "away_team": "Notre Dame",
+     "coach": "Brian Kelly",
+     "home_rank_ap": 8,
+     "away_rank_ap": 25,
+     "result": "L",
+     "away_points": 20,
+     "home_points": 27
+    },
+    {
+     "date": "2013-10-05",
+     "away_team": "Washington",
+     "coach": "Steve Sarkisian",
+     "home_rank_ap": 5,
+     "away_rank_ap": 15,
+     "result": "L",
+     "away_points": 28,
+     "home_points": 31
+    },
+    {
+     "date": "2013-11-23",
+     "away_team": "California",
+     "coach": "Sonny Dykes",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 63
+    },
+    {
+     "date": "2013-09-21",
+     "away_team": "Arizona State",
+     "coach": "Todd Graham",
+     "home_rank_ap": 5,
+     "away_rank_ap": 23,
+     "result": "L",
+     "away_points": 28,
+     "home_points": 42
+    },
+    {
+     "date": "2013-11-07",
+     "away_team": "Oregon",
+     "coach": "Mark Helfrich",
+     "home_rank_ap": 6,
+     "away_rank_ap": 2,
+     "result": "L",
+     "away_points": 20,
+     "home_points": 26
+    }
+   ]
+  },
+  {
+   "home_team": "Stanford",
+   "season": 2015,
+   "games": [
+    {
+     "date": "2015-10-24",
+     "away_team": "Washington",
+     "coach": "Chris Petersen",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 31
+    },
+    {
+     "date": "2015-11-14",
+     "away_team": "Oregon",
+     "coach": "Mark Helfrich",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 38,
+     "home_points": 36
+    }
+   ]
+  },
+  {
+   "home_team": "Stanford",
+   "season": 2016,
+   "games": [
+    {
+     "date": "2016-09-02",
+     "away_team": "Kansas State",
+     "coach": "Bill Snyder",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 26
+    },
+    {
+     "date": "2016-09-17",
+     "away_team": "USC",
+     "coach": "Clay Helton",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 27
+    }
+   ]
+  },
+  {
+   "home_team": "Stanford",
+   "season": 2018,
+   "games": [
+    {
+     "date": "2018-09-08",
+     "away_team": "USC",
+     "coach": "Clay Helton",
+     "home_rank_ap": 10,
+     "away_rank_ap": 17,
+     "result": "L",
+     "away_points": 3,
+     "home_points": 17
+    }
+   ]
+  },
+  {
+   "home_team": "Syracuse",
+   "season": 1992,
+   "games": [
+    {
+     "date": "1992-11-21",
+     "away_team": "Miami (FL)",
+     "coach": "Dennis Erickson",
+     "home_rank_ap": 8,
+     "away_rank_ap": 1,
+     "result": "W",
+     "away_points": 16,
+     "home_points": 10
+    },
+    {
+     "date": "1992-11-07",
+     "away_team": "Virginia Tech",
+     "coach": "Frank Beamer",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 9,
+     "home_points": 28
+    },
+    {
+     "date": "1992-09-19",
+     "away_team": "Ohio State",
+     "coach": "John Cooper",
+     "home_rank_ap": 8,
+     "away_rank_ap": 21,
+     "result": "W",
+     "away_points": 35,
+     "home_points": 12
+    },
+    {
+     "date": "1992-09-12",
+     "away_team": "Texas",
+     "coach": "John Mackovic",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 31
+    }
+   ]
+  },
+  {
+   "home_team": "Syracuse",
+   "season": 1994,
+   "games": [
+    {
+     "date": "1994-11-05",
+     "away_team": "Miami (FL)",
+     "coach": "Dennis Erickson",
+     "home_rank_ap": 10,
+     "away_rank_ap": 5,
+     "result": "W",
+     "away_points": 27,
+     "home_points": 6
+    }
+   ]
+  },
+  {
+   "home_team": "Syracuse",
+   "season": 1996,
+   "games": [
+    {
+     "date": "1996-09-07",
+     "away_team": "North Carolina",
+     "coach": "Mack Brown",
+     "home_rank_ap": 9,
+     "away_rank_ap": 24,
+     "result": "W",
+     "away_points": 27,
+     "home_points": 10
+    }
+   ]
+  },
+  {
+   "home_team": "TCU",
+   "season": 2003,
+   "games": [
+    {
+     "date": "2003-11-15",
+     "away_team": "Cincinnati",
+     "coach": "Rick Minter",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 43
+    }
+   ]
+  },
+  {
+   "home_team": "TCU",
+   "season": 2009,
+   "games": [
+    {
+     "date": "2009-11-28",
+     "away_team": "New Mexico",
+     "coach": "Mike Locksley",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 51
+    },
+    {
+     "date": "2009-11-14",
+     "away_team": "Utah",
+     "coach": "Kyle Whittingham",
+     "home_rank_ap": 4,
+     "away_rank_ap": 16,
+     "result": "L",
+     "away_points": 28,
+     "home_points": 55
+    }
+   ]
+  },
+  {
+   "home_team": "TCU",
+   "season": 2010,
+   "games": [
+    {
+     "date": "2010-09-18",
+     "away_team": "Baylor",
+     "coach": "Art Briles",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 45
+    },
+    {
+     "date": "2010-10-16",
+     "away_team": "BYU",
+     "coach": "Bronco Mendenhall",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 3,
+     "home_points": 31
+    },
+    {
+     "date": "2010-11-13",
+     "away_team": "San Diego State",
+     "coach": "Brady Hoke",
+     "home_rank_ap": 3,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 35,
+     "home_points": 40
+    }
+   ]
+  },
+  {
+   "home_team": "TCU",
+   "season": 2014,
+   "games": [
+    {
+     "date": "2014-11-08",
+     "away_team": "Kansas State",
+     "coach": "Bill Snyder",
+     "home_rank_ap": 6,
+     "away_rank_ap": 9,
+     "result": "L",
+     "away_points": 20,
+     "home_points": 41
+    },
+    {
+     "date": "2014-12-06",
+     "away_team": "Iowa State",
+     "coach": "Paul Rhoads",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 3,
+     "home_points": 55
+    },
+    {
+     "date": "2014-10-25",
+     "away_team": "Texas Tech",
+     "coach": "Kliff Kingsbury",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 27,
+     "home_points": 82
+    }
+   ]
+  },
+  {
+   "home_team": "TCU",
+   "season": 2015,
+   "games": [
+    {
+     "date": "2015-10-29",
+     "away_team": "West Virginia",
+     "coach": "Dana Holgorsen",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 40
+    },
+    {
+     "date": "2015-09-19",
+     "away_team": "SMU",
+     "coach": "Chad Morris",
+     "home_rank_ap": 3,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 37,
+     "home_points": 56
+    },
+    {
+     "date": "2015-10-03",
+     "away_team": "Texas",
+     "coach": "Charlie Strong",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 50
+    }
+   ]
+  },
+  {
+   "home_team": "TCU",
+   "season": 2017,
+   "games": [
+    {
+     "date": "2017-10-07",
+     "away_team": "West Virginia",
+     "coach": "Dana Holgorsen",
+     "home_rank_ap": 8,
+     "away_rank_ap": 23,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 31
+    },
+    {
+     "date": "2017-11-24",
+     "away_team": "Baylor",
+     "coach": "Matt Rhule",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 22,
+     "home_points": 45
+    },
+    {
+     "date": "2017-10-21",
+     "away_team": "Kansas",
+     "coach": "David Beaty",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 43
+    },
+    {
+     "date": "2017-11-04",
+     "away_team": "Texas",
+     "coach": "Tom Herman",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 24
+    }
+   ]
+  },
+  {
+   "home_team": "TCU",
+   "season": 2022,
+   "games": [
+    {
+     "date": "2022-11-26",
+     "away_team": "Iowa State",
+     "coach": "Matt Campbell",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 62
+    },
+    {
+     "date": "2022-10-22",
+     "away_team": "Kansas State",
+     "coach": "Chris Klieman",
+     "home_rank_ap": 8,
+     "away_rank_ap": 17,
+     "result": "L",
+     "away_points": 28,
+     "home_points": 38
+    },
+    {
+     "date": "2022-11-05",
+     "away_team": "Texas Tech",
+     "coach": "Joey McGuire",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 34
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 1990,
+   "games": [
+    {
+     "date": "1990-10-13",
+     "away_team": "Florida",
+     "coach": "Steve Spurrier",
+     "home_rank_ap": 5,
+     "away_rank_ap": 9,
+     "result": "L",
+     "away_points": 3,
+     "home_points": 45
+    },
+    {
+     "date": "1990-11-10",
+     "away_team": "Notre Dame",
+     "coach": "Lou Holtz",
+     "home_rank_ap": 9,
+     "away_rank_ap": 1,
+     "result": "W",
+     "away_points": 34,
+     "home_points": 29
+    },
+    {
+     "date": "1990-09-01",
+     "away_team": "Pacific",
+     "coach": "Walt Harris",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 55
+    },
+    {
+     "date": "1990-10-20",
+     "away_team": "Alabama",
+     "coach": "Gene Stallings",
+     "home_rank_ap": 3,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 9,
+     "home_points": 6
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 1991,
+   "games": [
+    {
+     "date": "1991-11-30",
+     "away_team": "Vanderbilt",
+     "coach": "Gerry DiNardo",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 45
+    },
+    {
+     "date": "1991-09-21",
+     "away_team": "Mississippi State",
+     "coach": "Jackie Sherrill",
+     "home_rank_ap": 6,
+     "away_rank_ap": 23,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 26
+    },
+    {
+     "date": "1991-11-16",
+     "away_team": "Ole Miss",
+     "coach": "Billy Brewer",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 25,
+     "home_points": 36
+    },
+    {
+     "date": "1991-09-28",
+     "away_team": "Auburn",
+     "coach": "Pat Dye",
+     "home_rank_ap": 5,
+     "away_rank_ap": 13,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 30
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 1992,
+   "games": [
+    {
+     "date": "1992-09-26",
+     "away_team": "Cincinnati",
+     "coach": "Tim Murphy",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 40
+    },
+    {
+     "date": "1992-10-10",
+     "away_team": "Arkansas",
+     "coach": "Joe Kines",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 25,
+     "home_points": 24
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 1993,
+   "games": [
+    {
+     "date": "1993-11-27",
+     "away_team": "Vanderbilt",
+     "coach": "Gerry DiNardo",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 62
+    },
+    {
+     "date": "1993-11-06",
+     "away_team": "Louisville",
+     "coach": "Howard Schnellenberger",
+     "home_rank_ap": 7,
+     "away_rank_ap": 13,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 45
+    },
+    {
+     "date": "1993-09-11",
+     "away_team": "Georgia",
+     "coach": "Ray Goff",
+     "home_rank_ap": 8,
+     "away_rank_ap": 22,
+     "result": "L",
+     "away_points": 6,
+     "home_points": 38
+    },
+    {
+     "date": "1993-10-30",
+     "away_team": "South Carolina",
+     "coach": "Sparky Woods",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 3,
+     "home_points": 55
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 1995,
+   "games": [
+    {
+     "date": "1995-10-28",
+     "away_team": "South Carolina",
+     "coach": "Brad Scott",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 56
+    },
+    {
+     "date": "1995-09-09",
+     "away_team": "Georgia",
+     "coach": "Ray Goff",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 27,
+     "home_points": 30
+    },
+    {
+     "date": "1995-11-25",
+     "away_team": "Vanderbilt",
+     "coach": "Rod Dowhower",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 12
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 1996,
+   "games": [
+    {
+     "date": "1996-09-21",
+     "away_team": "Florida",
+     "coach": "Steve Spurrier",
+     "home_rank_ap": 2,
+     "away_rank_ap": 4,
+     "result": "W",
+     "away_points": 35,
+     "home_points": 29
+    },
+    {
+     "date": "1996-11-23",
+     "away_team": "Kentucky",
+     "coach": "Bill Curry",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 56
+    },
+    {
+     "date": "1996-09-07",
+     "away_team": "UCLA",
+     "coach": "Bob Toledo",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 20,
+     "home_points": 35
+    },
+    {
+     "date": "1996-10-26",
+     "away_team": "Alabama",
+     "coach": "Gene Stallings",
+     "home_rank_ap": 6,
+     "away_rank_ap": 7,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 20
+    },
+    {
+     "date": "1996-08-31",
+     "away_team": "UNLV",
+     "coach": "Jeff Horton",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 3,
+     "home_points": 62
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 1997,
+   "games": [
+    {
+     "date": "1997-10-04",
+     "away_team": "Ole Miss",
+     "coach": "Tommy Tuberville",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 31
+    },
+    {
+     "date": "1997-08-30",
+     "away_team": "Texas Tech",
+     "coach": "Spike Dykes",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 52
+    },
+    {
+     "date": "1997-11-01",
+     "away_team": "South Carolina",
+     "coach": "Brad Scott",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 22
+    },
+    {
+     "date": "1997-11-29",
+     "away_team": "Vanderbilt",
+     "coach": "Woody Widenhofer",
+     "home_rank_ap": 3,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 17
+    },
+    {
+     "date": "1997-10-11",
+     "away_team": "Georgia",
+     "coach": "Jim Donnan",
+     "home_rank_ap": 9,
+     "away_rank_ap": 13,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 38
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 1998,
+   "games": [
+    {
+     "date": "1998-09-19",
+     "away_team": "Florida",
+     "coach": "Steve Spurrier",
+     "home_rank_ap": 6,
+     "away_rank_ap": 2,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 20
+    },
+    {
+     "date": "1998-11-14",
+     "away_team": "Arkansas",
+     "coach": "Houston Nutt",
+     "home_rank_ap": 1,
+     "away_rank_ap": 10,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 28
+    },
+    {
+     "date": "1998-11-07",
+     "away_team": "UAB",
+     "coach": "Watson Brown",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 37
+    },
+    {
+     "date": "1998-09-26",
+     "away_team": "Houston",
+     "coach": "Kim Helton",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 42
+    },
+    {
+     "date": "1998-11-21",
+     "away_team": "Kentucky",
+     "coach": "Hal Mumme",
+     "home_rank_ap": 1,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 59
+    },
+    {
+     "date": "1998-10-24",
+     "away_team": "Alabama",
+     "coach": "Mike DuBose",
+     "home_rank_ap": 3,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 18,
+     "home_points": 35
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 1999,
+   "games": [
+    {
+     "date": "1999-10-02",
+     "away_team": "Auburn",
+     "coach": "Tommy Tuberville",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 24
+    },
+    {
+     "date": "1999-10-30",
+     "away_team": "South Carolina",
+     "coach": "Lou Holtz",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 30
+    },
+    {
+     "date": "1999-11-06",
+     "away_team": "Notre Dame",
+     "coach": "Bob Davie",
+     "home_rank_ap": 4,
+     "away_rank_ap": 24,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 38
+    },
+    {
+     "date": "1999-11-27",
+     "away_team": "Vanderbilt",
+     "coach": "Woody Widenhofer",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 38
+    },
+    {
+     "date": "1999-09-04",
+     "away_team": "Wyoming",
+     "coach": "Dana Dimel",
+     "home_rank_ap": 3,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 42
+    },
+    {
+     "date": "1999-10-09",
+     "away_team": "Georgia",
+     "coach": "Jim Donnan",
+     "home_rank_ap": 6,
+     "away_rank_ap": 10,
+     "result": "L",
+     "away_points": 20,
+     "home_points": 37
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 2001,
+   "games": [
+    {
+     "date": "2001-09-29",
+     "away_team": "LSU",
+     "coach": "Nick Saban",
+     "home_rank_ap": 7,
+     "away_rank_ap": 14,
+     "result": "L",
+     "away_points": 18,
+     "home_points": 26
+    },
+    {
+     "date": "2001-10-06",
+     "away_team": "Georgia",
+     "coach": "Mark Richt",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 26,
+     "home_points": 24
+    },
+    {
+     "date": "2001-10-27",
+     "away_team": "South Carolina",
+     "coach": "Lou Holtz",
+     "home_rank_ap": 9,
+     "away_rank_ap": 12,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 17
+    },
+    {
+     "date": "2001-09-01",
+     "away_team": "Syracuse",
+     "coach": "Paul Pasqualoni",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 9,
+     "home_points": 33
+    },
+    {
+     "date": "2001-11-10",
+     "away_team": "Memphis",
+     "coach": "Tommy West",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 28,
+     "home_points": 49
+    },
+    {
+     "date": "2001-11-24",
+     "away_team": "Vanderbilt",
+     "coach": "Woody Widenhofer",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 38
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 2002,
+   "games": [
+    {
+     "date": "2002-10-05",
+     "away_team": "Arkansas",
+     "coach": "Houston Nutt",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 38,
+     "home_points": 41
+    },
+    {
+     "date": "2002-09-21",
+     "away_team": "Florida",
+     "coach": "Ron Zook",
+     "home_rank_ap": 4,
+     "away_rank_ap": 10,
+     "result": "W",
+     "away_points": 30,
+     "home_points": 13
+    },
+    {
+     "date": "2002-08-31",
+     "away_team": "Wyoming",
+     "coach": "Vic Koenning",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 47
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 2003,
+   "games": [
+    {
+     "date": "2003-09-27",
+     "away_team": "South Carolina",
+     "coach": "Lou Holtz",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 20,
+     "home_points": 23
+    },
+    {
+     "date": "2003-11-15",
+     "away_team": "Mississippi State",
+     "coach": "Jackie Sherrill",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 59
+    },
+    {
+     "date": "2003-11-22",
+     "away_team": "Vanderbilt",
+     "coach": "Bobby Johnson",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 48
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 2004,
+   "games": [
+    {
+     "date": "2004-10-02",
+     "away_team": "Auburn",
+     "coach": "Tommy Tuberville",
+     "home_rank_ap": 10,
+     "away_rank_ap": 8,
+     "result": "W",
+     "away_points": 34,
+     "home_points": 10
+    },
+    {
+     "date": "2004-11-06",
+     "away_team": "Notre Dame",
+     "coach": "Tyrone Willingham",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 17,
+     "home_points": 13
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 2005,
+   "games": [
+    {
+     "date": "2005-10-08",
+     "away_team": "Georgia",
+     "coach": "Mark Richt",
+     "home_rank_ap": 8,
+     "away_rank_ap": 5,
+     "result": "W",
+     "away_points": 27,
+     "home_points": 14
+    },
+    {
+     "date": "2005-09-03",
+     "away_team": "UAB",
+     "coach": "Watson Brown",
+     "home_rank_ap": 3,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 17
+    },
+    {
+     "date": "2005-10-01",
+     "away_team": "Ole Miss",
+     "coach": "Ed Orgeron",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 27
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 2006,
+   "games": [
+    {
+     "date": "2006-11-04",
+     "away_team": "LSU",
+     "coach": "Les Miles",
+     "home_rank_ap": 8,
+     "away_rank_ap": 13,
+     "result": "W",
+     "away_points": 28,
+     "home_points": 24
+    },
+    {
+     "date": "2006-10-21",
+     "away_team": "Alabama",
+     "coach": "Mike Shula",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 16
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 2016,
+   "games": [
+    {
+     "date": "2016-10-15",
+     "away_team": "Alabama",
+     "coach": "Nick Saban",
+     "home_rank_ap": 9,
+     "away_rank_ap": 1,
+     "result": "W",
+     "away_points": 49,
+     "home_points": 10
+    },
+    {
+     "date": "2016-09-01",
+     "away_team": "Appalachian State",
+     "coach": "Scott Satterfield",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 20
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 2022,
+   "games": [
+    {
+     "date": "2022-10-15",
+     "away_team": "Alabama",
+     "coach": "Nick Saban",
+     "home_rank_ap": 6,
+     "away_rank_ap": 3,
+     "result": "L",
+     "away_points": 49,
+     "home_points": 52
+    },
+    {
+     "date": "2022-10-29",
+     "away_team": "Kentucky",
+     "coach": "Mark Stoops",
+     "home_rank_ap": 3,
+     "away_rank_ap": 19,
+     "result": "L",
+     "away_points": 6,
+     "home_points": 44
+    },
+    {
+     "date": "2022-11-12",
+     "away_team": "Missouri",
+     "coach": "Eliah Drinkwitz",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 66
+    }
+   ]
+  },
+  {
+   "home_team": "Tennessee",
+   "season": 2024,
+   "games": [
+    {
+     "date": "2024-11-02",
+     "away_team": "Kentucky",
+     "coach": "Mark Stoops",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 18,
+     "home_points": 28
+    },
+    {
+     "date": "2024-10-12",
+     "away_team": "Florida",
+     "coach": "Billy Napier",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 23
+    },
+    {
+     "date": "2024-11-09",
+     "away_team": "Mississippi State",
+     "coach": "Jeff Lebby",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 33
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 1990,
+   "games": [
+    {
+     "date": "1990-12-01",
+     "away_team": "Texas A&M",
+     "coach": "R. C. Slocum",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 27,
+     "home_points": 28
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 1995,
+   "games": [
+    {
+     "date": "1995-11-18",
+     "away_team": "TCU",
+     "coach": "Pat Sullivan",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 19,
+     "home_points": 27
+    },
+    {
+     "date": "1995-11-23",
+     "away_team": "Baylor",
+     "coach": "Chuck Reedy",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 21
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 1996,
+   "games": [
+    {
+     "date": "1996-08-31",
+     "away_team": "Missouri",
+     "coach": "Larry Smith",
+     "home_rank_ap": 8,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 40
+    },
+    {
+     "date": "1996-09-21",
+     "away_team": "Notre Dame",
+     "coach": "Lou Holtz",
+     "home_rank_ap": 6,
+     "away_rank_ap": 9,
+     "result": "W",
+     "away_points": 27,
+     "home_points": 24
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 1999,
+   "games": [
+    {
+     "date": "1999-11-13",
+     "away_team": "Texas Tech",
+     "coach": "Spike Dykes",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 58
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 2001,
+   "games": [
+    {
+     "date": "2001-10-19",
+     "away_team": "Colorado",
+     "coach": "Gary Barnett",
+     "home_rank_ap": 9,
+     "away_rank_ap": 14,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 41
+    },
+    {
+     "date": "2001-12-01",
+     "away_team": "Colorado",
+     "coach": "Gary Barnett",
+     "home_rank_ap": 3,
+     "away_rank_ap": 9,
+     "result": "W",
+     "away_points": 39,
+     "home_points": 37
+    },
+    {
+     "date": "2001-10-06",
+     "away_team": "Oklahoma",
+     "coach": "Bob Stoops",
+     "home_rank_ap": 5,
+     "away_rank_ap": 3,
+     "result": "W",
+     "away_points": 14,
+     "home_points": 3
+    },
+    {
+     "date": "2001-09-29",
+     "away_team": "Texas Tech",
+     "coach": "Mike Leach",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 42
+    },
+    {
+     "date": "2001-09-08",
+     "away_team": "North Carolina",
+     "coach": "John Bunting",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 44
+    },
+    {
+     "date": "2001-11-10",
+     "away_team": "Kansas",
+     "coach": "Tom Hayes",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 59
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 2002,
+   "games": [
+    {
+     "date": "2002-10-05",
+     "away_team": "Oklahoma State",
+     "coach": "Les Miles",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 15,
+     "home_points": 17
+    },
+    {
+     "date": "2002-10-26",
+     "away_team": "Iowa State",
+     "coach": "Dan McCarney",
+     "home_rank_ap": 7,
+     "away_rank_ap": 17,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 21
+    },
+    {
+     "date": "2002-11-29",
+     "away_team": "Texas A&M",
+     "coach": "R. C. Slocum",
+     "home_rank_ap": 10,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 20,
+     "home_points": 50
+    },
+    {
+     "date": "2002-09-21",
+     "away_team": "Houston",
+     "coach": "Dana Dimel",
+     "home_rank_ap": 3,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 11,
+     "home_points": 41
+    },
+    {
+     "date": "2002-11-09",
+     "away_team": "Baylor",
+     "coach": "Kevin Steele",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 0,
+     "home_points": 41
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 2003,
+   "games": [
+    {
+     "date": "2003-09-13",
+     "away_team": "Arkansas",
+     "coach": "Houston Nutt",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 38,
+     "home_points": 28
+    },
+    {
+     "date": "2003-11-15",
+     "away_team": "Texas Tech",
+     "coach": "Mike Leach",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 40,
+     "home_points": 43
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 2004,
+   "games": [
+    {
+     "date": "2004-11-06",
+     "away_team": "Oklahoma State",
+     "coach": "Les Miles",
+     "home_rank_ap": 6,
+     "away_rank_ap": 19,
+     "result": "L",
+     "away_points": 35,
+     "home_points": 56
+    },
+    {
+     "date": "2004-10-16",
+     "away_team": "Missouri",
+     "coach": "Gary Pinkel",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 20,
+     "home_points": 28
+    },
+    {
+     "date": "2004-09-25",
+     "away_team": "Rice",
+     "coach": "Ken Hatfield",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 35
+    },
+    {
+     "date": "2004-11-26",
+     "away_team": "Texas A&M",
+     "coach": "Dennis Franchione",
+     "home_rank_ap": 6,
+     "away_rank_ap": 22,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 26
+    },
+    {
+     "date": "2004-10-02",
+     "away_team": "Baylor",
+     "coach": "Guy Morriss",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 44
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 2005,
+   "games": [
+    {
+     "date": "2005-10-15",
+     "away_team": "Colorado",
+     "coach": "Gary Barnett",
+     "home_rank_ap": 2,
+     "away_rank_ap": 24,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 42
+    },
+    {
+     "date": "2005-10-08",
+     "away_team": "Oklahoma",
+     "coach": "Bob Stoops",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 12,
+     "home_points": 45
+    },
+    {
+     "date": "2005-10-22",
+     "away_team": "Texas Tech",
+     "coach": "Mike Leach",
+     "home_rank_ap": 2,
+     "away_rank_ap": 10,
+     "result": "L",
+     "away_points": 17,
+     "home_points": 52
+    },
+    {
+     "date": "2005-09-17",
+     "away_team": "Rice",
+     "coach": "Ken Hatfield",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 51
+    },
+    {
+     "date": "2005-11-12",
+     "away_team": "Kansas",
+     "coach": "Mark Mangino",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 66
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 2006,
+   "games": [
+    {
+     "date": "2006-09-23",
+     "away_team": "Iowa State",
+     "coach": "Dan McCarney",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 37
+    },
+    {
+     "date": "2006-11-04",
+     "away_team": "Oklahoma State",
+     "coach": "Mike Gundy",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 36
+    },
+    {
+     "date": "2006-10-14",
+     "away_team": "Baylor",
+     "coach": "Guy Morriss",
+     "home_rank_ap": 6,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 31,
+     "home_points": 63
+    },
+    {
+     "date": "2006-09-09",
+     "away_team": "Ohio State",
+     "coach": "Jim Tressel",
+     "home_rank_ap": 2,
+     "away_rank_ap": 1,
+     "result": "W",
+     "away_points": 24,
+     "home_points": 7
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 2007,
+   "games": [
+    {
+     "date": "2007-09-08",
+     "away_team": "TCU",
+     "coach": "Gary Patterson",
+     "home_rank_ap": 7,
+     "away_rank_ap": 19,
+     "result": "L",
+     "away_points": 13,
+     "home_points": 34
+    },
+    {
+     "date": "2007-09-22",
+     "away_team": "Rice",
+     "coach": "David Bailiff",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 58
+    },
+    {
+     "date": "2007-09-29",
+     "away_team": "Kansas State",
+     "coach": "Ron Prince",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "W",
+     "away_points": 41,
+     "home_points": 21
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 2008,
+   "games": [
+    {
+     "date": "2008-10-18",
+     "away_team": "Missouri",
+     "coach": "Gary Pinkel",
+     "home_rank_ap": 1,
+     "away_rank_ap": 11,
+     "result": "L",
+     "away_points": 31,
+     "home_points": 56
+    },
+    {
+     "date": "2008-10-25",
+     "away_team": "Oklahoma State",
+     "coach": "Mike Gundy",
+     "home_rank_ap": 1,
+     "away_rank_ap": 7,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 28
+    },
+    {
+     "date": "2008-11-08",
+     "away_team": "Baylor",
+     "coach": "Art Briles",
+     "home_rank_ap": 5,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 21,
+     "home_points": 45
+    },
+    {
+     "date": "2008-09-27",
+     "away_team": "Arkansas",
+     "coach": "Bobby Petrino",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 52
+    },
+    {
+     "date": "2008-09-20",
+     "away_team": "Rice",
+     "coach": "David Bailiff",
+     "home_rank_ap": 7,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 10,
+     "home_points": 52
+    },
+    {
+     "date": "2008-11-27",
+     "away_team": "Texas A&M",
+     "coach": "Mike Sherman",
+     "home_rank_ap": 4,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 9,
+     "home_points": 49
+    }
+   ]
+  },
+  {
+   "home_team": "Texas",
+   "season": 2009,
+   "games": [
+    {
+     "date": "2009-09-19",
+     "away_team": "Texas Tech",
+     "coach": "Mike Leach",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 24,
+     "home_points": 34
+    },
+    {
+     "date": "2009-09-26",
+     "away_team": "UTEP",
+     "coach": "Mike Price",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 7,
+     "home_points": 64
+    },
+    {
+     "date": "2009-11-07",
+     "away_team": "UCF",
+     "coach": "George O'Leary",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 3,
+     "home_points": 35
+    },
+    {
+     "date": "2009-11-21",
+     "away_team": "Kansas",
+     "coach": "Mark Mangino",
+     "home_rank_ap": 3,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 20,
+     "home_points": 51
+    },
+    {
+     "date": "2009-10-10",
+     "away_team": "Colorado",
+     "coach": "Dan Hawkins",
+     "home_rank_ap": 2,
+     "away_rank_ap": null,
+     "result": "L",
+     "away_points": 14,
+     "home_points": 38
+    }
+   ]
+  }
+ ]
+}

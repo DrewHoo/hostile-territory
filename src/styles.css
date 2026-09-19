@@ -100,6 +100,7 @@ h2 { font-family: 'Graduate', serif; font-weight: 400; font-size: 21px; letter-s
 }
 .log-row:last-child { border-bottom: none; }
 .log-row .d { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-faint); }
+.log-row .d a { color: var(--rust); text-decoration: underline dotted; text-underline-offset: 3px; }
 .log-row .m { color: var(--ink-muted); }
 .log-row .m b { color: var(--ink); font-weight: 600; }
 .log-row .sc { text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 13px; }

@@ -57,6 +57,17 @@ const unmatched = []
 const conflicted = []
 const byCoach = new Map()
 
+// Optional enrichment layers, attached when present.
+let otMap = {}
+try { otMap = JSON.parse(readFileSync('data/ot.json', 'utf8')) } catch {}
+const receipts = new Map()
+for (const f of readdirSync(RESEARCH_DIR).filter((x) => /^receipts-\d\.json$/.test(x))) {
+  try {
+    for (const r of JSON.parse(readFileSync(`${RESEARCH_DIR}/${f}`, 'utf8')))
+      receipts.set(`${r.date}|${r.away_team}`, r)
+  } catch {}
+}
+
 let overrides = []
 try { overrides = JSON.parse(readFileSync('data/attribution-overrides.json', 'utf8')).overrides } catch {}
 // An override names the coach; the tenure row still has to exist so school and
@@ -94,7 +105,16 @@ for (const game of candidates.games) {
   if (!byCoach.has(key)) byCoach.set(key, { coach: key, schools: [], games: [] })
   const rec = byCoach.get(key)
   if (!rec.schools.includes(pick.school)) rec.schools.push(pick.school)
-  rec.games.push({ ...game, school: pick.school, interim: pick.interim || false, tenure_grade: pick.grade, home_coach: homeCoach(game), ot: game.ot ?? null })
+  const rcpt = receipts.get(`${game.date}|${game.away_team}`)
+  rec.games.push({
+    ...game,
+    school: pick.school,
+    interim: pick.interim || false,
+    tenure_grade: pick.grade,
+    home_coach: homeCoach(game),
+    ot: game.game_id != null && otMap[game.game_id] != null ? otMap[game.game_id] : null,
+    receipt: rcpt && rcpt.status !== 'page_missing' ? { url: rcpt.source_url, quote: rcpt.quote, status: rcpt.status } : null,
+  })
 }
 
 const records = [...byCoach.values()].map((r) => {
@@ -125,7 +145,8 @@ writeFileSync('data/records.json', JSON.stringify({
 
 // Compact site payload: arrays instead of objects, only what the page renders.
 // Row: [date, school, opponent, opp_rank, result, away_pts, home_pts, interim,
-//       home_coach|null, ot (0 = regulation/unknown, N = overtimes, from receipts)]
+//       home_coach|null, ot (0 = regulation/unknown, N = overtimes, ESPN),
+//       receipt_url|null, receipt_quote|null (confirmed SR receipts only)]
 writeFileSync('src/data/site-data.json', JSON.stringify({
   generated: new Date().toISOString().slice(0, 10),
   rules_version: candidates.rules_version,
@@ -133,7 +154,7 @@ writeFileSync('src/data/site-data.json', JSON.stringify({
     n: r.coach,
     s: r.schools,
     a: r.active,
-    g: r.games.map((g) => [g.date, g.school, g.home_team, g.home_rank_ap, g.result, g.away_points, g.home_points, g.interim ? 1 : 0, g.home_coach, g.ot ?? 0]),
+    g: r.games.map((g) => [g.date, g.school, g.home_team, g.home_rank_ap, g.result, g.away_points, g.home_points, g.interim ? 1 : 0, g.home_coach, g.ot ?? 0, g.receipt?.status === 'confirmed' ? g.receipt.url : null, g.receipt?.status === 'confirmed' ? g.receipt.quote : null]),
   })),
 }))
 

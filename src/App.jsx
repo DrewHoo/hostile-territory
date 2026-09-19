@@ -4,7 +4,7 @@ import { readParam, writeParam } from './urlState.js'
 
 // site-data game row: [date, school, opponent, opp_rank, result, away_pts,
 // home_pts, interim, home_coach|null, overtimes (0 = regulation/unknown)]
-const [D_DATE, D_SCHOOL, D_OPP, D_RANK, D_RES, D_AP, D_HP, D_INT, D_HC, D_OT] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+const [D_DATE, D_SCHOOL, D_OPP, D_RANK, D_RES, D_AP, D_HP, D_INT, D_HC, D_OT, D_URL, D_QUOTE] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
 const fmtDate = (iso) => {
   const [y, m, d] = iso.split('-')
@@ -181,12 +181,16 @@ export default function App() {
               <div className="detail">
                 {c.games.map((g, i) => (
                   <div key={i} className="log-row">
-                    <span className="d">{fmtDate(g[D_DATE])}</span>
+                    <span className="d">
+                      {g[D_URL]
+                        ? <a href={g[D_URL]} target="_blank" rel="noopener" title={g[D_QUOTE]}>{fmtDate(g[D_DATE])}</a>
+                        : fmtDate(g[D_DATE])}
+                    </span>
                     <span className="m">
                       <b>{g[D_SCHOOL]}</b> at #{g[D_RANK]} <b>{g[D_OPP]}</b>
                       {g[D_INT] ? <span className="int"> · interim</span> : null}
                     </span>
-                    <span className={`sc ${g[D_RES] === 'W' ? 'w' : ''}`}>{g[D_RES]} {g[D_AP]}–{g[D_HP]}</span>
+                    <span className={`sc ${g[D_RES] === 'W' ? 'w' : ''}`}>{g[D_RES]} {g[D_AP]}–{g[D_HP]}{g[D_OT] ? ` (${g[D_OT] > 1 ? g[D_OT] : ''}OT)` : ''}</span>
                   </div>
                 ))}
               </div>
