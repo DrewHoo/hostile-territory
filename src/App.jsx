@@ -1,10 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import DATA from './data/site-data.json'
+import LOGO_IDS from './data/team-ids.json'
 import { readParam, writeParam } from './urlState.js'
 
 // site-data game row: [date, school, opponent, opp_rank, result, away_pts,
 // home_pts, interim, home_coach|null, overtimes (0 = regulation/unknown)]
 const [D_DATE, D_SCHOOL, D_OPP, D_RANK, D_RES, D_AP, D_HP, D_INT, D_HC, D_OT, D_URL, D_QUOTE] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+const logoSrc = (team) => (LOGO_IDS[team] ? `${import.meta.env.BASE_URL}logos/${LOGO_IDS[team]}.png` : null)
 
 const fmtDate = (iso) => {
   const [y, m, d] = iso.split('-')
@@ -152,8 +155,8 @@ export default function App() {
 
       <h2>Every coach since 1990</h2>
       <div className="h2-note">
-        Each stamp is one true road game against a team ranked in the AP top {cut} at kickoff, in order.
-        Tap a coach for the road log.
+        Each stamp is one true road game against a team ranked in the AP top {cut} at kickoff, in
+        order — the logo is the host, and a lit stamp is a win. Tap a coach for the road log.
       </div>
 
       <div className="filters">
@@ -188,7 +191,9 @@ export default function App() {
                     className={`chip ${g[D_RES].toLowerCase()}${hlOpp && c.n !== pop.coach && g[D_OPP] === hlOpp ? ' hl' : ''}`}
                     {...chipHandlers(g, c.n)}
                   >
-                    {g[D_RES]}
+                    {logoSrc(g[D_OPP])
+                      ? <img src={logoSrc(g[D_OPP])} alt="" loading="lazy" width="14" height="14" />
+                      : g[D_RES]}
                   </span>
                 ))}
               </span>
@@ -222,6 +227,7 @@ export default function App() {
       <div className="legend">
         <span><span className="chip w">W</span> Win</span>
         <span><span className="chip l">L</span> Loss</span>
+        <span className="legend-note">stamps carry the host team's mark</span>
       </div>
 
       <h2>What counts as a road game</h2>

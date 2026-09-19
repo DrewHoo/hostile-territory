@@ -19,7 +19,7 @@ SCRATCH = "/private/tmp/claude-501/-Users-drewhoo-Projects/f889b103-352a-4124-b7
 CACHE = os.path.join(SCRATCH, "html")
 META = os.path.join(SCRATCH, "fetch-meta.json")
 WORKLIST = os.path.join(REPO, "data/research/receipts-worklist-6.json")
-OUT = os.path.join(REPO, "data/research/receipts-6.json")
+OUT = os.environ.get("RECEIPTS_OUT") or os.path.join(REPO, "data/research/receipts-6.json")
 PARSE_LOG = os.path.join(SCRATCH, "parse-log.json")
 
 SLUG_EXCEPTIONS = {
