@@ -14,6 +14,9 @@ export default {
   description:
     'Lane Kiffin is 1-8 on the road against top-10 teams. Every head coach\'s true road record vs AP top-10 opponents since 1990, with a receipt for every game.',
 
+  // Display title on the OG image (the SEO title is too long to render big).
+  ogTitle: 'Hostile Territory',
+
   // Second line on the OG image. Short.
   ogSubtitle: 'Every coach\'s true road record vs the AP top 10 since 1990',
 
@@ -21,5 +24,5 @@ export default {
   ogImageAlt: 'Hostile Territory: a floodlit night leaderboard of coaches\' road records against AP top-10 teams.',
 
   // Used by the favicon and the OG image. Pick something from your data.
-  accent: '#ffb52e',
+  accent: '#f3e2bc',
 }
