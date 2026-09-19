@@ -124,3 +124,17 @@ footer { margin-top: 56px; color: var(--ink-faint); font-size: 13px; text-align:
   .log-row { grid-template-columns: 78px 1fr 76px; }
   .hero-stat { gap: 12px; }
 }
+
+/* game popover */
+.popover {
+  position: fixed; z-index: 10; width: 264px;
+  background: var(--bg-lift); border: 1px solid var(--line); border-radius: 3px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.35);
+  padding: 12px 14px; pointer-events: none;
+}
+.pop-date { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rust); margin-bottom: 4px; }
+.pop-match { font-weight: 600; font-size: 14.5px; margin-bottom: 2px; }
+.pop-score { font-size: 15px; color: var(--ink-muted); margin-bottom: 8px; }
+.pop-score.win { color: var(--cream); }
+.pop-coaches { display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; color: var(--ink-muted); border-top: 1px dotted var(--line); padding-top: 8px; }
+.pop-coaches i { color: var(--ink-faint); font-style: italic; }

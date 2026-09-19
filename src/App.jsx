@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import DATA from './data/site-data.json'
 import { readParam, writeParam } from './urlState.js'
 
-// site-data game row: [date, school, opponent, opp_rank, result, away_pts, home_pts, interim]
-const [D_DATE, D_SCHOOL, D_OPP, D_RANK, D_RES, D_AP, D_HP, D_INT] = [0, 1, 2, 3, 4, 5, 6, 7]
+// site-data game row: [date, school, opponent, opp_rank, result, away_pts,
+// home_pts, interim, home_coach|null, overtimes (0 = regulation/unknown)]
+const [D_DATE, D_SCHOOL, D_OPP, D_RANK, D_RES, D_AP, D_HP, D_INT, D_HC, D_OT] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 const fmtDate = (iso) => {
   const [y, m, d] = iso.split('-')
@@ -16,12 +17,62 @@ function tally(games) {
   return { w, l, t, gp: games.length, pct: games.length ? (w + t / 2) / games.length : 0 }
 }
 
+// One popover at a time, anchored to the hovered/tapped stamp. Fixed
+// positioning, clamped to the viewport, flipped below when near the top.
+function GamePopover({ pop, onClose }) {
+  useEffect(() => {
+    const close = (e) => { if (!e.target.closest?.('.popover') && !e.target.closest?.('.chip')) onClose() }
+    const esc = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('pointerdown', close)
+    window.addEventListener('keydown', esc)
+    window.addEventListener('scroll', onClose, { passive: true })
+    return () => {
+      window.removeEventListener('pointerdown', close)
+      window.removeEventListener('keydown', esc)
+      window.removeEventListener('scroll', onClose)
+    }
+  }, [onClose])
+  if (!pop) return null
+  const { g, coach, rect } = pop
+  const W = 264
+  const left = Math.min(Math.max(8, rect.left + rect.width / 2 - W / 2), window.innerWidth - W - 8)
+  const above = rect.top > 150
+  const style = above
+    ? { left, bottom: window.innerHeight - rect.top + 8 }
+    : { left, top: rect.bottom + 8 }
+  const ot = g[D_OT] ? ` (${g[D_OT] > 1 ? g[D_OT] : ''}OT)` : ''
+  return (
+    <div className="popover" style={style} role="tooltip">
+      <div className="pop-date mono">{fmtDate(g[D_DATE])}</div>
+      <div className="pop-match">{g[D_SCHOOL]} at #{g[D_RANK]} {g[D_OPP]}</div>
+      <div className={`pop-score mono ${g[D_RES] === 'W' ? 'win' : ''}`}>{g[D_RES]} {g[D_AP]}–{g[D_HP]}{ot}</div>
+      <div className="pop-coaches">
+        <span><i>{g[D_SCHOOL]}:</i> {coach}{g[D_INT] ? ' (interim)' : ''}</span>
+        {g[D_HC] ? <span><i>{g[D_OPP]}:</i> {g[D_HC]}</span> : null}
+      </div>
+    </div>
+  )
+}
+
 export default function App() {
   const [cut, setCut] = useState(10) // opponent ranked within this
   const [minGames, setMinGames] = useState(5)
   const [activeOnly, setActiveOnly] = useState(true)
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(null)
+  const [pop, setPop] = useState(null)
+
+  const showPop = (e, g, coach) => setPop({ g, coach, rect: e.currentTarget.getBoundingClientRect() })
+  const chipHandlers = (g, coach) => ({
+    onPointerEnter: (e) => { if (e.pointerType === 'mouse') showPop(e, g, coach) },
+    onPointerLeave: (e) => { if (e.pointerType === 'mouse') setPop(null) },
+    onClick: (e) => e.stopPropagation(),
+    onPointerUp: (e) => {
+      if (e.pointerType === 'mouse') return
+      const rect = e.currentTarget.getBoundingClientRect()
+      setPop((p) => (p && p.g === g ? null : { g, coach, rect }))
+    },
+  })
 
   useEffect(() => {
     const c = readParam('cut')
@@ -116,7 +167,7 @@ export default function App() {
               </span>
               <span className="dots" aria-label={`${c.w} wins, ${c.l} losses`}>
                 {c.games.map((g, i) => (
-                  <span key={i} className={`chip ${g[D_RES].toLowerCase()}`} title={`${fmtDate(g[D_DATE])}: ${g[D_SCHOOL]} at #${g[D_RANK]} ${g[D_OPP]}, ${g[D_RES]} ${g[D_AP]}–${g[D_HP]}`}>
+                  <span key={i} className={`chip ${g[D_RES].toLowerCase()}`} {...chipHandlers(g, c.n)}>
                     {g[D_RES]}
                   </span>
                 ))}
@@ -170,6 +221,7 @@ export default function App() {
       </div>
 
       <footer>Data: Sports-Reference, College Poll Archive, cfbfastR. Rules and receipts above.</footer>
+      <GamePopover pop={pop} onClose={() => setPop(null)} />
     </main>
   )
 }

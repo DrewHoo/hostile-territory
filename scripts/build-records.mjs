@@ -26,16 +26,30 @@ const tenures = tenureFiles.flatMap((f) =>
   JSON.parse(readFileSync(`${RESEARCH_DIR}/${f}`, 'utf8')).map((t) => ({ ...t, coach: canonCoach(t.coach), school: canonTeam(t.school), file: f }))
 )
 
-// A tenure covers a game when the school matches and either the date range
-// (when present) or the season range contains it. Dated rows beat undated rows
-// so an interim's narrow window wins over the surrounding span.
-function covers(t, game) {
-  if (t.school !== game.away_team) return false
+// A tenure covers a school's game when the school matches and either the date
+// range (when present) or the season range contains it. Dated rows beat undated
+// rows so an interim's narrow window wins over the surrounding span.
+function covers(t, school, game) {
+  if (t.school !== school) return false
   if (t.start_date && game.date < t.start_date) return false
   if (t.end_date && game.date > t.end_date) return false
   if (!t.start_date && game.season < t.start_season) return false
   if (!t.end_date && t.end_season != null && game.season > t.end_season) return false
   return true
+}
+
+// Best-effort coach lookup for the HOME side of a game (for the popover).
+// Ranked home teams are nearly all covered schools; null when they aren't.
+function homeCoach(game) {
+  const matches = tenures.filter((t) => covers(t, game.home_team, game))
+  if (matches.length === 1) return matches[0].coach
+  if (matches.length > 1) {
+    const dated = matches.filter((t) => t.start_date || t.end_date)
+    if (dated.length) return dated.sort((a, b) =>
+      ((a.end_date ? Date.parse(a.end_date) : Infinity) - (a.start_date ? Date.parse(a.start_date) : -Infinity)) -
+      ((b.end_date ? Date.parse(b.end_date) : Infinity) - (b.start_date ? Date.parse(b.start_date) : -Infinity)))[0].coach
+  }
+  return null
 }
 
 const CURRENT_SEASON = 2026
@@ -56,7 +70,7 @@ function ovMatch(game, matches) {
 }
 
 for (const game of candidates.games) {
-  const matches = tenures.filter((t) => covers(t, game))
+  const matches = tenures.filter((t) => covers(t, game.away_team, game))
   let pick = null
   const ov = ovMatch(game, matches)
   if (ov) pick = ov
@@ -80,7 +94,7 @@ for (const game of candidates.games) {
   if (!byCoach.has(key)) byCoach.set(key, { coach: key, schools: [], games: [] })
   const rec = byCoach.get(key)
   if (!rec.schools.includes(pick.school)) rec.schools.push(pick.school)
-  rec.games.push({ ...game, school: pick.school, interim: pick.interim || false, tenure_grade: pick.grade })
+  rec.games.push({ ...game, school: pick.school, interim: pick.interim || false, tenure_grade: pick.grade, home_coach: homeCoach(game), ot: game.ot ?? null })
 }
 
 const records = [...byCoach.values()].map((r) => {
@@ -110,7 +124,8 @@ writeFileSync('data/records.json', JSON.stringify({
 }, null, 1))
 
 // Compact site payload: arrays instead of objects, only what the page renders.
-// Row: [date, school, opponent, opp_rank, result, away_pts, home_pts, interim]
+// Row: [date, school, opponent, opp_rank, result, away_pts, home_pts, interim,
+//       home_coach|null, ot (0 = regulation/unknown, N = overtimes, from receipts)]
 writeFileSync('src/data/site-data.json', JSON.stringify({
   generated: new Date().toISOString().slice(0, 10),
   rules_version: candidates.rules_version,
@@ -118,7 +133,7 @@ writeFileSync('src/data/site-data.json', JSON.stringify({
     n: r.coach,
     s: r.schools,
     a: r.active,
-    g: r.games.map((g) => [g.date, g.school, g.home_team, g.home_rank_ap, g.result, g.away_points, g.home_points, g.interim ? 1 : 0]),
+    g: r.games.map((g) => [g.date, g.school, g.home_team, g.home_rank_ap, g.result, g.away_points, g.home_points, g.interim ? 1 : 0, g.home_coach, g.ot ?? 0]),
   })),
 }))
 
