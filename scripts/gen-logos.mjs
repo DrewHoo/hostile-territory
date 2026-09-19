@@ -55,20 +55,21 @@ for (const team of [...hosts].sort()) {
   const res = await fetch(`https://a.espncdn.com/i/teamlogos/ncaa/500/${id}.png`)
   if (!res.ok) { missing.push(`${team} (http ${res.status})`); delete map[team]; continue }
   const buf = Buffer.from(await res.arrayBuffer())
-  // Key near-white to transparent at FULL resolution, then trim and downscale.
-  // Keying after the resize half-keys anti-aliased boundary pixels into
-  // speckle; keying first lets the resampler smooth a clean alpha channel.
-  // ESPN flattens interior counters (Georgia's G, FSU's spear detail) to
-  // opaque white; this recreates the one-color brand mark's negative space.
+  // Bake a one-color "ink density" mark instead of a binary silhouette: some
+  // marks (outlined wordmarks, multi-tone mascot heads) only read through
+  // their interior structure. Ink strength comes from darkness OR saturation,
+  // so dark outlines and saturated fills print, near-white interiors stay
+  // open, and bright solid marks (a maize M) still print at full strength.
+  // Output pixels are pure black with variable alpha; the CSS win treatment
+  // is plain opacity and the loss treatment inverts the same asset.
   const { data, info } = await sharp(buf).raw().ensureAlpha().toBuffer({ resolveWithObject: true })
   for (let i = 0; i < data.length; i += 4) {
     const [r, g, b] = [data[i], data[i + 1], data[i + 2]]
-    const lum = (r + g + b) / 3
-    const sat = Math.max(r, g, b) - Math.min(r, g, b)
-    if (sat < 40 && lum > 210) {
-      const t = Math.min(1, (lum - 210) / 35) // soft ramp 210..245
-      data[i + 3] = Math.round(data[i + 3] * (1 - t))
-    }
+    const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+    const sat = (Math.max(r, g, b) - Math.min(r, g, b)) / 255
+    const ink = Math.min(1, Math.max((1 - lum) * 1.2, sat * 0.9))
+    data[i] = 0; data[i + 1] = 0; data[i + 2] = 0
+    data[i + 3] = Math.round(data[i + 3] * ink)
   }
   await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } })
     .trim({ threshold: 10 })

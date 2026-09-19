@@ -1,0 +1,932 @@
+[
+ {
+  "date": "1990-12-01",
+  "away_team": "Florida",
+  "home_team": "Florida State",
+  "season": 1990,
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/1991/https://www.sports-reference.com/cfb/schools/florida/1990-schedule.html",
+  "quote": "11 | Dec 1, 1990 | Sat | (6) Florida | @ | (8) Florida State | Ind | L | 30 | 45 | 9 | 2 | 0 | L 1 | ",
+  "note": ""
+ },
+ {
+  "date": "1990-12-01",
+  "away_team": "Texas A&M",
+  "home_team": "Texas",
+  "season": 1990,
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/1991/https://www.sports-reference.com/cfb/schools/texas-am/1990-schedule.html",
+  "quote": "12 | Dec 1, 1990 | Sat | Texas A&M | @ | (5) Texas | SWC | L | 27 | 28 | 8 | 3 | 1 | L 1 | ",
+  "note": ""
+ },
+ {
+  "date": "1995-12-02",
+  "away_team": "Texas",
+  "home_team": "Texas A&M",
+  "season": 1995,
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/1996/https://www.sports-reference.com/cfb/schools/texas/1995-schedule.html",
+  "quote": "12 | Dec 2, 1995 | Sat | (9) Texas | @ | (16) Texas A&M | SWC | W | 16 | 6 | 10 | 1 | 1 | W 6 | ",
+  "note": ""
+ },
+ {
+  "date": "1999-12-04",
+  "away_team": "Temple",
+  "home_team": "Miami (FL)",
+  "season": 1999,
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2000/https://www.sports-reference.com/cfb/schools/temple/1999-schedule.html",
+  "quote": "11 | Dec 4, 1999 | Sat | Temple | @ | (23) Miami (FL) | Big East | L | 0 | 55 | 2 | 9 | L 3 | ",
+  "note": ""
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Auburn",
+  "home_team": "LSU",
+  "season": 2001,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Colorado",
+  "home_team": "Texas",
+  "season": 2001,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Houston",
+  "home_team": "Georgia",
+  "season": 2001,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Miami (FL)",
+  "home_team": "Virginia Tech",
+  "season": 2001,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Oregon State",
+  "home_team": "Oregon",
+  "season": 2001,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Tennessee",
+  "home_team": "Florida",
+  "season": 2001,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2001-12-01",
+  "away_team": "Utah State",
+  "home_team": "Fresno State",
+  "season": 2001,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2002-12-07",
+  "away_team": "Oklahoma",
+  "home_team": "Colorado",
+  "season": 2002,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2002-12-07",
+  "away_team": "Virginia Tech",
+  "home_team": "Miami (FL)",
+  "season": 2002,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2003-12-04",
+  "away_team": "Miami (OH)",
+  "home_team": "Bowling Green",
+  "season": 2003,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2003-12-06",
+  "away_team": "Kansas State",
+  "home_team": "Oklahoma",
+  "season": 2003,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2003-12-06",
+  "away_team": "Oregon State",
+  "home_team": "USC",
+  "season": 2003,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2004-12-04",
+  "away_team": "Colorado",
+  "home_team": "Oklahoma",
+  "season": 2004,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2004-12-04",
+  "away_team": "Virginia Tech",
+  "home_team": "Miami (FL)",
+  "season": 2004,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2005-12-02",
+  "away_team": "Louisiana Tech",
+  "home_team": "Fresno State",
+  "season": 2005,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2005-12-03",
+  "away_team": "UCLA",
+  "home_team": "USC",
+  "season": 2005,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2006-12-02",
+  "away_team": "Nebraska",
+  "home_team": "Oklahoma",
+  "season": 2006,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2006-12-02",
+  "away_team": "Oregon State",
+  "home_team": "Hawaii",
+  "season": 2006,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2006-12-02",
+  "away_team": "Rutgers",
+  "home_team": "West Virginia",
+  "season": 2006,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2006-12-02",
+  "away_team": "Stanford",
+  "home_team": "California",
+  "season": 2006,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2006-12-02",
+  "away_team": "UConn",
+  "home_team": "Louisville",
+  "season": 2006,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2006-12-02",
+  "away_team": "Wake Forest",
+  "home_team": "Georgia Tech",
+  "season": 2006,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2007-12-01",
+  "away_team": "Arizona",
+  "home_team": "Arizona State",
+  "season": 2007,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2007-12-01",
+  "away_team": "Oregon State",
+  "home_team": "Oregon",
+  "season": 2007,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2007-12-01",
+  "away_team": "Pittsburgh",
+  "home_team": "West Virginia",
+  "season": 2007,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2007-12-01",
+  "away_team": "UCLA",
+  "home_team": "USC",
+  "season": 2007,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2007-12-01",
+  "away_team": "Virginia Tech",
+  "home_team": "Boston College",
+  "season": 2007,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2007-12-01",
+  "away_team": "Washington",
+  "home_team": "Hawaii",
+  "season": 2007,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2009-12-03",
+  "away_team": "Oregon State",
+  "home_team": "Oregon",
+  "season": 2009,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2009-12-05",
+  "away_team": "Arizona",
+  "home_team": "USC",
+  "season": 2009,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2009-12-05",
+  "away_team": "Cincinnati",
+  "home_team": "Pittsburgh",
+  "season": 2009,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2009-12-05",
+  "away_team": "New Mexico State",
+  "home_team": "Boise State",
+  "season": 2009,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2010-12-04",
+  "away_team": "Rutgers",
+  "home_team": "West Virginia",
+  "season": 2010,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2010-12-04",
+  "away_team": "UNLV",
+  "home_team": "Hawaii",
+  "season": 2010,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2010-12-04",
+  "away_team": "Utah State",
+  "home_team": "Boise State",
+  "season": 2010,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2011-12-02",
+  "away_team": "UCLA",
+  "home_team": "Oregon",
+  "season": 2011,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2011-12-03",
+  "away_team": "Iowa State",
+  "home_team": "Kansas State",
+  "season": 2011,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2011-12-03",
+  "away_team": "New Mexico",
+  "home_team": "Boise State",
+  "season": 2011,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2011-12-03",
+  "away_team": "Oklahoma",
+  "home_team": "Oklahoma State",
+  "season": 2011,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2011-12-03",
+  "away_team": "Southern Miss",
+  "home_team": "Houston",
+  "season": 2011,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2011-12-03",
+  "away_team": "Texas",
+  "home_team": "Baylor",
+  "season": 2011,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2011-12-03",
+  "away_team": "UNLV",
+  "home_team": "TCU",
+  "season": 2011,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2012-12-01",
+  "away_team": "Texas",
+  "home_team": "Kansas State",
+  "season": 2012,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2013-12-07",
+  "away_team": "Oklahoma",
+  "home_team": "Oklahoma State",
+  "season": 2013,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2013-12-07",
+  "away_team": "Stanford",
+  "home_team": "Arizona State",
+  "season": 2013,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2013-12-07",
+  "away_team": "Texas",
+  "home_team": "Baylor",
+  "season": 2013,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2013-12-07",
+  "away_team": "Utah State",
+  "home_team": "Fresno State",
+  "season": 2013,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2014-12-06",
+  "away_team": "Fresno State",
+  "home_team": "Boise State",
+  "season": 2014,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2014-12-06",
+  "away_team": "Iowa State",
+  "home_team": "TCU",
+  "season": 2014,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2014-12-06",
+  "away_team": "Kansas State",
+  "home_team": "Baylor",
+  "season": 2014,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2014-12-06",
+  "away_team": "Oklahoma State",
+  "home_team": "Oklahoma",
+  "season": 2014,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2015-12-05",
+  "away_team": "Temple",
+  "home_team": "Houston",
+  "season": 2015,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2015-12-05",
+  "away_team": "Texas",
+  "home_team": "Baylor",
+  "season": 2015,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2016-12-03",
+  "away_team": "Baylor",
+  "home_team": "West Virginia",
+  "season": 2016,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2016-12-03",
+  "away_team": "Oklahoma State",
+  "home_team": "Oklahoma",
+  "season": 2016,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2016-12-03",
+  "away_team": "Temple",
+  "home_team": "Navy",
+  "season": 2016,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2017-12-02",
+  "away_team": "Memphis",
+  "home_team": "UCF",
+  "season": 2017,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2018-12-01",
+  "away_team": "Fresno State",
+  "home_team": "Boise State",
+  "season": 2018,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2018-12-01",
+  "away_team": "Memphis",
+  "home_team": "UCF",
+  "season": 2018,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2019-12-07",
+  "away_team": "Cincinnati",
+  "home_team": "Memphis",
+  "season": 2019,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2019-12-07",
+  "away_team": "Hawaii",
+  "home_team": "Boise State",
+  "season": 2019,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2019-12-07",
+  "away_team": "Louisiana",
+  "home_team": "Appalachian State",
+  "season": 2019,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "Baylor",
+  "home_team": "Oklahoma",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "BYU",
+  "home_team": "Coastal Carolina",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "Indiana",
+  "home_team": "Wisconsin",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "Rice",
+  "home_team": "Marshall",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "Stanford",
+  "home_team": "Washington",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "Syracuse",
+  "home_team": "Notre Dame",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-05",
+  "away_team": "West Virginia",
+  "home_team": "Iowa State",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-06",
+  "away_team": "Washington State",
+  "home_team": "USC",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "Akron",
+  "home_team": "Buffalo",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "Illinois",
+  "home_team": "Northwestern",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "LSU",
+  "home_team": "Florida",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "North Carolina",
+  "home_team": "Miami (FL)",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "San Diego State",
+  "home_team": "BYU",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "Utah",
+  "home_team": "Colorado",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-12",
+  "away_team": "Wisconsin",
+  "home_team": "Iowa",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-18",
+  "away_team": "Oregon",
+  "home_team": "USC",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2020-12-19",
+  "away_team": "Tulsa",
+  "home_team": "Cincinnati",
+  "season": 2020,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2021-12-04",
+  "away_team": "Appalachian State",
+  "home_team": "Louisiana",
+  "season": 2021,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2021-12-04",
+  "away_team": "Houston",
+  "home_team": "Cincinnati",
+  "season": 2021,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2021-12-04",
+  "away_team": "Utah State",
+  "home_team": "San Diego State",
+  "season": 2021,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2022-12-03",
+  "away_team": "UCF",
+  "home_team": "Tulane",
+  "season": 2022,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2023-12-01",
+  "away_team": "New Mexico State",
+  "home_team": "Liberty",
+  "season": 2023,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2023-12-02",
+  "away_team": "SMU",
+  "home_team": "Tulane",
+  "season": 2023,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2024-12-06",
+  "away_team": "Tulane",
+  "home_team": "Army",
+  "season": 2024,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2024-12-06",
+  "away_team": "UNLV",
+  "home_team": "Boise State",
+  "season": 2024,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2025-12-05",
+  "away_team": "North Texas",
+  "home_team": "Tulane",
+  "season": 2025,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ },
+ {
+  "date": "2025-12-05",
+  "away_team": "Troy",
+  "home_team": "James Madison",
+  "season": 2025,
+  "verdict": "unresolved",
+  "source_url": "",
+  "quote": "",
+  "note": "no usable Wayback snapshot (code=None, title=None)"
+ }
+]

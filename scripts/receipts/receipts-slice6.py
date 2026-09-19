@@ -272,6 +272,18 @@ def to_int(txt):
     return int(t) if re.match(r"^-?\d+$", t) else None
 
 
+def near_detail(f, team, g):
+    """One clause describing whether a near-miss row otherwise matches the worklist."""
+    hr, _ = split_rank(f["school"]["text"])
+    ar, _ = split_rank(f["opp"]["text"])
+    pts, opp_pts = to_int(f["pts"]["text"]), to_int(f["opp_pts"]["text"])
+    same = (hr == g["home_rank_ap"] and ar == g["away_rank_ap"] and pts == g["home_points"]
+            and opp_pts == g["away_points"] and f["site"]["text"] == "")
+    if same:
+        return " (that row otherwise matches: rank, empty site marker and score all agree, so the worklist date looks off by one)"
+    return " (SR rank %s/%s, score %s-%s, site marker %r)" % (hr, ar, pts, opp_pts, f["site"]["text"])
+
+
 def do_parse():
     work = json.load(open(WORKLIST))["work"]
     meta = json.load(open(META))
@@ -335,7 +347,8 @@ def do_parse():
                     "sr_home_rank": None, "sr_away_rank": None,
                     "sr_home_points": None, "sr_away_points": None, "site_marker": None,
                     "status": "discrepancy",
-                    "note": ("no schedule row dated %s; nearest row by opponent is dated %s" % (g["date"], near[0][0]))
+                    "note": ("no schedule row dated %s; the only row against %s is dated %s%s"
+                             % (g["date"], g["away_team"], near[0][0], near_detail(near[0][1], team, g)))
                     if near else "no schedule row dated %s and no row against %s" % (g["date"], g["away_team"]),
                 })
                 out.append(rec)

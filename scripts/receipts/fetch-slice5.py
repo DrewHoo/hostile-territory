@@ -163,6 +163,28 @@ def celltext(h):
 
 CELL = re.compile(r"<(td|th)\b([^>]*)>(.*?)</\1>", re.S)
 
+LABEL_KEYS = {
+    "G": "g", "Rk": "g", "Date": "date_game", "Time": "time_game", "Day": "day_name",
+    "School": "school_name", "Opponent": "opp_name", "Conf": "conf_abbr",
+    "Pts": "points", "Opp": "opp_points", "W": "wins", "L": "losses", "T": "ties",
+    "Streak": "game_streak", "Notes": "notes", "TV": "broadcaster",
+}
+
+
+def heads_from_labels(labels):
+    """Older snapshots ship no data-stat attrs. The two unlabelled columns are the
+    site marker (right after School) and the result (right after Conf)."""
+    keys, prev = [], None
+    for i, lab in enumerate(labels):
+        if lab == "":
+            k = ("game_location" if prev == "school_name"
+                 else "game_result" if prev == "conf_abbr" else "col%d" % i)
+        else:
+            k = LABEL_KEYS.get(lab, "col%d" % i)
+        keys.append(k)
+        prev = k
+    return keys
+
 
 def parse_rows(path):
     with open(path, encoding="utf-8", errors="replace") as f:
@@ -174,6 +196,10 @@ def parse_rows(path):
     tbl = m.group(1)
     hm = re.search(r"<thead>(.*?)</thead>", tbl, re.S)
     heads = re.findall(r'data-stat="([^"]+)"', hm.group(1)) if hm else []
+    if hm and not heads:
+        # Older Wayback snapshots have no data-stat attributes; map header labels.
+        heads = heads_from_labels(
+            [celltext(x) for x in re.findall(r"<th[^>]*>(.*?)</th>", hm.group(1), re.S)])
     body = tbl[hm.end():] if hm else tbl
     rows = []
     for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", body, re.S):
