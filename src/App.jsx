@@ -20,6 +20,8 @@ function tally(games) {
   return { w, l, t, gp: games.length, pct: games.length ? (w + t / 2) / games.length : 0 }
 }
 
+const fmtPct = (p) => (p >= 1 ? '1.000' : p.toFixed(3).replace(/^0/, ''))
+
 // One popover at a time, anchored to the hovered/tapped stamp. Fixed
 // positioning, clamped to the viewport, flipped below when near the top.
 function GamePopover({ pop, onClose, matchCount }) {
@@ -175,15 +177,13 @@ export default function App() {
         {rows.map((c) => (
           <div key={c.n}>
             <button className="row-btn" onClick={() => toggleOpen(c.n)} aria-expanded={open === c.n}>
-              <span>
+              <span className="coach-cell">
                 <span className="coach">{c.n}</span>
-                <span className="school-logos">
-                  {c.s.map((sch) =>
-                    logoSrc(sch)
-                      ? <img key={sch} src={logoSrc(sch)} alt={sch} title={sch} loading="lazy" width="15" height="15" />
-                      : <span key={sch} className="school">{sch}</span>
-                  )}
-                </span>
+                {c.s.map((sch) =>
+                  logoSrc(sch)
+                    ? <img key={sch} src={logoSrc(sch)} alt={sch} title={sch} loading="lazy" width="15" height="15" />
+                    : <span key={sch} className="school">{sch}</span>
+                )}
               </span>
               <span className="dots" aria-label={`${c.w} wins, ${c.l} losses`}>
                 {c.games.map((g, i) => (
@@ -200,7 +200,7 @@ export default function App() {
               </span>
               <span className="rec">
                 {c.w}–{c.l}{c.t ? `–${c.t}` : ''}
-                <span className="pct">{Math.round(c.pct * 100)}% won</span>
+                <span className="pct">{fmtPct(c.pct)}</span>
               </span>
             </button>
             {open === c.n && (

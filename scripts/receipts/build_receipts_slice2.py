@@ -294,9 +294,42 @@ def to_int(t):
     return int(t) if re.match(r"^-?\d+$", t) else None
 
 
+def day_offset(a, b):
+    """Signed day difference b - a for two YYYY-MM-DD strings."""
+    import datetime
+    fmt = "%Y-%m-%d"
+    try:
+        da = datetime.datetime.strptime(a, fmt).date()
+        db = datetime.datetime.strptime(b, fmt).date()
+    except ValueError:
+        return None
+    return (db - da).days
+
+
 def title_of(page_html):
     m = re.search(r"<title>(.*?)</title>", page_html, re.S)
     return re.sub(r"\s+", " ", htmllib.unescape(m.group(1))).strip() if m else ""
+
+
+# A handful of rows needed a second opinion: the snapshot the spec's year picker
+# lands on can be stale relative to SR's current data. Keyed (home_team, season,
+# date) -> text appended to that row's note. Findings only; nothing is repaired.
+CROSSCHECK = {
+    ("Georgia", 2017, "2017-11-18"):
+        "cross-checked against a later snapshot of the same page "
+        "(web/20251213231945) which reads '(7) Georgia' for this row and matches "
+        "the worklist, so the '(2)' above is a stale rank in the post-2017-season "
+        "snapshot rather than a real SR/worklist disagreement",
+    ("Kansas State", 2003, "2003-08-23"):
+        "cross-checked against a later snapshot (web/2025) which also reads "
+        "W 42-28, so SR is consistent and the worklist's 10-7 is the outlier; "
+        "SR's notes cell calls this the BCA Classic (Kansas City, MO) yet still "
+        "leaves the site marker empty, i.e. SR books it as a Kansas State home game",
+    ("Fresno State", 2001, "2001-10-18"):
+        "cross-checked against a later snapshot (web/2025) which also dates this "
+        "Friday-night game Oct 19, 2001, so SR is consistent and the worklist date "
+        "is off by one day; rank and score otherwise match",
+}
 
 
 def build(work, cache_dir):
@@ -346,6 +379,24 @@ def build(work, cache_dir):
             cand = by_date.get(date, [])
             notes = []   # substantive: forces "discrepancy"
             soft = []    # cosmetic (spelling, duplicate-date tiebreak): still "confirmed"
+            if not cand:
+                # SR occasionally dates a Thu/Fri night game one day off from our
+                # worklist. Accept a neighbouring date only if the opponent matches,
+                # and record it as a discrepancy (we do not silently repair dates).
+                for delta in (1, -1):
+                    for d2, rows2 in by_date.items():
+                        if day_offset(date, d2) != delta:
+                            continue
+                        for c in rows2:
+                            pr = locate_game_cells(c, team)
+                            if pr and names_match(g["away_team"], RANK_RE.sub("", pr["opp"]).strip()):
+                                cand = [c]
+                                notes.append("SR dates this game %s, worklist says %s" % (d2, date))
+                                break
+                        if cand:
+                            break
+                    if cand:
+                        break
             if not cand:
                 out.append({
                     "date": date, "away_team": g["away_team"], "home_team": team,
@@ -412,8 +463,18 @@ def build(work, cache_dir):
                 notes.append("home-side result %r; worklist visitor result %s implies home %s"
                              % (parsed["result"], g["result"], expect_home_result))
 
+            unplayed = (sr_home_points is None and sr_away_points is None
+                        and sr_result == "" and site in ("", "@", "N"))
             hard = notes
-            status = "confirmed" if not hard else "discrepancy"
+            if unplayed:
+                status = "page_missing"
+                notes = ["the only Wayback snapshot of this page predates the game: "
+                         "the row is present but its rank, result and score cells are "
+                         "still empty, so no receipt could be taken"]
+                hard = []
+                soft = []
+            else:
+                status = "confirmed" if not hard else "discrepancy"
             row = {
                 "date": date, "away_team": g["away_team"], "home_team": team,
                 "season": season, "source_url": url, "quote": quote,
@@ -421,13 +482,17 @@ def build(work, cache_dir):
                 "sr_home_points": sr_home_points, "sr_away_points": sr_away_points,
                 "site_marker": site, "status": status,
             }
+            extra = CROSSCHECK.get((team, season, date))
+            if extra:
+                soft = soft + [extra]
             all_notes = notes + soft
             if all_notes:
                 row["note"] = "; ".join(all_notes)
             out.append(row)
             if status != "confirmed":
-                problems.append(("discrepancy", team, season,
-                                 "%s %s at %s: %s" % (date, g["away_team"], team, "; ".join(hard))))
+                problems.append((status, team, season,
+                                 "%s %s at %s: %s" % (date, g["away_team"], team,
+                                                      "; ".join(hard or notes))))
     return out, problems
 
 

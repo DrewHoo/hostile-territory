@@ -2422,14 +2422,14 @@
     "home_team": "Fresno State",
     "season": 2001,
     "source_url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/fresno-state/2001-schedule.html",
-    "quote": "",
-    "sr_home_rank": null,
+    "quote": "7 | Oct 19, 2001 | Fri | (8) Fresno State |  | Boise State | WAC | L | 30 | 35 | 6 | 1 | L 1 | ",
+    "sr_home_rank": 8,
     "sr_away_rank": null,
-    "sr_home_points": null,
-    "sr_away_points": null,
-    "site_marker": null,
+    "sr_home_points": 30,
+    "sr_away_points": 35,
+    "site_marker": "",
     "status": "discrepancy",
-    "note": "no schedule row on the Fresno State 2001 page dated 2001-10-18"
+    "note": "SR dates this game 2001-10-19, worklist says 2001-10-18; cross-checked against a later snapshot (web/2025) which also dates this Friday-night game Oct 19, 2001, so SR is consistent and the worklist date is off by one day; rank and score otherwise match"
   },
   {
     "date": "1992-10-17",
@@ -3041,7 +3041,7 @@
     "sr_away_points": 13,
     "site_marker": "",
     "status": "discrepancy",
-    "note": "home rank is 2, worklist says 7"
+    "note": "home rank is 2, worklist says 7; cross-checked against a later snapshot of the same page (web/20251213231945) which reads '(7) Georgia' for this row and matches the worklist, so the '(2)' above is a stale rank in the post-2017-season snapshot rather than a real SR/worklist disagreement"
   },
   {
     "date": "2017-11-04",
@@ -3588,8 +3588,8 @@
     "sr_home_points": null,
     "sr_away_points": null,
     "site_marker": "",
-    "status": "discrepancy",
-    "note": "home rank is None, worklist says 7; home points None, worklist says 41; away points None, worklist says 16; home-side result ''; worklist visitor result L implies home W"
+    "status": "page_missing",
+    "note": "the only Wayback snapshot of this page predates the game: the row is present but its rank, result and score cells are still empty, so no receipt could be taken"
   },
   {
     "date": "1990-11-03",
@@ -4280,7 +4280,7 @@
     "sr_away_points": 28,
     "site_marker": "",
     "status": "discrepancy",
-    "note": "home points 42, worklist says 10; away points 28, worklist says 7"
+    "note": "home points 42, worklist says 10; away points 28, worklist says 7; cross-checked against a later snapshot (web/2025) which also reads W 42-28, so SR is consistent and the worklist's 10-7 is the outlier; SR's notes cell calls this the BCA Classic (Kansas City, MO) yet still leaves the site marker empty, i.e. SR books it as a Kansas State home game"
   },
   {
     "date": "2011-10-29",

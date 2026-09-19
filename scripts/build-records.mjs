@@ -5,6 +5,23 @@ import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
 
 const RESEARCH_DIR = 'data/research'
 const candidates = JSON.parse(readFileSync('data/games-candidates.json', 'utf8'))
+
+// Evidence-backed corrections to the bulk sources (see data/game-corrections.json).
+let corrections = { corrections: [] }
+try { corrections = JSON.parse(readFileSync('data/game-corrections.json', 'utf8')) } catch {}
+const corrKey = (d, a, h) => `${d}|${a}|${h}`
+const corrMap = new Map(corrections.corrections.map((c) => [corrKey(c.date, c.away_team, c.home_team), c]))
+let excluded = 0, patched = 0
+candidates.games = candidates.games.flatMap((g) => {
+  const c = corrMap.get(corrKey(g.date, g.away_team, g.home_team))
+  if (!c) return [g]
+  if (c.action === 'exclude') { excluded++; return [] }
+  patched++
+  const out = { ...g, ...c.patch }
+  if (c.patch.away_points != null) out.result = out.away_points > out.home_points ? 'W' : out.away_points < out.home_points ? 'L' : 'T'
+  return [out]
+})
+console.log(`corrections: ${excluded} excluded, ${patched} patched (of ${corrMap.size} entries)`)
 const aliasFile = JSON.parse(readFileSync('data/name-aliases.json', 'utf8'))
 
 // Coach-name aliases live here once the merge pass needs them: canonical -> [variants].

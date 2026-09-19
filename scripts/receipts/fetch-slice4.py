@@ -348,6 +348,52 @@ def retry():
     print("retry done")
 
 
+def refresh_stale():
+    """Some <season+1> pickers land on a snapshot taken DURING the season, so the
+    rows for late games carry no score yet. Refetch those with a later picker."""
+    meta = json.load(open(META_PATH))
+    for p in load_pages():
+        key = "%s-%d" % (slug_for(p["home_team"]), p["season"])
+        path = os.path.join(HTML_DIR, key + ".html")
+        if not os.path.exists(path):
+            continue
+
+        def stale(body):
+            rows, _ = parse_schedule(body)
+            if not rows:
+                return True
+            want = {g["date"] for g in p["games"]}
+            hit = [r for r in rows if row_date(r) in want]
+            if len(hit) < len(want):
+                return True
+            return any(to_int(r["by"].get("points")) is None for r in hit)
+
+        if not stale(open(path, encoding="utf-8", errors="replace").read()):
+            continue
+        for ts in ("20260901", "20260601", "20260301", str(p["season"] + 2)):
+            url = ("https://web.archive.org/web/%s/https://www.sports-reference.com/"
+                   "cfb/schools/%s/%d-schedule.html"
+                   % (ts, slug_for(p["home_team"]), p["season"]))
+            time.sleep(5)
+            r = subprocess.run(["curl", "-sL", "--max-time", "120", "-o", path + ".try",
+                                "-w", "%{http_code}\t%{url_effective}", url],
+                               capture_output=True, text=True)
+            code, _, eff = (r.stdout or "\t").partition("\t")
+            body = (open(path + ".try", encoding="utf-8", errors="replace").read()
+                    if os.path.exists(path + ".try") else "")
+            ok = code == "200" and not stale(body)
+            print(key, ts, code, "fresh" if ok else "stale", eff[:70], flush=True)
+            if ok:
+                os.replace(path + ".try", path)
+                meta.setdefault(key, {}).update(
+                    ok=True, url=url, home_team=p["home_team"], season=p["season"],
+                    title=title_of(body), effective=eff, refreshed_picker=ts)
+                json.dump(meta, open(META_PATH, "w"), indent=1)
+                break
+    print("refresh done")
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "fetch"
-    {"fetch": fetch, "build": build, "retry": retry}[cmd]()
+    {"fetch": fetch, "build": build, "retry": retry,
+     "refresh": refresh_stale}[cmd]()

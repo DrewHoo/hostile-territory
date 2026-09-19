@@ -8,6 +8,7 @@ Usage:
 """
 import html as htmllib
 import json
+import unicodedata
 import os
 import re
 import subprocess
@@ -45,6 +46,19 @@ SLUG_EXCEPTIONS = {
     "miami (oh)": "miami-oh",
     "texas a&m": "texas-am",
     "washington state": "washington-state",
+    "unlv": "nevada-las-vegas",
+    "nevada-las vegas": "nevada-las-vegas",
+    "utep": "texas-el-paso",
+    "uab": "alabama-birmingham",
+    "southern miss": "southern-mississippi",
+    "umass": "massachusetts",
+}
+
+# The <season+1> year picker sometimes lands on a mid-season snapshot (unplayed
+# games, "TBD" kickoff times). These pages get an explicit later timestamp.
+PICKER = {
+    "Texas Tech|2025": "20260601",
+    "Utah|2024": "20250601",
 }
 
 MONTHS = {m: i + 1 for i, m in enumerate(
@@ -52,7 +66,8 @@ MONTHS = {m: i + 1 for i, m in enumerate(
 
 
 def slugify(name):
-    key = name.strip().lower()
+    key = unicodedata.normalize("NFKD", name.strip().lower())
+    key = "".join(c for c in key if not unicodedata.combining(c))
     if key in SLUG_EXCEPTIONS:
         return SLUG_EXCEPTIONS[key]
     s = re.sub(r"[^a-z0-9 \-]", "", key)
@@ -60,9 +75,10 @@ def slugify(name):
     return s
 
 
-def page_url(slug, season):
-    return ("https://web.archive.org/web/%d/https://www.sports-reference.com/cfb/schools/%s/%d-schedule.html"
-            % (season + 1, slug, season))
+def page_url(slug, season, team=None):
+    pick = PICKER.get("%s|%s" % (team, season), str(season + 1))
+    return ("https://web.archive.org/web/%s/https://www.sports-reference.com/cfb/schools/%s/%d-schedule.html"
+            % (pick, slug, season))
 
 
 def cache_path(slug, season):
@@ -119,7 +135,7 @@ def do_fetch(limit=None, sleep_s=4.5, max_attempts=99):
         if limit is not None and n >= limit:
             break
         n += 1
-        url = page_url(slug, season)
+        url = page_url(slug, season, team)
         dest = cache_path(slug, season)
         attempts = list((meta.get(key) or {}).get("attempts", []))
         code, eff, size = curl(url, dest)
@@ -269,7 +285,7 @@ def do_parse():
             for g in wl_games:
                 out.append({
                     "date": g["date"], "away_team": g["away_team"], "home_team": team, "season": season,
-                    "source_url": page_url(slugify(team), season), "quote": "",
+                    "source_url": page_url(slugify(team), season, team), "quote": "",
                     "sr_home_rank": None, "sr_away_rank": None,
                     "sr_home_points": None, "sr_away_points": None, "site_marker": None,
                     "status": "page_missing",
