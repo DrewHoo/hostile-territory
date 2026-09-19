@@ -69,9 +69,9 @@ const head = `
     <meta property="og:title" content="${esc(config.title)}" />
     <meta property="og:description" content="${esc(config.description)}" />
     <meta property="og:url" content="${SITE}" />
-    <meta property="og:image" content="${SITE}og.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="${SITE}${config.ogImage ?? 'og.png'}" />
+    <meta property="og:image:width" content="${config.ogImageWidth ?? 1200}" />
+    <meta property="og:image:height" content="${config.ogImageHeight ?? 630}" />
     <meta property="og:image:alt" content="${esc(config.ogImageAlt)}" />
 
     <meta name="twitter:card" content="summary_large_image" />

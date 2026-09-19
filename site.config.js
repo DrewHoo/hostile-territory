@@ -23,6 +23,12 @@ export default {
   // Alt text for the OG image, for screen readers on social platforms.
   ogImageAlt: 'Hostile Territory: a floodlit night leaderboard of coaches\' road records against AP top-10 teams.',
 
+  // Link-preview image (og:image). Reddit and most platforms show this at its
+  // native ratio; X/Twitter keeps the 2:1 og.png via twitter:image instead.
+  ogImage: 'og-poster.png',
+  ogImageWidth: 1560,
+  ogImageHeight: 1301,
+
   // Used by the favicon and the OG image. Pick something from your data.
   accent: '#f3e2bc',
 }
