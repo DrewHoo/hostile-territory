@@ -311,6 +311,43 @@ def to_int(v):
     return int(v) if re.fullmatch(r"-?\d+", v) else None
 
 
+def retry():
+    """Second chance for pages whose <season+1> year picker gave no schedule table:
+    try later year pickers (the season is over in all of them)."""
+    meta = json.load(open(META_PATH))
+    for key, info in list(meta.items()):
+        path = os.path.join(HTML_DIR, key + ".html")
+        good = (os.path.exists(path) and os.path.getsize(path) > 2000 and
+                parse_schedule(open(path, encoding="utf-8", errors="replace").read())[0])
+        if good:
+            continue
+        season = info["season"]
+        for yr in (season + 1, season + 2, season + 3, season + 5):
+            url = ("https://web.archive.org/web/%d/https://www.sports-reference.com/"
+                   "cfb/schools/%s/%d-schedule.html"
+                   % (yr, slug_for(info["home_team"]), season))
+            time.sleep(5)
+            r = subprocess.run(
+                ["curl", "-sL", "--max-time", "120", "-o", path + ".try",
+                 "-w", "%{http_code}\t%{url_effective}", url],
+                capture_output=True, text=True)
+            code, _, eff = (r.stdout or "\t").partition("\t")
+            body = (open(path + ".try", encoding="utf-8", errors="replace").read()
+                    if os.path.exists(path + ".try") else "")
+            rows, _s = parse_schedule(body)
+            title = title_of(body)
+            print(key, yr, code, bool(rows), title[:60], flush=True)
+            if code == "200" and rows:
+                os.replace(path + ".try", path)
+                info.update(ok=True, url=url, title=title, effective=eff,
+                            retry_year=yr)
+                json.dump(meta, open(META_PATH, "w"), indent=1)
+                break
+        else:
+            print("STILL MISSING", key, flush=True)
+    print("retry done")
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "fetch"
-    {"fetch": fetch, "build": build}[cmd]()
+    {"fetch": fetch, "build": build, "retry": retry}[cmd]()

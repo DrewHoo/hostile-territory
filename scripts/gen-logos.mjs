@@ -27,6 +27,7 @@ const toCanon = (n) => canon.get(n.toLowerCase()) ?? n
 // Raw spellings the alias map doesn't carry (the pipeline joins these by id).
 canon.set('miami', 'Miami (FL)')
 canon.set("hawai'i", 'Hawaii')
+canon.set('san josé state', 'San Jose State')
 for (const f of readdirSync(RAW).filter((f) => f.endsWith('.csv'))) {
   for (const r of parse(readFileSync(`${RAW}/${f}`, 'utf8'))) {
     if (r.home_id && r.home_id !== 'NA') ids.set(toCanon(r.home_team), r.home_id)
@@ -34,11 +35,15 @@ for (const f of readdirSync(RAW).filter((f) => f.endsWith('.csv'))) {
   }
 }
 
-// Only hosts that appear in the records need logos.
+// Hosts (board chips) plus every school a scoped coach led (coach-row logos).
 const records = JSON.parse(readFileSync('data/records.json', 'utf8'))
 const hosts = new Set()
-for (const c of records.records) for (const g of c.games) hosts.add(g.home_team)
+for (const c of records.records) {
+  for (const g of c.games) hosts.add(g.home_team)
+  for (const s of c.schools) hosts.add(s)
+}
 
+ids.set('Pacific', '279') // defunct program, absent from cfbfastR ids
 const map = {}
 let missing = []
 for (const team of [...hosts].sort()) {
@@ -50,12 +55,12 @@ for (const team of [...hosts].sort()) {
   const res = await fetch(`https://a.espncdn.com/i/teamlogos/ncaa/500/${id}.png`)
   if (!res.ok) { missing.push(`${team} (http ${res.status})`); delete map[team]; continue }
   const buf = Buffer.from(await res.arrayBuffer())
-  // Key near-white to transparent BEFORE any downstream silhouetting: ESPN
-  // flattens interior counters (Georgia's G, FSU's spear detail) to opaque
-  // white, and a CSS brightness(0) cutout would fill them. A one-color brand
-  // mark keeps its negative space; this recreates that from the color PNG.
-  const resized = sharp(buf).resize(40, 40, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
-  const { data, info } = await resized.raw().ensureAlpha().toBuffer({ resolveWithObject: true })
+  // Key near-white to transparent at FULL resolution, then trim and downscale.
+  // Keying after the resize half-keys anti-aliased boundary pixels into
+  // speckle; keying first lets the resampler smooth a clean alpha channel.
+  // ESPN flattens interior counters (Georgia's G, FSU's spear detail) to
+  // opaque white; this recreates the one-color brand mark's negative space.
+  const { data, info } = await sharp(buf).raw().ensureAlpha().toBuffer({ resolveWithObject: true })
   for (let i = 0; i < data.length; i += 4) {
     const [r, g, b] = [data[i], data[i + 1], data[i + 2]]
     const lum = (r + g + b) / 3
@@ -65,7 +70,11 @@ for (const team of [...hosts].sort()) {
       data[i + 3] = Math.round(data[i + 3] * (1 - t))
     }
   }
-  await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } }).png({ compressionLevel: 9 }).toFile(out)
+  await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } })
+    .trim({ threshold: 10 })
+    .resize(96, 96, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .png({ compressionLevel: 9 })
+    .toFile(out)
   await new Promise((r) => setTimeout(r, 150))
 }
 writeFileSync('src/data/team-ids.json', JSON.stringify(map))

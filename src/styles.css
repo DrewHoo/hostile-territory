@@ -70,14 +70,16 @@ h2 { font-family: 'Graduate', serif; font-weight: 400; font-size: 21px; letter-s
 /* board */
 .board { border-top: 3px double var(--line); }
 .row-btn {
-  display: grid; grid-template-columns: 205px 1fr 100px; gap: 16px; align-items: center;
-  width: 100%; text-align: left; padding: 12px 4px; border: none; border-bottom: 1px solid var(--line);
+  display: grid; grid-template-columns: 170px 1fr 100px; gap: 16px; align-items: center;
+  width: 100%; text-align: left; padding: 10px 4px; border: none; border-bottom: 1px solid var(--line);
   background: transparent; color: inherit; font: inherit; cursor: pointer;
 }
 .row-btn:hover, .row-btn:focus-visible { background: rgba(243, 226, 188, 0.045); outline: none; }
 .coach { font-weight: 600; font-size: 15.5px; }
 .coach .int { color: var(--ink-faint); font-weight: 400; font-size: 12px; }
 .school { color: var(--ink-faint); font-size: 12.5px; font-style: italic; }
+.school-logos { display: flex; gap: 5px; margin-top: 4px; align-items: center; }
+.school-logos img { width: 15px; height: 15px; display: block; filter: brightness(0) invert(0.55); opacity: 0.9; }
 .dots { display: flex; gap: 6px; flex-wrap: wrap; }
 .chip {
   width: 24px; height: 24px; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center;

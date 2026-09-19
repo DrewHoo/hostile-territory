@@ -177,7 +177,13 @@ export default function App() {
             <button className="row-btn" onClick={() => toggleOpen(c.n)} aria-expanded={open === c.n}>
               <span>
                 <span className="coach">{c.n}</span>
-                <span className="school"> {c.s.join(' · ')}</span>
+                <span className="school-logos">
+                  {c.s.map((sch) =>
+                    logoSrc(sch)
+                      ? <img key={sch} src={logoSrc(sch)} alt={sch} title={sch} loading="lazy" width="15" height="15" />
+                      : <span key={sch} className="school">{sch}</span>
+                  )}
+                </span>
               </span>
               <span className="dots" aria-label={`${c.w} wins, ${c.l} losses`}>
                 {c.games.map((g, i) => (
