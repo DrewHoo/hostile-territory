@@ -45,7 +45,7 @@
   "home_team": "LSU",
   "season": 2001,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/auburn/2001-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -55,7 +55,7 @@
   "home_team": "Texas",
   "season": 2001,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/colorado/2001-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -65,7 +65,7 @@
   "home_team": "Georgia",
   "season": 2001,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/houston/2001-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -75,7 +75,7 @@
   "home_team": "Virginia Tech",
   "season": 2001,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/miami-fl/2001-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -85,7 +85,7 @@
   "home_team": "Oregon",
   "season": 2001,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/oregon-state/2001-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -95,7 +95,7 @@
   "home_team": "Florida",
   "season": 2001,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/tennessee/2001-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -104,160 +104,160 @@
   "away_team": "Utah State",
   "home_team": "Fresno State",
   "season": 2001,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/utah-state/2001-schedule.html",
+  "quote": "11 | Dec 1, 2001 | Sat | Utah State | @ | (21) Fresno State | WAC | L | 21 | 70 | 4 | 7 | L 2 | ",
+  "note": ""
  },
  {
   "date": "2002-12-07",
   "away_team": "Oklahoma",
   "home_team": "Colorado",
   "season": 2002,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "neutral",
+  "source_url": "https://web.archive.org/web/2003/https://www.sports-reference.com/cfb/schools/oklahoma/2002-schedule.html",
+  "quote": "13 | Dec 7, 2002 | Sat | (8) Oklahoma | N | (12) Colorado | Big 12 | W | 29 | 7 | 11 | 2 | W 1 | Big 12 Championship (Houston, TX)",
+  "note": "Big 12 Championship (Houston, TX)"
  },
  {
   "date": "2002-12-07",
   "away_team": "Virginia Tech",
   "home_team": "Miami (FL)",
   "season": 2002,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2003/https://www.sports-reference.com/cfb/schools/virginia-tech/2002-schedule.html",
+  "quote": "13 | Dec 7, 2002 | Sat | (18) Virginia Tech | @ | (1) Miami (FL) | Big East | L | 45 | 56 | 9 | 4 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2003-12-04",
   "away_team": "Miami (OH)",
   "home_team": "Bowling Green",
   "season": 2003,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2004/https://www.sports-reference.com/cfb/schools/miami-oh/2003-schedule.html",
+  "quote": "13 | Dec 4, 2003 | Thu | (14) Miami (OH) | @ | (20) Bowling Green State | MAC | W | 49 | 27 | 12 | 1 | W 12 | MAC Championship (Bowling Green, OH)",
+  "note": "MAC Championship (Bowling Green, OH)"
  },
  {
   "date": "2003-12-06",
   "away_team": "Kansas State",
   "home_team": "Oklahoma",
   "season": 2003,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "neutral",
+  "source_url": "https://web.archive.org/web/2004/https://www.sports-reference.com/cfb/schools/kansas-state/2003-schedule.html",
+  "quote": "14 | Dec 6, 2003 | Sat | (13) Kansas State | N | (1) Oklahoma | Big 12 | W | 35 | 7 | 11 | 3 | W 7 | Big 12 Championship (Kansas City, MO)",
+  "note": "Big 12 Championship (Kansas City, MO)"
  },
  {
   "date": "2003-12-06",
   "away_team": "Oregon State",
   "home_team": "USC",
   "season": 2003,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2004/https://www.sports-reference.com/cfb/schools/oregon-state/2003-schedule.html",
+  "quote": "12 | Dec 6, 2003 | Sat | Oregon State | @ | (2) Southern California | Pac-10 | L | 28 | 52 | 7 | 5 | L 2 | ",
+  "note": ""
  },
  {
   "date": "2004-12-04",
   "away_team": "Colorado",
   "home_team": "Oklahoma",
   "season": 2004,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "neutral",
+  "source_url": "https://web.archive.org/web/2005/https://www.sports-reference.com/cfb/schools/colorado/2004-schedule.html",
+  "quote": "12 | Dec 4, 2004 | Sat | Colorado | N | (2) Oklahoma | Big 12 | L | 3 | 42 | 7 | 5 | L 1 | Big 12 Championship (Kansas City, MO)",
+  "note": "Big 12 Championship (Kansas City, MO)"
  },
  {
   "date": "2004-12-04",
   "away_team": "Virginia Tech",
   "home_team": "Miami (FL)",
   "season": 2004,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2005/https://www.sports-reference.com/cfb/schools/virginia-tech/2004-schedule.html",
+  "quote": "12 | Dec 4, 2004 | Sat | (10) Virginia Tech | @ | (9) Miami (FL) | ACC | W | 16 | 10 | 10 | 2 | W 8 | ",
+  "note": ""
  },
  {
   "date": "2005-12-02",
   "away_team": "Louisiana Tech",
   "home_team": "Fresno State",
   "season": 2005,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2006/https://www.sports-reference.com/cfb/schools/louisiana-tech/2005-schedule.html",
+  "quote": "11 | Dec 2, 2005 | Fri | Louisiana Tech | @ | (23) Fresno State | WAC | W | 40 | 28 | 7 | 4 | W 1 | ",
+  "note": ""
  },
  {
   "date": "2005-12-03",
   "away_team": "UCLA",
   "home_team": "USC",
   "season": 2005,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2006/https://www.sports-reference.com/cfb/schools/ucla/2005-schedule.html",
+  "quote": "11 | Dec 3, 2005 | Sat | (11) UCLA | @ | (1) Southern California | Pac-10 | L | 19 | 66 | 9 | 2 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2006-12-02",
   "away_team": "Nebraska",
   "home_team": "Oklahoma",
   "season": 2006,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "neutral",
+  "source_url": "https://web.archive.org/web/2007/https://www.sports-reference.com/cfb/schools/nebraska/2006-schedule.html",
+  "quote": "13 | Dec 2, 2006 | Sat | (19) Nebraska | N | (8) Oklahoma | Big 12 | L | 7 | 21 | 9 | 4 | L 1 | Big 12 Championship (Kansas City, MO)",
+  "note": "Big 12 Championship (Kansas City, MO)"
  },
  {
   "date": "2006-12-02",
   "away_team": "Oregon State",
   "home_team": "Hawaii",
   "season": 2006,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2007/https://www.sports-reference.com/cfb/schools/oregon-state/2006-schedule.html",
+  "quote": "13 | Dec 2, 2006 | Sat | Oregon State | @ | (24) Hawaii | WAC | W | 35 | 32 | 9 | 4 | W 3 | ",
+  "note": ""
  },
  {
   "date": "2006-12-02",
   "away_team": "Rutgers",
   "home_team": "West Virginia",
   "season": 2006,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2007/https://www.sports-reference.com/cfb/schools/rutgers/2006-schedule.html",
+  "quote": "12 | Dec 2, 2006 | Sat | (13) Rutgers | @ | (15) West Virginia | Big East | L | 39 | 41 | 10 | 2 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2006-12-02",
   "away_team": "Stanford",
   "home_team": "California",
   "season": 2006,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2007/https://www.sports-reference.com/cfb/schools/stanford/2006-schedule.html",
+  "quote": "12 | Dec 2, 2006 | Sat | Stanford | @ | (21) California | Pac-10 | L | 17 | 26 | 1 | 11 | L 2 | ",
+  "note": ""
  },
  {
   "date": "2006-12-02",
   "away_team": "UConn",
   "home_team": "Louisville",
   "season": 2006,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2007/https://www.sports-reference.com/cfb/schools/connecticut/2006-schedule.html",
+  "quote": "12 | Dec 2, 2006 | Sat | Connecticut | @ | (6) Louisville | Big East | L | 17 | 48 | 4 | 8 | L 3 | ",
+  "note": ""
  },
  {
   "date": "2006-12-02",
   "away_team": "Wake Forest",
   "home_team": "Georgia Tech",
   "season": 2006,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "neutral",
+  "source_url": "https://web.archive.org/web/2007/https://www.sports-reference.com/cfb/schools/wake-forest/2006-schedule.html",
+  "quote": "13 | Dec 2, 2006 | Sat | (16) Wake Forest | N | (23) Georgia Tech | ACC | W | 9 | 6 | 11 | 2 | W 2 | ACC Championship (Jacksonville, FL)",
+  "note": "ACC Championship (Jacksonville, FL)"
  },
  {
   "date": "2007-12-01",
@@ -265,7 +265,7 @@
   "home_team": "Arizona State",
   "season": 2007,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2008/https://www.sports-reference.com/cfb/schools/arizona/2007-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -274,80 +274,80 @@
   "away_team": "Oregon State",
   "home_team": "Oregon",
   "season": 2007,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2008/https://www.sports-reference.com/cfb/schools/oregon-state/2007-schedule.html",
+  "quote": "12 | Dec 1, 2007 | Sat | Oregon State | @ | (18) Oregon | Pac-10 | W | 38 | 31 | 8 | 4 | W 3 | ",
+  "note": ""
  },
  {
   "date": "2007-12-01",
   "away_team": "Pittsburgh",
   "home_team": "West Virginia",
   "season": 2007,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2008/https://www.sports-reference.com/cfb/schools/pittsburgh/2007-schedule.html",
+  "quote": "12 | Dec 1, 2007 | Sat | Pittsburgh | @ | (2) West Virginia | Big East | W | 13 | 9 | 5 | 7 | W 1 | ",
+  "note": ""
  },
  {
   "date": "2007-12-01",
   "away_team": "UCLA",
   "home_team": "USC",
   "season": 2007,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2008/https://www.sports-reference.com/cfb/schools/ucla/2007-schedule.html",
+  "quote": "12 | Dec 1, 2007 | Sat | UCLA | @ | (8) Southern California | Pac-10 | L | 7 | 24 | 6 | 6 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2007-12-01",
   "away_team": "Virginia Tech",
   "home_team": "Boston College",
   "season": 2007,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "neutral",
+  "source_url": "https://web.archive.org/web/2008/https://www.sports-reference.com/cfb/schools/virginia-tech/2007-schedule.html",
+  "quote": "13 | Dec 1, 2007 | Sat | (6) Virginia Tech | N | (12) Boston College | ACC | W | 30 | 16 | 11 | 2 | W 5 | ACC Championship (Jacksonville, FL)",
+  "note": "ACC Championship (Jacksonville, FL)"
  },
  {
   "date": "2007-12-01",
   "away_team": "Washington",
   "home_team": "Hawaii",
   "season": 2007,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2008/https://www.sports-reference.com/cfb/schools/washington/2007-schedule.html",
+  "quote": "13 | Dec 1, 2007 | Sat | Washington | @ | (11) Hawaii | WAC | L | 28 | 35 | 4 | 9 | L 2 | ",
+  "note": ""
  },
  {
   "date": "2009-12-03",
   "away_team": "Oregon State",
   "home_team": "Oregon",
   "season": 2009,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2010/https://www.sports-reference.com/cfb/schools/oregon-state/2009-schedule.html",
+  "quote": "12 | Dec 3, 2009 | Thu | (13) Oregon State | @ | (7) Oregon | Pac-10 | L | 33 | 37 | 8 | 4 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2009-12-05",
   "away_team": "Arizona",
   "home_team": "USC",
   "season": 2009,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2010/https://www.sports-reference.com/cfb/schools/arizona/2009-schedule.html",
+  "quote": "12 | Dec 5, 2009 | Sat | Arizona | @ | (20) Southern California | Pac-10 | W | 21 | 17 | 8 | 4 | W 2 | ",
+  "note": ""
  },
  {
   "date": "2009-12-05",
   "away_team": "Cincinnati",
   "home_team": "Pittsburgh",
   "season": 2009,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2010/https://www.sports-reference.com/cfb/schools/cincinnati/2009-schedule.html",
+  "quote": "12 | Dec 5, 2009 | Sat | (5) Cincinnati | @ | (14) Pittsburgh | Big East | W | 45 | 44 | 12 | 0 | W 12 | ",
+  "note": ""
  },
  {
   "date": "2009-12-05",
@@ -355,7 +355,7 @@
   "home_team": "Boise State",
   "season": 2009,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2010/https://www.sports-reference.com/cfb/schools/new-mexico-state/2009-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -364,10 +364,10 @@
   "away_team": "Rutgers",
   "home_team": "West Virginia",
   "season": 2010,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2011/https://www.sports-reference.com/cfb/schools/rutgers/2010-schedule.html",
+  "quote": "12 | Dec 4, 2010 | Sat | Rutgers | @ | (23) West Virginia | Big East | L | 14 | 35 | 4 | 8 | L 6 | ",
+  "note": ""
  },
  {
   "date": "2010-12-04",
@@ -375,7 +375,7 @@
   "home_team": "Hawaii",
   "season": 2010,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2011/https://www.sports-reference.com/cfb/schools/nevada-las-vegas/2010-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -384,10 +384,10 @@
   "away_team": "Utah State",
   "home_team": "Boise State",
   "season": 2010,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2011/https://www.sports-reference.com/cfb/schools/utah-state/2010-schedule.html",
+  "quote": "12 | Dec 4, 2010 | Sat | Utah State | @ | (9) Boise State | WAC | L | 14 | 50 | 4 | 8 | L 2 | ",
+  "note": ""
  },
  {
   "date": "2011-12-02",
@@ -395,7 +395,7 @@
   "home_team": "Oregon",
   "season": 2011,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2012/https://www.sports-reference.com/cfb/schools/ucla/2011-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -405,7 +405,7 @@
   "home_team": "Kansas State",
   "season": 2011,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2012/https://www.sports-reference.com/cfb/schools/iowa-state/2011-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -414,60 +414,60 @@
   "away_team": "New Mexico",
   "home_team": "Boise State",
   "season": 2011,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2012/https://www.sports-reference.com/cfb/schools/new-mexico/2011-schedule.html",
+  "quote": "12 | Dec 3, 2011 | Sat | New Mexico | @ | (9) Boise State | MWC | L | 0 | 45 | 1 | 11 | L 2 | ",
+  "note": ""
  },
  {
   "date": "2011-12-03",
   "away_team": "Oklahoma",
   "home_team": "Oklahoma State",
   "season": 2011,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2012/https://www.sports-reference.com/cfb/schools/oklahoma/2011-schedule.html",
+  "quote": "12 | Dec 3, 2011 | Sat | (13) Oklahoma | @ | (3) Oklahoma State | Big 12 | L | 10 | 44 | 9 | 3 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2011-12-03",
   "away_team": "Southern Miss",
   "home_team": "Houston",
   "season": 2011,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2012/https://www.sports-reference.com/cfb/schools/southern-mississippi/2011-schedule.html",
+  "quote": "13 | Dec 3, 2011 | Sat | (24) Southern Mississippi | @ | (7) Houston | CUSA | W | 49 | 28 | 11 | 2 | W 2 | CUSA Championship (Houston, TX)",
+  "note": "CUSA Championship (Houston, TX)"
  },
  {
   "date": "2011-12-03",
   "away_team": "Texas",
   "home_team": "Baylor",
   "season": 2011,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2012/https://www.sports-reference.com/cfb/schools/texas/2011-schedule.html",
+  "quote": "12 | Dec 3, 2011 | Sat | Texas | @ | (19) Baylor | Big 12 | L | 24 | 48 | 7 | 5 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2011-12-03",
   "away_team": "UNLV",
   "home_team": "TCU",
   "season": 2011,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2012/https://www.sports-reference.com/cfb/schools/nevada-las-vegas/2011-schedule.html",
+  "quote": "12 | Dec 3, 2011 | Sat | Nevada-Las Vegas | @ | (18) Texas Christian | MWC | L | 9 | 56 | 2 | 10 | L 5 | ",
+  "note": ""
  },
  {
   "date": "2012-12-01",
   "away_team": "Texas",
   "home_team": "Kansas State",
   "season": 2012,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2013/https://www.sports-reference.com/cfb/schools/texas/2012-schedule.html",
+  "quote": "12 | Dec 1, 2012 | Sat | (23) Texas | @ | (7) Kansas State | Big 12 | L | 24 | 42 | 8 | 4 | L 2 | ",
+  "note": ""
  },
  {
   "date": "2013-12-07",
@@ -475,7 +475,7 @@
   "home_team": "Oklahoma State",
   "season": 2013,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2014/https://www.sports-reference.com/cfb/schools/oklahoma/2013-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -485,7 +485,7 @@
   "home_team": "Arizona State",
   "season": 2013,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2014/https://www.sports-reference.com/cfb/schools/stanford/2013-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -494,100 +494,100 @@
   "away_team": "Texas",
   "home_team": "Baylor",
   "season": 2013,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2014/https://www.sports-reference.com/cfb/schools/texas/2013-schedule.html",
+  "quote": "12 | Dec 7, 2013 | 3:30 PM | Sat | (23) Texas | @ | (9) Baylor | Big 12 | L | 10 | 30 | 8 | 4 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2013-12-07",
   "away_team": "Utah State",
   "home_team": "Fresno State",
   "season": 2013,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2014/https://www.sports-reference.com/cfb/schools/utah-state/2013-schedule.html",
+  "quote": "13 | Dec 7, 2013 | 10:00 PM | Sat | Utah State | @ | (24) Fresno State | MWC | L | 17 | 24 | 8 | 5 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2014-12-06",
   "away_team": "Fresno State",
   "home_team": "Boise State",
   "season": 2014,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2015/https://www.sports-reference.com/cfb/schools/fresno-state/2014-schedule.html",
+  "quote": "13 | Dec 6, 2014 | 10:00 PM | Sat | Fresno State | @ | (22) Boise State | MWC | L | 14 | 28 | 6 | 7 | L 1 | CBS | ",
+  "note": ""
  },
  {
   "date": "2014-12-06",
   "away_team": "Iowa State",
   "home_team": "TCU",
   "season": 2014,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2015/https://www.sports-reference.com/cfb/schools/iowa-state/2014-schedule.html",
+  "quote": "12 | Dec 6, 2014 | 12:00 PM | Sat | Iowa State | @ | (4) Texas Christian | Big 12 | L | 3 | 55 | 2 | 10 | L 6 | ABC | ",
+  "note": ""
  },
  {
   "date": "2014-12-06",
   "away_team": "Kansas State",
   "home_team": "Baylor",
   "season": 2014,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2015/https://www.sports-reference.com/cfb/schools/kansas-state/2014-schedule.html",
+  "quote": "12 | Dec 6, 2014 | 7:45 PM | Sat | (9) Kansas State | @ | (5) Baylor | Big 12 | L | 27 | 38 | 9 | 3 | L 1 | ESPN | ",
+  "note": ""
  },
  {
   "date": "2014-12-06",
   "away_team": "Oklahoma State",
   "home_team": "Oklahoma",
   "season": 2014,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2015/https://www.sports-reference.com/cfb/schools/oklahoma-state/2014-schedule.html",
+  "quote": "12 | Dec 6, 2014 | 3:30 PM | Sat | Oklahoma State | @ | (18) Oklahoma | Big 12 | W | 38 | 35 | 6 | 6 | W 1 | FS1 | ",
+  "note": ""
  },
  {
   "date": "2015-12-05",
   "away_team": "Temple",
   "home_team": "Houston",
   "season": 2015,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2016/https://www.sports-reference.com/cfb/schools/temple/2015-schedule.html",
+  "quote": "13 | Dec 5, 2015 | 12:00 PM | Sat | (20) Temple | @ | (17) Houston | American | L | 13 | 24 | 10 | 3 | L 1 |  | American Championship Game",
+  "note": "American Championship Game"
  },
  {
   "date": "2015-12-05",
   "away_team": "Texas",
   "home_team": "Baylor",
   "season": 2015,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2016/https://www.sports-reference.com/cfb/schools/texas/2015-schedule.html",
+  "quote": "12 | Dec 5, 2015 | 12:00 PM | Sat | Texas | @ | (12) Baylor | Big 12 | W | 23 | 17 | 5 | 7 | W 1 |  | ",
+  "note": ""
  },
  {
   "date": "2016-12-03",
   "away_team": "Baylor",
   "home_team": "West Virginia",
   "season": 2016,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2017/https://www.sports-reference.com/cfb/schools/baylor/2016-schedule.html",
+  "quote": "12 | Dec 3, 2016 | 3:30 PM | Sat | Baylor | @ | (14) West Virginia | Big 12 | L | 21 | 24 | 6 | 6 | L 6 |  | ",
+  "note": ""
  },
  {
   "date": "2016-12-03",
   "away_team": "Oklahoma State",
   "home_team": "Oklahoma",
   "season": 2016,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2017/https://www.sports-reference.com/cfb/schools/oklahoma-state/2016-schedule.html",
+  "quote": "12 | Dec 3, 2016 | 12:30 PM | Sat | (11) Oklahoma State | @ | (7) Oklahoma | Big 12 | L | 20 | 38 | 9 | 3 | L 1 |  | ",
+  "note": ""
  },
  {
   "date": "2016-12-03",
@@ -595,7 +595,7 @@
   "home_team": "Navy",
   "season": 2016,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2017/https://www.sports-reference.com/cfb/schools/temple/2016-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -604,40 +604,40 @@
   "away_team": "Memphis",
   "home_team": "UCF",
   "season": 2017,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2018/https://www.sports-reference.com/cfb/schools/memphis/2017-schedule.html",
+  "quote": "12 | Dec 2, 2017 |  | Sat | (16) Memphis | @ | (12) UCF | American | L | 55 | 62 | 10 | 2 | L 1 |  | American Championship Game",
+  "note": "American Championship Game"
  },
  {
   "date": "2018-12-01",
   "away_team": "Fresno State",
   "home_team": "Boise State",
   "season": 2018,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2019/https://www.sports-reference.com/cfb/schools/fresno-state/2018-schedule.html",
+  "quote": "13 | Dec 1, 2018 | 7:45 PM | Sat | (25) Fresno State | @ | (19) Boise State | MWC | W | 19 | 16 | 11 | 2 | W 3 | MWC Championship Game",
+  "note": "MWC Championship Game"
  },
  {
   "date": "2018-12-01",
   "away_team": "Memphis",
   "home_team": "UCF",
   "season": 2018,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2019/https://www.sports-reference.com/cfb/schools/memphis/2018-schedule.html",
+  "quote": "13 | Dec 1, 2018 | 3:30 PM | Sat | Memphis | @ | (7) Central Florida | American | L | 41 | 56 | 8 | 5 | L 1 |  | American Championship Game",
+  "note": "American Championship Game"
  },
  {
   "date": "2019-12-07",
   "away_team": "Cincinnati",
   "home_team": "Memphis",
   "season": 2019,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2020/https://www.sports-reference.com/cfb/schools/cincinnati/2019-schedule.html",
+  "quote": "13 | Dec 7, 2019 |  | Sat | (21) Cincinnati | @ | (16) Memphis | American | L | 24 | 29 | 10 | 3 | L 2 | American Championship Game",
+  "note": "American Championship Game"
  },
  {
   "date": "2019-12-07",
@@ -645,7 +645,7 @@
   "home_team": "Boise State",
   "season": 2019,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2020/https://www.sports-reference.com/cfb/schools/hawaii/2019-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -655,7 +655,7 @@
   "home_team": "Appalachian State",
   "season": 2019,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2020/https://www.sports-reference.com/cfb/schools/louisiana-lafayette/2019-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -664,30 +664,30 @@
   "away_team": "Baylor",
   "home_team": "Oklahoma",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/baylor/2020-schedule.html",
+  "quote": "8 | Dec 5, 2020 | 8:00 PM | Sat | Baylor | @ | (13) Oklahoma | Big 12 | L | 14 | 27 | 2 | 6 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2020-12-05",
   "away_team": "BYU",
   "home_team": "Coastal Carolina",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/brigham-young/2020-schedule.html",
+  "quote": "10 | Dec 5, 2020 | 5:30 PM | Sat | (8) BYU | @ | (14) Coastal Carolina | Sun Belt | L | 17 | 22 | 9 | 1 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2020-12-05",
   "away_team": "Indiana",
   "home_team": "Wisconsin",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/indiana/2020-schedule.html",
+  "quote": "7 | Dec 5, 2020 | 3:30 PM | Sat | (10) Indiana | @ | (18) Wisconsin | Big Ten | W | 14 | 6 | 6 | 1 | W 2 | ",
+  "note": ""
  },
  {
   "date": "2020-12-05",
@@ -695,7 +695,7 @@
   "home_team": "Marshall",
   "season": 2020,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/rice/2020-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -705,7 +705,7 @@
   "home_team": "Washington",
   "season": 2020,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/stanford/2020-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -714,10 +714,10 @@
   "away_team": "Syracuse",
   "home_team": "Notre Dame",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/syracuse/2020-schedule.html",
+  "quote": "11 | Dec 5, 2020 | 2:30 PM | Sat | Syracuse | @ | (2) Notre Dame | ACC | L | 21 | 45 | 1 | 10 | L 8 | ",
+  "note": ""
  },
  {
   "date": "2020-12-05",
@@ -725,7 +725,7 @@
   "home_team": "Iowa State",
   "season": 2020,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/west-virginia/2020-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -734,10 +734,10 @@
   "away_team": "Washington State",
   "home_team": "USC",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/washington-state/2020-schedule.html",
+  "quote": "3 | Dec 6, 2020 | 7:30 PM | Sun | Washington State | @ | (17) USC | Pac-12 | L | 13 | 38 | 1 | 2 | L 2 | United Airlines Field at Los Angeles Memorial Coliseum - Los Angeles, California",
+  "note": "United Airlines Field at Los Angeles Memorial Coliseum - Los Angeles, California"
  },
  {
   "date": "2020-12-12",
@@ -745,7 +745,7 @@
   "home_team": "Buffalo",
   "season": 2020,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/akron/2020-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -754,90 +754,90 @@
   "away_team": "Illinois",
   "home_team": "Northwestern",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/illinois/2020-schedule.html",
+  "quote": "7 | Dec 12, 2020 | 12:00 PM | Sat | Illinois | @ | (15) Northwestern | Big Ten | L | 10 | 28 | 2 | 5 | L 2 | ",
+  "note": ""
  },
  {
   "date": "2020-12-12",
   "away_team": "LSU",
   "home_team": "Florida",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/louisiana-state/2020-schedule.html",
+  "quote": "9 | Dec 12, 2020 | 7:00 PM | Sat | LSU | @ | (6) Florida | SEC | W | 37 | 34 | 4 | 5 | W 1 | ",
+  "note": ""
  },
  {
   "date": "2020-12-12",
   "away_team": "North Carolina",
   "home_team": "Miami (FL)",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/north-carolina/2020-schedule.html",
+  "quote": "11 | Dec 12, 2020 | 3:30 PM | Sat | (20) North Carolina | @ | (9) Miami (FL) | ACC | W | 62 | 26 | 8 | 3 | W 2 | ",
+  "note": ""
  },
  {
   "date": "2020-12-12",
   "away_team": "San Diego State",
   "home_team": "BYU",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/san-diego-state/2020-schedule.html",
+  "quote": "8 | Dec 12, 2020 | 10:00 PM | Sat | San Diego State | @ | (14) BYU | Ind | L | 14 | 28 | 4 | 4 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2020-12-12",
   "away_team": "Utah",
   "home_team": "Colorado",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/utah/2020-schedule.html",
+  "quote": "4 | Dec 12, 2020 | 12:00 PM | Sat | Utah | @ | (21) Colorado | Pac-12 | W | 38 | 21 | 2 | 2 | W 2 | ",
+  "note": ""
  },
  {
   "date": "2020-12-12",
   "away_team": "Wisconsin",
   "home_team": "Iowa",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/wisconsin/2020-schedule.html",
+  "quote": "5 | Dec 12, 2020 | 3:30 PM | Sat | (25) Wisconsin | @ | (19) Iowa | Big Ten | L | 7 | 28 | 2 | 3 | L 3 | ",
+  "note": ""
  },
  {
   "date": "2020-12-18",
   "away_team": "Oregon",
   "home_team": "USC",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/oregon/2020-schedule.html",
+  "quote": "6 | Dec 18, 2020 | 8:00 PM | Fri | Oregon | @ | (13) USC | Pac-12 | W | 31 | 24 | 4 | 2 | W 1 | Pac-12 Championship Game",
+  "note": "Pac-12 Championship Game"
  },
  {
   "date": "2020-12-19",
   "away_team": "Tulsa",
   "home_team": "Cincinnati",
   "season": 2020,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2021/https://www.sports-reference.com/cfb/schools/tulsa/2020-schedule.html",
+  "quote": "8 | Dec 19, 2020 | 8:00 PM | Sat | (20) Tulsa | @ | (6) Cincinnati | American | L | 24 | 27 | 6 | 2 | L 1 | American Championship Game",
+  "note": "American Championship Game"
  },
  {
   "date": "2021-12-04",
   "away_team": "Appalachian State",
   "home_team": "Louisiana",
   "season": 2021,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2022/https://www.sports-reference.com/cfb/schools/appalachian-state/2021-schedule.html",
+  "quote": "13 | Dec 4, 2021 | 3:30 PM | Sat | Appalachian State | @ | (20) Louisiana | Sun Belt | L | 16 | 24 | 10 | 3 | L 1 | Sun Belt Championship Game",
+  "note": "Sun Belt Championship Game"
  },
  {
   "date": "2021-12-04",
@@ -845,7 +845,7 @@
   "home_team": "Cincinnati",
   "season": 2021,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2022/https://www.sports-reference.com/cfb/schools/houston/2021-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -854,20 +854,20 @@
   "away_team": "Utah State",
   "home_team": "San Diego State",
   "season": 2021,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2022/https://www.sports-reference.com/cfb/schools/utah-state/2021-schedule.html",
+  "quote": "13 | Dec 4, 2021 | 3:00 PM | Sat | Utah State | @ | (19) San Diego State | MWC | W | 46 | 13 | 10 | 3 | W 2 | MWC Championship Game",
+  "note": "MWC Championship Game"
  },
  {
   "date": "2022-12-03",
   "away_team": "UCF",
   "home_team": "Tulane",
   "season": 2022,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2023/https://www.sports-reference.com/cfb/schools/central-florida/2022-schedule.html",
+  "quote": "13 | Dec 3, 2022 | 4:00 PM | Sat | (22) UCF | @ | (18) Tulane | American | L | 28 | 45 | 9 | 4 | L 1 | American Championship Game",
+  "note": "American Championship Game"
  },
  {
   "date": "2023-12-01",
@@ -875,7 +875,7 @@
   "home_team": "Liberty",
   "season": 2023,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2024/https://www.sports-reference.com/cfb/schools/new-mexico-state/2023-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -885,7 +885,7 @@
   "home_team": "Tulane",
   "season": 2023,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2024/https://www.sports-reference.com/cfb/schools/southern-methodist/2023-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -894,10 +894,10 @@
   "away_team": "Tulane",
   "home_team": "Army",
   "season": 2024,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2025/https://www.sports-reference.com/cfb/schools/tulane/2024-schedule.html",
+  "quote": "13 | Dec 6, 2024 | 8:00 PM | Fri | Tulane | @ | (24) Army | American | L | 14 | 35 | 9 | 4 | L 2 | American Championship Game",
+  "note": "American Championship Game"
  },
  {
   "date": "2024-12-06",
@@ -905,7 +905,7 @@
   "home_team": "Boise State",
   "season": 2024,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2025/https://www.sports-reference.com/cfb/schools/nevada-las-vegas/2024-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  },
@@ -914,10 +914,10 @@
   "away_team": "North Texas",
   "home_team": "Tulane",
   "season": 2025,
-  "verdict": "unresolved",
-  "source_url": "",
-  "quote": "",
-  "note": "no usable Wayback snapshot (code=None, title=None)"
+  "verdict": "road",
+  "source_url": "https://web.archive.org/web/2026/https://www.sports-reference.com/cfb/schools/north-texas/2025-schedule.html",
+  "quote": "13 | Dec 5, 2025 | 8:00 PM | Fri | (20) North Texas | @ | (21) Tulane | American | L | 21 | 34 | 11 | 2 | L 1 | ",
+  "note": ""
  },
  {
   "date": "2025-12-05",
@@ -925,7 +925,7 @@
   "home_team": "James Madison",
   "season": 2025,
   "verdict": "unresolved",
-  "source_url": "",
+  "source_url": "https://web.archive.org/web/2026/https://www.sports-reference.com/cfb/schools/troy/2025-schedule.html",
   "quote": "",
   "note": "no usable Wayback snapshot (code=None, title=None)"
  }

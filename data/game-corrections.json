@@ -233,6 +233,48 @@
     "date": "2001-10-20"
    },
    "reason": "2001 midnight-ET placeholder shifted a day early; SR dates it Oct 20 (receipts-3)."
+  },
+  {
+   "date": "2003-12-06",
+   "away_team": "Kansas State",
+   "home_team": "Oklahoma",
+   "action": "exclude",
+   "reason": "Big 12 Championship at Arrowhead, Kansas City; SR site marker N (receipts-4)."
+  },
+  {
+   "date": "2004-12-04",
+   "away_team": "Colorado",
+   "home_team": "Oklahoma",
+   "action": "exclude",
+   "reason": "Big 12 Championship at Arrowhead, Kansas City; SR site marker N (receipts-4)."
+  },
+  {
+   "date": "2006-12-02",
+   "away_team": "Nebraska",
+   "home_team": "Oklahoma",
+   "action": "exclude",
+   "reason": "Big 12 Championship Game (Arrowhead); SR site marker N (receipts-4)."
+  },
+  {
+   "date": "2001-08-25",
+   "away_team": "North Carolina",
+   "home_team": "Oklahoma",
+   "action": "patch",
+   "patch": {
+    "away_points": 27,
+    "home_points": 41
+   },
+   "reason": "cfbfastR row carries 10-0; SR reads 41-27 in two independent snapshots, Hispanic Coaches Classic in Norman with empty site marker (receipts-4)."
+  },
+  {
+   "date": "2001-10-19",
+   "away_team": "Baylor",
+   "home_team": "Oklahoma",
+   "action": "patch",
+   "patch": {
+    "date": "2001-10-20"
+   },
+   "reason": "2001 midnight-ET placeholder shifted a day early; SR dates it Oct 20 (receipts-4)."
   }
  ]
 }

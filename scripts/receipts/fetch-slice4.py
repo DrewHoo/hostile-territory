@@ -112,6 +112,37 @@ def cell_text(raw):
     return re.sub(r"\s+", " ", t).strip()
 
 
+LABELS = {"g": "g", "rk": "g", "date": "date_game", "time": "time_game",
+          "day": "day_name", "school": "school_name", "opponent": "opp_name",
+          "conf": "conf_abbr", "pts": "points", "opp": "opp_points",
+          "w": "wins", "l": "losses", "t": "ties", "streak": "game_streak",
+          "notes": "notes"}
+
+
+def stats_from_labels(head_html):
+    """Older SR snapshots carry no data-stat attributes: map header labels instead.
+    The two blank headers are the site marker (after School) and the result
+    (after Conf)."""
+    cells = [cell_text(c) for c in
+             re.findall(r"<th[^>]*>(.*?)</th>", head_html, re.S)]
+    keys, seen_school, seen_conf = [], False, False
+    for c in cells:
+        k = LABELS.get(c.strip().lower())
+        if k is None:
+            if seen_conf:
+                k = "game_result"
+            elif seen_school:
+                k = "game_location"
+            else:
+                k = None
+        if k == "school_name":
+            seen_school = True
+        if k == "conf_abbr":
+            seen_conf = True
+        keys.append(k)
+    return keys
+
+
 def parse_schedule(body):
     """Return list of rows; each row = {'cells': [...], 'by': {data_stat: text}}."""
     m = re.search(r'<table[^>]*id="schedule"[^>]*>(.*?)</table>', body, re.S)
@@ -120,6 +151,8 @@ def parse_schedule(body):
     tbl = m.group(1)
     head = re.search(r"<thead>(.*?)</thead>", tbl, re.S)
     stats = re.findall(r'data-stat="([^"]+)"', head.group(1)) if head else []
+    if head and not stats:
+        stats = stats_from_labels(head.group(1))
     bodym = re.search(r"<tbody>(.*?)</tbody>", tbl, re.S)
     chunk = bodym.group(1) if bodym else tbl
     rows = []
@@ -268,6 +301,17 @@ def build():
             hp = to_int(r["by"].get("points"))
             ap = to_int(r["by"].get("opp_points"))
             res = r["by"].get("game_result", "")
+            if hp is None and ap is None and not res.strip():
+                out.append(dict(base, quote=" | ".join(r["cells"]),
+                                sr_home_rank=hr, sr_away_rank=ar,
+                                sr_home_points=None, sr_away_points=None,
+                                site_marker=site, status="page_missing",
+                                note="the only Wayback snapshot of this page predates "
+                                     "the game: its row carries no result yet, so the "
+                                     "score and the at-game AP ranks cannot be verified "
+                                     "from SR"))
+                issues.append((key, g, "snapshot predates the game (no result on row)"))
+                continue
             probs = []
             if norm_team(aschool) != norm_team(g["away_team"]):
                 probs.append("opponent is %r, worklist says %s" % (aschool, g["away_team"]))
@@ -281,7 +325,7 @@ def build():
             if hp != g["home_points"] or ap != g["away_points"]:
                 probs.append("score %s-%s (home-away) vs worklist %s-%s"
                              % (hp, ap, g["home_points"], g["away_points"]))
-            exp_home_res = "L" if g["result"] == "W" else "W"
+            exp_home_res = {"W": "L", "L": "W", "T": "T"}.get(g["result"], "?")
             if res and res[0] != exp_home_res:
                 probs.append("home result %r, worklist visitor result %s"
                              % (res, g["result"]))

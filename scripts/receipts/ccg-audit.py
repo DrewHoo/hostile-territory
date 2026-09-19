@@ -56,8 +56,12 @@ SLUG_EXCEPTIONS = {
     "louisiana": "louisiana-lafayette",
 }
 
-# The <season+1> year picker occasionally lands on a mid-season snapshot.
-PICKER = {}
+# The <season+1> year picker occasionally lands on a pre/mid-season snapshot
+# (unplayed games, "TBD" kickoff times). These pages get an explicit timestamp.
+PICKER = {
+    "UNLV|2024": "20250601",
+    "Troy|2025": "20260601",
+}
 
 MONTHS = {m: i + 1 for i, m in enumerate(
     ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"])}
@@ -123,6 +127,33 @@ def title_ok(title, team, slug, season):
     return False
 
 
+def snapshot_unplayed(path):
+    """True when the snapshot predates the season (no game has a result yet)."""
+    try:
+        h = open(path, encoding="utf-8", errors="replace").read()
+    except OSError:
+        return False
+    tbl = extract_table(h)
+    if not tbl:
+        return False
+    try:
+        headers, rows = parse_rows(tbl)
+    except Exception:
+        return False
+    if not rows:
+        return False
+    played = 0
+    for cells in rows:
+        try:
+            dcell, site, opp, notes = row_fields(headers, cells)
+        except ValueError:
+            continue
+        i_pts = hidx(headers, "Pts")
+        if i_pts is not None and len(cells) > i_pts and cells[i_pts]["text"]:
+            played += 1
+    return played == 0
+
+
 def do_fetch(limit=None, sleep_s=4.5):
     os.makedirs(CACHE, exist_ok=True)
     suspects = json.load(open(SUSPECTS))
@@ -138,7 +169,8 @@ def do_fetch(limit=None, sleep_s=4.5):
         slug = slugify(team)
         key = "%s|%d" % (team, season)
         prev = meta.get(key) or {}
-        if prev.get("ok") or len(prev.get("attempts", [])) >= 2:
+        max_attempts = int(os.environ.get("CCG_MAX_ATTEMPTS", "2"))
+        if prev.get("ok") or len(prev.get("attempts", [])) >= max_attempts:
             continue
         if limit is not None and n >= limit:
             break
@@ -151,9 +183,11 @@ def do_fetch(limit=None, sleep_s=4.5):
             time.sleep(60)
             code, eff, size = curl(url, dest)
         title = get_title(dest)
-        ok = code == "200" and title_ok(title, team, slug, season)
+        stale = code == "200" and snapshot_unplayed(dest)
+        ok = code == "200" and title_ok(title, team, slug, season) and not stale
         attempts = list(prev.get("attempts", []))
-        attempts.append({"code": code, "effective_url": eff, "size": size, "title": title})
+        attempts.append({"code": code, "effective_url": eff, "size": size,
+                         "title": title, "stale": stale})
         meta[key] = {"team": team, "season": season, "slug": slug, "url": url,
                      "cache": dest, "ok": ok, "attempts": attempts}
         json.dump(meta, open(META, "w"), indent=1)
@@ -266,6 +300,10 @@ ALIASES = {
     "texas am": {"texas am", "texas a m"},
     "hawaii": {"hawaii", "hawaii"},
     "appalachian state": {"appalachian state", "app state"},
+    "usc": {"usc", "southern california"},
+    "tcu": {"tcu", "texas christian"},
+    "ole miss": {"ole miss", "mississippi"},
+    "nc state": {"nc state", "north carolina state"},
 }
 
 
@@ -433,7 +471,7 @@ if __name__ == "__main__":
         only = None
         if "--only" in sys.argv:
             only = int(sys.argv[sys.argv.index("--only") + 1])
-        do_fetch(limit=only)
+        do_fetch(limit=only, sleep_s=float(os.environ.get("CCG_SLEEP", "4.5")))
     elif cmd == "parse":
         do_parse()
     else:

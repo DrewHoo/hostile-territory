@@ -14,3 +14,8 @@ snapshot; SR's current page agrees with us (7).
 
 - 2013-09-01 Ohio at Louisville: SR column says (8). AP week 1 2013 per
   ESPN core API: Louisville 9, matching College Poll Archive and our data (receipts-3).
+
+- 2017-11-18 Illinois at Ohio State and Kansas State at Oklahoma State:
+  receipts-4 challenged both hosts' top-10 status off SR's on-page poll
+  table, which lacks the Nov 12 column. AP week 12 2017 per ESPN core API:
+  Ohio State 8, Oklahoma State 10 — both in scope, matching our data.
