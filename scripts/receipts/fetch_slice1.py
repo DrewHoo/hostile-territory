@@ -280,8 +280,10 @@ def parse_all():
             page_html = open(path, encoding="utf-8", errors="replace").read()
             title = re.search(r"<title>(.*?)</title>", page_html, re.S)
             title = text_of(title.group(1)) if title else ""
-            school_word = team.split()[0] if team != "BYU" else "BYU"
-            if str(season) not in title or school_word.lower() not in title.lower():
+            # SR titles use the full program name, which is not always the
+            # common name we index by (BYU -> "Brigham Young Cougars").
+            title_word = {"BYU": "Brigham Young"}.get(team, team.split()[0])
+            if str(season) not in title or title_word.lower() not in title.lower():
                 page_html = None
                 bad_title = title
         if page_html is None:
@@ -317,6 +319,19 @@ def parse_all():
                                 site_marker="", status="discrepancy",
                                 note="row found but its cells could not be mapped"))
                 continue
+            if f["result"]["text"] == "" and f["points"]["text"] == "":
+                # the snapshot predates this game, so the row has no result yet
+                cap = re.search(r"/web/(\d{14})/", page_html)
+                out.append(dict(
+                    base, quote=quote, sr_home_rank=rank_of(f["school"]["text"]),
+                    sr_away_rank=rank_of(f["opp"]["text"]),
+                    sr_home_points=None, sr_away_points=None,
+                    site_marker=f["site"]["text"], status="page_missing",
+                    note="the only Wayback capture of this page (%s) predates the "
+                         "game, so the row is unplayed: no result or score to verify "
+                         "(the rank shown is that snapshot's, not the pregame AP rank)"
+                         % (cap.group(1) if cap else "unknown timestamp")))
+                continue
             hr = rank_of(f["school"]["text"])
             ar = rank_of(f["opp"]["text"])
             site = f["site"]["text"]
@@ -341,7 +356,9 @@ def parse_all():
             if site != "":
                 problems.append("SR site marker is %r, not empty (SR does not treat "
                                 "this as the visitor's true road game)" % site)
-            exp_home_res = "L" if g["result"] == "W" else "W"
+            # the worklist result is from the visitor's side; SR's is the home
+            # side's, so W and L invert and a tie stays a tie
+            exp_home_res = {"W": "L", "L": "W", "T": "T"}.get(g["result"])
             if res != exp_home_res:
                 problems.append("SR home result %r contradicts worklist visitor result "
                                 "%r" % (res, g["result"]))

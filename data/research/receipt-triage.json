@@ -1,0 +1,20 @@
+{
+  "note": "Resolutions for discrepancy-status receipt rows. resolved-date / resolved-score: our data was corrected via game-corrections.json and now agrees with SR, so the receipt attaches as confirmed. resolved-rank: third source (ESPN core API + College Poll Archive) sides with our rank against SR's schedule column (see rank-disputes.md); the game stays, the disagreeing receipt does not display.",
+  "triage": {
+    "2001-08-25|TCU": "resolved-date",
+    "2001-10-20|Texas Tech": "resolved-date",
+    "2001-10-20|Colorado": "resolved-date",
+    "2001-10-20|Stanford": "resolved-date",
+    "2001-10-20|California": "resolved-date",
+    "2001-10-20|Baylor": "resolved-date",
+    "2001-10-19|Boise State": "resolved-date",
+    "2001-08-25|North Carolina": "resolved-score",
+    "2003-08-23|California": "resolved-score",
+    "2010-11-27|Northwestern": "resolved-rank",
+    "2017-11-18|Michigan": "resolved-rank",
+    "2017-11-18|Illinois": "resolved-rank",
+    "2017-11-18|Kansas State": "resolved-rank",
+    "2017-11-18|Kentucky": "resolved-rank",
+    "2013-09-01|Ohio": "resolved-rank"
+  }
+}

@@ -85,6 +85,9 @@ for (const f of readdirSync(RESEARCH_DIR).filter((x) => /^receipts-\d\.json$/.te
   } catch {}
 }
 
+let triage = {}
+try { triage = JSON.parse(readFileSync('data/research/receipt-triage.json', 'utf8')).triage } catch {}
+
 let overrides = []
 try { overrides = JSON.parse(readFileSync('data/attribution-overrides.json', 'utf8')).overrides } catch {}
 // An override names the coach; the tenure row still has to exist so school and
@@ -122,7 +125,16 @@ for (const game of candidates.games) {
   if (!byCoach.has(key)) byCoach.set(key, { coach: key, schools: [], games: [] })
   const rec = byCoach.get(key)
   if (!rec.schools.includes(pick.school)) rec.schools.push(pick.school)
-  const rcpt = receipts.get(`${game.date}|${game.away_team}`)
+  let rcpt = receipts.get(`${game.date}|${game.away_team}`)
+  if (!rcpt) {
+    // date-patched games: the fleet recorded the pre-patch worklist date
+    const d = new Date(game.date)
+    for (const off of [-1, 1]) {
+      const alt = new Date(d.getTime() + off * 86400000).toISOString().slice(0, 10)
+      rcpt = receipts.get(`${alt}|${game.away_team}`)
+      if (rcpt) break
+    }
+  }
   rec.games.push({
     ...game,
     school: pick.school,
@@ -130,7 +142,16 @@ for (const game of candidates.games) {
     tenure_grade: pick.grade,
     home_coach: homeCoach(game),
     ot: game.game_id != null && otMap[game.game_id] != null ? otMap[game.game_id] : null,
-    receipt: rcpt && rcpt.status !== 'page_missing' ? { url: rcpt.source_url, quote: rcpt.quote, status: rcpt.status } : null,
+    receipt: (() => {
+      if (!rcpt || rcpt.status === 'page_missing') return null
+      let status = rcpt.status
+      if (status === 'discrepancy') {
+        const t = triage[`${game.date}|${game.away_team}`] ?? triage[`${rcpt.date}|${game.away_team}`]
+        if (t === 'resolved-date' || t === 'resolved-score') status = 'confirmed'
+        else if (t === 'resolved-rank') status = 'resolved-rank'
+      }
+      return { url: rcpt.source_url, quote: rcpt.quote, status }
+    })(),
   })
 }
 

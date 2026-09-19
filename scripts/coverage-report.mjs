@@ -89,6 +89,28 @@ for (const g of candidates.games) {
 }
 if (!nearBoundary) console.log('  none')
 
+// 5c. Receipts: every displayed top-10 game should carry a confirmed SR
+// receipt; a discrepancy-status receipt on a still-included game means the
+// fleet flagged something nobody triaged into game-corrections or
+// rank-disputes.md.
+console.log('\n== 5c. Receipts ==')
+{
+  const recs = JSON.parse(readFileSync('data/records.json', 'utf8'))
+  let top10 = 0, receipted = 0, resolvedRank = 0
+  const flagged = []
+  for (const c of recs.records) for (const g of c.games) {
+    if (g.home_rank_ap > 10) continue
+    top10++
+    if (g.receipt?.status === 'confirmed') receipted++
+    else if (g.receipt?.status === 'resolved-rank') resolvedRank++
+    else if (g.receipt?.status === 'discrepancy') flagged.push(`${g.date} ${g.away_team} at ${g.home_team}`)
+  }
+  if (resolvedRank) console.log(`  ${resolvedRank} rank-dispute games kept without a displayed receipt (see rank-disputes.md)`)
+  console.log(`  ${receipted}/${top10} top-10 games carry a confirmed receipt (${(100*receipted/top10).toFixed(1)}%)`)
+  if (flagged.length) { fail(`${flagged.length} included games have untriaged discrepancy receipts`); for (const f of flagged.slice(0, 10)) console.log('   ', f) }
+  else console.log('  no untriaged discrepancy receipts on included games')
+}
+
 // 6. Receipt integrity is checked by the verification fleet per row; here just count grades.
 console.log('\n== 6. Evidence grades ==')
 const grades = {}
