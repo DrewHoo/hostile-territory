@@ -163,7 +163,9 @@ export default function App() {
       </div>
 
       <div className="board">
-        {rows.map((c) => (
+        {[rows.slice(0, Math.ceil(rows.length / 2)), rows.slice(Math.ceil(rows.length / 2))].map((col, ci) => (
+          <div className="bcol" key={ci}>
+        {col.map((c) => (
           <div key={c.n}>
             <button className="row-btn" onClick={() => toggleOpen(c.n)} aria-expanded={open === c.n}>
               <span className="coach-cell">
@@ -210,6 +212,8 @@ export default function App() {
                 ))}
               </div>
             )}
+          </div>
+        ))}
           </div>
         ))}
         {!rows.length && <p className="h2-note">No coaches match — loosen the filters.</p>}

@@ -63,6 +63,23 @@ PICKER = {
     "Troy|2025": "20260601",
 }
 
+# Nine away-team schedule pages have no Wayback capture at all (CDX returns zero
+# snapshots for the URL, and the season-summary page carries no schedule table).
+# For those we read the HOME team's page instead, exactly as the receipts fleet
+# does: there an empty site marker means a real home game (so the visitor's true
+# road game) and 'N' still means neutral.
+HOME_SIDE = {
+    "Hawaii|2019": "Boise State",
+    "Louisiana|2019": "Appalachian State",
+    "Rice|2020": "Marshall",
+    "Stanford|2020": "Washington",
+    "Akron|2020": "Buffalo",
+    "Houston|2021": "Cincinnati",
+    "New Mexico State|2023": "Liberty",
+    "SMU|2023": "Tulane",
+    "Troy|2025": "James Madison",
+}
+
 MONTHS = {m: i + 1 for i, m in enumerate(
     ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"])}
 
@@ -166,8 +183,10 @@ def do_fetch(limit=None, sleep_s=4.5):
             pages.append((s["away_team"], s["season"]))
     n = 0
     for team, season in pages:
-        slug = slugify(team)
         key = "%s|%d" % (team, season)
+        side = "home" if key in HOME_SIDE else "away"
+        page_team = HOME_SIDE.get(key, team)
+        slug = slugify(page_team)
         prev = meta.get(key) or {}
         max_attempts = int(os.environ.get("CCG_MAX_ATTEMPTS", "2"))
         if prev.get("ok") or len(prev.get("attempts", [])) >= max_attempts:
@@ -175,7 +194,7 @@ def do_fetch(limit=None, sleep_s=4.5):
         if limit is not None and n >= limit:
             break
         n += 1
-        url = page_url(slug, season, team)
+        url = page_url(slug, season, page_team)
         dest = cache_path(slug, season)
         code, eff, size = curl(url, dest)
         if code in ("429", "503", "502", "500"):
@@ -184,12 +203,13 @@ def do_fetch(limit=None, sleep_s=4.5):
             code, eff, size = curl(url, dest)
         title = get_title(dest)
         stale = code == "200" and snapshot_unplayed(dest)
-        ok = code == "200" and title_ok(title, team, slug, season) and not stale
+        ok = code == "200" and title_ok(title, page_team, slug, season) and not stale
         attempts = list(prev.get("attempts", []))
         attempts.append({"code": code, "effective_url": eff, "size": size,
                          "title": title, "stale": stale})
         meta[key] = {"team": team, "season": season, "slug": slug, "url": url,
-                     "cache": dest, "ok": ok, "attempts": attempts}
+                     "cache": dest, "ok": ok, "attempts": attempts,
+                     "side": side, "page_team": page_team}
         json.dump(meta, open(META, "w"), indent=1)
         print(("OK  " if ok else "BAD ") + key + " code=" + code + " " + str(title)[:60],
               flush=True)
@@ -362,20 +382,27 @@ def do_parse():
             out.append(row)
             continue
         cells, site, opp, notes = hit
+        side = m.get("side", "away")
+        expect_opp = s["home_team"] if side == "away" else s["away_team"]
+        road_marker = "@" if side == "away" else ""
         row["quote"] = " | ".join(c["text"] for c in cells)
         row["note"] = notes
-        if not team_match(opp, s["home_team"]):
+        if side == "home":
+            row["note"] = ("%s [read from the home team's page: %s %d — the away team's "
+                           "own schedule page has no Wayback capture]" %
+                           (notes or "(notes cell empty)", m.get("page_team"), s["season"]))
+        if not team_match(opp, expect_opp):
             row["verdict"] = "unresolved"
             row["note"] = "row on %s names opponent %r, expected %s%s" % (
-                s["date"], opp, s["home_team"], (" [notes: %s]" % notes) if notes else "")
-        elif site == "@":
+                s["date"], opp, expect_opp, (" [notes: %s]" % notes) if notes else "")
+        elif site == road_marker:
             row["verdict"] = "road"
         elif site == "N":
             row["verdict"] = "neutral"
         else:
             row["verdict"] = "unresolved"
-            row["note"] = "unexpected site marker %r (SR has the away team at home?)%s" % (
-                site, (" [notes: %s]" % notes) if notes else "")
+            row["note"] = "unexpected site marker %r on the %s team's page%s" % (
+                site, side, (" [notes: %s]" % notes) if notes else "")
         out.append(row)
 
     json.dump(out, open(OUT_JSON, "w"), indent=1)
