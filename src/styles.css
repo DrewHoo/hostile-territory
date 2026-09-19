@@ -80,11 +80,11 @@ h2 { font-family: 'Graduate', serif; font-weight: 400; font-size: 21px; letter-s
 .school { color: var(--ink-faint); font-size: 12.5px; font-style: italic; }
 .dots { display: flex; gap: 6px; flex-wrap: wrap; }
 .chip {
-  width: 20px; height: 20px; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center;
-  font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 600;
+  width: 24px; height: 24px; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; font-weight: 600;
 }
-.chip img { width: 14px; height: 14px; display: block; }
-.chip.w img { filter: brightness(0); opacity: 0.88; }
+.chip img { width: 18px; height: 18px; display: block; }
+.chip.w img { filter: brightness(0); opacity: 0.72; }
 .chip.l img { filter: brightness(0) invert(0.66); opacity: 0.85; }
 .chip.w { background: var(--cream); color: #241d12; box-shadow: 0 0 8px rgba(243, 226, 188, 0.35); }
 .chip.l { background: var(--bg-lift); color: var(--ink-muted); border: 1px solid var(--line); }

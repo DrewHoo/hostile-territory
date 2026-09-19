@@ -187,7 +187,7 @@ export default function App() {
                     {...chipHandlers(g, c.n)}
                   >
                     {logoSrc(g[D_OPP])
-                      ? <img src={logoSrc(g[D_OPP])} alt="" loading="lazy" width="14" height="14" />
+                      ? <img src={logoSrc(g[D_OPP])} alt="" loading="lazy" width="18" height="18" />
                       : g[D_RES]}
                   </span>
                 ))}
