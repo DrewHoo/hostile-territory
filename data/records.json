@@ -80146,7 +80146,7 @@
      "receipt": null
     },
     {
-     "date": "2001-10-19",
+     "date": "2001-10-20",
      "season": 2001,
      "week": 9,
      "away_team": "California",
@@ -80167,11 +80167,7 @@
      "tenure_grade": "secondary",
      "home_coach": "Bob Toledo",
      "ot": null,
-     "receipt": {
-      "url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/ucla/2001-schedule.html",
-      "quote": "6 | Oct 20, 2001 | Sat | (4) UCLA |  | California | Pac-10 | W | 56 | 17 | 6 | 0 | W 6 | ",
-      "status": "discrepancy"
-     }
+     "receipt": null
     },
     {
      "date": "2001-11-17",
