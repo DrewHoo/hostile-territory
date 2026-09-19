@@ -206,6 +206,33 @@
     "date": "2001-10-20"
    },
    "reason": "2001 midnight-ET placeholder shifted a day early; SR dates it Oct 20 (receipts-5)."
+  },
+  {
+   "date": "2015-10-10",
+   "away_team": "South Carolina",
+   "home_team": "LSU",
+   "action": "exclude",
+   "reason": "Flood relocation: the scheduled LSU-at-South-Carolina game moved to Baton Rouge with South Carolina as designated home team. Nobody played a true road game at a top-10 host; SR marks LSU as the visitor with an @ and notes 'At Baton Rouge, LA due to flooding' (receipts-3)."
+  },
+  {
+   "date": "2001-08-24",
+   "away_team": "TCU",
+   "home_team": "Nebraska",
+   "action": "patch",
+   "patch": {
+    "date": "2001-08-25"
+   },
+   "reason": "Pigskin Classic; 2001 midnight-ET placeholder shifted a day early. SR dates it Aug 25 (receipts-3)."
+  },
+  {
+   "date": "2001-10-19",
+   "away_team": "Texas Tech",
+   "home_team": "Nebraska",
+   "action": "patch",
+   "patch": {
+    "date": "2001-10-20"
+   },
+   "reason": "2001 midnight-ET placeholder shifted a day early; SR dates it Oct 20 (receipts-3)."
   }
  ]
 }

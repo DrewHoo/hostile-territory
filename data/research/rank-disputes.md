@@ -11,3 +11,6 @@ core rankings API), so DO NOT "fix" these rows toward SR:
 
 A third receipts-2 case (2017 Georgia at Kentucky) was a stale Wayback
 snapshot; SR's current page agrees with us (7).
+
+- 2013-09-01 Ohio at Louisville: SR column says (8). AP week 1 2013 per
+  ESPN core API: Louisville 9, matching College Poll Archive and our data (receipts-3).

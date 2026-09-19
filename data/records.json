@@ -14,7 +14,7 @@
   "tenures-sec.json"
  ],
  "coach_count": 400,
- "matched_games": 4472,
+ "matched_games": 4471,
  "unmatched_scoped_note": "unmatched games are road teams with no tenure coverage; scoped-coach G5 stints among them are found by the career-sweep phase",
  "records": [
   {
@@ -1075,44 +1075,16 @@
       "quote": "3 | Sep 19, 2015 | 6:00 PM | Sat | (7) Georgia |  | South Carolina | SEC | W | 52 | 20 | 3 | 0 | W 3 |  | ",
       "status": "confirmed"
      }
-    },
-    {
-     "date": "2015-10-10",
-     "season": 2015,
-     "week": 6,
-     "away_team": "South Carolina",
-     "home_team": "LSU",
-     "home_rank_ap": 7,
-     "away_rank_ap": null,
-     "away_points": 24,
-     "home_points": 45,
-     "result": "L",
-     "source": "cfbfastR",
-     "poll_date": "2015-10-04",
-     "poll_label": "October 4",
-     "season_type": "regular",
-     "venue": "Tiger Stadium (LA)",
-     "game_id": "400603903",
-     "school": "South Carolina",
-     "interim": false,
-     "tenure_grade": "secondary",
-     "home_coach": "Les Miles",
-     "ot": 0,
-     "receipt": {
-      "url": "https://web.archive.org/web/2016/https://www.sports-reference.com/cfb/schools/louisiana-state/2015-schedule.html",
-      "quote": "6 | Oct 10, 2015 | 3:30 PM | Sat | (7) Louisiana State | @ | South Carolina | SEC | W | 45 | 24 |  |  | W 5 |  | At Baton Rouge, LA due to flooding",
-      "status": "discrepancy"
-     }
     }
    ],
    "top10": {
     "w": 4,
-    "l": 18,
+    "l": 17,
     "t": 1
    },
    "top25": {
     "w": 14,
-    "l": 27,
+    "l": 26,
     "t": 1
    },
    "active": false
@@ -9980,7 +9952,7 @@
    ],
    "games": [
     {
-     "date": "2001-08-24",
+     "date": "2001-08-25",
      "season": 2001,
      "week": 1,
      "away_team": "TCU",
@@ -10001,11 +9973,7 @@
      "tenure_grade": "secondary",
      "home_coach": "Frank Solich",
      "ot": null,
-     "receipt": {
-      "url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/nebraska/2001-schedule.html",
-      "quote": "1 | Aug 25, 2001 | Sat | (4) Nebraska |  | Texas Christian | CUSA | W | 21 | 7 | 1 | 0 | W 1 | Pigskin Classic (Lincoln, NE)",
-      "status": "discrepancy"
-     }
+     "receipt": null
     },
     {
      "date": "2004-11-10",
@@ -11178,9 +11146,9 @@
      "home_coach": "Jim Harbaugh",
      "ot": 0,
      "receipt": {
-      "url": "https://web.archive.org/web/2018/https://www.sports-reference.com/cfb/schools/michigan/2017-schedule.html",
-      "quote": "5 | Oct 7, 2017 | 12:00 PM | Sat | Michigan |  | Michigan State | Big Ten |  |  |  |  |  |  |  | ",
-      "status": "discrepancy"
+      "url": "https://web.archive.org/web/20210119/https://www.sports-reference.com/cfb/schools/michigan/2017-schedule.html",
+      "quote": "5 | Oct 7, 2017 | 7:30 PM | Sat | (7) Michigan |  | Michigan State | Big Ten | L | 10 | 14 | 4 | 1 | L 1 | Michigan Stadium - Ann Arbor, Michigan",
+      "status": "confirmed"
      }
     },
     {
@@ -13646,7 +13614,7 @@
      }
     },
     {
-     "date": "2001-10-19",
+     "date": "2001-10-20",
      "season": 2001,
      "week": 9,
      "away_team": "Texas Tech",
@@ -13667,11 +13635,7 @@
      "tenure_grade": "secondary",
      "home_coach": "Frank Solich",
      "ot": null,
-     "receipt": {
-      "url": "https://web.archive.org/web/2002/https://www.sports-reference.com/cfb/schools/nebraska/2001-schedule.html",
-      "quote": "8 | Oct 20, 2001 | Sat | (3) Nebraska |  | Texas Tech | Big 12 | W | 41 | 31 | 8 | 0 | W 8 | ",
-      "status": "discrepancy"
-     }
+     "receipt": null
     },
     {
      "date": "2002-08-24",
@@ -15280,7 +15244,7 @@
      "home_coach": "Bo Pelini",
      "ot": 0,
      "receipt": {
-      "url": "https://web.archive.org/web/2011/https://www.sports-reference.com/cfb/schools/nebraska/2010-schedule.html",
+      "url": "https://web.archive.org/web/20141204/https://www.sports-reference.com/cfb/schools/nebraska/2010-schedule.html",
       "quote": "6 | Oct 16, 2010 | Sat | (5) Nebraska |  | Texas | Big 12 | L | 13 | 20 | 5 | 1 | L 1 | ",
       "status": "confirmed"
      }
@@ -69776,7 +69740,7 @@
      "home_coach": "Bo Pelini",
      "ot": 0,
      "receipt": {
-      "url": "https://web.archive.org/web/2011/https://www.sports-reference.com/cfb/schools/nebraska/2010-schedule.html",
+      "url": "https://web.archive.org/web/20141204/https://www.sports-reference.com/cfb/schools/nebraska/2010-schedule.html",
       "quote": "2 | Sep 11, 2010 | Sat | (6) Nebraska |  | Idaho | WAC | W | 38 | 17 | 2 | 0 | W 2 | ",
       "status": "confirmed"
      }
@@ -70523,7 +70487,7 @@
      "home_coach": "Bo Pelini",
      "ot": 0,
      "receipt": {
-      "url": "https://web.archive.org/web/2011/https://www.sports-reference.com/cfb/schools/nebraska/2010-schedule.html",
+      "url": "https://web.archive.org/web/20141204/https://www.sports-reference.com/cfb/schools/nebraska/2010-schedule.html",
       "quote": "1 | Sep 4, 2010 | Sat | (8) Nebraska |  | Western Kentucky | Sun Belt | W | 49 | 10 | 1 | 0 | W 1 | ",
       "status": "confirmed"
      }
@@ -71402,9 +71366,9 @@
      "home_coach": "Jim Harbaugh",
      "ot": 0,
      "receipt": {
-      "url": "https://web.archive.org/web/2018/https://www.sports-reference.com/cfb/schools/michigan/2017-schedule.html",
-      "quote": "2 | Sep 9, 2017 | 12:00 PM | Sat | Michigan |  | Cincinnati | American |  |  |  |  |  |  |  | ",
-      "status": "discrepancy"
+      "url": "https://web.archive.org/web/20210119/https://www.sports-reference.com/cfb/schools/michigan/2017-schedule.html",
+      "quote": "2 | Sep 9, 2017 | 12:00 PM | Sat | (8) Michigan |  | Cincinnati | American | W | 36 | 14 | 2 | 0 | W 2 | Michigan Stadium - Ann Arbor, Michigan",
+      "status": "confirmed"
      }
     },
     {
@@ -83344,9 +83308,9 @@
      "home_coach": "Bo Pelini",
      "ot": 0,
      "receipt": {
-      "url": "https://web.archive.org/web/2011/https://www.sports-reference.com/cfb/schools/nebraska/2010-schedule.html",
-      "quote": "10 | Nov 13, 2010 | Sat | (14) Nebraska |  | Kansas | Big 12 |  |  |  |  |  |  | ",
-      "status": "discrepancy"
+      "url": "https://web.archive.org/web/20141204/https://www.sports-reference.com/cfb/schools/nebraska/2010-schedule.html",
+      "quote": "10 | Nov 13, 2010 | Sat | (9) Nebraska |  | Kansas | Big 12 | W | 20 | 3 | 9 | 1 | W 4 | ",
+      "status": "confirmed"
      }
     },
     {
