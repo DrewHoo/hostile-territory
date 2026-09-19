@@ -50,7 +50,22 @@ for (const team of [...hosts].sort()) {
   const res = await fetch(`https://a.espncdn.com/i/teamlogos/ncaa/500/${id}.png`)
   if (!res.ok) { missing.push(`${team} (http ${res.status})`); delete map[team]; continue }
   const buf = Buffer.from(await res.arrayBuffer())
-  await sharp(buf).resize(40, 40, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).png({ compressionLevel: 9 }).toFile(out)
+  // Key near-white to transparent BEFORE any downstream silhouetting: ESPN
+  // flattens interior counters (Georgia's G, FSU's spear detail) to opaque
+  // white, and a CSS brightness(0) cutout would fill them. A one-color brand
+  // mark keeps its negative space; this recreates that from the color PNG.
+  const resized = sharp(buf).resize(40, 40, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+  const { data, info } = await resized.raw().ensureAlpha().toBuffer({ resolveWithObject: true })
+  for (let i = 0; i < data.length; i += 4) {
+    const [r, g, b] = [data[i], data[i + 1], data[i + 2]]
+    const lum = (r + g + b) / 3
+    const sat = Math.max(r, g, b) - Math.min(r, g, b)
+    if (sat < 40 && lum > 210) {
+      const t = Math.min(1, (lum - 210) / 35) // soft ramp 210..245
+      data[i + 3] = Math.round(data[i + 3] * (1 - t))
+    }
+  }
+  await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } }).png({ compressionLevel: 9 }).toFile(out)
   await new Promise((r) => setTimeout(r, 150))
 }
 writeFileSync('src/data/team-ids.json', JSON.stringify(map))

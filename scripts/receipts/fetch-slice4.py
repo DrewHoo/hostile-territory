@@ -202,10 +202,12 @@ def build():
         path = os.path.join(HTML_DIR, key + ".html")
         rows = None
         page_note = None
-        if info.get("ok") and os.path.exists(path):
+        if os.path.exists(path) and os.path.getsize(path) > 2000:
             body = open(path, encoding="utf-8", errors="replace").read()
             title = title_of(body)
             rows, _ = parse_schedule(body)
+            if not rows:
+                page_note = "snapshot fetched but no schedule table found"
             if not re.match(r"^%d\b" % season, title):
                 page_note = "snapshot title does not name season %d: %r" % (season, title)
                 rows = None
@@ -217,8 +219,8 @@ def build():
                                  % (title, team))
                     rows = None
         else:
-            page_note = "no usable Wayback snapshot (%s)" % (
-                info.get("attempts", [{}])[-1].get("code", "?"))
+            page_note = "no usable Wayback snapshot (http %s)" % (
+                (info.get("attempts") or [{}])[-1].get("code", "?"))
 
         for g in p["games"]:
             base = {"date": g["date"], "away_team": g["away_team"], "home_team": team,
