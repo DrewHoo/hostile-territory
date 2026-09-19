@@ -1,59 +1,175 @@
-import { useEffect, useState } from 'react'
-import Chart from './Chart.jsx'
-import { SERIES } from './data/sample.js'
+import { useEffect, useMemo, useState } from 'react'
+import DATA from './data/site-data.json'
 import { readParam, writeParam } from './urlState.js'
 
-const DEFAULT = SERIES[0].id
+// site-data game row: [date, school, opponent, opp_rank, result, away_pts, home_pts, interim]
+const [D_DATE, D_SCHOOL, D_OPP, D_RANK, D_RES, D_AP, D_HP, D_INT] = [0, 1, 2, 3, 4, 5, 6, 7]
+
+const fmtDate = (iso) => {
+  const [y, m, d] = iso.split('-')
+  return `${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][m - 1]} ${+d}, ${y}`
+}
+
+function tally(games) {
+  let w = 0, l = 0, t = 0
+  for (const g of games) g[D_RES] === 'W' ? w++ : g[D_RES] === 'L' ? l++ : t++
+  return { w, l, t, gp: games.length, pct: games.length ? (w + t / 2) / games.length : 0 }
+}
 
 export default function App() {
-  const [selected, setSelected] = useState(DEFAULT)
+  const [cut, setCut] = useState(10) // opponent ranked within this
+  const [minGames, setMinGames] = useState(5)
+  const [activeOnly, setActiveOnly] = useState(true)
+  const [query, setQuery] = useState('')
+  const [open, setOpen] = useState(null)
 
-  // Apply URL state after mount, and validate it against the data. Seeding
-  // useState from the URL breaks the prerender (no window there).
   useEffect(() => {
-    const fromUrl = readParam('series')
-    if (fromUrl && SERIES.some((s) => s.id === fromUrl)) setSelected(fromUrl)
+    const c = readParam('cut')
+    if (c === '25') setCut(25)
+    const m = readParam('min')
+    if (m && ['1', '5', '10'].includes(m)) setMinGames(+m)
+    if (readParam('all') === '1') setActiveOnly(false)
+    const coach = readParam('coach')
+    if (coach && DATA.coaches.some((x) => x.n === coach)) { setOpen(coach); setActiveOnly(false) }
   }, [])
 
-  const select = (id) => {
-    setSelected(id)
-    writeParam('series', id === DEFAULT ? null : id)
-    // Structured events make "which one did they look at" a one-click report.
-    // Optional-chained: the embed is third-party and blockable.
-    window.dhAnalytics?.track('Series selected', { id })
+  const setAndWrite = (setter, key, value, defaultValue) => {
+    setter(value)
+    writeParam(key, String(value) === String(defaultValue) ? null : String(value))
   }
 
-  const series = SERIES.find((s) => s.id === selected)
+  const rows = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    return DATA.coaches
+      .map((c) => {
+        const games = c.g.filter((g) => g[D_RANK] <= cut)
+        return { ...c, games, ...tally(games) }
+      })
+      .filter((c) => c.gp >= Math.max(minGames, 1))
+      .filter((c) => !activeOnly || c.a)
+      .filter((c) => !q || c.n.toLowerCase().includes(q) || c.s.some((s) => s.toLowerCase().includes(q)))
+      .sort((a, b) => b.pct - a.pct || b.w - a.w)
+  }, [cut, minGames, activeOnly, query])
+
+  const kiffin = useMemo(() => {
+    const c = DATA.coaches.find((x) => x.n === 'Lane Kiffin')
+    return c ? tally(c.g.filter((g) => g[D_RANK] <= 10)) : null
+  }, [])
+
+  const toggleOpen = (name) => {
+    const next = open === name ? null : name
+    setOpen(next)
+    writeParam('coach', next)
+    window.dhAnalytics?.track('coach_open', { coach: name })
+  }
 
   return (
     <main>
-      {/* One h1 that names the subject. The eyebrow and title render as two
-          lines but read as a single heading to crawlers. */}
-      <h1 className="head">
-        <span className="eyebrow">A dataviz project</span>
-        <span className="title">Twelve months of something</span>
-      </h1>
-      <p className="intro">
-        This is the sample page from the template. Three series, one chart, a picker that writes the
-        selection into the URL so a link lands on the same view. Replace the data in{' '}
-        <code>src/data/sample.js</code> and this copy in <code>src/App.jsx</code>.
+      <div className="field-rule"><span>Official Program · Night Edition</span></div>
+      <h1>Hostile Territory</h1>
+      <div className="dateline">Road games vs the AP Top 10 · 1990 – present</div>
+      <p className="sub">
+        ESPN flashed a graphic: Lane Kiffin is 1–8 on the road against top-10 teams. This is that
+        record for every head coach since 1990.
       </p>
 
-      <div className="controls" role="group" aria-label="Series">
-        {SERIES.map((s) => (
-          <button key={s.id} type="button" aria-pressed={s.id === selected} onClick={() => select(s.id)}>
-            {s.label}
-          </button>
-        ))}
+      {kiffin && (
+        <div className="hero-stat">
+          <div className="num">{kiffin.w}–{kiffin.l}</div>
+          <div className="why">
+            <b>Lane Kiffin</b>, on the road against the AP top 10. The number that started this.
+            Is it bad? Depends what good looks like.
+          </div>
+        </div>
+      )}
+
+      <h2>Every coach since 1990</h2>
+      <div className="h2-note">
+        Each stamp is one true road game against a team ranked in the AP top {cut} at kickoff, in order.
+        Tap a coach for the road log.
       </div>
 
-      <section className="card">
-        <Chart series={series} />
-      </section>
+      <div className="filters">
+        <div className="toggle" role="group" aria-label="Opponent rank cut">
+          <button className={cut === 10 ? 'on' : ''} onClick={() => setAndWrite(setCut, 'cut', 10, 10)}>Top 10</button>
+          <button className={cut === 25 ? 'on' : ''} onClick={() => setAndWrite(setCut, 'cut', 25, 10)}>Top 25</button>
+        </div>
+        <div className="toggle" role="group" aria-label="Minimum games">
+          {[1, 5, 10].map((m) => (
+            <button key={m} className={minGames === m ? 'on' : ''} onClick={() => setAndWrite(setMinGames, 'min', m, 5)}>{m}+ games</button>
+          ))}
+        </div>
+        <label>
+          <input type="checkbox" checked={activeOnly} onChange={(e) => { setActiveOnly(e.target.checked); writeParam('all', e.target.checked ? null : '1') }} />
+          current coaches only
+        </label>
+        <input type="search" placeholder="coach or school" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Filter by coach or school" />
+      </div>
 
-      <p className="note">
-        The address bar updates when you pick a series. Reloading that URL restores the view.
-      </p>
+      <div className="board">
+        {rows.map((c) => (
+          <div key={c.n}>
+            <button className="row-btn" onClick={() => toggleOpen(c.n)} aria-expanded={open === c.n}>
+              <span>
+                <span className="coach">{c.n}</span>
+                <span className="school"> {c.s.join(' · ')}</span>
+              </span>
+              <span className="dots" aria-label={`${c.w} wins, ${c.l} losses`}>
+                {c.games.map((g, i) => (
+                  <span key={i} className={`chip ${g[D_RES].toLowerCase()}`} title={`${fmtDate(g[D_DATE])}: ${g[D_SCHOOL]} at #${g[D_RANK]} ${g[D_OPP]}, ${g[D_RES]} ${g[D_AP]}–${g[D_HP]}`}>
+                    {g[D_RES]}
+                  </span>
+                ))}
+              </span>
+              <span className="rec">
+                {c.w}–{c.l}{c.t ? `–${c.t}` : ''}
+                <span className="pct">{Math.round(c.pct * 100)}% won</span>
+              </span>
+            </button>
+            {open === c.n && (
+              <div className="detail">
+                {c.games.map((g, i) => (
+                  <div key={i} className="log-row">
+                    <span className="d">{fmtDate(g[D_DATE])}</span>
+                    <span className="m">
+                      <b>{g[D_SCHOOL]}</b> at #{g[D_RANK]} <b>{g[D_OPP]}</b>
+                      {g[D_INT] ? <span className="int"> · interim</span> : null}
+                    </span>
+                    <span className={`sc ${g[D_RES] === 'W' ? 'w' : ''}`}>{g[D_RES]} {g[D_AP]}–{g[D_HP]}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+        {!rows.length && <p className="h2-note">No coaches match — loosen the filters.</p>}
+      </div>
+      <div className="legend">
+        <span><span className="chip w">W</span> Win</span>
+        <span><span className="chip l">L</span> Loss</span>
+      </div>
+
+      <h2>What counts as a road game</h2>
+      <div className="rules-note">
+        <ul>
+          <li>The team is the away team and the site is not neutral. Bowls, kickoff classics, and conference championship games are out. CFP first-round campus games count.</li>
+          <li>The opponent is ranked in the most recent AP poll published before kickoff — not the Coaches poll, not the CFP rankings, not the final poll.</li>
+          <li>The coach of record is whoever was head coach on the game date. Interim games count for the interim.</li>
+          <li>Coaches qualify by having led a power-conference program since 1990; all of their FBS head-coaching games count, including stops elsewhere.</li>
+        </ul>
+      </div>
+
+      <h2>Where every number comes from</h2>
+      <div className="method">
+        <p>
+          No total on this page was reported by anyone — records are computed by joining three
+          sources: game results (cfbfastR 2001–2025, jhowell.net 1990–2000), weekly AP polls
+          (College Poll Archive), and coaching tenures researched row by row with a citation each.
+          The build fails if any school-season lacks a coach or the join disagrees with itself.
+        </p>
+      </div>
+
+      <footer>Data: Sports-Reference, College Poll Archive, cfbfastR. Rules and receipts above.</footer>
     </main>
   )
 }

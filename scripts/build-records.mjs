@@ -95,6 +95,19 @@ writeFileSync('data/records.json', JSON.stringify({
   conflicted,
 }, null, 1))
 
+// Compact site payload: arrays instead of objects, only what the page renders.
+// Row: [date, school, opponent, opp_rank, result, away_pts, home_pts, interim]
+writeFileSync('src/data/site-data.json', JSON.stringify({
+  generated: new Date().toISOString().slice(0, 10),
+  rules_version: candidates.rules_version,
+  coaches: records.map((r) => ({
+    n: r.coach,
+    s: r.schools,
+    a: r.active,
+    g: r.games.map((g) => [g.date, g.school, g.home_team, g.home_rank_ap, g.result, g.away_points, g.home_points, g.interim ? 1 : 0]),
+  })),
+}))
+
 console.log(`tenure files: ${tenureFiles.join(', ')}`)
 console.log(`coaches: ${records.length}, matched games: ${records.reduce((n, r) => n + r.games.length, 0)} of ${candidates.games.length}`)
 console.log(`unmatched (no tenure coverage): ${unmatched.length}, conflicted (2+ tenures, no dated tiebreak): ${conflicted.length}`)
