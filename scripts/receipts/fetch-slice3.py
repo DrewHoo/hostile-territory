@@ -75,8 +75,9 @@ def slug_for(team):
 # that season finished (blank result cells). For those pages we pin an explicit
 # post-season timestamp instead.
 TIMESTAMP_OVERRIDES = {
-    ("Michigan", 2017): "20180701",
-    ("Nebraska", 2010): "20110701",
+    # earliest post-season captures per the Wayback CDX index
+    ("Michigan", 2017): "20210119",
+    ("Nebraska", 2010): "20141204",
 }
 
 
