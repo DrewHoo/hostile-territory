@@ -130,19 +130,16 @@ export default function App() {
       <h1>Hostile Territory</h1>
       <div className="dateline">Road games vs the AP Top 10 · 1990 – present</div>
       {kiffin && (
-        <div className="hero-stat">
-          <div className="num">{kiffin.w}–{kiffin.l}</div>
-          <div className="why">
-            <b>Lane Kiffin</b>, on the road against the AP top 10. Is it bad? Depends what good
-            looks like.
-          </div>
-        </div>
+        <p className="sub">
+          Lane Kiffin is {kiffin.w}–{kiffin.l} on the road against top 10 teams. Here's how his
+          record matches up against everyone else.
+        </p>
       )}
 
       <h2>Every coach since 1990</h2>
       <div className="h2-note">
-        One logo per true road game against a top-{cut} team, in order. Tap a game for details,
-        or a coach for the full log.
+        Every true road game against a top-{cut} team, per head coach. Tap a game for details,
+        or the coach for their full record.
       </div>
 
       <div className="filters">
