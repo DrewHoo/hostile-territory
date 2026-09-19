@@ -23,9 +23,9 @@ const FORCE = args.includes('--force');
 const ONLY = (args.find((a) => a.startsWith('--only=')) || '').split('=')[1] || null;
 
 const CFB_FIRST = 2001;
-const CFB_LAST = 2025;
+const CFB_LAST = 2026;
 const POLL_FIRST = 1990;
-const POLL_LAST = 2025;
+const POLL_LAST = 2026;
 const JH_FIRST = 1990;
 const JH_LAST = 2000;
 

@@ -338,7 +338,7 @@ function main() {
   };
 
   // ---- 2001-2025 from cfbfastR
-  const { games: cfb, skipped: cfbSkipped } = loadCfbfastrGames(2001, 2025);
+  const { games: cfb, skipped: cfbSkipped } = loadCfbfastrGames(2001, 2026);
   diag.cfbfastr.total = cfb.length;
   for (const g of cfb) {
     if (g.neutral) continue;

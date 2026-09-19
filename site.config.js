@@ -27,7 +27,7 @@ export default {
   // native ratio; X/Twitter keeps the 2:1 og.png via twitter:image instead.
   ogImage: 'og-poster.png',
   ogImageWidth: 1560,
-  ogImageHeight: 1301,
+  ogImageHeight: 1240,
 
   // Used by the favicon and the OG image. Pick something from your data.
   accent: '#f3e2bc',
