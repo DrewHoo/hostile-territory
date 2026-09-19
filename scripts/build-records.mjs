@@ -43,10 +43,24 @@ const unmatched = []
 const conflicted = []
 const byCoach = new Map()
 
+let overrides = []
+try { overrides = JSON.parse(readFileSync('data/attribution-overrides.json', 'utf8')).overrides } catch {}
+// An override names the coach; the tenure row still has to exist so school and
+// grade come from research, not from the override file.
+function ovMatch(game, matches) {
+  const o = overrides.find((x) => x.date === game.date && x.away_team === game.away_team)
+  if (!o) return null
+  const row = matches.find((t) => t.coach === o.coach)
+  if (!row) console.warn(`override for ${o.date} ${o.away_team} names ${o.coach}, but no matching tenure covers the game`)
+  return row ?? null
+}
+
 for (const game of candidates.games) {
   const matches = tenures.filter((t) => covers(t, game))
   let pick = null
-  if (matches.length === 1) pick = matches[0]
+  const ov = ovMatch(game, matches)
+  if (ov) pick = ov
+  else if (matches.length === 1) pick = matches[0]
   else if (matches.length > 1) {
     const dated = matches.filter((t) => t.start_date || t.end_date)
     if (dated.length === 1) pick = dated[0]

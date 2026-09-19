@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "note": "Per-game attribution rulings for games where the head coach kept the title while an acting coach ran game day. The convention follows who the NCAA/school record credits. build-records.mjs consults these before any tiebreak.",
+  "overrides": [
+    {
+      "date": "2023-11-11",
+      "away_team": "Michigan",
+      "coach": "Jim Harbaugh",
+      "reason": "Big Ten sideline ban was game-day only; the NCAA credits the final three 2023 regular-season games to Harbaugh (unlike the September self-imposed suspension games, which are credited to their acting coaches)."
+    },
+    {
+      "date": "2013-10-05",
+      "away_team": "Minnesota",
+      "coach": "Jerry Kill",
+      "reason": "Kill remained head coach during medical leave; Minnesota credits the Claeys acting-HC stretch to Kill."
+    },
+    {
+      "date": "2013-11-30",
+      "away_team": "Minnesota",
+      "coach": "Jerry Kill",
+      "reason": "Same medical-leave stretch as 2013-10-05."
+    }
+  ]
+}

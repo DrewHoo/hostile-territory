@@ -2,10 +2,10 @@
   "version": 1,
   "updated": "2026-09-19",
   "definitions": {
-    "road_game": "Team is the away team and neutral_site is false. Bowls, kickoff classics, and conference championship games are neutral. CFP first-round campus games count as road.",
+    "road_game": "Team is the away team and neutral_site is false. Bowls, kickoff classics, and most conference championship games are neutral. A championship game played on a campus site counts as road (e.g. the 2011 Pac-12 CCG at Autzen Stadium); the neutral_site flag in the game data, not the game type, decides.",
     "top10_at_kickoff": "Opponent ranked 1-10 in the most recent AP poll published before the game date. Preseason poll covers games before the first regular-season poll. AP poll only.",
     "since": "1990 season onward, postseason included with its season.",
-    "coach_of_record": "Head coach on the game date. Interim coaches count as themselves with interim: true.",
+    "coach_of_record": "Head coach on the game date. Interim coaches count as themselves with interim: true. When a titled head coach was absent but retained credit (game-day sideline ban, medical leave), attribution follows the NCAA/school record via data/attribution-overrides.json.",
     "in_scope_coach": "Any FBS head coach with a tenure overlapping a school-season listed in power_conference_eras. All of a scoped coach's FBS HC games count toward the record, including G5 stints."
   },
   "power_conference_eras": {

@@ -67,6 +67,28 @@ if (inScopeUnmatched.length) {
   for (const g of inScopeUnmatched.slice(0, 10)) console.log(`    ${g.date} ${g.away_team} at #${g.home_rank_ap} ${g.home_team}`)
 } else console.log('  none')
 
+// 5b. Boundary adjacency: tenure boundary dates sourced from cfbfastR CSVs are
+// UTC while the pipeline shifts game dates -8h, so a qualifying game within a
+// day of a dated boundary can sit on the wrong side. Print them for eyeballing.
+console.log('\n== 5b. Games within 1 day of a tenure boundary ==')
+const DAY = 86400000
+let nearBoundary = 0
+for (const g of candidates.games) {
+  const gd = Date.parse(g.date)
+  for (const t of tenures) {
+    if (t.school !== g.away_team) continue
+    for (const b of [t.start_date, t.end_date]) {
+      if (!b) continue
+      const diff = Math.abs(Date.parse(b) - gd)
+      if (diff > 0 && diff <= DAY) {
+        console.log(`  check: ${g.date} ${g.away_team} at #${g.home_rank_ap} ${g.home_team} — 1 day from ${t.coach} boundary ${b} [${t.file}]`)
+        nearBoundary++
+      }
+    }
+  }
+}
+if (!nearBoundary) console.log('  none')
+
 // 6. Receipt integrity is checked by the verification fleet per row; here just count grades.
 console.log('\n== 6. Evidence grades ==')
 const grades = {}
