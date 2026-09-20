@@ -24,8 +24,12 @@ candidates.games = candidates.games.flatMap((g) => {
 // 'add' entries construct rows the pipeline's rules exclude but a ruling
 // admits (e.g. a "neutral" CFP game played in one team's own stadium).
 let added = 0
+const haveGame = new Set(candidates.games.map((g) => corrKey(g.date, g.away_team, g.home_team)))
 for (const c of corrections.corrections) {
   if (c.action !== 'add') continue
+  // Yield to the pipeline once the bulk source carries the same game, so a
+  // hand-added row (e.g. last night's final) never duplicates tomorrow's data.
+  if (haveGame.has(corrKey(c.date, c.away_team, c.home_team))) continue
   const { action, reason, ...row } = c
   candidates.games.push(row)
   added++

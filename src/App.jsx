@@ -110,11 +110,6 @@ export default function App() {
       .sort((a, b) => b.pct - a.pct || b.w - a.w)
   }, [cut, minGames, activeOnly, query])
 
-  const kiffin = useMemo(() => {
-    const c = DATA.coaches.find((x) => x.n === 'Lane Kiffin')
-    return c ? tally(c.g.filter((g) => g[D_RANK] <= 10)) : null
-  }, [])
-
   // Highlight every OTHER coach's road game at the same host while a game is
   // hovered or selected. The active coach's own row stays unlit.
   const hlOpp = pop ? pop.g[D_OPP] : null
@@ -130,12 +125,11 @@ export default function App() {
       <div className="field-rule" aria-hidden="true"></div>
       <h1>Hostile Territory</h1>
       <div className="dateline">Road games vs the AP Top 10 · 1990 – present</div>
-      {kiffin && (
-        <p className="sub">
-          Lane Kiffin is {kiffin.w}–{kiffin.l} on the road against top 10 teams. Here's how his
-          record matches up against everyone else.
-        </p>
-      )}
+      {/* Pinned to the ESPN factoid that started the site; the board carries the live record. */}
+      <p className="sub">
+        Lane Kiffin is 1–8 on the road against top 10 teams. Here's how his record matches up
+        against everyone else.
+      </p>
 
       <h2>Every coach since 1990</h2>
       <div className="h2-note">
