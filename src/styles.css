@@ -128,7 +128,7 @@ h2 { font-family: 'Graduate', serif; font-weight: 400; font-size: 21px; letter-s
 footer { margin-top: 56px; color: var(--ink-faint); font-size: 13px; text-align: center; }
 
 @media (max-width: 980px) {
-  .board { flex-direction: column; gap: 0; }
+  .board { flex-direction: column; gap: 0; align-items: stretch; }
   .bcol + .bcol { border-top: none; }
 }
 @media (max-width: 640px) {
