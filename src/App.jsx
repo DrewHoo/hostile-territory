@@ -107,7 +107,7 @@ export default function App() {
       .filter((c) => c.gp >= Math.max(minGames, 1))
       .filter((c) => !activeOnly || c.a)
       .filter((c) => !q || c.n.toLowerCase().includes(q) || c.s.some((s) => s.toLowerCase().includes(q)))
-      .sort((a, b) => b.pct - a.pct || b.w - a.w)
+      .sort((a, b) => b.pct - a.pct || b.w - a.w || a.l - b.l || a.n.localeCompare(b.n))
   }, [cut, minGames, activeOnly, query])
 
   // Highlight every OTHER coach's road game at the same host while a game is
