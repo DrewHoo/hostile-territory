@@ -13,8 +13,8 @@
   "tenures-legacy.json",
   "tenures-sec.json"
  ],
- "coach_count": 403,
- "matched_games": 4479,
+ "coach_count": 404,
+ "matched_games": 4480,
  "unmatched_scoped_note": "unmatched games are road teams with no tenure coverage; scoped-coach G5 stints among them are found by the career-sweep phase",
  "records": [
   {
@@ -124871,6 +124871,50 @@
    "top25": {
     "w": 0,
     "l": 1,
+    "t": 0
+   },
+   "active": true
+  },
+  {
+   "coach": "Will Stein",
+   "schools": [
+    "Kentucky"
+   ],
+   "games": [
+    {
+     "date": "2026-09-19",
+     "season": 2026,
+     "week": 4,
+     "season_type": "regular",
+     "away_team": "Kentucky",
+     "home_team": "Texas A&M",
+     "home_rank_ap": 9,
+     "away_rank_ap": null,
+     "away_points": 31,
+     "home_points": 21,
+     "result": "W",
+     "game_id": "401856694",
+     "venue": "Kyle Field",
+     "poll_date": "2026-09-13",
+     "poll_label": "September 13",
+     "source": "ESPN (cfbfastR pending)",
+     "school": "Kentucky",
+     "interim": false,
+     "tenure_grade": "secondary",
+     "home_coach": "Mike Elko",
+     "ot": 0,
+     "credit": null,
+     "receipt": null
+    }
+   ],
+   "top10": {
+    "w": 1,
+    "l": 0,
+    "t": 0
+   },
+   "top25": {
+    "w": 1,
+    "l": 0,
     "t": 0
    },
    "active": true

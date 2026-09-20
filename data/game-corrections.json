@@ -317,6 +317,26 @@
    "source": "cfbfastR",
    "credit": "petitioned by u/garygoblins on r/CFB",
    "reason": "CFP semifinal, officially neutral with Indiana as designated home team \u2014 at Hard Rock Stadium, Miami's own home venue. Ruled a true road game: the visitor-in-fact won in the opponent's building."
+  },
+  {
+   "action": "add",
+   "date": "2026-09-19",
+   "season": 2026,
+   "week": 4,
+   "season_type": "regular",
+   "away_team": "Kentucky",
+   "home_team": "Texas A&M",
+   "home_rank_ap": 9,
+   "away_rank_ap": null,
+   "away_points": 31,
+   "home_points": 21,
+   "result": "W",
+   "game_id": "401856694",
+   "venue": "Kyle Field",
+   "poll_date": "2026-09-13",
+   "poll_label": "September 13",
+   "source": "ESPN (cfbfastR pending)",
+   "reason": "Played after today's bulk fetch; scored from ESPN's final (event 401856694, Kyle Field, non-neutral). Yields automatically to the cfbfastR row when it lands."
   }
  ]
 }
