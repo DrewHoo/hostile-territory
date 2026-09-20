@@ -14,14 +14,23 @@ const corrMap = new Map(corrections.corrections.map((c) => [corrKey(c.date, c.aw
 let excluded = 0, patched = 0
 candidates.games = candidates.games.flatMap((g) => {
   const c = corrMap.get(corrKey(g.date, g.away_team, g.home_team))
-  if (!c) return [g]
+  if (!c || c.action === 'add') return [g]
   if (c.action === 'exclude') { excluded++; return [] }
   patched++
   const out = { ...g, ...c.patch }
   if (c.patch.away_points != null) out.result = out.away_points > out.home_points ? 'W' : out.away_points < out.home_points ? 'L' : 'T'
   return [out]
 })
-console.log(`corrections: ${excluded} excluded, ${patched} patched (of ${corrMap.size} entries)`)
+// 'add' entries construct rows the pipeline's rules exclude but a ruling
+// admits (e.g. a "neutral" CFP game played in one team's own stadium).
+let added = 0
+for (const c of corrections.corrections) {
+  if (c.action !== 'add') continue
+  const { action, reason, ...row } = c
+  candidates.games.push(row)
+  added++
+}
+console.log(`corrections: ${excluded} excluded, ${patched} patched, ${added} added (of ${corrMap.size} entries)`)
 const aliasFile = JSON.parse(readFileSync('data/name-aliases.json', 'utf8'))
 
 // Coach-name aliases live here once the merge pass needs them: canonical -> [variants].
@@ -142,6 +151,7 @@ for (const game of candidates.games) {
     tenure_grade: pick.grade,
     home_coach: homeCoach(game),
     ot: game.game_id != null && otMap[game.game_id] != null ? otMap[game.game_id] : null,
+    credit: game.credit ?? null,
     receipt: (() => {
       if (!rcpt || rcpt.status === 'page_missing') return null
       let status = rcpt.status
@@ -192,7 +202,7 @@ writeFileSync('src/data/site-data.json', JSON.stringify({
     n: r.coach,
     s: r.schools,
     a: r.active,
-    g: r.games.map((g) => [g.date, g.school, g.home_team, g.home_rank_ap, g.result, g.away_points, g.home_points, g.interim ? 1 : 0, g.home_coach, g.ot ?? 0, g.receipt?.status === 'confirmed' ? g.receipt.url : null, g.receipt?.status === 'confirmed' ? g.receipt.quote : null]),
+    g: r.games.map((g) => [g.date, g.school, g.home_team, g.home_rank_ap, g.result, g.away_points, g.home_points, g.interim ? 1 : 0, g.home_coach, g.ot ?? 0, g.receipt?.status === 'confirmed' ? g.receipt.url : null, g.receipt?.status === 'confirmed' ? g.receipt.quote : null, g.credit]),
   })),
 }))
 

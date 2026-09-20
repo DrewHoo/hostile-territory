@@ -153,3 +153,5 @@ footer { margin-top: 56px; color: var(--ink-faint); font-size: 13px; text-align:
 .pop-score.win { color: var(--cream); }
 .pop-coaches { display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; color: var(--ink-muted); border-top: 1px dotted var(--line); padding-top: 8px; }
 .pop-coaches i { color: var(--ink-faint); font-style: italic; }
+.pop-credit { margin-top: 8px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rust); border-top: 1px dotted var(--line); padding-top: 7px; }
+.log-row .credit { color: var(--rust); font-size: 12px; font-style: italic; }

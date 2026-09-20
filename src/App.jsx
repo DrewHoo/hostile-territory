@@ -5,7 +5,7 @@ import { readParam, writeParam } from './urlState.js'
 
 // site-data game row: [date, school, opponent, opp_rank, result, away_pts,
 // home_pts, interim, home_coach|null, overtimes (0 = regulation/unknown)]
-const [D_DATE, D_SCHOOL, D_OPP, D_RANK, D_RES, D_AP, D_HP, D_INT, D_HC, D_OT, D_URL, D_QUOTE] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+const [D_DATE, D_SCHOOL, D_OPP, D_RANK, D_RES, D_AP, D_HP, D_INT, D_HC, D_OT, D_URL, D_QUOTE, D_CREDIT] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
 const logoSrc = (team) => (LOGO_IDS[team] ? `${import.meta.env.BASE_URL}logos/${LOGO_IDS[team]}.png` : null)
 
@@ -55,6 +55,7 @@ function GamePopover({ pop, onClose }) {
         <span><i>{g[D_SCHOOL]}:</i> {coach}{g[D_INT] ? ' (interim)' : ''}</span>
         {g[D_HC] ? <span><i>{g[D_OPP]}:</i> {g[D_HC]}</span> : null}
       </div>
+      {g[D_CREDIT] ? <div className="pop-credit mono">{g[D_CREDIT]}</div> : null}
     </div>
   )
 }
@@ -203,6 +204,7 @@ export default function App() {
                     <span className="m">
                       <b>{g[D_SCHOOL]}</b> at #{g[D_RANK]} <b>{g[D_OPP]}</b>
                       {g[D_INT] ? <span className="int"> · interim</span> : null}
+                      {g[D_CREDIT] ? <span className="credit"> · {g[D_CREDIT]}</span> : null}
                     </span>
                     <span className={`sc ${g[D_RES] === 'W' ? 'w' : ''}`}>{g[D_RES]} {g[D_AP]}–{g[D_HP]}{g[D_OT] ? ` (${g[D_OT] > 1 ? g[D_OT] : ''}OT)` : ''}</span>
                   </div>

@@ -296,6 +296,27 @@
    "home_team": "Boston College",
    "action": "exclude",
    "reason": "ACC Championship in Jacksonville; SR site marker N (ccg-audit)."
+  },
+  {
+   "action": "add",
+   "date": "2026-01-19",
+   "season": 2025,
+   "week": null,
+   "season_type": "postseason",
+   "away_team": "Indiana",
+   "home_team": "Miami (FL)",
+   "home_rank_ap": 10,
+   "away_rank_ap": 1,
+   "away_points": 27,
+   "home_points": 21,
+   "result": "W",
+   "game_id": "401769076",
+   "venue": "Hard Rock Stadium",
+   "poll_date": "2025-12-07",
+   "poll_label": "December 7",
+   "source": "cfbfastR",
+   "credit": "petitioned by u/garygoblins on r/CFB",
+   "reason": "CFP semifinal, officially neutral with Indiana as designated home team \u2014 at Hard Rock Stadium, Miami's own home venue. Ruled a true road game: the visitor-in-fact won in the opponent's building."
   }
  ]
 }
