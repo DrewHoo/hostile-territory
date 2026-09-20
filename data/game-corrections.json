@@ -337,6 +337,26 @@
    "poll_label": "September 13",
    "source": "ESPN (cfbfastR pending)",
    "reason": "Played after today's bulk fetch; scored from ESPN's final (event 401856694, Kyle Field, non-neutral). Yields automatically to the cfbfastR row when it lands."
+  },
+  {
+   "action": "add",
+   "date": "2026-09-19",
+   "season": 2026,
+   "week": 4,
+   "season_type": "regular",
+   "away_team": "LSU",
+   "home_team": "Ole Miss",
+   "home_rank_ap": 8,
+   "away_rank_ap": 7,
+   "away_points": 24,
+   "home_points": 32,
+   "result": "L",
+   "game_id": "401856688",
+   "venue": "Vaught-Hemingway Stadium",
+   "poll_date": "2026-09-13",
+   "poll_label": "September 13",
+   "source": "ESPN (cfbfastR pending)",
+   "reason": "Played after today's bulk fetch; scored from ESPN's final (event 401856688). Kiffin's first trip back to Oxford. Yields automatically to the cfbfastR row when it lands."
   }
  ]
 }
