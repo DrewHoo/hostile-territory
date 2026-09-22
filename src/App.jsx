@@ -127,8 +127,8 @@ export default function App() {
       <div className="dateline">Road games vs the AP Top 10 · 1990 – present</div>
       {/* Pinned to the ESPN factoid that started the site; the board carries the live record. */}
       <p className="sub">
-        Lane Kiffin is 1–8 on the road against top 10 teams. Here's how his record matches up
-        against everyone else.
+        Lane Kiffin is <s>1–8</s> 1–9 on the road against top 10 teams. Here's how his record
+        matches up against everyone else.
       </p>
 
       <h2>Every coach since 1990</h2>
@@ -217,24 +217,41 @@ export default function App() {
         <span className="legend-note">each mark is the host team</span>
       </div>
 
-      <h2>What counts as a road game</h2>
-      <div className="rules-note">
-        <ul>
-          <li>The team is the away team and the site is not neutral. Bowls, kickoff classics, and conference championship games are out. CFP first-round campus games count.</li>
-          <li>The opponent is ranked in the most recent AP poll published before kickoff — not the Coaches poll, not the CFP rankings, not the final poll.</li>
-          <li>The coach of record is whoever was head coach on the game date. Interim games count for the interim.</li>
-          <li>Coaches qualify by having led a power-conference program since 1990; all of their FBS head-coaching games count, including stops elsewhere.</li>
-        </ul>
-      </div>
+      {/* Each trailing section is one centered 700px column so the heading
+          and its body share a left edge at every width — the board above
+          stays full-width. */}
+      <section className="notes">
+        <h2>What counts as a road game</h2>
+        <div className="rules-note">
+          <ul>
+            <li>The team is the away team and the site is not neutral. Bowls, kickoff classics, and conference championship games are out. CFP first-round campus games count.</li>
+            <li>The opponent is ranked in the most recent AP poll published before kickoff — not the Coaches poll, not the CFP rankings, not the final poll.</li>
+            <li>The coach of record is whoever was head coach on the game date. Interim games count for the interim.</li>
+            <li>Coaches qualify by having led a power-conference program since 1990; all of their FBS head-coaching games count, including stops elsewhere.</li>
+          </ul>
+        </div>
+      </section>
 
-      <h2>Where every number comes from</h2>
-      <div className="method">
-        <p>
-          No total on this page was reported by anyone — records are computed by joining three
-          sources: game results (cfbfastR 2001–2025, jhowell.net 1990–2000), weekly AP polls
-          (College Poll Archive), and coaching tenures researched row by row with a citation each.
-        </p>
-      </div>
+      <section className="notes">
+        <h2>Where every number comes from</h2>
+        <div className="method">
+          <p>
+            No total on this page was reported by anyone — records are computed by joining three
+            sources: game results (cfbfastR 2001–2025, jhowell.net 1990–2000), weekly AP polls
+            (College Poll Archive), and coaching tenures researched row by row with a citation each.
+          </p>
+        </div>
+      </section>
+
+      <section className="notes">
+        <h2>What to read next</h2>
+        <div className="method">
+          <p>
+            <a href="https://drewhoover.com/collegiate-championships/">Who has the most college championships?</a> — every
+            NCAA champion since 1972, 33 sports, one grid.
+          </p>
+        </div>
+      </section>
 
       <footer>Data: Sports-Reference, College Poll Archive, cfbfastR. Rules and receipts above.</footer>
       <GamePopover pop={pop} onClose={() => setPop(null)} />
