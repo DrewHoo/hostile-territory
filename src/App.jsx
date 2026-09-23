@@ -247,8 +247,16 @@ export default function App() {
         <h2>What to read next</h2>
         <div className="method">
           <p>
+            <a href="https://drewhoover.com/how-many-rings/">How Many Rings?</a> — every person on a
+            national-championship staff since 1990, ranked by rings, each one cited.
+          </p>
+          <p>
             <a href="https://drewhoover.com/collegiate-championships/">Who has the most college championships?</a> — every
             NCAA champion since 1972, 33 sports, one grid.
+          </p>
+          <p>
+            <a href="https://drewhoover.com/cfb-all-time-records/football">All-time FBS records</a> — all
+            136 programs ranked by total wins, win percentage and bowl record.
           </p>
         </div>
       </section>
