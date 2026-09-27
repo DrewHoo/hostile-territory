@@ -247,6 +247,10 @@ export default function App() {
         <h2>What to read next</h2>
         <div className="method">
           <p>
+            <a href="https://drewhoover.com/cfb-streak-king/">Streak King</a> — design a streak from
+            up to four constraints; every FBS team ranked by its longest active run.
+          </p>
+          <p>
             <a href="https://drewhoover.com/how-many-rings/">How Many Rings?</a> — every person on a
             national-championship staff since 1990, ranked by rings, each one cited.
           </p>
