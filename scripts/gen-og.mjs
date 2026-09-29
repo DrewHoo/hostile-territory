@@ -3,17 +3,20 @@
 //   public/card.png  1200x750, the 8:5 cover for the index site's project card
 //
 // Styled to match the site's Night Program look: warm charcoal, cream serif
-// display, and a row of letterpress W/L stamps (Kiffin's 1-8) as the motif.
+// display, and Kiffin's road games vs the top 10 as the motif, drawn as the
+// site's own chips (cream win / dark loss, opponent mark inside), read from
+// src/data/site-data.json so a new game lands on the next run.
 // Outputs are committed; CI does not regenerate them. Re-run after a redesign,
 // and open the PNGs.
 import sharp from 'sharp'
-import { mkdirSync } from 'node:fs'
+import { mkdirSync, readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import config from '../site.config.js'
 import pkg from '../package.json' with { type: 'json' }
 
-const outDir = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'public')
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+const outDir = resolve(ROOT, 'public')
 mkdirSync(outDir, { recursive: true })
 
 const SERIF = "Georgia, 'Times New Roman', serif"
@@ -28,18 +31,52 @@ const RUST = '#c36c36'
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
 
 // Kiffin's road-vs-top-10 line, the number that started the site.
-const STAMPS = ['L', 'L', 'W', 'L', 'L', 'L', 'L', 'L', 'L']
+const data = JSON.parse(readFileSync(resolve(ROOT, 'src/data/site-data.json'), 'utf8'))
+const teamIds = JSON.parse(readFileSync(resolve(ROOT, 'src/data/team-ids.json'), 'utf8'))
+const kiffin = data.coaches.find((c) => c.n === 'Lane Kiffin')
+const GAMES = kiffin.g.filter((g) => g[3] <= 10) // [date, team, opp, oppRank, result, ...]
+const WINS = GAMES.filter((g) => g[4] === 'W').length
+const RECORD = `${WINS}–${GAMES.length - WINS}`
+const WAS = `${WINS}–${GAMES.length - WINS - 1}` // before the latest loss; struck, as on the site
+
+// The site tints the black opponent mark with CSS filters; bake the same tints
+// into the pixels: ink on a win, warm gray on a loss.
+async function mark(opp, rgb, alpha) {
+  const id = teamIds[opp]
+  if (!id) return null
+  const { data: px, info } = await sharp(resolve(outDir, 'logos', `${id}.png`)).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+  for (let i = 0; i < px.length; i += 4) { px[i] = rgb[0]; px[i + 1] = rgb[1]; px[i + 2] = rgb[2]; px[i + 3] = Math.round(px[i + 3] * alpha) }
+  const png = await sharp(px, { raw: { width: info.width, height: info.height, channels: 4 } }).png().toBuffer()
+  return `data:image/png;base64,${png.toString('base64')}`
+}
+const MARKS = await Promise.all(GAMES.map((g) => (g[4] === 'W' ? mark(g[2], [0, 0, 0], 0.72) : mark(g[2], [168, 168, 168], 0.85))))
 
 function chips(x, y, size, gap) {
-  return STAMPS.map((r, i) => {
+  const m = size * 0.16 // mark inset; the site draws a 14px mark in an 18px chip
+  return GAMES.map((g, i) => {
     const cx = x + i * (size + gap)
-    return r === 'W'
-      ? `<rect x="${cx}" y="${y}" width="${size}" height="${size}" rx="6" fill="${CREAM}"/>
-         <text x="${cx + size / 2}" y="${y + size * 0.7}" font-family="${MONO}" font-size="${size * 0.5}" font-weight="700" fill="#241d12" text-anchor="middle">W</text>`
-      : `<rect x="${cx}" y="${y}" width="${size}" height="${size}" rx="6" fill="${LIFT}" stroke="${LINE}" stroke-width="2"/>
-         <text x="${cx + size / 2}" y="${y + size * 0.7}" font-family="${MONO}" font-size="${size * 0.5}" font-weight="600" fill="${MUTED}" text-anchor="middle">L</text>`
+    const last = i === GAMES.length - 1
+    const box = g[4] === 'W'
+      ? `<rect x="${cx}" y="${y}" width="${size}" height="${size}" rx="6" fill="${CREAM}"/>`
+      : `<rect x="${cx}" y="${y}" width="${size}" height="${size}" rx="6" fill="${LIFT}" stroke="${LINE}" stroke-width="2"/>`
+    // the newest game, the one that made it 1-9, gets the site's rust outline
+    const ring = last ? `<rect x="${cx - 4}" y="${y - 4}" width="${size + 8}" height="${size + 8}" rx="8" fill="none" stroke="${RUST}" stroke-width="2.5"/>` : ''
+    const img = MARKS[i] ? `<image x="${cx + m}" y="${y + m}" width="${size - 2 * m}" height="${size - 2 * m}" href="${MARKS[i]}"/>` : ''
+    return box + img + ring
   }).join('\n  ')
 }
+
+// librsvg ignores text-decoration, so the strike through the old record is a
+// drawn line. Measure ink widths by rendering the runs alone and trimming.
+const CAPTION = { size: 26, attrs: `font-family="${SERIF}" font-size="26" font-style="italic"` }
+async function inkWidth(str) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="60"><text x="10" y="40" ${CAPTION.attrs} fill="#000">${esc(str)}</text></svg>`
+  const { info } = await sharp(Buffer.from(svg)).flatten({ background: '#fff' }).trim().toBuffer({ resolveWithObject: true })
+  return info.width
+}
+const PRE = 'Lane Kiffin is '
+const POST = ` ${RECORD} on the road against the AP top 10`
+const STRIKE = { full: await inkWidth(PRE + WAS + POST), toEnd: await inkWidth(PRE + WAS), was: await inkWidth(WAS) }
 
 function render(W, H) {
   const title = config.ogTitle ?? config.title
@@ -68,8 +105,9 @@ function render(W, H) {
   <text x="${W / 2}" y="${cy - 75}" font-family="${SERIF}" font-size="96" font-weight="700" fill="${CREAM}" text-anchor="middle" letter-spacing="2">${esc(title)}</text>
   <text x="${W / 2}" y="${cy - 22}" font-family="${MONO}" font-size="22" fill="${RUST}" letter-spacing="4" text-anchor="middle">${esc(config.ogSubtitle.toUpperCase())}</text>
 
-  ${chips(W / 2 - (9 * 64 - 12) / 2, cy + 30, 52, 12)}
-  <text x="${W / 2}" y="${cy + 135}" font-family="${SERIF}" font-size="26" font-style="italic" fill="${MUTED}" text-anchor="middle">Lane Kiffin, on the road against the AP top 10</text>
+  ${chips(W / 2 - (GAMES.length * 64 - 12) / 2, cy + 30, 52, 12)}
+  <text x="${W / 2}" y="${cy + 135}" ${CAPTION.attrs} fill="${MUTED}" text-anchor="middle">${esc(PRE)}<tspan fill-opacity="0.75">${WAS}</tspan> <tspan fill="${INK}">${RECORD}</tspan>${esc(POST.slice(RECORD.length + 1))}</text>
+  <line x1="${W / 2 - STRIKE.full / 2 + STRIKE.toEnd - STRIKE.was - 2}" x2="${W / 2 - STRIKE.full / 2 + STRIKE.toEnd + 2}" y1="${cy + 123}" y2="${cy + 123}" stroke="${RUST}" stroke-width="2"/>
 
   <text x="${W / 2}" y="${footerY}" font-family="${MONO}" font-size="18" fill="${MUTED}" text-anchor="middle">${esc(config.domain)}/${esc(pkg.name)}</text>
 </svg>`
