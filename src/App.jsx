@@ -221,29 +221,6 @@ export default function App() {
           and its body share a left edge at every width — the board above
           stays full-width. */}
       <section className="notes">
-        <h2>What counts as a road game</h2>
-        <div className="rules-note">
-          <ul>
-            <li>The team is the away team and the site is not neutral. Bowls, kickoff classics, and conference championship games are out. CFP first-round campus games count.</li>
-            <li>The opponent is ranked in the most recent AP poll published before kickoff — not the Coaches poll, not the CFP rankings, not the final poll.</li>
-            <li>The coach of record is whoever was head coach on the game date. Interim games count for the interim.</li>
-            <li>Coaches qualify by having led a power-conference program since 1990; all of their FBS head-coaching games count, including stops elsewhere.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section className="notes">
-        <h2>Where every number comes from</h2>
-        <div className="method">
-          <p>
-            No total on this page was reported by anyone — records are computed by joining three
-            sources: game results (cfbfastR 2001–2025, jhowell.net 1990–2000), weekly AP polls
-            (College Poll Archive), and coaching tenures researched row by row with a citation each.
-          </p>
-        </div>
-      </section>
-
-      <section className="notes">
         <h2>What to read next</h2>
         <div className="method">
           <p>
@@ -262,6 +239,31 @@ export default function App() {
             <a href="https://drewhoover.com/cfb-all-time-records/football">All-time FBS records</a> — all
             136 programs ranked by total wins, win percentage and bowl record.
           </p>
+        </div>
+      </section>
+
+      <section className="notes">
+        <h2>Methodology</h2>
+        <div className="method">
+          <p>
+            No total on this page was reported by anyone — records are computed by joining three
+            sources: game results (cfbfastR 2001–2025, jhowell.net 1990–2000), weekly AP polls
+            (College Poll Archive), and coaching tenures researched row by row with a citation each.
+          </p>
+          <p>
+            Each game's date links its receipt: for all but a handful, the home team's Sports-Reference schedule
+            page as captured by the Internet Archive's{' '}
+            <a href="https://web.archive.org/">Wayback Machine</a>, with the matching row quoted on hover. The
+            captures keep the receipts checkable after the live page changes; the archive is
+            worth <a href="https://archive.org/donate">a donation</a>.
+          </p>
+          <p>What counts as a road game, and whose record it goes on:</p>
+          <ul>
+            <li>The team is the away team and the site is not neutral. Bowls, kickoff classics, and conference championship games are out. CFP first-round campus games count.</li>
+            <li>The opponent is ranked in the most recent AP poll published before kickoff — not the Coaches poll, not the CFP rankings, not the final poll.</li>
+            <li>The coach of record is whoever was head coach on the game date. Interim games count for the interim.</li>
+            <li>Coaches qualify by having led a power-conference program since 1990; all of their FBS head-coaching games count, including stops elsewhere.</li>
+          </ul>
         </div>
       </section>
 
