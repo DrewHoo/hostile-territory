@@ -224,16 +224,17 @@ export default function App() {
         <h2>What to read next</h2>
         <div className="method">
           <p>
-            <a href="https://drewhoover.com/cfb-streak-king/">Streak King</a> — design a streak from
-            up to four constraints; every FBS team ranked by its longest active run.
+            <a href="https://drewhoover.com/cfb-streak-king/">Streak King</a> — win, lose, cover, or don't, all-time, active, at-home, on the road,
+            underdog, favorite, conference-only, while ranked, against ranked, at night, trailing at the half, after a loss, after a bye... 
+            any constraint you can think of, somebody's team is the king of that streak.
           </p>
           <p>
-            <a href="https://drewhoover.com/how-many-rings/">How Many Rings?</a> — every person on a
-            national-championship staff since 1990, ranked by rings, each one cited.
+            <a href="https://drewhoover.com/how-many-rings/">How Many Rings?</a> — There is one person who has the 
+            most rings in college football, and it isn't Nick Saban.
           </p>
           <p>
             <a href="https://drewhoover.com/collegiate-championships/">Who has the most college championships?</a> — every
-            NCAA champion since 1972, 33 sports, one grid.
+            NCAA champion across 33 sports since 1972.
           </p>
           <p>
             <a href="https://drewhoover.com/cfb-all-time-records/football">All-time FBS records</a> — all
@@ -243,7 +244,7 @@ export default function App() {
       </section>
 
       <section className="notes">
-        <h2>Methodology</h2>
+        <h2>Method</h2>
         <div className="method">
           <p>
             No total on this page was reported by anyone — records are computed by joining three
