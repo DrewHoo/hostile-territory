@@ -1,15 +1,21 @@
 #!/usr/bin/env node
 /**
- * build-candidates.mjs — join every game since the 1990 season to the AP poll
+ * build-candidates.mjs — join every game since the 1936 season to the AP poll
  * in effect at kickoff and emit data/games-candidates.json: TRUE ROAD games
- * (away team, not neutral) against a home team ranked in the AP top 25.
+ * (away team, not neutral) against a home team ranked in the AP poll (top 25
+ * from 1989; the AP ranked 20 before that, and 10 in 1961-67).
  *
- * Top-10 is a downstream filter; this file keeps the full top 25.
+ * Top-10 is a downstream filter; this file keeps every ranked host.
  *
  * Inputs (all under data/raw/, produced by scripts/fetch-data.mjs):
- *   cfbfastr/cfb_schedules_<year>.csv   2001-2025 games, has neutral_site
- *   jhowell/teams/<Team>.htm            1990-2000 games, one file per team
- *   ap-polls/polls/poll-<id>.html       weekly AP polls 1990-2025
+ *   cfbfastr/cfb_schedules_<year>.csv   2001-2026 games, has neutral_site
+ *   jhowell/teams/<Team>.htm            1936-2000 games, one file per team
+ *   ap-polls/polls/poll-<id>.html       weekly AP polls 1936-2026
+ *
+ * Rows before 1990 carry receipts (the receipts-research receipt object): the
+ * visitor's Howell row and the host's row in the AP poll in effect, each a
+ * verbatim quote of a page saved under data/research/pages/ by
+ * scripts/save-pages.mjs and checked by scripts/check-receipts.mjs.
  *
  * Name normalization goes through data/name-aliases.json. Any source name with
  * no alias entry is reported (see --unmatched) rather than silently dropped.
@@ -27,6 +33,13 @@ import {
   isoDate,
   parseLongDate,
 } from './lib/util.mjs';
+import { quoteOf, howellUrl, cpaPollUrl } from './lib/receipts.mjs';
+
+// The seasons each source covers. Howell's pages are the only game source
+// before 2001; the receipts layer covers the seasons hostile-territory added
+// in the 1936 backfill (specs/back-to-1936.spec.md).
+export const FIRST_SEASON = 1936;
+export const RECEIPTS_BEFORE = 1990;
 
 const REPORT_UNMATCHED = process.argv.includes('--unmatched');
 const REPORT_AMBIGUOUS = process.argv.includes('--ambiguous');
@@ -70,7 +83,7 @@ export const display = (key) => aliasDoc.canonical[key] ?? key;
 
 /**
  * Parse one collegepollarchive poll page.
- * Returns { label, date, ranks: Map<canonKey, rank>, rawNames: [..] }.
+ * Returns { label, date, ranks: Map<canonKey, rank>, quotes: Map<canonKey, rowText>, rawNames: [..] }.
  */
 export function parsePollPage(html, seasonYear, label) {
   const heading =
@@ -86,6 +99,7 @@ export function parsePollPage(html, seasonYear, label) {
   }
 
   const ranks = new Map();
+  const quotes = new Map();
   const rawNames = [];
   const trRe = /<tr\b[^>]*>([\s\S]*?)<\/tr>/gi;
   let m;
@@ -99,9 +113,12 @@ export function parsePollPage(html, seasonYear, label) {
     const raw = decodeEntities(stripTags(teamM[1])).trim();
     rawNames.push(raw);
     const key = canon(raw, 'ap');
-    if (key && !ranks.has(key)) ranks.set(key, rank);
+    if (key && !ranks.has(key)) {
+      ranks.set(key, rank);
+      quotes.set(key, quoteOf(row));
+    }
   }
-  return { label, date, ranks, rawNames };
+  return { label, date, ranks, quotes, rawNames };
 }
 
 /** All AP polls by season, sorted by release date. */
@@ -119,19 +136,36 @@ export function loadPolls() {
       polls.push({ ...parsed, id: p.id });
     }
     polls.sort((a, b) => a.date.localeCompare(b.date));
+    // Before 1965, and in 1966-67, the AP's final poll came out after the
+    // regular season and before the bowls. CPA doesn't date final polls, so
+    // date those a week after the last weekly poll (cfb-streak-king's
+    // parse-polls.mjs does the same); from 1968 Feb 1 stands.
+    if (season.year < 1965 || season.year === 1966 || season.year === 1967) {
+      const fin = polls.at(-1);
+      const prev = polls.at(-2);
+      if (fin && prev && /final/i.test(fin.label)) {
+        const d = new Date(Date.parse(prev.date + 'T00:00:00Z') + 7 * 86400000);
+        fin.date = d.toISOString().slice(0, 10);
+      }
+    }
     bySeason.set(season.year, polls);
   }
   return bySeason;
 }
 
-/** The poll in effect at kickoff: the latest one released on or before the game. */
+/**
+ * The poll in effect at kickoff: the latest one released on or before the
+ * game. Null before the season's first poll: there was no preseason poll
+ * before 1950, so a game played before mid-October has no rank at all
+ * (unknown, not unranked).
+ */
 export function pollAtKickoff(polls, gameDate) {
   let best = null;
   for (const p of polls) {
     if (p.date <= gameDate) best = p;
     else break;
   }
-  return best ?? polls[0] ?? null;
+  return best;
 }
 
 // ------------------------------------------------------------ cfbfastR games
@@ -272,6 +306,7 @@ export function parseJhowellFile(html, teamName) {
 
       const year = month >= 7 ? season : season + 1;
       games.push({
+        quote: quoteOf(rowHtml),
         season,
         conference,
         date: isoDate(year, month, day),
@@ -304,7 +339,7 @@ export function loadJhowellGames(firstSeason, lastSeason) {
     const html = fs.readFileSync(file, 'latin1');
     for (const g of parseJhowellFile(html, t.name)) {
       if (g.season < firstSeason || g.season > lastSeason) continue;
-      all.push(g);
+      all.push({ ...g, file: t.file });
     }
   }
   return { games: all, fileToName };
@@ -331,10 +366,23 @@ function main() {
       `${[...polls.values()].reduce((n, p) => n + p.length, 0)} weekly polls`
   );
 
+  // The raw cache has to reach back to FIRST_SEASON. A checkout whose
+  // data/raw/ predates the 1936 backfill would otherwise drop every earlier
+  // game without a word: fetch-data.mjs --only=polls and --only=jhowell fill it.
+  const thin = [];
+  for (let y = FIRST_SEASON; y <= 2000; y++) if (!polls.get(y)?.length) thin.push(`no AP polls for ${y}`);
+  const jhSeasons = new Set(loadJhowellGames(FIRST_SEASON, 2000).games.map((g) => g.season));
+  for (let y = FIRST_SEASON; y <= 2000; y++) if (!jhSeasons.has(y)) thin.push(`no Howell games for ${y}`);
+  if (thin.length) {
+    console.error(`data/raw/ doesn't reach back to ${FIRST_SEASON}: ${thin.slice(0, 5).join('; ')}${thin.length > 5 ? ` (+${thin.length - 5} more)` : ''}`);
+    console.error('run node scripts/fetch-data.mjs --only=polls and --only=jhowell first');
+    process.exit(1);
+  }
+
   const rows = [];
   const diag = {
-    cfbfastr: { total: 0, road: 0, qualifying: 0, unresolvedHome: 0, noPoll: 0 },
-    jhowell: { total: 0, road: 0, qualifying: 0, unresolvedHome: 0, noPoll: 0 },
+    cfbfastr: { total: 0, road: 0, qualifying: 0, unresolvedHome: 0, noPoll: 0, prePoll: 0 },
+    jhowell: { total: 0, road: 0, qualifying: 0, unresolvedHome: 0, noPoll: 0, prePoll: 0 },
   };
 
   // ---- 2001-2025 from cfbfastR
@@ -355,6 +403,10 @@ function main() {
       continue;
     }
     const poll = pollAtKickoff(seasonPolls, g.date);
+    if (!poll) {
+      diag.cfbfastr.prePoll++;
+      continue;
+    }
     const homeRank = poll.ranks.get(homeKey);
     if (!homeRank) continue;
     diag.cfbfastr.qualifying++;
@@ -378,8 +430,12 @@ function main() {
     });
   }
 
-  // ---- 1990-2000 from jhowell
-  const { games: jh, fileToName } = loadJhowellGames(1990, 2000);
+  // ---- 1936-2000 from jhowell
+  const { games: jh, fileToName } = loadJhowellGames(FIRST_SEASON, 2000);
+  // Road games played before the season's first poll (1936-49, no preseason
+  // poll): no rank in effect, so they can't qualify. Kept so the coverage
+  // report can say how many a reader can't see, with the host's first rank.
+  const prePoll = [];
   diag.jhowell.total = jh.length;
   const seasonStart = new Map();
   for (const g of jh) {
@@ -402,9 +458,21 @@ function main() {
       continue;
     }
     const poll = pollAtKickoff(seasonPolls, g.date);
+    if (!poll) {
+      diag.jhowell.prePoll++;
+      const firstRank = seasonPolls[0].ranks.get(homeKey);
+      if (firstRank) prePoll.push({ date: g.date, season: g.season, away_team: awayKey ? display(awayKey) : g.team, home_team: display(homeKey), first_poll_rank: firstRank, first_poll_date: seasonPolls[0].date, result: g.result });
+      continue;
+    }
     const homeRank = poll.ranks.get(homeKey);
     if (!homeRank) continue;
     diag.jhowell.qualifying++;
+    const receipts = g.season < RECEIPTS_BEFORE
+      ? [
+          { url: howellUrl(g.file), quote: g.quote, note: `the visitor's ${g.season} table: date, @ (at the opponent's home field), result, score` },
+          { url: cpaPollUrl(poll.id), quote: poll.quotes.get(homeKey), note: `the host's row in the AP poll released ${poll.date} (${poll.label}), the last before kickoff` },
+        ]
+      : undefined;
     rows.push({
       date: g.date,
       season: g.season,
@@ -422,6 +490,7 @@ function main() {
       season_type: g.date.slice(5) < '07' ? 'postseason' : 'regular',
       venue: null,
       game_id: null,
+      ...(receipts ? { poll_id: Number(poll.id), howell_file: g.file, receipts } : {}),
     });
   }
 
@@ -459,15 +528,16 @@ function main() {
     generated: new Date().toISOString().slice(0, 10),
     rules_version: JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'rules.json'), 'utf8')).version,
     definition:
-      'True road games (away team, neutral_site false) since the 1990 season where the home team was ranked 1-25 in the AP poll in effect at kickoff.',
+      'True road games (away team, neutral_site false) since the 1936 season where the home team was ranked in the AP poll in effect at kickoff (1-25 from 1989, 1-20 before, 1-10 in 1961-67).',
     sources: {
-      'cfbfastR (2001-2025)':
+      'cfbfastR (2001-2026)':
         'https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_<year>.csv',
-      'jhowell.net (1990-2000)': 'https://www.jhowell.net/cf/scores/byname.htm',
-      'AP polls (1990-2025)': 'https://www.collegepollarchive.com/football/ap/seasons.cfm?seasonid=<year>',
+      'jhowell.net (1936-2000)': 'https://www.jhowell.net/cf/scores/byname.htm',
+      'AP polls (1936-2026)': 'https://www.collegepollarchive.com/football/ap/seasons.cfm?seasonid=<year>',
     },
     count: rows.length,
     games: rows,
+    pre_poll: prePoll,
   };
   const outFile = path.join(ROOT, 'data', 'games-candidates.json');
   fs.writeFileSync(outFile, JSON.stringify(out, null, 1));

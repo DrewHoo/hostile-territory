@@ -1,12 +1,12 @@
 {
-  "version": 1,
-  "updated": "2026-09-19",
+  "version": 2,
+  "updated": "2026-10-13",
   "definitions": {
-    "road_game": "Team is the away team and neutral_site is false. Bowls, kickoff classics, and most conference championship games are neutral. A championship game played on a campus site counts as road (e.g. the 2011 Pac-12 CCG at Autzen Stadium); the neutral_site flag in the game data, not the game type, decides.",
-    "top10_at_kickoff": "Opponent ranked 1-10 in the most recent AP poll published before the game date. Preseason poll covers games before the first regular-season poll. AP poll only.",
-    "since": "1990 season onward, postseason included with its season.",
+    "road_game": "Team is the away team and neutral_site is false. Bowls, kickoff classics, and most conference championship games are neutral. A championship game played on a campus site counts as road (e.g. the 2011 Pac-12 CCG at Autzen Stadium); the neutral_site flag in the game data, not the game type, decides. Before 2001 the source is Howell's '@' marker, which calls every off-campus game neutral, so a game at a team's regular alternate home field (Alabama at Legion Field, Arkansas at Little Rock) doesn't count yet; see specs/back-to-1936.spec.md.",
+    "top10_at_kickoff": "Opponent ranked 1-10 in the most recent AP poll published before the game date. Preseason poll covers games before the first regular-season poll. There was no preseason poll before 1950: a 1936-1949 game played before that season's first poll (mid-October) has no rank in effect and doesn't count. AP poll only.",
+    "since": "1936 season onward (the AP poll's first season), postseason included with its season.",
     "coach_of_record": "Head coach on the game date. Interim coaches count as themselves with interim: true. When a titled head coach was absent but retained credit (game-day sideline ban, medical leave), attribution follows the NCAA/school record via data/attribution-overrides.json.",
-    "in_scope_coach": "Any FBS head coach with a tenure overlapping a school-season listed in power_conference_eras. All of a scoped coach's FBS HC games count toward the record, including G5 stints."
+    "in_scope_coach": "Any FBS head coach with a tenure overlapping a power school-season: from 1990 a school-season listed in power_conference_eras, before 1990 one listed in pre_1990_power. All of a scoped coach's FBS (major-college before 1978) HC games count toward the record, including stints at other schools."
   },
   "power_conference_eras": {
     "ACC": "1990-present",
@@ -26,5 +26,18 @@
     "acc": ["Boston College", "California", "Clemson", "Duke", "Florida State", "Georgia Tech", "Louisville", "Miami (FL)", "NC State", "North Carolina", "Pittsburgh", "SMU", "Stanford", "Syracuse", "Virginia", "Virginia Tech", "Wake Forest"],
     "legacy-and-independents": ["Oregon State", "Washington State", "Notre Dame", "Temple", "UConn", "South Florida", "Rice"]
   },
-  "notes": "school_assignments is the union of every school that spent time in a power conference 1990-present, grouped for research agents by current or longest affiliation. Tenure coverage per school runs 1990 to present regardless of which conference the school was in for a given season."
+  "notes": "school_assignments is the union of every school that spent time in a power conference 1990-present, grouped for research agents by current or longest affiliation. Tenure coverage per school runs 1990 to present regardless of which conference the school was in for a given season.",
+  "pre_1990_power": {
+    "note": "Power school-seasons before 1990, read from cfb-streak-king's conference-by-season table (Howell's byconf.htm labels: 'Big 8' covers the Big Six and Big Seven, 'Pac-12' covers the PCC, AAWU, Pac-8 and Pac-10). scripts/build-coach-stints.mjs applies it.",
+    "conferences": {
+      "SEC": [1936, 1989],
+      "Big Ten": [1936, 1989],
+      "SWC": [1936, 1989],
+      "Big 8": [1936, 1989],
+      "Pac-12": [1936, 1989],
+      "ACC": [1953, 1989],
+      "Southern": [1936, 1952]
+    },
+    "independents": "An independent school-season counts when the school is in school_assignments (it has played in a power conference since 1990), the same way Miami, Florida State and Penn State count via their independent years after 1990. Army, Navy, Fordham and the pre-1956 Ivies are out under this rule."
+  }
 }

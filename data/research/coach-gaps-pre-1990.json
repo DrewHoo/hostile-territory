@@ -1,0 +1,140 @@
+{
+ "version": 1,
+ "updated": "2026-10-13",
+ "note": "Triage file: qualifying pre-1990 road games by a team in a power school-season (data/rules.json pre_1990_power) that no coach row covers, because CFBD /coaches has no row for that team-season and cfb-streak-king's coach-overrides.json doesn't rule it. coverage-report.mjs fails on any such game not listed here. The fix is upstream: research the coach for each team-season in cfb-streak-king's data/ref/coach-overrides.json (with receipts), rebuild its payload, then re-run scripts/build-coach-stints.mjs here; a game that gains a coach drops out of this list, and coverage-report.mjs prints it as stale.",
+ "games": [
+  {
+   "date": "1938-10-22",
+   "away_team": "Sewanee",
+   "home_team": "Alabama",
+   "home_rank_ap": 15,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1938-10-22",
+   "away_team": "The Citadel",
+   "home_team": "Tennessee",
+   "home_rank_ap": 8,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1939-11-11",
+   "away_team": "The Citadel",
+   "home_team": "Tennessee",
+   "home_rank_ap": 1,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1939-11-25",
+   "away_team": "Sewanee",
+   "home_team": "Tulane",
+   "home_rank_ap": 5,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1940-10-19",
+   "away_team": "Idaho",
+   "home_team": "Boston College",
+   "home_rank_ap": 8,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1942-10-24",
+   "away_team": "Furman",
+   "home_team": "Tennessee",
+   "home_rank_ap": 17,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1946-10-26",
+   "away_team": "VMI",
+   "home_team": "William & Mary",
+   "home_rank_ap": 18,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1946-11-16",
+   "away_team": "Montana",
+   "home_team": "UCLA",
+   "home_rank_ap": 4,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1946-11-23",
+   "away_team": "Furman",
+   "home_team": "Georgia Tech",
+   "home_rank_ap": 6,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1947-10-25",
+   "away_team": "The Citadel",
+   "home_team": "Georgia Tech",
+   "home_rank_ap": 7,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1947-11-15",
+   "away_team": "Montana",
+   "home_team": "California",
+   "home_rank_ap": 10,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1947-11-22",
+   "away_team": "Furman",
+   "home_team": "Georgia Tech",
+   "home_rank_ap": 10,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1948-11-06",
+   "away_team": "Furman",
+   "home_team": "Clemson",
+   "home_rank_ap": 12,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1948-11-20",
+   "away_team": "Furman",
+   "home_team": "Georgia",
+   "home_rank_ap": 11,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1948-11-20",
+   "away_team": "The Citadel",
+   "home_team": "Georgia Tech",
+   "home_rank_ap": 20,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1949-10-15",
+   "away_team": "The Citadel",
+   "home_team": "Kentucky",
+   "home_rank_ap": 8,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1950-10-28",
+   "away_team": "Furman",
+   "home_team": "Florida",
+   "home_rank_ap": 20,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1950-11-18",
+   "away_team": "Furman",
+   "home_team": "Clemson",
+   "home_rank_ap": 11,
+   "reason": "CFBD /coaches has no row for this team-season"
+  },
+  {
+   "date": "1952-09-20",
+   "away_team": "The Citadel",
+   "home_team": "Georgia Tech",
+   "home_rank_ap": 3,
+   "reason": "CFBD /coaches has no row for this team-season"
+  }
+ ]
+}

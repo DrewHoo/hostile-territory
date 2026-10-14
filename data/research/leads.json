@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "updated": "2026-10-13",
+  "note": "Things a pass raised outside its brief, filed so they don't get dropped (the receipts-research skill's leads file). Close a lead by doing it or by writing why not in its resolution field. The 1936 backfill's are from specs/back-to-1936.spec.md.",
+  "leads": [
+    {
+      "id": "alt-home-1936-2000",
+      "raised": "2026-10-13",
+      "note": "Howell's '@' parse calls every off-campus game neutral, so a game at a team's regular alternate home field doesn't count. Against cfb-streak-king's data/ref/alt-home.json ruling, 186 pre-1990 top-10 games and 8 from 1990-2000 would become road games (Alabama in Birmingham 60, Arkansas in Little Rock 43, Navy in Baltimore 15, Ole Miss in Jackson 10, Tennessee in Memphis 10, Fordham in New York 10). Same problem as open problem 1 in data/research/sources.md.",
+      "next": "Port alt-home.json (pairs and howellEra, with its exceptions) and read Howell's 'vs.' rows with a location cell through it in build-candidates.mjs; diff the 8 changed 1990-2000 rows against their SR receipts.",
+      "resolution": null
+    },
+    {
+      "id": "scope-army-navy",
+      "raised": "2026-10-13",
+      "note": "pre_1990_power leaves out independents that never joined a power conference: Army (24 qualifying top-10 games with no scoped coach), Navy (19), Fordham, the pre-1956 Ivies. Earl Blaik isn't on the board.",
+      "next": "Drew's call. Adding them is a line in data/rules.json pre_1990_power and a re-run of build-coach-stints.mjs and build-records.mjs.",
+      "resolution": null
+    },
+    {
+      "id": "coach-gaps-pre-1990",
+      "raised": "2026-10-13",
+      "note": "19 qualifying games from power school-seasons have no coach because CFBD /coaches has no row for the team-season (The Citadel, Furman, VMI, Sewanee, Idaho, Montana; listed in coach-gaps-pre-1990.json).",
+      "next": "Research each team-season into cfb-streak-king's data/ref/coach-overrides.json with receipts, rebuild its payload, re-run build-coach-stints.mjs here.",
+      "resolution": null
+    },
+    {
+      "id": "sr-verification-pre-1990",
+      "raised": "2026-10-13",
+      "note": "Pre-1990 games carry Howell's row and the poll row as receipts; Howell is the game source, so nothing has checked those games independently. 2,170 top-10 games on the board.",
+      "next": "A verification fleet against archived Sports-Reference season pages, grouped by host-season, writing receipts-7+ in the existing shape.",
+      "resolution": null
+    },
+    {
+      "id": "cfbd-jeff-horton",
+      "raised": "2026-10-13",
+      "note": "CFBD /coaches carries Jeff Horton under two ids (1180: Nevada 1993, UNLV 1994-98; 1181: Minnesota 2010 interim). Same person; the board's single record is right.",
+      "next": "Optional issue draft for CFBD's maintainers.",
+      "resolution": "checked, no change needed here"
+    },
+    {
+      "id": "index-card-since-1990",
+      "raised": "2026-10-13",
+      "note": "The project card on the index site (DrewHoo.github.io) still says 'since 1990'.",
+      "next": "Refresh the card copy per the dataviz-pages-site skill's index-registration reference.",
+      "resolution": null
+    }
+  ]
+}

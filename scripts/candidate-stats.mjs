@@ -2,10 +2,13 @@
 /**
  * candidate-stats.mjs — sanity report over data/games-candidates.json.
  *
- * Prints per-season counts of qualifying games (top-25 and top-10 cuts) and
- * flags seasons that look wrong: zero games, or more than 2x the median. The
- * 1990-2000 / 2001-2025 source seam is the expected failure point, so the
- * report also prints the two eras' medians side by side.
+ * Prints per-season counts of qualifying games (every ranked host, and the
+ * top-10 cut) and flags seasons that look wrong: zero games, or more than 2x
+ * or under half the median of the season's poll era. The AP's depth and
+ * calendar changed (top 20 with no preseason poll 1936-49, top 20 1950-60,
+ * top 10 1961-67, top 20 1968-88, top 25 from 1989), so each era gets its own
+ * median. The 1990-2000 / 2001-2025 source seam is the other expected failure
+ * point, so the report also prints those two eras' medians side by side.
  *
  *   node scripts/candidate-stats.mjs
  *   node scripts/candidate-stats.mjs --team "Ole Miss"   # one away team's rows
@@ -44,7 +47,7 @@ for (const g of games) {
 }
 
 const allSeasons = [];
-for (let s = 1990; s <= last; s++) allSeasons.push(s);
+for (let s = first; s <= last; s++) allSeasons.push(s);
 
 const stat = allSeasons.map((season) => {
   const rows = rowsBySeason.get(season) ?? [];
@@ -56,17 +59,22 @@ const stat = allSeasons.map((season) => {
   return { season, source: sources, top25: rows.length, top10: top10.length, w, l, t };
 });
 
+const POLL_ERAS = [[1936, 1949], [1950, 1960], [1961, 1967], [1968, 1988], [1989, 9999]];
+const eraOf = (season) => POLL_ERAS.find(([a, b]) => season >= a && season <= b);
+const eraMedian = new Map(POLL_ERAS.map((e) => [e, median(stat.filter((s) => s.top25 > 0 && eraOf(s.season) === e).map((s) => s.top25))]));
 const med25 = median(stat.filter((s) => s.top25 > 0).map((s) => s.top25));
 const med10 = median(stat.filter((s) => s.top25 > 0).map((s) => s.top10));
 
 console.log(`data/games-candidates.json — ${games.length} rows, seasons ${first}-${last}`);
-console.log(`median per season: top-25 ${med25}, top-10 ${med10}\n`);
+console.log(`median per season: ranked ${med25}, top-10 ${med10}; by poll era: ${POLL_ERAS.map((e) => `${e[0]}-${e[1] === 9999 ? last : e[1]} ${eraMedian.get(e)}`).join(', ')}\n`);
 console.log('season  source     top25  top10   top10 W-L-T   flag');
 const flagged = [];
 for (const s of stat) {
   const flags = [];
+  const em = eraMedian.get(eraOf(s.season));
   if (s.top25 === 0) flags.push('ZERO');
-  else if (s.top25 > 2 * med25) flags.push(`>2x median (${med25})`);
+  else if (s.top25 > 2 * em) flags.push(`>2x era median (${em})`);
+  else if (s.top25 < em / 2) flags.push(`<half era median (${em})`);
   if (s.top25 > 0 && s.top10 === 0) flags.push('ZERO top-10');
   if (flags.length) flagged.push(s.season);
   console.log(

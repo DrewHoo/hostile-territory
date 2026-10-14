@@ -9,9 +9,12 @@
  *   node scripts/fetch-data.mjs --only=polls    # games | jhowell | polls
  *
  * Sources (see data/research/sources.md for the why):
- *   games 2001-2025  cfbfastR-data schedules CSVs on raw.githubusercontent.com
- *   games 1990-2000  jhowell.net per-team historical score files
- *   AP polls 1990-2025 collegepollarchive.com weekly poll pages
+ *   games 2001-2026  cfbfastR-data schedules CSVs on raw.githubusercontent.com
+ *   games 1936-2000  jhowell.net per-team historical score files
+ *   AP polls 1936-2026 collegepollarchive.com weekly poll pages
+ *
+ * cfb-streak-king caches the same Howell and CPA urls under its data/raw/, so
+ * a fresh checkout can copy those files in instead of fetching them again.
  */
 
 import fs from 'node:fs';
@@ -24,9 +27,9 @@ const ONLY = (args.find((a) => a.startsWith('--only=')) || '').split('=')[1] || 
 
 const CFB_FIRST = 2001;
 const CFB_LAST = 2026;
-const POLL_FIRST = 1990;
+const POLL_FIRST = 1936;
 const POLL_LAST = 2026;
-const JH_FIRST = 1990;
+const JH_FIRST = 1936;
 const JH_LAST = 2000;
 
 const UA =

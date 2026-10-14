@@ -7,18 +7,18 @@ export default {
 
   // <title>, og:title, twitter:title. Under 60 characters, phrased the way
   // someone would type the search.
-  title: "Every Coach's Road Record vs Top-10 Teams Since 1990",
+  title: "Every Coach's Road Record vs Top-10 Teams Since 1936",
 
   // Meta description and og:description. The first ~155 characters are the
   // search snippet, so the payoff goes first.
   description:
-    'Lane Kiffin is 1-8 on the road against top-10 teams. Every head coach\'s true road record vs AP top-10 opponents since 1990, with a receipt for every game.',
+    'Lane Kiffin is 1-8 on the road against top-10 teams. Every head coach\'s true road record vs AP top-10 opponents since 1936, with a receipt for every game.',
 
   // Display title on the OG image (the SEO title is too long to render big).
   ogTitle: 'Hostile Territory',
 
   // Second line on the OG image. Short.
-  ogSubtitle: 'Every coach\'s true road record vs the AP top 10 since 1990',
+  ogSubtitle: 'Every coach\'s true road record vs the AP top 10 since 1936',
 
   // Alt text for the OG image, for screen readers on social platforms.
   ogImageAlt: 'Hostile Territory: a floodlit night leaderboard of coaches\' road records against AP top-10 teams.',

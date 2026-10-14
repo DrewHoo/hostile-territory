@@ -1,6 +1,8 @@
-// Joins researched tenures (data/research/tenures-*.json) against computed
-// candidate games (data/games-candidates.json) and emits data/records.json.
-// Agents gather rows; this script is the only place attribution happens.
+// Joins researched tenures (data/research/tenures-*.json) and the generated
+// coach stints (data/coach-stints.json, 1936-1989 plus a few later rows)
+// against computed candidate games (data/games-candidates.json) and emits
+// data/records.json. Agents gather rows; this script is the only place
+// attribution happens.
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
 
 const RESEARCH_DIR = 'data/research'
@@ -56,6 +58,16 @@ const tenures = tenureFiles.flatMap((f) =>
   JSON.parse(readFileSync(`${RESEARCH_DIR}/${f}`, 'utf8')).map((t) => ({ ...t, coach: canonCoach(t.coach), school: canonTeam(t.school), file: f }))
 )
 
+// Before 1990 the researched rows don't apply (they were researched for 1990
+// on, and some carry a tenure's real start season); the stints own those
+// seasons. From 1990 the researched rows come first and a scoped stint row
+// fills in only where none covers the game (a coach scoped by his pre-1990
+// career, at a school the research never covered).
+const SEAM = 1990
+const stints = JSON.parse(readFileSync('data/coach-stints.json', 'utf8')).rows
+  .map((t) => ({ ...t, coach: canonCoach(t.coach), file: 'coach-stints.json' }))
+const scopedStints = stints.filter((t) => t.scoped)
+
 // A tenure covers a school's game when the school matches and either the date
 // range (when present) or the season range contains it. Dated rows beat undated
 // rows so an interim's narrow window wins over the surrounding span.
@@ -71,7 +83,8 @@ function covers(t, school, game) {
 // Best-effort coach lookup for the HOME side of a game (for the popover).
 // Ranked home teams are nearly all covered schools; null when they aren't.
 function homeCoach(game) {
-  const matches = tenures.filter((t) => covers(t, game.home_team, game))
+  let matches = game.season < SEAM ? [] : tenures.filter((t) => covers(t, game.home_team, game))
+  if (!matches.length) matches = stints.filter((t) => covers(t, game.home_team, game))
   if (matches.length === 1) return matches[0].coach
   if (matches.length > 1) {
     const dated = matches.filter((t) => t.start_date || t.end_date)
@@ -114,7 +127,8 @@ function ovMatch(game, matches) {
 }
 
 for (const game of candidates.games) {
-  const matches = tenures.filter((t) => covers(t, game.away_team, game))
+  let matches = game.season < SEAM ? [] : tenures.filter((t) => covers(t, game.away_team, game))
+  if (!matches.length) matches = scopedStints.filter((t) => covers(t, game.away_team, game))
   let pick = null
   const ov = ovMatch(game, matches)
   if (ov) pick = ov
@@ -156,6 +170,7 @@ for (const game of candidates.games) {
     home_coach: homeCoach(game),
     ot: game.game_id != null && otMap[game.game_id] != null ? otMap[game.game_id] : null,
     credit: game.credit ?? null,
+    tenure_file: pick.file,
     receipt: (() => {
       if (!rcpt || rcpt.status === 'page_missing') return null
       let status = rcpt.status
@@ -198,15 +213,46 @@ writeFileSync('data/records.json', JSON.stringify({
 // Compact site payload: arrays instead of objects, only what the page renders.
 // Row: [date, school, opponent, opp_rank, result, away_pts, home_pts, interim,
 //       home_coach|null, ot (0 = regulation/unknown, N = overtimes, ESPN),
-//       receipt_url|null, receipt_quote|null (confirmed SR receipts only)]
+//       receipt_url|null, receipt_quote|null, credit|null, poll|null]
+// receipt_url/quote: a confirmed SR receipt (an independent check), or before
+// 1990 the visitor's Howell row ('h:<file>#<season>', the source itself).
+// poll: before 1990, [CPA poll id, the host's row in it].
+const howellRow = (g) => {
+  const r = g.receipts?.find((x) => x.url?.includes('jhowell.net'))
+  return r ? [`h:${g.howell_file}#${g.season}`, r.quote] : null
+}
+const pollRow = (g) => {
+  const r = g.receipts?.find((x) => x.url?.includes('collegepollarchive.com'))
+  return r ? [g.poll_id, r.quote] : null
+}
+const siteRow = (g) => [
+  g.date, g.school, g.home_team, g.home_rank_ap, g.result, g.away_points, g.home_points, g.interim ? 1 : 0, g.home_coach, g.ot ?? 0, g.receipt?.status === 'confirmed' ? g.receipt.url : howellRow(g)?.[0] ?? null, g.receipt?.status === 'confirmed' ? g.receipt.quote : howellRow(g)?.[1] ?? null, g.credit,
+  ...(pollRow(g) ? [pollRow(g)] : []),
+]
+const modern = (g) => g.season >= SEAM
+
+// The page's first paint and the prerender read only site-data.json, the
+// 1990+ rows; the app loads site-data-1936.json after mount and adds each
+// coach's earlier games. A coach with only pre-1990 games appears in the
+// second file alone.
 writeFileSync('src/data/site-data.json', JSON.stringify({
   generated: new Date().toISOString().slice(0, 10),
   rules_version: candidates.rules_version,
-  coaches: records.map((r) => ({
+  coaches: records.filter((r) => r.games.some(modern)).map((r) => ({
     n: r.coach,
-    s: r.schools,
+    s: [...new Set(r.games.filter(modern).map((g) => g.school))],
     a: r.active,
-    g: r.games.map((g) => [g.date, g.school, g.home_team, g.home_rank_ap, g.result, g.away_points, g.home_points, g.interim ? 1 : 0, g.home_coach, g.ot ?? 0, g.receipt?.status === 'confirmed' ? g.receipt.url : null, g.receipt?.status === 'confirmed' ? g.receipt.quote : null, g.credit]),
+    g: r.games.filter(modern).map(siteRow),
+  })),
+}))
+writeFileSync('src/data/site-data-1936.json', JSON.stringify({
+  generated: new Date().toISOString().slice(0, 10),
+  rules_version: candidates.rules_version,
+  coaches: records.filter((r) => r.games.some((g) => !modern(g))).map((r) => ({
+    n: r.coach,
+    s: [...new Set(r.games.filter((g) => !modern(g)).map((g) => g.school))],
+    a: r.active,
+    g: r.games.filter((g) => !modern(g)).map(siteRow),
   })),
 }))
 

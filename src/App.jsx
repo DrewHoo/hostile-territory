@@ -4,8 +4,33 @@ import LOGO_IDS from './data/team-ids.json'
 import { readParam, writeParam } from './urlState.js'
 
 // site-data game row: [date, school, opponent, opp_rank, result, away_pts,
-// home_pts, interim, home_coach|null, overtimes (0 = regulation/unknown)]
-const [D_DATE, D_SCHOOL, D_OPP, D_RANK, D_RES, D_AP, D_HP, D_INT, D_HC, D_OT, D_URL, D_QUOTE, D_CREDIT] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+// home_pts, interim, home_coach|null, overtimes (0 = regulation/unknown),
+// receipt_url|null, receipt_quote|null, credit|null, poll|null]
+// receipt_url is a Sports-Reference capture (an independent check) or, before
+// 1990, 'h:<file>#<season>', the visitor's row on Howell's page (the source).
+// poll is [CPA poll id, the host's row in the poll in effect], before 1990.
+const [D_DATE, D_SCHOOL, D_OPP, D_RANK, D_RES, D_AP, D_HP, D_INT, D_HC, D_OT, D_URL, D_QUOTE, D_CREDIT, D_POLL] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
+// site-data.json holds the 1990+ rows and is all the prerender renders;
+// site-data-1936.json (the earlier rows) loads after mount and is merged in
+// here, oldest games first.
+function mergeEras(modern, early) {
+  if (!early) return modern
+  const byName = new Map(modern.map((c) => [c.n, c]))
+  const merged = modern.map((c) => c)
+  for (const e of early) {
+    const m = byName.get(e.n)
+    const c = m ? { n: e.n, s: [...new Set([...e.s, ...m.s])], a: m.a, g: [...e.g, ...m.g] } : e
+    if (m) merged[merged.indexOf(m)] = c
+    else merged.push(c)
+  }
+  return merged
+}
+
+const isHowell = (g) => g[D_URL]?.startsWith('h:')
+const receiptHref = (g) => (isHowell(g) ? `https://www.jhowell.net/cf/scores/${g[D_URL].slice(2)}` : g[D_URL])
+const receiptTitle = (g) => (isHowell(g) ? `Howell's page, the source row (not an independent check): ${g[D_QUOTE]}` : g[D_QUOTE])
+const pollHref = (g) => `https://www.collegepollarchive.com/football/ap/seasons.cfm?appollid=${g[D_POLL][0]}`
 
 const logoSrc = (team) => (LOGO_IDS[team] ? `${import.meta.env.BASE_URL}logos/${LOGO_IDS[team]}.png` : null)
 
@@ -67,6 +92,8 @@ export default function App() {
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(null)
   const [pop, setPop] = useState(null)
+  const [early, setEarly] = useState(null)
+  const coaches = useMemo(() => mergeEras(DATA.coaches, early?.coaches), [early])
 
   const showPop = (e, g, coach) => setPop({ g, coach, rect: e.currentTarget.getBoundingClientRect() })
   const chipHandlers = (g, coach) => ({
@@ -89,7 +116,8 @@ export default function App() {
     const q = readParam('q')
     if (q) setQuery(q)
     const coach = readParam('coach')
-    if (coach && DATA.coaches.some((x) => x.n === coach)) { setOpen(coach); setActiveOnly(false) }
+    if (coach) { setOpen(coach); setActiveOnly(false) }
+    import('./data/site-data-1936.json').then((m) => setEarly(m.default))
   }, [])
 
   const setAndWrite = (setter, key, value, defaultValue) => {
@@ -99,7 +127,7 @@ export default function App() {
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return DATA.coaches
+    return coaches
       .map((c) => {
         const games = c.g.filter((g) => g[D_RANK] <= cut)
         return { ...c, games, ...tally(games) }
@@ -108,7 +136,7 @@ export default function App() {
       .filter((c) => !activeOnly || c.a)
       .filter((c) => !q || c.n.toLowerCase().includes(q) || c.s.some((s) => s.toLowerCase().includes(q)))
       .sort((a, b) => b.pct - a.pct || b.w - a.w || a.l - b.l || a.n.localeCompare(b.n))
-  }, [cut, minGames, activeOnly, query])
+  }, [coaches, cut, minGames, activeOnly, query])
 
   // Highlight every OTHER coach's road game at the same host while a game is
   // hovered or selected. The active coach's own row stays unlit.
@@ -124,17 +152,18 @@ export default function App() {
     <main>
       <div className="field-rule" aria-hidden="true"></div>
       <h1>Hostile Territory</h1>
-      <div className="dateline">Road games vs the AP Top 10 · 1990 – present</div>
+      <div className="dateline">Road games vs the AP Top 10 · 1936 – present</div>
       {/* Pinned to the ESPN factoid that started the site; the board carries the live record. */}
       <p className="sub">
         Lane Kiffin is <s>1–8</s> 1–9 on the road against top 10 teams. Here's how his record
         matches up against everyone else.
       </p>
 
-      <h2>Every coach since 1990</h2>
+      <h2>Every coach since 1936</h2>
       <div className="h2-note">
         Every true road game against a top-{cut} team, per head coach. Tap a game for details,
         or the coach for their full record.
+        {cut === 25 ? ' The AP ranked 20 teams before 1989 (10 in 1961–67), so earlier seasons stop there.' : ''}
       </div>
 
       <div className="filters">
@@ -192,11 +221,13 @@ export default function App() {
                   <div key={i} className="log-row">
                     <span className="d">
                       {g[D_URL]
-                        ? <a href={g[D_URL]} target="_blank" rel="noopener" title={g[D_QUOTE]}>{fmtDate(g[D_DATE])}</a>
+                        ? <a href={receiptHref(g)} className={isHowell(g) ? 'src' : null} target="_blank" rel="noopener" title={receiptTitle(g)}>{fmtDate(g[D_DATE])}</a>
                         : fmtDate(g[D_DATE])}
                     </span>
                     <span className="m">
-                      <b>{g[D_SCHOOL]}</b> at #{g[D_RANK]} <b>{g[D_OPP]}</b>
+                      <b>{g[D_SCHOOL]}</b> at {g[D_POLL]
+                        ? <a href={pollHref(g)} className="poll" target="_blank" rel="noopener" title={`AP poll in effect at kickoff: ${g[D_POLL][1]}`}>#{g[D_RANK]}</a>
+                        : `#${g[D_RANK]}`} <b>{g[D_OPP]}</b>
                       {g[D_INT] ? <span className="int"> · interim</span> : null}
                       {g[D_CREDIT] ? <span className="credit"> · {g[D_CREDIT]}</span> : null}
                     </span>
@@ -214,6 +245,7 @@ export default function App() {
       <div className="legend">
         <span><span className="chip w">W</span> Win</span>
         <span><span className="chip l">L</span> Loss</span>
+        <span><span className="chip t">T</span> Tie</span>
         <span className="legend-note">each mark is the host team</span>
       </div>
 
@@ -248,27 +280,34 @@ export default function App() {
         <div className="method">
           <p>
             No total on this page was reported by anyone — records are computed by joining three
-            sources: game results (cfbfastR 2001–2025, jhowell.net 1990–2000), weekly AP polls
-            (College Poll Archive), and coaching tenures researched row by row with a citation each.
+            sources: game results (cfbfastR 2001–present, <a href="https://www.jhowell.net/cf/scores/byname.htm">jhowell.net</a> 1936–2000),
+            weekly AP polls (<a href="https://www.collegepollarchive.com/">College Poll Archive</a>), and head
+            coaches: researched row by row with a citation each since 1990, and before that
+            CollegeFootballData's coach records checked against every team's results season by season
+            (the work behind <a href="https://drewhoover.com/cfb-streak-king/">Streak King</a>).
           </p>
           <p>
-            Each game's date links its receipt: for all but a handful, the home team's Sports-Reference schedule
-            page as captured by the Internet Archive's{' '}
+            Each game's date links its receipt. Since 1990, for all but a handful, that's the home team's
+            Sports-Reference schedule page as captured by the Internet Archive's{' '}
             <a href="https://web.archive.org/">Wayback Machine</a>, with the matching row quoted on hover. The
             captures keep the receipts checkable after the live page changes; the archive is
-            worth <a href="https://archive.org/donate">a donation</a>.
+            worth <a href="https://archive.org/donate">a donation</a>. Before 1990 the date links the game's
+            row on Howell's page, which is where the game came from rather than a second source (so the link is
+            dashed), and the rank links the AP poll that was in effect at kickoff.
           </p>
           <p>What counts as a road game, and whose record it goes on:</p>
           <ul>
             <li>The team is the away team and the site is not neutral. Bowls, kickoff classics, and conference championship games are out. CFP first-round campus games count.</li>
             <li>The opponent is ranked in the most recent AP poll published before kickoff — not the Coaches poll, not the CFP rankings, not the final poll.</li>
+            <li>There was no preseason poll before 1950, so a game played before that season's first poll (mid-October) has no rank and can't count. The AP ranked 20 teams before 1989, and 10 in 1961–67.</li>
+            <li>Before 2001 a game at a team's regular second home (Alabama at Legion Field, Arkansas at Little Rock) is treated as neutral, so it isn't counted yet.</li>
             <li>The coach of record is whoever was head coach on the game date. Interim games count for the interim.</li>
-            <li>Coaches qualify by having led a power-conference program since 1990; all of their FBS head-coaching games count, including stops elsewhere.</li>
+            <li>Coaches qualify by having led a power-conference program: since 1990, the conferences you'd expect; before that the SEC, Big Ten, Southwest, Big 8 (and the Big Six and Seven), the Pacific Coast through the Pac-10, the ACC, the Southern Conference through 1952, and independents that later joined one of them. All of their major-college head-coaching games count, including stops elsewhere.</li>
           </ul>
         </div>
       </section>
 
-      <footer>Data: Sports-Reference, College Poll Archive, cfbfastR. Rules and receipts above.</footer>
+      <footer>Data: Sports-Reference, College Poll Archive, jhowell.net, cfbfastR, CollegeFootballData. Rules and receipts above.</footer>
       <GamePopover pop={pop} onClose={() => setPop(null)} />
     </main>
   )

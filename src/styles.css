@@ -95,7 +95,8 @@ h2 { font-family: 'Graduate', serif; font-weight: 400; font-size: 21px; letter-s
 .chip.l img { filter: brightness(0) invert(0.66); opacity: 0.85; }
 .chip.w { background: var(--cream); color: #241d12; box-shadow: 0 0 8px rgba(243, 226, 188, 0.35); }
 .chip.l { background: var(--bg-lift); color: var(--ink-muted); border: 1px solid var(--line); }
-.chip.t { background: transparent; color: var(--ink-muted); border: 1px dashed var(--ink-faint); }
+.chip.t { background: var(--bg-lift); color: var(--ink); border: 1px dashed rgba(243, 226, 188, 0.6); }
+.chip.t img { filter: brightness(0) invert(0.9); opacity: 0.9; }
 .chip.hl { outline: 2px solid var(--rust); outline-offset: 1px; }
 .chip.l.hl { color: var(--ink); border-color: var(--rust); }
 .rec { text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; white-space: nowrap; }
@@ -113,6 +114,8 @@ h2 { font-family: 'Graduate', serif; font-weight: 400; font-size: 21px; letter-s
 .log-row:last-child { border-bottom: none; }
 .log-row .d { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-faint); }
 .log-row .d a { color: var(--rust); text-decoration: underline dotted; text-underline-offset: 3px; }
+.log-row .d a.src { color: var(--ink-muted); text-decoration-style: dashed; }
+.log-row .m a.poll { color: inherit; text-decoration: underline dotted; text-underline-offset: 3px; }
 .log-row .m { color: var(--ink-muted); }
 .log-row .m b { color: var(--ink); font-weight: 600; }
 .log-row .sc { text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 13px; }

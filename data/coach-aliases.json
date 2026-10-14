@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "updated": "2026-10-13",
+  "note": "Coach-name spellings, canonical -> [variants]. The canonical name is the researched tenure files' spelling; a variant is another source's spelling of the same person (CFBD /coaches via data/coach-stints.json). build-records.mjs and build-coach-stints.mjs map every variant onto the canonical name, so one person keeps one record. Add a row when build-coach-stints.mjs prints a seam mismatch or coverage-report.mjs prints a name-variant suspect that is the same person.",
+  "aliases": {
+    "R. C. Slocum": [
+      "R.C. Slocum"
+    ],
+    "Rod Dowhower": [
+      "Ron Dowhower"
+    ]
+  }
+}

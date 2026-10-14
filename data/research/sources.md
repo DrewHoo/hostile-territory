@@ -1,5 +1,7 @@
 # Pipeline sources and evidence
 
+> 2026-10-13: the window now starts in 1936. Howell's pages carry the games back to 1936 and the polls come from the same CPA archive; the rules that change before 1990 (no preseason poll before 1950, a 20- or 10-team poll before 1989, who counts as power) and the backfill's checks are in `specs/back-to-1936.spec.md`. The numbers below are the 1990 build's.
+
 Phase 1 of `docs/research-plan.md`. Everything here was produced by running
 `scripts/fetch-data.mjs`, `scripts/build-candidates.mjs`, and
 `scripts/candidate-stats.mjs` on 2026-09-19. Nothing in this file is an agent's
