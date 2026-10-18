@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-13",
+ "generated": "2026-10-18",
  "rules_version": 2,
  "definition": "True road games (away team, neutral_site false) since the 1936 season where the home team was ranked in the AP poll in effect at kickoff (1-25 from 1989, 1-20 before, 1-10 in 1961-67).",
  "sources": {
@@ -7,7 +7,7 @@
   "jhowell.net (1936-2000)": "https://www.jhowell.net/cf/scores/byname.htm",
   "AP polls (1936-2026)": "https://www.collegepollarchive.com/football/ap/seasons.cfm?seasonid=<year>"
  },
- "count": 9836,
+ "count": 9840,
  "games": [
   {
    "date": "1936-10-24",
@@ -239370,6 +239370,78 @@
    "season_type": "regular",
    "venue": "Autzen Stadium",
    "game_id": "401858484"
+  },
+  {
+   "date": "2026-10-17",
+   "season": 2026,
+   "week": 7,
+   "away_team": "Florida",
+   "home_team": "Texas",
+   "home_rank_ap": 7,
+   "away_rank_ap": null,
+   "away_points": 27,
+   "home_points": 24,
+   "result": "W",
+   "source": "cfbfastR",
+   "poll_date": "2026-10-11",
+   "poll_label": "October 11",
+   "season_type": "regular",
+   "venue": "DKR-Texas Memorial Stadium",
+   "game_id": "401856724"
+  },
+  {
+   "date": "2026-10-17",
+   "season": 2026,
+   "week": 7,
+   "away_team": "Mississippi State",
+   "home_team": "LSU",
+   "home_rank_ap": 22,
+   "away_rank_ap": 16,
+   "away_points": 0,
+   "home_points": 31,
+   "result": "L",
+   "source": "cfbfastR",
+   "poll_date": "2026-10-11",
+   "poll_label": "October 11",
+   "season_type": "regular",
+   "venue": "Tiger Stadium (LA)",
+   "game_id": "401856720"
+  },
+  {
+   "date": "2026-10-17",
+   "season": 2026,
+   "week": 7,
+   "away_team": "Ohio State",
+   "home_team": "Indiana",
+   "home_rank_ap": 5,
+   "away_rank_ap": 4,
+   "away_points": 19,
+   "home_points": 15,
+   "result": "W",
+   "source": "cfbfastR",
+   "poll_date": "2026-10-11",
+   "poll_label": "October 11",
+   "season_type": "regular",
+   "venue": "Memorial Stadium (Bloomington, IN)",
+   "game_id": "401858488"
+  },
+  {
+   "date": "2026-10-17",
+   "season": 2026,
+   "week": 7,
+   "away_team": "Virginia",
+   "home_team": "SMU",
+   "home_rank_ap": 24,
+   "away_rank_ap": null,
+   "away_points": 13,
+   "home_points": 23,
+   "result": "L",
+   "source": "cfbfastR",
+   "poll_date": "2026-10-11",
+   "poll_label": "October 11",
+   "season_type": "regular",
+   "venue": "Gerald J. Ford Stadium",
+   "game_id": "401858268"
   }
  ],
  "pre_poll": [
