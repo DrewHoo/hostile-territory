@@ -51,7 +51,7 @@ h1 {
 .hero-stat .why { max-width: 340px; color: var(--ink-muted); font-size: 15px; }
 .hero-stat .why b { color: var(--ink); }
 
-h2 { font-family: 'Graduate', serif; font-weight: 400; font-size: 21px; letter-spacing: 0.04em; margin: 46px 0 4px; color: var(--cream); }
+h2 { font-family: Georgia, 'Source Serif 4', 'Times New Roman', serif; font-weight: 700; font-size: 21px; letter-spacing: 0.02em; margin: 46px 0 4px; color: var(--cream); }
 .h2-note { color: var(--ink-faint); font-size: 13.5px; margin-bottom: 18px; font-style: italic; }
 
 /* filters */
