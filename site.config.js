@@ -1,3 +1,6 @@
+import DATA from './src/data/site-data.json' with { type: 'json' }
+import { kiffinDescription } from './src/kiffin.js'
+
 // The one file to edit when you start a project from this template.
 // The URL slug is NOT here: it is the "name" in package.json, and it has to
 // equal the GitHub repo name, because the site serves at https://<domain>/<repo>/.
@@ -10,9 +13,9 @@ export default {
   title: "Every Coach's Road Record vs Top-10 Teams Since 1936",
 
   // Meta description and og:description. The first ~155 characters are the
-  // search snippet, so the payoff goes first.
-  description:
-    'Lane Kiffin is 1-8 on the road against top-10 teams. Every head coach\'s true road record vs AP top-10 opponents since 1936, with a receipt for every game.',
+  // search snippet, so the payoff goes first: Kiffin's live record from the
+  // board, with ESPN's 1-8 factoid (the searched phrase) kept beside it.
+  description: kiffinDescription(DATA),
 
   // Display title on the OG image (the SEO title is too long to render big).
   ogTitle: 'Hostile Territory',

@@ -2,6 +2,12 @@ import { useEffect, useMemo, useState } from 'react'
 import DATA from './data/site-data.json'
 import LOGO_IDS from './data/team-ids.json'
 import { readParam, writeParam } from './urlState.js'
+import { ESPN, kiffinRecord } from './kiffin.js'
+import { useShare } from './useShare.js'
+import { ShareIcon } from './Icons.jsx'
+import { Notes } from './Notes.jsx'
+
+const KIFFIN = kiffinRecord(DATA)
 
 // site-data game row: [date, school, opponent, opp_rank, result, away_pts,
 // home_pts, interim, home_coach|null, overtimes (0 = regulation/unknown),
@@ -94,6 +100,7 @@ export default function App() {
   const [pop, setPop] = useState(null)
   const [early, setEarly] = useState(null)
   const coaches = useMemo(() => mergeEras(DATA.coaches, early?.coaches), [early])
+  const { copied, share } = useShare()
 
   const showPop = (e, g, coach) => setPop({ g, coach, rect: e.currentTarget.getBoundingClientRect() })
   const chipHandlers = (g, coach) => ({
@@ -148,14 +155,32 @@ export default function App() {
     window.dhAnalytics?.track('coach_open', { coach: name })
   }
 
+  // The share text is the page's one sentence, or the open coach's record line.
+  const onShare = () => {
+    const c = open && coaches.find((c) => c.n === open)
+    const r = c && tally(c.g.filter((g) => g[D_RANK] <= cut))
+    const text = c
+      ? `${c.n} is ${r.w}–${r.l}${r.t ? `–${r.t}` : ''} on the road against top-${cut} teams`
+      : `Every coach's true road record vs the AP top ${cut} since 1936`
+    window.dhAnalytics?.track('share', { from: 'dateline', coach: c ? c.n : undefined, cut })
+    share(text, window.location.href)
+  }
+
   return (
     <main>
       <div className="field-rule" aria-hidden="true"></div>
       <h1>Hostile Territory</h1>
-      <div className="dateline">Road games vs the AP Top 10 · 1936 – present</div>
-      {/* Pinned to the ESPN factoid that started the site; the board carries the live record. */}
+      <div className="dateline">
+        <span>Road games vs the AP Top 10 · 1936 – present<span className="dateline-upd"> · updated {DATA.generated}</span></span>
+        <span className="dateline-acts">
+          <button className="ico" onClick={onShare} aria-label="Share"><ShareIcon /></button>
+          {copied && <span className="toast">copied</span>}
+        </span>
+      </div>
+      {/* Pinned to the ESPN factoid that started the site, with the live number from the board beside it. */}
       <p className="sub">
-        Lane Kiffin is <s>1–8</s> 1–9 on the road against top 10 teams. Here's how his record
+        Lane Kiffin is {(KIFFIN.w !== ESPN.w || KIFFIN.l !== ESPN.l || KIFFIN.t) ? <><s>{ESPN.w}–{ESPN.l}</s>{' '}</> : null}
+        {KIFFIN.w}–{KIFFIN.l}{KIFFIN.t ? `–${KIFFIN.t}` : ''} on the road against top 10 teams. Here's how his record
         matches up against everyone else.
       </p>
 
@@ -249,65 +274,7 @@ export default function App() {
         <span className="legend-note">each mark is the host team</span>
       </div>
 
-      {/* Each trailing section is one centered 700px column so the heading
-          and its body share a left edge at every width — the board above
-          stays full-width. */}
-      <section className="notes">
-        <h2>What to read next</h2>
-        <div className="method">
-          <p>
-            <a href="https://drewhoover.com/cfb-streak-king/">Streak King</a> — win, lose, cover, or don't, all-time, active, at-home, on the road,
-            underdog, favorite, conference-only, while ranked, against ranked, at night, trailing at the half, after a loss, after a bye... 
-            any constraint you can think of, somebody's team is the king of that streak.
-          </p>
-          <p>
-            <a href="https://drewhoover.com/how-many-rings/">How Many Rings?</a> — There is one person who has the 
-            most rings in college football, and it isn't Nick Saban.
-          </p>
-          <p>
-            <a href="https://drewhoover.com/collegiate-championships/">Who has the most college championships?</a> — every
-            NCAA champion across 33 sports since 1972.
-          </p>
-          <p>
-            <a href="https://drewhoover.com/cfb-all-time-records/football">All-time FBS records</a> — all
-            136 programs ranked by total wins, win percentage and bowl record.
-          </p>
-        </div>
-      </section>
-
-      <section className="notes">
-        <h2>Method</h2>
-        <div className="method">
-          <p>
-            No total on this page was reported by anyone — records are computed by joining three
-            sources: game results (cfbfastR 2001–present, <a href="https://www.jhowell.net/cf/scores/byname.htm">jhowell.net</a> 1936–2000),
-            weekly AP polls (<a href="https://www.collegepollarchive.com/">College Poll Archive</a>), and head
-            coaches: researched row by row with a citation each since 1990, and before that
-            CollegeFootballData's coach records checked against every team's results season by season
-            (the work behind <a href="https://drewhoover.com/cfb-streak-king/">Streak King</a>).
-          </p>
-          <p>
-            Each game's date links its receipt. Since 1990, for all but a handful, that's the home team's
-            Sports-Reference schedule page as captured by the Internet Archive's{' '}
-            <a href="https://web.archive.org/">Wayback Machine</a>, with the matching row quoted on hover. The
-            captures keep the receipts checkable after the live page changes; the archive is
-            worth <a href="https://archive.org/donate">a donation</a>. Before 1990 the date links the game's
-            row on Howell's page, which is where the game came from rather than a second source (so the link is
-            dashed), and the rank links the AP poll that was in effect at kickoff.
-          </p>
-          <p>What counts as a road game, and whose record it goes on:</p>
-          <ul>
-            <li>The team is the away team and the site is not neutral. Bowls, kickoff classics, and conference championship games are out. CFP first-round campus games count.</li>
-            <li>The opponent is ranked in the most recent AP poll published before kickoff — not the Coaches poll, not the CFP rankings, not the final poll.</li>
-            <li>There was no preseason poll before 1950, so a game played before that season's first poll (mid-October) has no rank and can't count. The AP ranked 20 teams before 1989, and 10 in 1961–67.</li>
-            <li>Before 2001 a game at a team's regular second home (Alabama at Legion Field, Arkansas at Little Rock) is treated as neutral, so it isn't counted yet.</li>
-            <li>The coach of record is whoever was head coach on the game date. Interim games count for the interim.</li>
-            <li>Coaches qualify by having led a power-conference program: since 1990, the conferences you'd expect; before that the SEC, Big Ten, Southwest, Big 8 (and the Big Six and Seven), the Pacific Coast through the Pac-10, the ACC, the Southern Conference through 1952, and independents that later joined one of them. All of their major-college head-coaching games count, including stops elsewhere.</li>
-          </ul>
-        </div>
-      </section>
-
-      <footer>Data: Sports-Reference, College Poll Archive, jhowell.net, cfbfastR, CollegeFootballData. Rules and receipts above.</footer>
+      <Notes />
       <GamePopover pop={pop} onClose={() => setPop(null)} />
     </main>
   )
