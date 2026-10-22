@@ -13,6 +13,9 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import config from '../site.config.js'
 import pkg from '../package.json' with { type: 'json' }
+import DATA from '../src/data/site-data.json' with { type: 'json' }
+import EARLY from '../src/data/site-data-1936.json' with { type: 'json' }
+import { llmsText } from './lib/llms.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SLUG = pkg.name
@@ -80,7 +83,7 @@ const head = `
     <meta name="twitter:image" content="${SITE}og.png" />
 
     <!-- Cross-site chrome served by the index site: back bar, comments, analytics. -->
-    <script src="${ORIGIN}/embed/back-bar.js" async></script>
+    <script src="${ORIGIN}/embed/back-bar.js" data-section="sports" async></script>
     <script src="${ORIGIN}/embed/giscus.js" async></script>
     <script src="${ORIGIN}/embed/analytics.js" async></script>
 
@@ -115,6 +118,9 @@ fs.writeFileSync(
 </urlset>
 `,
 )
+
+// llms.txt (llmstxt.org): the site in plain markdown for a language model.
+fs.writeFileSync(path.join(ROOT, 'dist/llms.txt'), llmsText({ site: SITE, title: config.title, description: config.description, generated: DATA.generated, coaches: new Set([...DATA.coaches, ...EARLY.coaches].map((c) => c.n)).size }))
 
 const words = appHtml.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length
 console.log(`prerendered ${(appHtml.length / 1024).toFixed(0)}KB into #root (~${words} words); head written for ${SITE}`)

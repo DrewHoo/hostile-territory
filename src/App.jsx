@@ -4,8 +4,8 @@ import LOGO_IDS from './data/team-ids.json'
 import { readParam, writeParam } from './urlState.js'
 import { ESPN, kiffinRecord } from './kiffin.js'
 import { useShare } from './useShare.js'
-import { ShareIcon } from './Icons.jsx'
-import { Notes } from './Notes.jsx'
+import { ShareIcon, CoffeeIcon } from './Icons.jsx'
+import { Notes, KOFI_URL } from './Notes.jsx'
 
 const KIFFIN = kiffinRecord(DATA)
 
@@ -174,6 +174,7 @@ export default function App() {
         <span>Road games vs the AP Top 10 · 1936 – present<span className="dateline-upd"> · updated {DATA.generated}</span></span>
         <span className="dateline-acts">
           <button className="ico" onClick={onShare} aria-label="Share"><ShareIcon /></button>
+          <a className="ico" href={KOFI_URL} onClick={() => window.dhAnalytics?.track('kofi', { from: 'icons' })} aria-label="Buy me a coffee"><CoffeeIcon /></a>
           {copied && <span className="toast">copied</span>}
         </span>
       </div>

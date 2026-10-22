@@ -1,5 +1,7 @@
 // What to read next, the Ko-fi line, and the Method notes: the page's static copy.
 
+import { SIBLINGS } from './siblings.js'
+
 export const KOFI_URL = 'https://ko-fi.com/drewhooverdotcom'
 
 const track = (name, props) => window.dhAnalytics?.track(name, props)
@@ -13,30 +15,11 @@ export function Notes() {
       <section className="notes">
         <h2>What to read next</h2>
         <div className="method">
-          <p>
-            <a href="https://drewhoover.com/cfb-streak-king/">Streak King</a> — the longest winning and losing
-            streaks in college football under any definition you can think of, every FBS team since 1936.
-          </p>
-          <p>
-            <a href="https://drewhoover.com/nfl-comparator/">NFL Comparator</a> — compare NFL players at the same
-            point in their careers, since 1999.
-          </p>
-          <p>
-            <a href="https://drewhoover.com/wnba-comparator/">WNBA Comparator</a> — compare WNBA players at the
-            same point in their careers, since 1997.
-          </p>
-          <p>
-            <a href="https://drewhoover.com/how-many-rings/">How Many Rings?</a> — every person on a
-            national-championship staff since 1990, ranked by the rings they can claim; the leader isn't Nick Saban.
-          </p>
-          <p>
-            <a href="https://drewhoover.com/collegiate-championships/">Who has the most college championships?</a> — every
-            NCAA champion across 33 sports since 1972.
-          </p>
-          <p>
-            <a href="https://drewhoover.com/cfb-all-time-records/football">All-time FBS records</a> — all
-            136 programs ranked by total wins, win percentage and bowl record.
-          </p>
+          {SIBLINGS.map((s) => (
+            <p key={s.url}>
+              <a href={s.url}>{s.name}</a> — {s.words}
+            </p>
+          ))}
         </div>
       </section>
 
