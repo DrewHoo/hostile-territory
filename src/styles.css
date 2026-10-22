@@ -143,6 +143,16 @@ h2 { font-family: Georgia, 'Source Serif 4', 'Times New Roman', serif; font-weig
 .rules-note ul, .method ul { padding-left: 20px; }
 .rules-note li, .method li { margin-bottom: 6px; }
 
+/* the Method folds into sections: a summary reads as a small heading, the open one shows its body */
+.notes details { margin: 10px 0; }
+.notes summary { cursor: pointer; color: var(--ink); font-weight: 600; font-size: 15px; list-style: none; display: flex; align-items: center; gap: 8px; }
+.notes summary::-webkit-details-marker { display: none; }
+.notes summary::before { content: ''; width: 6px; height: 6px; border-right: 1px solid var(--ink-faint); border-bottom: 1px solid var(--ink-faint); transform: rotate(-45deg); transition: transform 0.15s; flex: none; }
+.notes details[open] > summary::before { transform: rotate(45deg); }
+.notes summary:hover { color: var(--cream); }
+.notes details[open] > summary { margin-bottom: 4px; }
+.notes details > p, .notes details > ul { margin: 8px 0 8px 14px; }
+
 .provisional {
   margin: 0 0 28px; padding: 12px 16px; border: 1px dashed var(--rust); border-radius: 3px;
   color: var(--ink-muted); font-size: 13.5px; font-style: italic;
