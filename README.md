@@ -1,34 +1,23 @@
-# dataviz-project-template
+# Hostile Territory
 
-A starter for a data-visualization site that deploys to GitHub Pages under your own domain at `https://<domain>/<repo-name>/`. It assumes you already have a GitHub User Site (`<owner>/<owner>.github.io`) with a custom domain, built from [`personal-site-starter`](https://github.com/DrewHoo/personal-site-starter). Every public repo you own with Pages enabled then serves under that domain with no extra DNS.
+Every head coach's true road record against AP top-10 teams since 1936, with a receipt for every game. Live at [drewhoover.com/hostile-territory](https://drewhoover.com/hostile-territory/).
 
-What's in the box: Vite + React, the `base` path derived from the repo name, a deploy workflow, a prerender step so crawlers see the page, a `<head>` generated from one config file, favicon and OG image generators, a sample D3 chart with touch-friendly hover, URL state, and the index site's embed scripts (back bar, comments, analytics).
+No total on the page was reported by anyone. A road game is one where the team is the away team at a non-neutral site and the host is ranked in the AP poll in effect at kickoff; the record goes to whoever was head coach that day. The rulings are in the page's Method and in `data/rules.json`; the backfill to 1936 is `specs/back-to-1936.spec.md`.
 
-The [`dataviz-pages-site`](https://github.com/DrewHoo/dataviz-pages-site) skill knows this template. In Claude Code, "new dataviz project called `<slug>`" walks the steps below.
+## Data and credit
 
-## Start a project
+- Game results 2001 to the present: [cfbfastR](https://github.com/sportsdataverse/cfbfastR-data) schedules (sportsdataverse).
+- Game results 1936 to 2000: [jhowell.net](https://www.jhowell.net/cf/scores/byname.htm), James Howell's historical scores.
+- Weekly AP polls since 1936: [College Poll Archive](https://www.collegepollarchive.com/).
+- Head coaches: researched row by row with a citation each since 1990 (`data/research/tenures-*.json`); before that, CollegeFootballData's coach records checked against every season's results, the work behind [Streak King](https://drewhoover.com/cfb-streak-king/) (`data/coach-stints.json`).
+- Receipts: the home team's Sports-Reference schedule page as captured by the Internet Archive's Wayback Machine since 1990; Howell's row and the poll page before that. Overtime counts from ESPN.
 
-1. **Use this template** on GitHub, name the repo the slug you want in the URL (lowercase, kebab-case), make it public. Clone it.
-2. Set `"name"` in `package.json` to the repo name. That is the URL path.
-3. Edit `site.config.js`: your domain, the title, the description, the OG copy.
-4. `npm install`, then `npm run gen:favicon && npm run gen:og`. Open `public/og.png` and `public/card.png` and look at them. Commit the outputs.
-5. Enable Pages with the source set to Actions:
+The pipeline writes `data/games-candidates.json` (every candidate game), `data/records.json` (per coach, with receipts) and `src/data/site-data*.json` (what the page loads). Corrections are a visible layer in `data/game-corrections.json`, never edits to a source.
 
-   ```sh
-   gh api -X POST repos/<owner>/<repo>/pages -f build_type=workflow
-   ```
+## Refresh
 
-6. `git push`, then `gh run watch`. The site is live at `https://<domain>/<repo>/` when the run is green.
-7. Register the project card on your index site (the skill's `index-registration` reference), copying `public/card.png` to the index repo's `public/projects/<repo>.png`.
+`node scripts/refresh.mjs` runs the whole in-season refresh: the current season's schedule and poll pages download again, `build-candidates.mjs` joins games to polls, `build-records.mjs` attributes them to coaches, `fetch-ot.mjs` fills the overtime counts, and `candidate-stats.mjs` reports per season. The bulk sources live under `data/raw/` (gitignored, about 100 MB; `fetch-data.mjs` fills it from empty in about 15 minutes). Commit the four data files it changes. A game played after the bulk fetch can be hand-added in `data/game-corrections.json` and yields to cfbfastR's row when it lands. `CLAUDE.md` has the rest of the runbook (the pre-1990 receipts, the poster, Kiffin's line).
 
-## Replace the sample
+## Deploy
 
-- `src/data/sample.js` is the data. `src/App.jsx` and `src/Chart.jsx` are the page. `src/styles.css` is the look.
-- Data that has to be fetched goes in a build-time script that writes to `public/data/` (gitignored). See the skill's `build-time-data` reference.
-- Before sharing the URL, run the skill's pre-launch checklist. The two that bite: `curl -s <url> | grep -c '<div id="root"></div>'` must print `0`, and the OG card must look right in a platform's card validator.
-
-## Why it is shaped this way
-
-- **Prerender.** A Vite SPA deploys `<div id="root"></div>` and nothing else. Google usually renders JS eventually; Bing, DuckDuckGo, social unfurlers, and LLM crawlers mostly don't. `scripts/prerender.mjs` bakes the rendered app into `dist/index.html`, which is why `main.jsx` hydrates and why render never touches `window`.
-- **One config file.** The domain and copy live in `site.config.js` and the slug in `package.json`. `index.html` has no owner-specific values, so the template stays generic and a project has exactly two places to edit.
-- **Embeds, not dependencies.** The back bar, comments, and analytics are script tags pointing at your index site. Fixes land there once.
+`npm run build` is `vite build` plus `scripts/prerender.mjs`, which bakes the rendered page, the head, the sitemap and `llms.txt` into `dist/`. `.github/workflows/deploy.yml` builds and publishes to GitHub Pages on every push to `main`, and every Sunday morning in season it runs the refresh first, with `data/raw/` restored from the Actions cache, so the week's games land without a commit. `npm run dev` serves it locally.
