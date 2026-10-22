@@ -4,10 +4,11 @@ on:
   push:
     branches: ['main']
   workflow_dispatch:
-  # For data that changes on a schedule (prices, standings), rebuild on a cron.
-  # The build step fetches and bakes it. Delete this block if the data is static.
-  # schedule:
-  #   - cron: '30 22 * * 1-5'
+  # In-season refresh: Sunday 14:00 UTC (10am EDT, 9am EST) after the Saturday
+  # slate, August through the January playoff. The refresh step below pulls
+  # the week's games and poll onto the committed payload before the build.
+  schedule:
+    - cron: '0 14 * 1,8-12 0'
 
 permissions:
   contents: read
@@ -25,9 +26,22 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
       - run: npm ci
+      # The bulk sources (cfbfastR schedules, jhowell.net, the AP polls) are
+      # gitignored and cached between runs; fetch-data.mjs fills whatever the
+      # cache lacks, the whole 1936-2026 archive when it is cold. A new entry
+      # is saved every run so the week's files join it.
+      - uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: raw-sources-${{ github.run_id }}
+          restore-keys: raw-sources-
+      # Refresh the in-progress season (schedule + AP poll) and rebuild the
+      # ledger (CLAUDE.md's runbook). If a step fails, the committed payload
+      # builds instead.
+      - run: node scripts/refresh.mjs || git checkout -- data src/data
       # If the build dies with "Cannot find module '../lightningcss.linux-x64-gnu.node'"
       # (Tailwind v4, or anything else with a platform binary the macOS lockfile
       # skipped), install the Linux binary explicitly:
