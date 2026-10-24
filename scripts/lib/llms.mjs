@@ -32,6 +32,6 @@ Every row is a head coach's true road games against AP top-10 teams, in order, w
 
 ## Other sports sites
 
-${SIBLINGS.map((s) => `- [${s.name}](${s.url}): ${s.words}`).join('\n')}
+${SIBLINGS.map((s) => `- [${s.name}](${s.url}): ${s.words}${s.links ? ' ' + s.links.map((l) => `[${l.name}](${l.url})`).join(' | ') : ''}`).join('\n')}
 `
 }
