@@ -9,7 +9,8 @@
  *   node scripts/fetch-data.mjs --only=polls    # games | jhowell | polls
  *
  * Sources (see data/research/sources.md for the why):
- *   games 2001-2026  cfbfastR-data schedules CSVs on raw.githubusercontent.com
+ *   games 2001-2025  cfbfastR-data schedules CSVs on raw.githubusercontent.com
+ *   games 2026-      College Football Streak King's published payload (drewhoover.com)
  *   games 1936-2000  jhowell.net per-team historical score files
  *   AP polls 1936-2026 collegepollarchive.com weekly poll pages
  *
@@ -20,13 +21,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { RAW, ensureDir, sleep, cellText, decodeEntities } from './lib/util.mjs';
+import { STREAK_KING_FROM } from './build-candidates.mjs';
 
 const args = process.argv.slice(2);
 const FORCE = args.includes('--force');
 const ONLY = (args.find((a) => a.startsWith('--only=')) || '').split('=')[1] || null;
 
 const CFB_FIRST = 2001;
-const CFB_LAST = 2026;
+const CFB_LAST = STREAK_KING_FROM - 1;
 const POLL_FIRST = 1936;
 const POLL_LAST = 2026;
 const JH_FIRST = 1936;
@@ -95,6 +97,21 @@ async function fetchCfbfastr() {
     manifest.push({ year, url, ok: true, rows: lines });
   }
   fs.writeFileSync(path.join(dir, '_manifest.json'), JSON.stringify(manifest, null, 2));
+}
+
+// ------------------------------------------------------------- Streak King
+
+// The running season: Streak King's payload as its last refresh published it
+// (cfbfastR's schedules plus CFBD's finals and the overtimes). The refresh
+// deletes it so it downloads again.
+async function fetchStreakKing() {
+  const url = 'https://drewhoover.com/cfb-streak-king/share/payload.json';
+  const file = path.join(RAW, 'streak-king', 'payload.json');
+  const r = await download(url, file);
+  if (r.missing) throw new Error(`Streak King payload: 404 at ${url}`);
+  const p = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const n = p.games.se.filter((s) => s >= STREAK_KING_FROM).length;
+  log(`  Streak King: ${n} games from ${STREAK_KING_FROM}, built ${p.builtAt}${r.cached ? ' (cached)' : ''}`);
 }
 
 // ----------------------------------------------------------------- jhowell
@@ -201,6 +218,7 @@ async function main() {
   if (!ONLY || ONLY === 'games') {
     log(`cfbfastR schedules ${CFB_FIRST}-${CFB_LAST}`);
     await fetchCfbfastr();
+    await fetchStreakKing();
   }
   if (!ONLY || ONLY === 'jhowell') {
     log(`jhowell.net team score files (for ${JH_FIRST}-${JH_LAST})`);

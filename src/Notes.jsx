@@ -28,7 +28,7 @@ export function Notes() {
         <div className="method">
           <p>
             No total on this page was reported by anyone — records are computed by joining three
-            sources: game results (cfbfastR 2001–present, <a href="https://www.jhowell.net/cf/scores/byname.htm">jhowell.net</a> 1936–2000),
+            sources: game results (cfbfastR 2001–2025, the running season from <a href="https://drewhoover.com/cfb-streak-king/">College Football Streak King</a>'s ledger of cfbfastR's schedules and CollegeFootballData's finals, <a href="https://www.jhowell.net/cf/scores/byname.htm">jhowell.net</a> 1936–2000),
             weekly AP polls (<a href="https://www.collegepollarchive.com/">College Poll Archive</a>), and head
             coaches: researched row by row with a citation each since 1990, and before that
             CollegeFootballData's coach records checked against every team's results season by season

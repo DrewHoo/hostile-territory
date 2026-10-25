@@ -8,7 +8,8 @@
  * Top-10 is a downstream filter; this file keeps every ranked host.
  *
  * Inputs (all under data/raw/, produced by scripts/fetch-data.mjs):
- *   cfbfastr/cfb_schedules_<year>.csv   2001-2026 games, has neutral_site
+ *   cfbfastr/cfb_schedules_<year>.csv   2001-2025 games, has neutral_site
+ *   streak-king/payload.json            the running season's games (STREAK_KING_FROM on)
  *   jhowell/teams/<Team>.htm            1936-2000 games, one file per team
  *   ap-polls/polls/poll-<id>.html       weekly AP polls 1936-2026
  *
@@ -40,6 +41,12 @@ import { quoteOf, howellUrl, cpaPollUrl } from './lib/receipts.mjs';
 // in the 1936 backfill (specs/back-to-1936.spec.md).
 export const FIRST_SEASON = 1936;
 export const RECEIPTS_BEFORE = 1990;
+// From this season on the games come from College Football Streak King's
+// published payload, not cfbfastR's schedule file: the same games (it reads
+// cfbfastR's schedules too), plus CollegeFootballData's final for a game
+// cfbfastR hasn't marked completed yet, and the overtimes, so a Sunday refresh
+// has all of Saturday. The finished seasons stay on cfbfastR.
+export const STREAK_KING_FROM = Number(process.env.STREAK_KING_FROM ?? 2026);
 
 const REPORT_UNMATCHED = process.argv.includes('--unmatched');
 const REPORT_AMBIGUOUS = process.argv.includes('--ambiguous');
@@ -248,6 +255,55 @@ export function loadCfbfastrGames(firstSeason, lastSeason) {
   return { games, skipped };
 }
 
+// --------------------------------------------------------- Streak King games
+
+const POST = 4, NEUTRAL = 1; // cfb-streak-king src/lib/schema.ts FLAG
+
+/**
+ * The running season from Streak King's payload, in loadCfbfastrGames' shape.
+ * A game's date is already its US calendar date (the payload's epoch day), and
+ * its overtimes ride along (-1, unknown, becomes null). A team resolves by its
+ * Streak King id first ('appalachian-state' is a canonical key here too), then
+ * by its name. A visitor that wasn't a major team that season is skipped, as
+ * an FCS visitor is in cfbfastR's rows.
+ */
+export function loadStreakKingGames(firstSeason) {
+  const file = path.join(RAW, 'streak-king', 'payload.json');
+  if (!fs.existsSync(file)) return { games: [], skipped: { missing: 1 } };
+  const p = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const g = p.games;
+  const major = (t, season) => (t.major ?? []).some(([a, b]) => season >= a && season <= b);
+  const raw = (t) => (aliasIndex.has(slug(t.id)) ? t.id : t.name);
+  const games = [];
+  const skipped = { nonFbsAway: 0 };
+  for (let k = 0; k < g.se.length; k++) {
+    const season = g.se[k];
+    if (season < firstSeason) continue;
+    const home = p.teams[g.hi[k]], away = p.teams[g.ai[k]];
+    if (!major(away, season)) {
+      skipped.nonFbsAway++;
+      continue;
+    }
+    games.push({
+      game_id: null,
+      season,
+      week: null,
+      season_type: g.fl[k] & POST ? 'postseason' : 'regular',
+      date: new Date(g.ep[k] * 86400000).toISOString().slice(0, 10),
+      neutral: !!(g.fl[k] & NEUTRAL),
+      home_raw: raw(home),
+      away_raw: raw(away),
+      home_points: g.hs[k],
+      away_points: g.as[k],
+      ot: g.ot && g.ot[k] >= 0 ? g.ot[k] : null,
+      venue: null,
+      notes: null,
+      source: 'Streak King',
+    });
+  }
+  return { games, skipped };
+}
+
 // ------------------------------------------------------------- jhowell games
 
 /**
@@ -385,14 +441,15 @@ function main() {
     jhowell: { total: 0, road: 0, qualifying: 0, unresolvedHome: 0, noPoll: 0, prePoll: 0 },
   };
 
-  // ---- 2001-2025 from cfbfastR
-  const { games: cfb, skipped: cfbSkipped } = loadCfbfastrGames(2001, 2026);
+  // ---- 2001-2025 from cfbfastR, the running season from Streak King
+  const { games: cfbOnly, skipped: cfbSkipped } = loadCfbfastrGames(2001, STREAK_KING_FROM - 1);
+  const cfb = [...cfbOnly, ...loadStreakKingGames(STREAK_KING_FROM).games];
   diag.cfbfastr.total = cfb.length;
   for (const g of cfb) {
     if (g.neutral) continue;
     diag.cfbfastr.road++;
-    const homeKey = canon(g.home_raw, 'cfbfastR');
-    const awayKey = canon(g.away_raw, 'cfbfastR');
+    const homeKey = canon(g.home_raw, g.source);
+    const awayKey = canon(g.away_raw, g.source);
     if (!homeKey) {
       diag.cfbfastr.unresolvedHome++;
       continue;
@@ -421,12 +478,13 @@ function main() {
       away_points: g.away_points,
       home_points: g.home_points,
       result: resultFor(g.away_points, g.home_points),
-      source: 'cfbfastR',
+      source: g.source,
       poll_date: poll.date,
       poll_label: poll.label,
       season_type: g.season_type,
       venue: g.venue,
       game_id: g.game_id,
+      ...(g.ot !== undefined && { ot: g.ot }),
     });
   }
 

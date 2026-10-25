@@ -6,7 +6,7 @@ No total on the page was reported by anyone. A road game is one where the team i
 
 ## Data and credit
 
-- Game results 2001 to the present: [cfbfastR](https://github.com/sportsdataverse/cfbfastR-data) schedules (sportsdataverse).
+- Game results 2001 to 2025: [cfbfastR](https://github.com/sportsdataverse/cfbfastR-data) schedules (sportsdataverse). The running season, from 2026: [College Football Streak King](https://drewhoover.com/cfb-streak-king/)'s published payload, the same schedules with CollegeFootballData's finals and each game's overtimes.
 - Game results 1936 to 2000: [jhowell.net](https://www.jhowell.net/cf/scores/byname.htm), James Howell's historical scores.
 - Weekly AP polls since 1936: [College Poll Archive](https://www.collegepollarchive.com/).
 - Head coaches: researched row by row with a citation each since 1990 (`data/research/tenures-*.json`); before that, CollegeFootballData's coach records checked against every season's results, the work behind [Streak King](https://drewhoover.com/cfb-streak-king/) (`data/coach-stints.json`).
@@ -16,7 +16,7 @@ The pipeline writes `data/games-candidates.json` (every candidate game), `data/r
 
 ## Refresh
 
-`node scripts/refresh.mjs` runs the whole in-season refresh: the current season's schedule and poll pages download again, `build-candidates.mjs` joins games to polls, `build-records.mjs` attributes them to coaches, `fetch-ot.mjs` fills the overtime counts, and `candidate-stats.mjs` reports per season. The bulk sources live under `data/raw/` (gitignored, about 100 MB; `fetch-data.mjs` fills it from empty in about 15 minutes). Commit the four data files it changes. A game played after the bulk fetch can be hand-added in `data/game-corrections.json` and yields to cfbfastR's row when it lands. `CLAUDE.md` has the rest of the runbook (the pre-1990 receipts, the poster, Kiffin's line).
+`node scripts/refresh.mjs` runs the whole in-season refresh: Streak King's payload and the current season's poll pages download again, `build-candidates.mjs` joins games to polls, `build-records.mjs` attributes them to coaches, `fetch-ot.mjs` fills the overtime counts, and `candidate-stats.mjs` reports per season. The bulk sources live under `data/raw/` (gitignored, about 100 MB; `fetch-data.mjs` fills it from empty in about 15 minutes). Commit the four data files it changes. A game played after the bulk fetch can be hand-added in `data/game-corrections.json` and yields to Streak King's row when it lands. `CLAUDE.md` has the rest of the runbook (the pre-1990 receipts, the poster, Kiffin's line).
 
 ## Deploy
 

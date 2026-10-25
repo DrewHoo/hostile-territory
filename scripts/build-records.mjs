@@ -168,7 +168,8 @@ for (const game of candidates.games) {
     interim: pick.interim || false,
     tenure_grade: pick.grade,
     home_coach: homeCoach(game),
-    ot: game.game_id != null && otMap[game.game_id] != null ? otMap[game.game_id] : null,
+    // a Streak King game carries its own overtimes; a cfbfastR one's are ESPN's, by game id
+    ot: game.ot !== undefined ? game.ot : game.game_id != null && otMap[game.game_id] != null ? otMap[game.game_id] : null,
     credit: game.credit ?? null,
     tenure_file: pick.file,
     receipt: (() => {

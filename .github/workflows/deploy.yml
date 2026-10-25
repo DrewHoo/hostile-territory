@@ -4,11 +4,14 @@ on:
   push:
     branches: ['main']
   workflow_dispatch:
-  # In-season refresh: Sunday 14:00 UTC (10am EDT, 9am EST) after the Saturday
-  # slate, August through the January playoff. The refresh step below pulls
-  # the week's games and poll onto the committed payload before the build.
+  # In-season refresh, August through the January playoff: Sunday 22:00 UTC,
+  # after College Football Streak King's Sunday refresh publishes the week's
+  # games (its 14:00 cron has run as late as 17:30), and Monday 13:00 in case
+  # that one ran later still. The refresh step below pulls the week's games
+  # and poll onto the committed payload before the build.
   schedule:
-    - cron: '0 14 * 1,8-12 0'
+    - cron: '0 22 * 1,8-12 0'
+    - cron: '0 13 * 1,8-12 1'
 
 permissions:
   contents: read

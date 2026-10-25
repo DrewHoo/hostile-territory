@@ -19,16 +19,15 @@ import { fileURLToPath } from 'node:url'
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const RAW = path.join(ROOT, 'data/raw')
 
-// The newest season in the cache is the one in progress: its schedule CSV
-// and poll index page grow through the season, so they are fetched fresh.
+// The running season's games (Streak King's payload) and the newest season's
+// poll index page grow through the season, so they are fetched fresh.
 const newest = (dir, re) => {
   if (!fs.existsSync(dir)) return null
   const years = fs.readdirSync(dir).map((f) => f.match(re)?.[1]).filter(Boolean).map(Number)
   return years.length ? Math.max(...years) : null
 }
-const csvYear = newest(path.join(RAW, 'cfbfastr'), /^cfb_schedules_(\d{4})\.csv$/)
 const pollYear = newest(path.join(RAW, 'ap-polls'), /^season-(\d{4})\.html$/)
-for (const f of [csvYear && `cfbfastr/cfb_schedules_${csvYear}.csv`, pollYear && `ap-polls/season-${pollYear}.html`]) {
+for (const f of ['streak-king/payload.json', pollYear && `ap-polls/season-${pollYear}.html`]) {
   if (f) { fs.rmSync(path.join(RAW, f), { force: true }); console.log(`refresh: dropped data/raw/${f}`) }
 }
 
