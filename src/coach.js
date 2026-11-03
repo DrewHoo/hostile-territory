@@ -12,7 +12,7 @@ export const MIN_RANKED = 5
 
 /** "P. J. Fleck" -> "p-j-fleck", "Mike O'Brien" -> "mike-obrien" */
 export const slugOf = (name) =>
-  name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/['.]/g, ' ').replace(/'/g, '').trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/['’]/g, '').replace(/\./g, ' ').trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
 /** the 1990+ and the 1936 payloads as one list, oldest games first (App.jsx's mergeEras) */
 export function mergeEras(modern, early) {

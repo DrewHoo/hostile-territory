@@ -16,6 +16,7 @@ import pkg from '../package.json' with { type: 'json' }
 import DATA from '../src/data/site-data.json' with { type: 'json' }
 import EARLY from '../src/data/site-data-1936.json' with { type: 'json' }
 import { llmsText } from './lib/llms.mjs'
+import { mergeEras, slugOf } from '../src/coach.js'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SLUG = pkg.name
@@ -105,13 +106,15 @@ html = html.replace('</head>', head)
 html = html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
 fs.writeFileSync(OUT, html)
 
-// Single-page sitemap: what Search Console wants submitted, and it carries lastmod.
+// The sitemap: the board, and the board with each coach open at his own
+// address (/coach/<slug>/, which the share worker serves with his title and
+// card), with lastmod.
 const lastmod = new Date().toISOString().slice(0, 10)
 fs.writeFileSync(
   path.join(ROOT, 'dist/sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[SITE].map((u) => `  <url>\n    <loc>${esc(u)}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`).join('\n')}
+${[SITE, ...mergeEras(DATA.coaches, EARLY.coaches).map((c) => `${SITE}coach/${slugOf(c.n)}/`)].map((u) => `  <url>\n    <loc>${esc(u)}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`).join('\n')}
 </urlset>
 `,
 )

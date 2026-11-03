@@ -21,3 +21,24 @@ export function writeParam(key, value) {
     window.history.replaceState(null, '', url)
   } catch {}
 }
+
+// The open coach is the path, /coach/<slug>/, the address the share worker
+// serves the board at with his title and card. A ?coach= address still opens
+// him, and opening or closing a row rewrites it as the path.
+export function writeCoachPath(slug) {
+  try {
+    const url = new URL(window.location.href)
+    url.pathname = `${import.meta.env.BASE_URL}${slug ? `coach/${slug}/` : ''}`
+    url.searchParams.delete('coach')
+    window.history.replaceState(null, '', url)
+  } catch {}
+}
+
+/** the coach slug in the path, or null */
+export function readCoachPath() {
+  try {
+    return window.location.pathname.match(/\/coach\/([a-z0-9-]+)\/?$/)?.[1] ?? null
+  } catch {
+    return null
+  }
+}

@@ -1,14 +1,14 @@
 // The share worker: sits on drewhoover.com/hostile-territory/* in front of
-// GitHub Pages and makes a board link with a coach open unfurl as that coach.
+// GitHub Pages and serves the board with a coach open at his own address.
 //
-//   <head> rewrite            ?coach=<name> gets his title, his record as the
-//                             description, and his card as og:image
+//   /coach/<slug>/            the board's HTML (Pages has one page), with his
+//                             title, his record as the description, his
+//                             address as the canonical and his card as
+//                             og:image. The board reads the coach from the path.
+//   ?coach=<name>             301 to his /coach/<slug>/, the older address
 //   /share/coach/<slug>.png   the card (card.ts) from the data this bundle
 //                             carries (src/data/*.json, worded by src/coach.js),
 //                             cached at the edge
-//   /coach/<slug>/            301 to the board with him open: these were a
-//                             page per coach for one night (2026-11-02), and
-//                             IndexNow was sent every one
 //
 // Anything else, and anything that goes wrong, passes through untouched: this
 // worker must never be the reason the site is down. A link preview of the
@@ -103,7 +103,7 @@ async function buffered(res: Response): Promise<Response> {
 }
 
 const CARD = new RegExp(`^${BASE}/share/coach/([a-z0-9-]+)\\.png$`);
-const OLD_PAGE = new RegExp(`^${BASE}/coach/(?:([a-z0-9-]+)/?)?$`);
+const COACH = new RegExp(`^${BASE}/coach/(?:([a-z0-9-]+)/?)?$`);
 const isBoard = (pathname: string) => pathname === `${BASE}/` || pathname === `${BASE}/index.html`;
 const VENUE_WORDS: Record<string, string> = { home: 'at home', neutral: 'at neutral sites', all: '' };
 
@@ -130,37 +130,47 @@ export default {
       }
     }
 
-    // 2. a coach's old page: the board with him open
-    const old = OLD_PAGE.exec(url.pathname);
-    if (old) {
-      const r = old[1] ? records().get(old[1]) : null;
-      return Response.redirect(`${url.origin}${BASE}/${r ? `?coach=${encodeURIComponent(r.name)}` : ''}`, 301);
+    // 2. ?coach=<name>, the older address of an open coach: his path
+    const named = isBoard(url.pathname) ? url.searchParams.get('coach') : null;
+    if (named) {
+      const r = records().get(C.slugOf(named));
+      const to = new URL(url.href);
+      to.searchParams.delete('coach');
+      if (r) to.pathname = `${BASE}/coach/${C.slugOf(r.name)}/`;
+      return Response.redirect(to.href, 301);
     }
 
-    // 3. everything else from GitHub Pages, with the board's <head> rewritten
-    // for an open coach. A same-zone subrequest skips the worker and lands on Pages.
-    const res = await fetch(new Request(`${origin}${url.pathname}${url.search}`, request));
+    // 3. /coach/<slug>/: the board with his head; /coach/ or a slug nobody has goes to the board
+    const coach = COACH.exec(url.pathname);
+    const r = coach?.[1] ? records().get(coach[1]) : null;
+    if (coach && !r) return Response.redirect(`${url.origin}${BASE}/${url.search}`, 301);
+    if (coach && !url.pathname.endsWith('/')) return Response.redirect(`${url.origin}${url.pathname}/${url.search}`, 301);
+
+    // 4. everything else from GitHub Pages. A same-zone subrequest skips the worker and lands on Pages.
+    const res = await fetch(new Request(`${origin}${r ? `${BASE}/` : url.pathname}${url.search}`, request));
     try {
-      if (request.method !== 'GET' || !isBoard(url.pathname)) return res;
+      if (request.method !== 'GET' || !(r || isBoard(url.pathname))) return res;
       if (PREVIEWS.has(agentOf(request.headers.get('user-agent')))) {
-        report(env, ctx, request, 'share unfurl', { url: url.href, $current_url: url.href, path: '/', coach: url.searchParams.get('coach') });
+        report(env, ctx, request, 'share unfurl', { url: url.href, $current_url: url.href, path: url.pathname.replace(BASE, '') || '/', coach: r?.name ?? null });
       }
-      const name = url.searchParams.get('coach');
-      const r = name ? records().get(C.slugOf(name)) : null;
-      if (!r || !(res.headers.get('content-type') ?? '').includes('text/html')) return res;
+      if (!r || !res.ok || !(res.headers.get('content-type') ?? '').includes('text/html')) return res;
       const venue = url.searchParams.get('venue') ?? 'road';
       const title = venue in VENUE_WORDS
-        ? `${r.name}'s record${VENUE_WORDS[venue] ? ` ${VENUE_WORDS[venue]}` : ''} vs top-10 teams · Hostile Territory`
-        : `${r.name}'s road record vs top-10 teams · Hostile Territory`;
+        ? `${r.name}'s record${VENUE_WORDS[venue] ? ` ${VENUE_WORDS[venue]}` : ''} vs top-10 teams`
+        : `${r.name}'s road record vs top-10 teams`;
       const description = C.coachLead(r);
+      const page = `https://drewhoover.com${BASE}/coach/${C.slugOf(r.name)}/`;
       const img = `${origin}${BASE}/share/coach/${C.slugOf(r.name)}.png`;
       const content = (v: string) => ({ element(e: Element) { e.setAttribute('content', v); } });
+      const headers = new Headers(res.headers);
+      headers.delete('content-length');
       return new HTMLRewriter()
         .on('title', { element(e) { e.setInnerContent(title); } })
+        .on('link[rel="canonical"]', { element(e) { e.setAttribute('href', page); } })
         .on('meta[name="description"]', content(description))
         .on('meta[property="og:title"]', content(title))
         .on('meta[property="og:description"]', content(description))
-        .on('meta[property="og:url"]', content(`${origin}${url.pathname}${url.search}`))
+        .on('meta[property="og:url"]', content(page + url.search))
         .on('meta[property="og:image"]', content(img))
         .on('meta[property="og:image:width"]', content('1200'))
         .on('meta[property="og:image:height"]', content('630'))
@@ -168,7 +178,7 @@ export default {
         .on('meta[name="twitter:image"]', content(img))
         .on('meta[name="twitter:title"]', content(title))
         .on('meta[name="twitter:description"]', content(description))
-        .transform(res);
+        .transform(new Response(res.body, { status: res.status, headers }));
     } catch (e) {
       console.log(JSON.stringify({ event: 'share_rewrite_failed', url: url.pathname + url.search, error: String(e) }));
       return res;

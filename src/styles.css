@@ -194,3 +194,4 @@ footer a:hover { color: var(--cream); }
 .pop-credit { margin-top: 8px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rust); border-top: 1px dotted var(--line); padding-top: 7px; }
 .log-row .credit { color: var(--rust); font-size: 12px; font-style: italic; }
 
+.row-btn { scroll-margin-top: 72px; } /* the back bar is fixed over the top of the page */

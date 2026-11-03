@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import DATA from './data/site-data.json'
 import LOGO_IDS from './data/team-ids.json'
-import { readParam, writeParam } from './urlState.js'
+import { readParam, writeParam, writeCoachPath, readCoachPath } from './urlState.js'
+import { slugOf } from './coach.js'
 import { ESPN, kiffinRecord } from './kiffin.js'
 import { useShare } from './useShare.js'
 import { ShareIcon, CoffeeIcon } from './Icons.jsx'
@@ -123,6 +124,8 @@ export default function App() {
   const [pop, setPop] = useState(null)
   const [early, setEarly] = useState(null)
   const [venue, setVenue] = useState('road')
+  const [fromAddress, setFromAddress] = useState(null) // the coach slug the address opened, until his row is found
+  const [scrollToOpen, setScrollToOpen] = useState(false)
   const [venueGames, setVenueGames] = useState(null) // venue-games.json, loaded the first time a venue other than the road is picked
   const coaches = useMemo(() => mergeEras(DATA.coaches, early?.coaches), [early])
   const { copied, share } = useShare()
@@ -149,8 +152,8 @@ export default function App() {
     if (q) setQuery(q)
     const v = readParam('venue')
     if (VENUES.some(([k]) => k === v && k !== 'road')) setVenue(v)
-    const coach = readParam('coach')
-    if (coach) { setOpen(coach); setActiveOnly(false) }
+    const coach = readCoachPath() ?? (readParam('coach') && slugOf(readParam('coach')))
+    if (coach) { setFromAddress(coach); setActiveOnly(false) }
     import('./data/site-data-1936.json').then((m) => setEarly(m.default))
   }, [])
 
@@ -158,6 +161,25 @@ export default function App() {
     if (venue !== 'road' && !venueGames) import('./data/venue-games.json').then((m) => setVenueGames(m.default.coaches))
   }, [venue, venueGames])
   const waiting = venue !== 'road' && !venueGames
+
+  // The address's coach opens once the board is whole (the 1936 file, and the
+  // venue's games when it isn't the road), so his row is where it stays, and
+  // it scrolls to the top so his record is in view.
+  useEffect(() => {
+    if (!fromAddress || !early || waiting) return
+    const c = coaches.find((c) => slugOf(c.n) === fromAddress)
+    if (!c) return
+    setFromAddress(null)
+    setOpen(c.n)
+    setScrollToOpen(true)
+    writeCoachPath(slugOf(c.n))
+  }, [fromAddress, coaches, early, waiting])
+  // after the open row has rendered
+  useEffect(() => {
+    if (!scrollToOpen || !open) return
+    setScrollToOpen(false)
+    document.querySelector('.row-btn[aria-expanded="true"]')?.scrollIntoView({ block: 'start' })
+  }, [scrollToOpen, open])
 
   const setAndWrite = (setter, key, value, defaultValue) => {
     setter(value)
@@ -171,11 +193,12 @@ export default function App() {
         const games = gamesAt(c, venue, venueGames).filter((g) => g[D_RANK] <= cut)
         return { ...c, games, ...tally(games) }
       })
-      .filter((c) => c.gp >= Math.max(minGames, 1))
-      .filter((c) => !activeOnly || c.a)
-      .filter((c) => !q || c.n.toLowerCase().includes(q) || c.s.some((s) => s.toLowerCase().includes(q)))
+      // the open coach stays whatever the filters say, so his address never lands on an empty board
+      .filter((c) => c.n === open || c.gp >= Math.max(minGames, 1))
+      .filter((c) => c.n === open || !activeOnly || c.a)
+      .filter((c) => c.n === open || !q || c.n.toLowerCase().includes(q) || c.s.some((s) => s.toLowerCase().includes(q)))
       .sort((a, b) => b.pct - a.pct || b.w - a.w || a.l - b.l || a.n.localeCompare(b.n))
-  }, [coaches, cut, minGames, activeOnly, query, venue, venueGames])
+  }, [coaches, cut, minGames, activeOnly, query, venue, venueGames, open])
 
   // Highlight every OTHER coach's road game at the same host while a game is
   // hovered or selected. The active coach's own row stays unlit.
@@ -183,7 +206,7 @@ export default function App() {
   const toggleOpen = (name) => {
     const next = open === name ? null : name
     setOpen(next)
-    writeParam('coach', next)
+    writeCoachPath(next && slugOf(next))
     window.dhAnalytics?.track('coach_open', { coach: name })
   }
 
