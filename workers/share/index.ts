@@ -68,6 +68,13 @@ function report(env: Env, ctx: ExecutionContext, request: Request, event: string
 
 // every coach's record, keyed by slug, worked out once per isolate
 let bySlug: Map<string, ReturnType<typeof C.coachRecord>> | null = null;
+// the slug an apostrophe made on 2026-11-02, "tom-o-brien" for "tom-obrien"; IndexNow was sent those
+const firstSlug = (name: string) => C.slugOf(name.replace(/['’]/g, ' '));
+let byFirstSlug: Map<string, string> | null = null;
+function slugMovedTo(old: string): string | null {
+  if (!byFirstSlug) byFirstSlug = new Map([...records().values()].filter((r) => firstSlug(r.name) !== C.slugOf(r.name)).map((r) => [firstSlug(r.name), C.slugOf(r.name)]));
+  return byFirstSlug.get(old) ?? null;
+}
 function records() {
   if (!bySlug) {
     const field = C.mergeEras(DATA.coaches, EARLY.coaches);
@@ -143,6 +150,8 @@ export default {
     // 3. /coach/<slug>/: the board with his head; /coach/ or a slug nobody has goes to the board
     const coach = COACH.exec(url.pathname);
     const r = coach?.[1] ? records().get(coach[1]) : null;
+    const moved = coach?.[1] && !r ? slugMovedTo(coach[1]) : null;
+    if (moved) return Response.redirect(`${url.origin}${BASE}/coach/${moved}/${url.search}`, 301);
     if (coach && !r) return Response.redirect(`${url.origin}${BASE}/${url.search}`, 301);
     if (coach && !url.pathname.endsWith('/')) return Response.redirect(`${url.origin}${url.pathname}/${url.search}`, 301);
 
