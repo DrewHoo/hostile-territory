@@ -1,14 +1,18 @@
 // The share worker: sits on drewhoover.com/hostile-territory/* in front of
-// GitHub Pages and draws each coach page's og card.
+// GitHub Pages and makes a board link with a coach open unfurl as that coach.
 //
+//   <head> rewrite            ?coach=<name> gets his title, his record as the
+//                             description, and his card as og:image
 //   /share/coach/<slug>.png   the card (card.ts) from the data this bundle
 //                             carries (src/data/*.json, worded by src/coach.js),
-//                             cached at the edge. The prerender points each
-//                             coach page's og:image here.
+//                             cached at the edge
+//   /coach/<slug>/            301 to the board with him open: these were a
+//                             page per coach for one night (2026-11-02), and
+//                             IndexNow was sent every one
 //
 // Anything else, and anything that goes wrong, passes through untouched: this
 // worker must never be the reason the site is down. A link preview of the
-// board or a coach page is counted in Mixpanel as `share unfurl`.
+// board is counted in Mixpanel as `share unfurl`.
 //
 // Deploy: npm run worker:deploy. To see a card locally: npm run build,
 // npm run preview (4173), then npm run worker:dev and open
@@ -99,7 +103,9 @@ async function buffered(res: Response): Promise<Response> {
 }
 
 const CARD = new RegExp(`^${BASE}/share/coach/([a-z0-9-]+)\\.png$`);
-const PAGE = new RegExp(`^${BASE}/(coach/[a-z0-9-]+/)?$`);
+const OLD_PAGE = new RegExp(`^${BASE}/coach/(?:([a-z0-9-]+)/?)?$`);
+const isBoard = (pathname: string) => pathname === `${BASE}/` || pathname === `${BASE}/index.html`;
+const VENUE_WORDS: Record<string, string> = { home: 'at home', neutral: 'at neutral sites', all: '' };
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
@@ -124,11 +130,48 @@ export default {
       }
     }
 
-    // 2. everything else from GitHub Pages; a link preview of a page is counted.
-    // A same-zone subrequest skips the worker and lands on Pages.
-    if (request.method === 'GET' && PAGE.test(url.pathname) && PREVIEWS.has(agentOf(request.headers.get('user-agent')))) {
-      report(env, ctx, request, 'share unfurl', { url: url.href, $current_url: url.href, path: url.pathname.replace(BASE, '') || '/' });
+    // 2. a coach's old page: the board with him open
+    const old = OLD_PAGE.exec(url.pathname);
+    if (old) {
+      const r = old[1] ? records().get(old[1]) : null;
+      return Response.redirect(`${url.origin}${BASE}/${r ? `?coach=${encodeURIComponent(r.name)}` : ''}`, 301);
     }
-    return fetch(new Request(`${origin}${url.pathname}${url.search}`, request));
+
+    // 3. everything else from GitHub Pages, with the board's <head> rewritten
+    // for an open coach. A same-zone subrequest skips the worker and lands on Pages.
+    const res = await fetch(new Request(`${origin}${url.pathname}${url.search}`, request));
+    try {
+      if (request.method !== 'GET' || !isBoard(url.pathname)) return res;
+      if (PREVIEWS.has(agentOf(request.headers.get('user-agent')))) {
+        report(env, ctx, request, 'share unfurl', { url: url.href, $current_url: url.href, path: '/', coach: url.searchParams.get('coach') });
+      }
+      const name = url.searchParams.get('coach');
+      const r = name ? records().get(C.slugOf(name)) : null;
+      if (!r || !(res.headers.get('content-type') ?? '').includes('text/html')) return res;
+      const venue = url.searchParams.get('venue') ?? 'road';
+      const title = venue in VENUE_WORDS
+        ? `${r.name}'s record${VENUE_WORDS[venue] ? ` ${VENUE_WORDS[venue]}` : ''} vs top-10 teams · Hostile Territory`
+        : `${r.name}'s road record vs top-10 teams · Hostile Territory`;
+      const description = C.coachLead(r);
+      const img = `${origin}${BASE}/share/coach/${C.slugOf(r.name)}.png`;
+      const content = (v: string) => ({ element(e: Element) { e.setAttribute('content', v); } });
+      return new HTMLRewriter()
+        .on('title', { element(e) { e.setInnerContent(title); } })
+        .on('meta[name="description"]', content(description))
+        .on('meta[property="og:title"]', content(title))
+        .on('meta[property="og:description"]', content(description))
+        .on('meta[property="og:url"]', content(`${origin}${url.pathname}${url.search}`))
+        .on('meta[property="og:image"]', content(img))
+        .on('meta[property="og:image:width"]', content('1200'))
+        .on('meta[property="og:image:height"]', content('630'))
+        .on('meta[property="og:image:alt"]', content(`${r.name}'s record vs top-10 teams, on a dark board.`))
+        .on('meta[name="twitter:image"]', content(img))
+        .on('meta[name="twitter:title"]', content(title))
+        .on('meta[name="twitter:description"]', content(description))
+        .transform(res);
+    } catch (e) {
+      console.log(JSON.stringify({ event: 'share_rewrite_failed', url: url.pathname + url.search, error: String(e) }));
+      return res;
+    }
   },
 } satisfies ExportedHandler<Env>;

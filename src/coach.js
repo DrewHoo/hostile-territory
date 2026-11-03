@@ -1,6 +1,5 @@
-// A coach's page: who he is, his games, his record at each venue, and the
-// words the page, the prerender, llms.txt and the board's link share. Pure,
-// so the prerender and the page say the same thing.
+// A coach's record at each venue and its words, for the share worker: the
+// card and the <head> of a board link with him open (?coach=). Pure.
 
 // site-data game row, as App.jsx reads it
 export const D = { DATE: 0, SCHOOL: 1, OPP: 2, RANK: 3, RES: 4, AP: 5, HP: 6, INT: 7, HC: 8, OT: 9, URL: 10, QUOTE: 11, CREDIT: 12, POLL: 13 }
@@ -14,8 +13,6 @@ export const MIN_RANKED = 5
 /** "P. J. Fleck" -> "p-j-fleck", "Mike O'Brien" -> "mike-obrien" */
 export const slugOf = (name) =>
   name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/['.]/g, ' ').replace(/'/g, '').trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
-
-export const coachPath = (name) => `coach/${slugOf(name)}/`
 
 /** the 1990+ and the 1936 payloads as one list, oldest games first (App.jsx's mergeEras) */
 export function mergeEras(modern, early) {
@@ -81,9 +78,6 @@ export function coachRecord(coach, venues, field) {
 
 const top10 = (r) => r.table.find((x) => x.cut === CUT)
 
-/** "Kirby Smart's record vs top-10 teams, home and road" */
-export const coachTitle = (r) => `${r.name}'s record vs top-10 teams, home and road`
-
 /** the lead: the whole record against the top 10, then the road part of it, then the top 25 on the road */
 export function coachLead(r) {
   const t = top10(r)
@@ -94,14 +88,3 @@ export function coachLead(r) {
   const atEach = r.schools.length > 1 ? ` On the road against the top 10 he ${is} ${list(r.schools.map((x) => `${rec(x.r)} at ${x.school}`))}.` : ''
   return `${head}${atEach} Against the top 25 on the road he ${is} ${rec(r.road[25])}.`
 }
-
-/** his place on the board, or null: "That ranks 12th of the 336 coaches with five or more road games against the top 10." */
-export function coachPlace(r) {
-  if (!r.place) return null
-  const { rank, tied, last, of } = r.place
-  const where = last ? `${tied ? 'tied for ' : ''}last` : `${tied ? 'tied for ' : ''}${ordinal(rank)}`
-  return `That ranks ${where} of the ${of.toLocaleString('en-US')} coaches with five or more road games against the top 10.`
-}
-
-/** the description: the lead, cut to the search snippet's length */
-export const coachDescription = (r) => coachLead(r)

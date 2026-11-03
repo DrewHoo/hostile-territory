@@ -6,7 +6,6 @@ import { ESPN, kiffinRecord } from './kiffin.js'
 import { useShare } from './useShare.js'
 import { ShareIcon, CoffeeIcon } from './Icons.jsx'
 import { Notes, KOFI_URL } from './Notes.jsx'
-import { coachPath } from './coach.js'
 
 const KIFFIN = kiffinRecord(DATA)
 
@@ -16,7 +15,30 @@ const KIFFIN = kiffinRecord(DATA)
 // receipt_url is a Sports-Reference capture (an independent check) or, before
 // 1990, 'h:<file>#<season>', the visitor's row on Howell's page (the source).
 // poll is [CPA poll id, the host's row in the poll in effect], before 1990.
-const [D_DATE, D_SCHOOL, D_OPP, D_RANK, D_RES, D_AP, D_HP, D_INT, D_HC, D_OT, D_URL, D_QUOTE, D_CREDIT, D_POLL] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+// A home or neutral-site game (venue-games.json, from College Football Streak
+// King's payload) has the same shape with the coach's points first, no
+// receipt, and its venue last: 'h' or 'n'.
+const [D_DATE, D_SCHOOL, D_OPP, D_RANK, D_RES, D_AP, D_HP, D_INT, D_HC, D_OT, D_URL, D_QUOTE, D_CREDIT, D_POLL, D_VENUE] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+
+// The venue word: the board is road games unless the reader picks another.
+const VENUES = [
+  ['road', 'Road'],
+  ['home', 'Home'],
+  ['neutral', 'Neutral site'],
+  ['all', 'All'],
+]
+const DATELINE = { road: 'Road games', home: 'Home games', neutral: 'Neutral-site games', all: 'Every game' }
+const VENUE_WORDS = { road: 'on the road', home: 'at home', neutral: 'at neutral sites', all: '' }
+/** a coach's games at a venue: his road games are the board's own; the rest load with venue-games.json */
+function gamesAt(c, venue, extra) {
+  if (venue === 'road') return c.g
+  const v = extra?.[c.n]
+  if (venue === 'home') return v?.h ?? []
+  if (venue === 'neutral') return v?.n ?? []
+  return [...c.g, ...(v?.h ?? []), ...(v?.n ?? [])].sort((a, b) => (a[D_DATE] < b[D_DATE] ? -1 : a[D_DATE] > b[D_DATE] ? 1 : 0))
+}
+/** "at", "vs" or "vs … (neutral)" between his school and the opponent */
+const siteWord = (g) => (g[D_VENUE] ? 'vs' : 'at')
 
 // site-data.json holds the 1990+ rows and is all the prerender renders;
 // site-data-1936.json (the earlier rows) loads after mount and is merged in
@@ -81,7 +103,7 @@ function GamePopover({ pop, onClose }) {
   return (
     <div className="popover" style={style} role="tooltip">
       <div className="pop-date mono">{fmtDate(g[D_DATE])}</div>
-      <div className="pop-match">{g[D_SCHOOL]} at #{g[D_RANK]} {g[D_OPP]}</div>
+      <div className="pop-match">{g[D_SCHOOL]} {siteWord(g)} #{g[D_RANK]} {g[D_OPP]}{g[D_VENUE] === 'n' ? ' (neutral)' : ''}</div>
       <div className={`pop-score mono ${g[D_RES] === 'W' ? 'win' : ''}`}>{g[D_RES]} {g[D_AP]}–{g[D_HP]}{ot}</div>
       <div className="pop-coaches">
         <span><i>{g[D_SCHOOL]}:</i> {coach}{g[D_INT] ? ' (interim)' : ''}</span>
@@ -100,6 +122,8 @@ export default function App() {
   const [open, setOpen] = useState(null)
   const [pop, setPop] = useState(null)
   const [early, setEarly] = useState(null)
+  const [venue, setVenue] = useState('road')
+  const [venueGames, setVenueGames] = useState(null) // venue-games.json, loaded the first time a venue other than the road is picked
   const coaches = useMemo(() => mergeEras(DATA.coaches, early?.coaches), [early])
   const { copied, share } = useShare()
 
@@ -123,10 +147,17 @@ export default function App() {
     if (readParam('all') === '1') setActiveOnly(false)
     const q = readParam('q')
     if (q) setQuery(q)
+    const v = readParam('venue')
+    if (VENUES.some(([k]) => k === v && k !== 'road')) setVenue(v)
     const coach = readParam('coach')
     if (coach) { setOpen(coach); setActiveOnly(false) }
     import('./data/site-data-1936.json').then((m) => setEarly(m.default))
   }, [])
+
+  useEffect(() => {
+    if (venue !== 'road' && !venueGames) import('./data/venue-games.json').then((m) => setVenueGames(m.default.coaches))
+  }, [venue, venueGames])
+  const waiting = venue !== 'road' && !venueGames
 
   const setAndWrite = (setter, key, value, defaultValue) => {
     setter(value)
@@ -137,14 +168,14 @@ export default function App() {
     const q = query.trim().toLowerCase()
     return coaches
       .map((c) => {
-        const games = c.g.filter((g) => g[D_RANK] <= cut)
+        const games = gamesAt(c, venue, venueGames).filter((g) => g[D_RANK] <= cut)
         return { ...c, games, ...tally(games) }
       })
       .filter((c) => c.gp >= Math.max(minGames, 1))
       .filter((c) => !activeOnly || c.a)
       .filter((c) => !q || c.n.toLowerCase().includes(q) || c.s.some((s) => s.toLowerCase().includes(q)))
       .sort((a, b) => b.pct - a.pct || b.w - a.w || a.l - b.l || a.n.localeCompare(b.n))
-  }, [coaches, cut, minGames, activeOnly, query])
+  }, [coaches, cut, minGames, activeOnly, query, venue, venueGames])
 
   // Highlight every OTHER coach's road game at the same host while a game is
   // hovered or selected. The active coach's own row stays unlit.
@@ -159,11 +190,14 @@ export default function App() {
   // The share text is the page's one sentence, or the open coach's record line.
   const onShare = () => {
     const c = open && coaches.find((c) => c.n === open)
-    const r = c && tally(c.g.filter((g) => g[D_RANK] <= cut))
+    const r = c && tally(gamesAt(c, venue, venueGames).filter((g) => g[D_RANK] <= cut))
+    const where = VENUE_WORDS[venue]
     const text = c
-      ? `${c.n} is ${r.w}–${r.l}${r.t ? `–${r.t}` : ''} on the road against top-${cut} teams`
-      : `Every coach's true road record vs the AP top ${cut} since 1936`
-    window.dhAnalytics?.track('share', { from: 'dateline', coach: c ? c.n : undefined, cut })
+      ? `${c.n} is ${r.w}–${r.l}${r.t ? `–${r.t}` : ''}${where ? ` ${where}` : ''} against top-${cut} teams`
+      : venue === 'road'
+        ? `Every coach's true road record vs the AP top ${cut} since 1936`
+        : `Every coach's record${where ? ` ${where}` : ''} vs the AP top ${cut} since 1936`
+    window.dhAnalytics?.track('share', { from: 'dateline', coach: c ? c.n : undefined, cut, venue })
     share(text, window.location.href)
   }
 
@@ -172,7 +206,7 @@ export default function App() {
       <div className="field-rule" aria-hidden="true"></div>
       <h1>Hostile Territory</h1>
       <div className="dateline">
-        <span>Road games vs the AP Top 10 · 1936 – present<span className="dateline-upd"> · updated {DATA.generated}</span></span>
+        <span>{DATELINE[venue]} vs the AP Top 10 · 1936 – present<span className="dateline-upd"> · updated {DATA.generated}</span></span>
         <span className="dateline-acts">
           <button className="ico" onClick={onShare} aria-label="Share"><ShareIcon /></button>
           <a className="ico" href={KOFI_URL} onClick={() => window.dhAnalytics?.track('kofi', { from: 'icons' })} aria-label="Buy me a coffee"><CoffeeIcon /></a>
@@ -188,12 +222,18 @@ export default function App() {
 
       <h2>Every coach since 1936</h2>
       <div className="h2-note">
-        Every true road game against a top-{cut} team, per head coach. Tap a game for details,
+        {venue === 'road' ? 'Every true road game' : venue === 'home' ? 'Every home game' : venue === 'neutral' ? 'Every neutral-site game' : 'Every game'} against a top-{cut} team, per head coach. Tap a game for details,
         or the coach for their full record.
+        {venue !== 'road' ? ` Home and neutral-site games are College Football Streak King's ledger, without a receipt each; the road games are this site's own.` : ''}
         {cut === 25 ? ' The AP ranked 20 teams before 1989 (10 in 1961–67), so earlier seasons stop there.' : ''}
       </div>
 
       <div className="filters">
+        <div className="toggle" role="group" aria-label="Venue">
+          {VENUES.map(([k, label]) => (
+            <button key={k} className={venue === k ? 'on' : ''} onClick={() => { setAndWrite(setVenue, 'venue', k, 'road'); window.dhAnalytics?.track('venue', { venue: k }) }}>{label}</button>
+          ))}
+        </div>
         <div className="toggle" role="group" aria-label="Opponent rank cut">
           <button className={cut === 10 ? 'on' : ''} onClick={() => setAndWrite(setCut, 'cut', 10, 10)}>Top 10</button>
           <button className={cut === 25 ? 'on' : ''} onClick={() => setAndWrite(setCut, 'cut', 25, 10)}>Top 25</button>
@@ -244,7 +284,6 @@ export default function App() {
             </button>
             {open === c.n && (
               <div className="detail">
-                <p className="detail-link"><a href={`${import.meta.env.BASE_URL}${coachPath(c.n)}`}>{c.n}&rsquo;s page: his record against the top 10 at home, on the road and on neutral fields</a></p>
                 {c.games.map((g, i) => (
                   <div key={i} className="log-row">
                     <span className="d">
@@ -253,9 +292,10 @@ export default function App() {
                         : fmtDate(g[D_DATE])}
                     </span>
                     <span className="m">
-                      <b>{g[D_SCHOOL]}</b> at {g[D_POLL]
+                      <b>{g[D_SCHOOL]}</b> {siteWord(g)} {g[D_POLL]
                         ? <a href={pollHref(g)} className="poll" target="_blank" rel="noopener" title={`AP poll in effect at kickoff: ${g[D_POLL][1]}`}>#{g[D_RANK]}</a>
                         : `#${g[D_RANK]}`} <b>{g[D_OPP]}</b>
+                      {g[D_VENUE] === 'n' ? <span className="int"> · neutral site</span> : null}
                       {g[D_INT] ? <span className="int"> · interim</span> : null}
                       {g[D_CREDIT] ? <span className="credit"> · {g[D_CREDIT]}</span> : null}
                     </span>
@@ -268,7 +308,8 @@ export default function App() {
         ))}
           </div>
         ))}
-        {!rows.length && <p className="h2-note">No coaches match — loosen the filters.</p>}
+        {waiting && <p className="h2-note">Reading every home and neutral-site game…</p>}
+        {!waiting && !rows.length && <p className="h2-note">No coaches match — loosen the filters.</p>}
       </div>
       <div className="legend">
         <span><span className="chip w">W</span> Win</span>

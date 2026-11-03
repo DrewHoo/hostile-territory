@@ -16,26 +16,19 @@ const REPO = 'https://github.com/DrewHoo/hostile-territory'
  *   description: string,  // site.config.js description
  *   generated: string,    // the data build date, site-data.json `generated`
  *   coaches: number,      // how many coaches the board carries, both payloads
- *   pages: { url: string, title: string, lead: string }[], // a coach's page each
  * }} o
  */
-export function llmsText({ site, title, description, generated, coaches, pages = [] }) {
+export function llmsText({ site, title, description, generated, coaches }) {
   return `# ${title}
 
 > ${description}
 
-Every row is a head coach's true road games against AP top-10 teams, in order, with the score, since the first AP poll in 1936; the board at ${site} ranks ${coaches.toLocaleString('en-US')} coaches by that record, top 10 or top 25, current coaches or everyone. No total on the page was reported by anyone: the records are computed by joining game results (cfbfastR 2001 to the present, jhowell.net 1936 to 2000), the weekly AP polls (College Poll Archive) and the head coach on each game's date (researched row by row with a citation each since 1990; CollegeFootballData's coach records checked against every season's results before that). Each game's date links its receipt. Data as of ${generated}; it updates weekly in season. Credit as "per Hostile Territory" with the page's link.
+Every row is a head coach's true road games against AP top-10 teams, in order, with the score, since the first AP poll in 1936; the board at ${site} ranks ${coaches.toLocaleString('en-US')} coaches by that record, top 10 or top 25, current coaches or everyone; a reader can also pick home games, neutral-site games or all of them (those from College Football Streak King's ledger, without receipts). No total on the page was reported by anyone: the records are computed by joining game results (cfbfastR 2001 to the present, jhowell.net 1936 to 2000), the weekly AP polls (College Poll Archive) and the head coach on each game's date (researched row by row with a citation each since 1990; CollegeFootballData's coach records checked against every season's results before that). Each game's date links its receipt. Data as of ${generated}; it updates weekly in season. Credit as "per Hostile Territory" with the page's link.
 
 ## Data
 
 - [Method](${site}#method): what counts as a road game, whose record it goes on, and where each receipt points.
 - [The repository](${REPO}): the pipeline, the rulings, the corrections and the saved receipt pages.
-
-## Coaches
-
-Each coach's page has his record against AP top-10 teams at home, on the road and on neutral fields (home and neutral games from College Football Streak King's ledger), and every road game against a ranked team with its receipt. The list is at ${site}coach/.
-
-${pages.map((p) => `- [${p.title}](${p.url}): ${p.lead}`).join('\n')}
 
 ## Other sports sites
 
