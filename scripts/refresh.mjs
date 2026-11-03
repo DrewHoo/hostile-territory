@@ -4,7 +4,8 @@
 // rebuilds the ledger from the sources: fetch the schedules and the polls,
 // join them (build-candidates), attribute each game to its coach
 // (build-records), fill ESPN's overtime counts for the new game ids, and
-// build the records again so ot.json reaches the payload. Ends with the
+// build the records again so ot.json reaches the payload, then each coach's
+// home and neutral games from the same payload (build-venues). Ends with the
 // per-season report. The deploy workflow runs it every Sunday in season;
 // by hand: node scripts/refresh.mjs
 //
@@ -39,6 +40,7 @@ const steps = [
   ['build-records.mjs'],
   ['fetch-ot.mjs'],
   ['build-records.mjs'],
+  ['build-venues.mjs'],
   ['candidate-stats.mjs'],
 ]
 for (const [script, ...args] of steps) {

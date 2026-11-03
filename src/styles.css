@@ -193,3 +193,29 @@ footer a:hover { color: var(--cream); }
 .pop-coaches i { color: var(--ink-faint); font-style: italic; }
 .pop-credit { margin-top: 8px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rust); border-top: 1px dotted var(--line); padding-top: 7px; }
 .log-row .credit { color: var(--rust); font-size: 12px; font-style: italic; }
+
+/* coach pages (scripts/prerender.mjs writes one per coach) */
+.coach-page { max-width: 760px; }
+.crumb { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 14px; }
+.crumb a, .to-board a, .coach-index a { color: var(--ink); text-decoration: underline dotted; text-underline-offset: 3px; }
+.crumb a:hover, .to-board a:hover, .coach-index a:hover { color: var(--cream); }
+.coach-h1 { font-size: clamp(28px, 4.6vw, 44px); }
+.coach-page .sub { font-style: normal; color: var(--ink); max-width: 700px; text-align: left; }
+.venues-wrap { overflow-x: auto; }
+.venues { width: 100%; border-collapse: collapse; font-family: 'IBM Plex Mono', monospace; font-size: 13px; border-top: 3px double var(--line); }
+.venues th, .venues td { padding: 9px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; font-weight: 500; }
+.venues thead th { color: var(--ink-faint); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+.venues tbody th { text-align: left; font-family: 'Source Serif 4', Georgia, serif; font-size: 14.5px; color: var(--ink-muted); }
+.venues .pct { color: var(--ink-faint); font-size: 11px; margin-left: 6px; }
+.venues .none { color: var(--ink-faint); }
+.venues tr.lit td, .venues tr.lit th { color: var(--cream); background: rgba(243, 226, 188, 0.06); }
+.venues tr.total td, .venues tr.total th { color: var(--ink); font-weight: 600; }
+.coach-log { margin-top: 4px; border-top: 3px double var(--line); }
+.to-board { margin: 16px 0 0; font-size: 14.5px; }
+.coach-index { list-style: none; padding: 0; margin: 24px 0 0; columns: 2 260px; column-gap: 32px; font-size: 14.5px; }
+.coach-index li { break-inside: avoid; padding: 3px 0; }
+.coach-index .mono { color: var(--ink-faint); font-size: 11.5px; margin-left: 4px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.detail-link { margin: 4px 2px 6px; font-size: 13.5px; }
+.detail-link a { color: var(--ink); text-decoration: underline dotted; text-underline-offset: 3px; }
+.detail-link a:hover { color: var(--cream); }

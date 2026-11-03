@@ -6,6 +6,7 @@ import { ESPN, kiffinRecord } from './kiffin.js'
 import { useShare } from './useShare.js'
 import { ShareIcon, CoffeeIcon } from './Icons.jsx'
 import { Notes, KOFI_URL } from './Notes.jsx'
+import { coachPath } from './coach.js'
 
 const KIFFIN = kiffinRecord(DATA)
 
@@ -243,6 +244,7 @@ export default function App() {
             </button>
             {open === c.n && (
               <div className="detail">
+                <p className="detail-link"><a href={`${import.meta.env.BASE_URL}${coachPath(c.n)}`}>{c.n}&rsquo;s page: his record against the top 10 at home, on the road and on neutral fields</a></p>
                 {c.games.map((g, i) => (
                   <div key={i} className="log-row">
                     <span className="d">
