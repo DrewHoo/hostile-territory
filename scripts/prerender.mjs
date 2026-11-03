@@ -114,9 +114,9 @@ fs.writeFileSync(OUT, html)
 
 // A page per coach, /coach/<slug>/, and the list of them at /coach/: static
 // HTML with the site's styles and no app script. Each one's head says its own
-// title and lead; the card is the site's poster until the share worker draws one.
+// title and lead, and its card is the share worker's (workers/share).
 const field = C.mergeEras(DATA.coaches, EARLY.coaches)
-const pageHead = ({ url, title, description, crumbs }) => `<!doctype html>
+const pageHead = ({ url, title, description, crumbs, card }) => `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -130,14 +130,14 @@ const pageHead = ({ url, title, description, crumbs }) => `<!doctype html>
     <meta property="og:title" content="${esc(title)}" />
     <meta property="og:description" content="${esc(description)}" />
     <meta property="og:url" content="${url}" />
-    <meta property="og:image" content="${SITE}${config.ogImage ?? 'og.png'}" />
-    <meta property="og:image:width" content="${config.ogImageWidth ?? 1200}" />
-    <meta property="og:image:height" content="${config.ogImageHeight ?? 630}" />
-    <meta property="og:image:alt" content="${esc(config.ogImageAlt)}" />
+    <meta property="og:image" content="${card ?? `${SITE}${config.ogImage ?? 'og.png'}`}" />
+    <meta property="og:image:width" content="${card ? 1200 : (config.ogImageWidth ?? 1200)}" />
+    <meta property="og:image:height" content="${card ? 630 : (config.ogImageHeight ?? 630)}" />
+    <meta property="og:image:alt" content="${esc(card ? `${title}, on a dark board.` : config.ogImageAlt)}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${esc(title)}" />
     <meta name="twitter:description" content="${esc(description)}" />
-    <meta name="twitter:image" content="${SITE}og.png" />
+    <meta name="twitter:image" content="${card ?? `${SITE}og.png`}" />
     <script src="${ORIGIN}/embed/back-bar.js" data-section="sports" async></script>
     <script src="${ORIGIN}/embed/analytics.js" async></script>
     <script type="application/ld+json">${JSON.stringify({
@@ -161,7 +161,7 @@ const records = field.map((c) => C.coachRecord(c, VENUES[c.n], field)).sort((a, 
 for (const r of records) {
   const rel = C.coachPath(r.name)
   const url = `${SITE}${rel}`
-  writePage(rel, pageHead({ url, title: C.coachTitle(r), description: C.coachDescription(r), crumbs: [{ name: 'Coaches', item: `${SITE}coach/` }, { name: r.name, item: url }] }), coachHtml({ r, board: `/${SLUG}/` }))
+  writePage(rel, pageHead({ url, title: C.coachTitle(r), description: C.coachDescription(r), crumbs: [{ name: 'Coaches', item: `${SITE}coach/` }, { name: r.name, item: url }], card: `${SITE}share/coach/${C.slugOf(r.name)}.png` }), coachHtml({ r, board: `/${SLUG}/` }))
 }
 const surname = (n) => n.split(' ').slice(-1)[0]
 const indexRows = records
