@@ -93,11 +93,11 @@ export function renderCoachCard(c: CoachCard): Response {
   <div style="display:flex; flex-direction:column; align-items:center; width:1200px; height:630px; background-color:${BG}; padding:42px 0 30px;">
     <div style="display:flex; font-family:'Plex'; font-weight:600; font-size:17px; letter-spacing:4px; color:${RUST};">HOSTILE TERRITORY · VS THE AP TOP ${c.cut}</div>
     <div style="display:flex; flex-direction:column; justify-content:center; flex-grow:1; width:720px; margin-bottom:44px;">
-      <div style="display:flex; flex-direction:row; align-items:flex-end; justify-content:space-between; gap:40px;">
+      <div style="display:flex; flex-direction:row; align-items:flex-end; justify-content:center; gap:30px;">
         <div style="display:flex; font-family:'Serif'; font-size:${nameSize}px; color:${CREAM}; line-height:1; white-space:nowrap;">${esc(c.name)}</div>
         <div style="display:flex; font-family:'Graduate'; font-size:58px; color:${CREAM}; line-height:1;">${esc(c.record)}</div>
       </div>
-      <div style="display:flex; flex-direction:row; align-items:center; gap:12px; margin-top:12px;">
+      <div style="display:flex; flex-direction:row; align-items:center; justify-content:center; gap:12px; margin-top:12px;">
         <div style="display:flex; font-family:'Serif'; font-size:20px; color:${MUTED};">${esc(c.sentence)}</div>
         ${c.pct ? `<div style="display:flex; font-family:'Plex'; font-size:17px; letter-spacing:1px; color:${FAINT};">· ${esc(c.pct)}</div>` : ''}
       </div>
