@@ -88,3 +88,37 @@ export function coachLead(r) {
   const atEach = r.schools.length > 1 ? ` On the road against the top 10 he ${is} ${list(r.schools.map((x) => `${rec(x.r)} at ${x.school}`))}.` : ''
   return `${head}${atEach} Against the top 25 on the road he ${is} ${rec(r.road[25])}.`
 }
+
+// ---- the view a shared URL names (?cut=&venue=), for the share worker ----
+
+export const VENUES = ['road', 'home', 'neutral', 'all']
+export const VENUE_PHRASE = { road: 'on the road', home: 'at home', neutral: 'at neutral sites', all: 'at every venue' }
+
+/** the cut a URL says, or the default */
+export const readCut = (s) => (CUTS.includes(+s) ? +s : CUT)
+/** the venue a URL says, or the road. A coach without venue games falls back to the road. */
+export const readVenue = (s, hasVenues = true) => (VENUES.includes(s) && (s === 'road' || hasVenues) ? s : 'road')
+
+/**
+ * His games in the view, oldest first, each the site-data row plus the venue
+ * ('r' | 'h' | 'n') last. Road rows are the board's own, with their receipts;
+ * home and neutral rows are venue-games.json (College Football Streak King's
+ * ledger).
+ * @param coach a merged site-data coach ({ n, s, a, g })
+ * @param vg his venue-games.json entry ({ h, r?, n }) or undefined
+ */
+export function viewGames(coach, vg, cut, venue) {
+  const tag = (rows, t) => rows.map((g) => [...g.slice(0, 5), t])
+  const rows =
+    venue === 'road' ? tag(coach.g, 'r')
+    : venue === 'home' ? tag(vg?.h ?? [], 'h')
+    : venue === 'neutral' ? tag(vg?.n ?? [], 'n')
+    : [...tag(coach.g, 'r'), ...tag(vg?.h ?? [], 'h'), ...tag(vg?.n ?? [], 'n')].sort((a, b) => (a[D.DATE] < b[D.DATE] ? -1 : 1))
+  return rows.filter((g) => g[D.RANK] <= cut)
+}
+
+/** "Kalen DeBoer is 22-8 (.733) against the top 25, at every venue." */
+export function viewLead(name, active, games, cut, venue) {
+  const r = tally(games)
+  return `${name} ${active ? 'is' : 'was'} ${rec(r)} (${fmtPct(pctOf(r))}) against the top ${cut}, ${VENUE_PHRASE[venue]}.`
+}

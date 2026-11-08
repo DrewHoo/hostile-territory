@@ -6,7 +6,10 @@
 //                             address as the canonical and his card as
 //                             og:image. The board reads the coach from the path.
 //   ?coach=<name>             301 to his /coach/<slug>/, the older address
-//   /share/coach/<slug>.png   the card (card.ts) from the data this bundle
+//   /share/coach/<slug>.png?cut=&venue=
+//                             the shared view's card (card.ts): his games at
+//                             that cut and venue as the board's chips, from
+//                             the data this bundle
 //                             carries (src/data/*.json, worded by src/coach.js),
 //                             cached at the edge
 //
@@ -21,6 +24,8 @@
 import DATA from '../../src/data/site-data.json';
 import EARLY from '../../src/data/site-data-1936.json';
 import VENUES from '../../src/data/venues.json';
+import VG from '../../src/data/venue-games.json';
+import IDS from '../../src/data/team-ids.json';
 import * as C from '../../src/coach.js';
 import { renderCoachCard } from './card.ts';
 
@@ -30,7 +35,7 @@ const BASE = '/hostile-territory';
 const SITE = 'hostile-territory';
 
 /** Bump on any change to what the card draws; it keys the edge cache. */
-const CARD_VERSION = '2026-11-02c';
+const CARD_VERSION = '2026-11-07a';
 
 // Analytics: one Mixpanel event per link preview, sent server-side to the
 // index site's project (the public token its embed carries; a project token
@@ -84,20 +89,50 @@ function records() {
   return bySlug;
 }
 
-function coachCard(slug: string): Response {
+// the chips' marks, fetched from the origin once per isolate per (team, look)
+const logoCache = new Map<string, string | null>();
+async function chipLogo(origin: string, team: string, res: string): Promise<string | null> {
+  const id = (IDS as Record<string, number>)[team];
+  if (!id) return null;
+  const variant = res === 'W' ? 'ink' : 'dim';
+  const key = `${variant}:${id}`;
+  const hit = logoCache.get(key);
+  if (hit !== undefined) return hit;
+  try {
+    const r = await fetch(`${origin}${BASE}/logos-${variant}/${id}.png`, { cf: { cacheEverything: true, cacheTtlByStatus: { '200-299': 86400, '400-599': 60 } } } as RequestInit);
+    if (!r.ok) { await r.body?.cancel(); logoCache.set(key, null); return null; }
+    const buf = new Uint8Array(await r.arrayBuffer());
+    let bin = '';
+    for (let i = 0; i < buf.length; i += 0x8000) bin += String.fromCharCode(...buf.subarray(i, i + 0x8000));
+    const uri = `data:image/png;base64,${btoa(bin)}`;
+    logoCache.set(key, uri);
+    return uri;
+  } catch { return null; }
+}
+
+/** the view a shared URL names: his cut/venue games as the card */
+async function coachCard(slug: string, cut: number, venue: string, origin: string): Promise<Response> {
   const r = records().get(slug);
   if (!r) throw new Error(`no coach ${slug}`);
-  const t = r.table.find((x: { cut: number }) => x.cut === C.CUT);
-  const lines = [
-    ...(r.hasVenues ? [`${C.rec(t.all)} against the top 10 at every venue`] : []),
-    `${C.rec(r.road[25])} on the road against the top 25`,
-    ...(r.place ? [`${r.place.last ? 'last' : `${r.place.tied ? 'T-' : ''}${r.place.rank}${['th', 'st', 'nd', 'rd'][(r.place.rank % 100 > 10 && r.place.rank % 100 < 14) || r.place.rank % 10 > 3 ? 0 : r.place.rank % 10]}`} of ${r.place.of} coaches on the road`] : []),
-  ];
+  const vg = (VG as { coaches: Record<string, { h?: unknown[][]; n?: unknown[][] }> }).coaches[r.name];
+  const games = C.viewGames({ g: r.games }, vg, cut, venue) as unknown[][];
+  const t = C.tally(games);
+  const since = games.length ? String(games[0][C.D.DATE]).slice(0, 4) : null;
+  const where = venue === 'road' ? `on the road against the top ${cut}` : `against the top ${cut}, ${C.VENUE_PHRASE[venue]}`;
+  const chips = await Promise.all(games.map(async (g) => ({
+    res: g[C.D.RES] as string,
+    venue: g[5] as string,
+    rank: g[C.D.RANK] as number,
+    logo: await chipLogo(origin, g[C.D.OPP] as string, g[C.D.RES] as string),
+  })));
   return renderCoachCard({
     name: r.name,
-    road: C.rec(r.road[C.CUT]),
-    lines,
-    games: r.games.filter((g: unknown[]) => (g[C.D.RANK] as number) <= C.CUT).map((g: unknown[]) => g[C.D.RES] as string),
+    cut,
+    record: C.rec(t),
+    pct: games.length ? C.fmtPct(C.pctOf(t)) : '',
+    sentence: `${where}${since ? `, since ${since}` : ''}`,
+    games: chips,
+    roadMark: venue === 'all',
     footer: `drewhoover.com/hostile-territory · since 1936`,
   });
 }
@@ -123,11 +158,14 @@ export default {
     const card = CARD.exec(url.pathname);
     if (card) {
       try {
-        const key = new Request(`${url.origin}${url.pathname}?v=${CARD_VERSION}`, { method: 'GET' });
+        const r = records().get(card[1]);
+        const cut = C.readCut(url.searchParams.get('cut'));
+        const venue = C.readVenue(url.searchParams.get('venue'), !!r && !!(VG as { coaches: Record<string, unknown> }).coaches[r.name]);
+        const key = new Request(`${url.origin}${url.pathname}?v=${CARD_VERSION}&cut=${cut}&venue=${venue}`, { method: 'GET' });
         const cached = await caches.default.match(key);
-        report(env, ctx, request, 'share card', { url: url.href, path: url.pathname.replace(BASE, ''), cached: !!cached });
+        report(env, ctx, request, 'share card', { url: url.href, path: url.pathname.replace(BASE, ''), cut, venue, cached: !!cached });
         if (cached) return cached;
-        const res = await buffered(coachCard(card[1]));
+        const res = await buffered(await coachCard(card[1], cut, venue, origin));
         ctx.waitUntil(caches.default.put(key, res.clone()));
         return res;
       } catch (e) {
@@ -155,21 +193,32 @@ export default {
     if (coach && !r) return Response.redirect(`${url.origin}${BASE}/${url.search}`, 301);
     if (coach && !url.pathname.endsWith('/')) return Response.redirect(`${url.origin}${url.pathname}/${url.search}`, 301);
 
-    // 4. everything else from GitHub Pages. A same-zone subrequest skips the worker and lands on Pages.
-    const res = await fetch(new Request(`${origin}${r ? `${BASE}/` : url.pathname}${url.search}`, request));
+    // 4. everything else from GitHub Pages. A same-zone subrequest skips the
+    // worker and lands on Pages. The subrequest drops accept-encoding so the
+    // body arrives decoded (gzip would give HTMLRewriter nothing to rewrite).
+    const reqHeaders = new Headers(request.headers);
+    reqHeaders.delete('accept-encoding');
+    const res = await fetch(new Request(`${origin}${r ? `${BASE}/` : url.pathname}${url.search}`, { method: request.method, headers: reqHeaders }));
     try {
       if (request.method !== 'GET' || !(r || isBoard(url.pathname))) return res;
       if (PREVIEWS.has(agentOf(request.headers.get('user-agent')))) {
         report(env, ctx, request, 'share unfurl', { url: url.href, $current_url: url.href, path: url.pathname.replace(BASE, '') || '/', coach: r?.name ?? null });
       }
       if (!r || !res.ok || !(res.headers.get('content-type') ?? '').includes('text/html')) return res;
-      const venue = url.searchParams.get('venue') ?? 'road';
-      const title = venue in VENUE_WORDS
-        ? `${r.name}'s record${VENUE_WORDS[venue] ? ` ${VENUE_WORDS[venue]}` : ''} vs top-10 teams`
-        : `${r.name}'s road record vs top-10 teams`;
-      const description = C.coachLead(r);
+      const cut = C.readCut(url.searchParams.get('cut'));
+      const hasVG = !!(VG as { coaches: Record<string, unknown> }).coaches[r.name];
+      const venue = C.readVenue(url.searchParams.get('venue'), hasVG);
+      const title = venue === 'road'
+        ? `${r.name}'s road record vs top-${cut} teams`
+        : `${r.name}'s record ${VENUE_WORDS[venue] || 'at every venue'} vs top-${cut} teams`;
+      const isDefault = cut === C.CUT && venue === 'road';
+      const vg = (VG as { coaches: Record<string, { h?: unknown[][]; n?: unknown[][] }> }).coaches[r.name];
+      const description = isDefault
+        ? C.coachLead(r)
+        : `${C.viewLead(r.name, r.active, C.viewGames({ g: r.games }, vg, cut, venue), cut, venue)} ${C.coachLead(r)}`;
       const page = `https://drewhoover.com${BASE}/coach/${C.slugOf(r.name)}/`;
-      const img = `${origin}${BASE}/share/coach/${C.slugOf(r.name)}.png`;
+      const q = [...(cut !== C.CUT ? [`cut=${cut}`] : []), ...(venue !== 'road' ? [`venue=${venue}`] : [])].join('&');
+      const img = `${origin}${BASE}/share/coach/${C.slugOf(r.name)}.png${q ? `?${q}` : ''}`;
       const content = (v: string) => ({ element(e: Element) { e.setAttribute('content', v); } });
       const headers = new Headers(res.headers);
       headers.delete('content-length');
@@ -183,7 +232,7 @@ export default {
         .on('meta[property="og:image"]', content(img))
         .on('meta[property="og:image:width"]', content('1200'))
         .on('meta[property="og:image:height"]', content('630'))
-        .on('meta[property="og:image:alt"]', content(`${r.name}'s record vs top-10 teams, on a dark board.`))
+        .on('meta[property="og:image:alt"]', content(`${r.name}'s games vs top-${cut} teams ${venue === 'road' ? 'on the road' : VENUE_WORDS[venue] || 'at every venue'}, as cream and dark squares.`))
         .on('meta[name="twitter:image"]', content(img))
         .on('meta[name="twitter:title"]', content(title))
         .on('meta[name="twitter:description"]', content(description))
