@@ -35,7 +35,7 @@ const BASE = '/hostile-territory';
 const SITE = 'hostile-territory';
 
 /** Bump on any change to what the card draws; it keys the edge cache. */
-const CARD_VERSION = '2026-11-07a';
+const CARD_VERSION = '2026-11-07b';
 
 // Analytics: one Mixpanel event per link preview, sent server-side to the
 // index site's project (the public token its embed carries; a project token

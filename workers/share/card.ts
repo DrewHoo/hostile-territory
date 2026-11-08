@@ -58,7 +58,7 @@ function layout(n: number): { size: number; ranks: boolean } {
   const fits = (s: number, labelH: number) => {
     const perRow = Math.floor((720 + GAP) / (s + GAP));
     const rows = Math.ceil(Math.max(1, n) / perRow);
-    return rows * (s + labelH) + (rows - 1) * GAP <= 350;
+    return rows * (s + labelH) + (rows - 1) * GAP <= 320;
   };
   for (const s of [56, 52, 44, 38, 32, 26]) if (fits(s, 24)) return { size: s, ranks: true };
   for (const s of [26, 22, 18]) if (fits(s, 0)) return { size: s, ranks: false };
@@ -93,18 +93,18 @@ export function renderCoachCard(c: CoachCard): Response {
   <div style="display:flex; flex-direction:column; align-items:center; width:1200px; height:630px; background-color:${BG}; padding:42px 0 30px;">
     <div style="display:flex; font-family:'Plex'; font-weight:600; font-size:17px; letter-spacing:4px; color:${RUST};">HOSTILE TERRITORY · VS THE AP TOP ${c.cut}</div>
     <div style="display:flex; font-family:'Serif'; font-size:${nameSize}px; color:${CREAM}; margin-top:8px; white-space:nowrap;">${esc(c.name)}</div>
-    <div style="display:flex; flex-direction:column; justify-content:center; flex-grow:1; width:720px;">
+    <div style="display:flex; flex-direction:column; justify-content:center; flex-grow:1; width:720px; margin-bottom:44px;">
       <div style="display:flex; flex-direction:row; align-items:flex-end; gap:24px;">
         <div style="display:flex; flex-direction:column; align-items:center;">
           <div style="display:flex; font-family:'Graduate'; font-size:76px; color:${CREAM}; line-height:1;">${esc(c.record)}</div>
           ${c.pct ? `<div style="display:flex; font-family:'Plex'; font-size:20px; letter-spacing:2px; color:${FAINT}; margin-top:8px;">${esc(c.pct)}</div>` : ''}
         </div>
-        <div style="display:flex; max-width:400px; font-family:'Serif'; font-size:21px; color:${MUTED}; margin-left:auto; margin-bottom:2px;">${esc(c.sentence)}</div>
+        <div style="display:flex; max-width:480px; font-family:'Serif'; font-size:20px; color:${MUTED}; margin-left:auto; margin-bottom:2px;">${esc(c.sentence)}</div>
       </div>
       <div style="display:flex; flex-direction:row; flex-wrap:wrap; gap:${GAP}px; row-gap:${ranks ? GAP + 24 : GAP}px; margin-top:${ranks ? 30 : 26}px;">
         ${c.games.map(chip).join('')}
       </div>
-      ${legend.length ? `<div style="display:flex; flex-direction:row; gap:20px; margin-top:${ranks ? 36 : 26}px; font-family:'Plex'; font-size:12.5px; letter-spacing:1px; color:${FAINT};">${legend.map((l) => `<span>${esc(l)}</span>`).join('')}</div>` : ''}
+      ${legend.length ? `<div style="display:flex; flex-direction:row; gap:20px; margin-top:${ranks ? 34 : 18}px; font-family:'Plex'; font-size:12.5px; letter-spacing:1px; color:${FAINT};">${legend.map((l) => `<span>${esc(l)}</span>`).join('')}</div>` : ''}
     </div>
     <div style="display:flex; font-family:'Plex'; font-weight:600; font-size:14px; letter-spacing:2px; color:${FAINT};">${esc(c.footer.toUpperCase())}</div>
   </div>`;
