@@ -35,7 +35,7 @@ const BASE = '/hostile-territory';
 const SITE = 'hostile-territory';
 
 /** Bump on any change to what the card draws; it keys the edge cache. */
-const CARD_VERSION = '2026-11-07e';
+const CARD_VERSION = '2026-11-07f';
 
 // Analytics: one Mixpanel event per link preview, sent server-side to the
 // index site's project (the public token its embed carries; a project token
@@ -120,8 +120,6 @@ async function coachCard(slug: string, cut: number, venue: string, origin: strin
   const where = venue === 'road' ? `on the road against the top ${cut}` : `against the top ${cut}, ${C.VENUE_PHRASE[venue]}`;
   const chips = await Promise.all(games.map(async (g) => ({
     res: g[C.D.RES] as string,
-    venue: g[5] as string,
-    rank: g[C.D.RANK] as number,
     logo: await chipLogo(origin, g[C.D.OPP] as string, g[C.D.RES] as string),
   })));
   return renderCoachCard({
@@ -131,7 +129,6 @@ async function coachCard(slug: string, cut: number, venue: string, origin: strin
     pct: games.length ? C.fmtPct(C.pctOf(t)) : '',
     sentence: where,
     games: chips,
-    roadMark: venue === 'all',
     footer: `drewhoover.com/hostile-territory · since 1936`,
   });
 }
