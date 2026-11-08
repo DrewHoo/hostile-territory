@@ -99,7 +99,7 @@ export function renderCoachCard(c: CoachCard): Response {
       </div>
       <div style="display:flex; flex-direction:row; align-items:center; justify-content:center; gap:12px; margin-top:12px;">
         <div style="display:flex; font-family:'Serif'; font-size:20px; color:${MUTED};">${esc(c.sentence)}</div>
-        ${c.pct ? `<div style="display:flex; font-family:'Plex'; font-size:17px; letter-spacing:1px; color:${FAINT};">· ${esc(c.pct)}</div>` : ''}
+        ${c.pct ? `<div style="display:flex; font-family:'Plex'; font-size:17px; letter-spacing:1px; color:${FAINT};">${esc(c.pct)}</div>` : ''}
       </div>
       <div style="display:flex; flex-direction:row; flex-wrap:wrap; gap:${GAP}px; row-gap:${ranks ? GAP + 24 : GAP}px; margin-top:${ranks ? 30 : 26}px;">
         ${c.games.map(chip).join('')}
