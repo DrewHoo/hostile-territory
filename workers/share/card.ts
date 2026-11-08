@@ -71,7 +71,7 @@ export function renderCoachCard(c: CoachCard): Response {
   const mark = Math.round(size * 0.72);
   const chip = (g: ChipGame) => {
     const style = g.res === 'W'
-      ? `background-color:${CREAM}; box-shadow:0 0 10px rgba(243,226,188,0.3);`
+      ? `background-color:${CREAM};`
       : g.res === 'L'
         ? `background-color:${LIFT}; border:1px solid ${LINE};`
         : `background-color:${LIFT}; border:1px dashed rgba(243,226,188,0.6);`;
@@ -87,19 +87,19 @@ export function renderCoachCard(c: CoachCard): Response {
     ...(c.roadMark && ranks ? ['@ ON THE ROAD'] : []),
     ...(ranks ? [`#N = THE OPPONENT'S AP RANK`] : []),
   ];
-  const nameSize = Math.max(38, Math.min(58, Math.floor(720 / (0.5 * Math.max(1, c.name.length)))));
+  const nameSize = Math.max(34, Math.min(50, Math.floor(430 / (0.48 * Math.max(1, c.name.length)))));
   // every meaningful glyph stays inside the centered 720px column
   const html = `
   <div style="display:flex; flex-direction:column; align-items:center; width:1200px; height:630px; background-color:${BG}; padding:42px 0 30px;">
     <div style="display:flex; font-family:'Plex'; font-weight:600; font-size:17px; letter-spacing:4px; color:${RUST};">HOSTILE TERRITORY · VS THE AP TOP ${c.cut}</div>
-    <div style="display:flex; font-family:'Serif'; font-size:${nameSize}px; color:${CREAM}; margin-top:8px; white-space:nowrap;">${esc(c.name)}</div>
     <div style="display:flex; flex-direction:column; justify-content:center; flex-grow:1; width:720px; margin-bottom:44px;">
-      <div style="display:flex; flex-direction:row; align-items:flex-end; gap:24px;">
-        <div style="display:flex; flex-direction:column; align-items:center;">
-          <div style="display:flex; font-family:'Graduate'; font-size:76px; color:${CREAM}; line-height:1;">${esc(c.record)}</div>
-          ${c.pct ? `<div style="display:flex; font-family:'Plex'; font-size:20px; letter-spacing:2px; color:${FAINT}; margin-top:8px;">${esc(c.pct)}</div>` : ''}
-        </div>
-        <div style="display:flex; max-width:480px; font-family:'Serif'; font-size:20px; color:${MUTED}; margin-left:auto; margin-bottom:2px;">${esc(c.sentence)}</div>
+      <div style="display:flex; flex-direction:row; align-items:flex-end; justify-content:space-between; gap:40px;">
+        <div style="display:flex; font-family:'Serif'; font-size:${nameSize}px; color:${CREAM}; line-height:1; white-space:nowrap;">${esc(c.name)}</div>
+        <div style="display:flex; font-family:'Graduate'; font-size:58px; color:${CREAM}; line-height:1;">${esc(c.record)}</div>
+      </div>
+      <div style="display:flex; flex-direction:row; align-items:center; gap:12px; margin-top:12px;">
+        <div style="display:flex; font-family:'Serif'; font-size:20px; color:${MUTED};">${esc(c.sentence)}</div>
+        ${c.pct ? `<div style="display:flex; font-family:'Plex'; font-size:17px; letter-spacing:1px; color:${FAINT};">· ${esc(c.pct)}</div>` : ''}
       </div>
       <div style="display:flex; flex-direction:row; flex-wrap:wrap; gap:${GAP}px; row-gap:${ranks ? GAP + 24 : GAP}px; margin-top:${ranks ? 30 : 26}px;">
         ${c.games.map(chip).join('')}

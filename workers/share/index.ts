@@ -35,7 +35,7 @@ const BASE = '/hostile-territory';
 const SITE = 'hostile-territory';
 
 /** Bump on any change to what the card draws; it keys the edge cache. */
-const CARD_VERSION = '2026-11-07b';
+const CARD_VERSION = '2026-11-07c';
 
 // Analytics: one Mixpanel event per link preview, sent server-side to the
 // index site's project (the public token its embed carries; a project token
@@ -117,7 +117,6 @@ async function coachCard(slug: string, cut: number, venue: string, origin: strin
   const vg = (VG as { coaches: Record<string, { h?: unknown[][]; n?: unknown[][] }> }).coaches[r.name];
   const games = C.viewGames({ g: r.games }, vg, cut, venue) as unknown[][];
   const t = C.tally(games);
-  const since = games.length ? String(games[0][C.D.DATE]).slice(0, 4) : null;
   const where = venue === 'road' ? `on the road against the top ${cut}` : `against the top ${cut}, ${C.VENUE_PHRASE[venue]}`;
   const chips = await Promise.all(games.map(async (g) => ({
     res: g[C.D.RES] as string,
@@ -130,7 +129,7 @@ async function coachCard(slug: string, cut: number, venue: string, origin: strin
     cut,
     record: C.rec(t),
     pct: games.length ? C.fmtPct(C.pctOf(t)) : '',
-    sentence: `${where}${since ? `, since ${since}` : ''}`,
+    sentence: where,
     games: chips,
     roadMark: venue === 'all',
     footer: `drewhoover.com/hostile-territory · since 1936`,
