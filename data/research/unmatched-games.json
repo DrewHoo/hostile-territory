@@ -31354,5 +31354,43 @@
   "venue": null,
   "game_id": null,
   "ot": 0
+ },
+ {
+  "date": "2026-10-31",
+  "season": 2026,
+  "week": null,
+  "away_team": "Nevada",
+  "home_team": "UCLA",
+  "home_rank_ap": 7,
+  "away_rank_ap": null,
+  "away_points": 0,
+  "home_points": 27,
+  "result": "L",
+  "source": "Streak King",
+  "poll_date": "2026-10-25",
+  "poll_label": "October 25",
+  "season_type": "regular",
+  "venue": null,
+  "game_id": null,
+  "ot": 0
+ },
+ {
+  "date": "2026-10-31",
+  "season": 2026,
+  "week": null,
+  "away_team": "Texas State",
+  "home_team": "Boise State",
+  "home_rank_ap": 20,
+  "away_rank_ap": null,
+  "away_points": 45,
+  "home_points": 46,
+  "result": "L",
+  "source": "Streak King",
+  "poll_date": "2026-10-25",
+  "poll_label": "October 25",
+  "season_type": "regular",
+  "venue": null,
+  "game_id": null,
+  "ot": 0
  }
 ]
