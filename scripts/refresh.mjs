@@ -11,7 +11,13 @@
 //
 // Needs data/raw/ to reach 1936 (fetch-data.mjs fills whatever is missing,
 // about 15 minutes from empty). Any step that fails stops the run with its
-// exit code, and the committed payload is what builds.
+// exit code: the deploy workflow then commits and deploys nothing, and the
+// site keeps the data it had.
+//
+// What it leaves changed under data/ and src/data/ is what the workflow
+// commits. A run that found no new game changes only the stamps (the build
+// date, Streak King's builtAt), so it puts the committed files back and
+// there's nothing to commit.
 import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -47,4 +53,19 @@ for (const [script, ...args] of steps) {
   console.log(`\nrefresh: node scripts/${script} ${args.join(' ')}`.trimEnd())
   execFileSync(process.execPath, [path.join(ROOT, 'scripts', script), ...args], { cwd: ROOT, stdio: 'inherit' })
 }
-console.log('\nrefresh: done')
+
+// The same games as the commit, under a new date? Then the committed files stay.
+const STAMPS = new Set(['generated', 'builtAt'])
+const withoutStamps = (json) => JSON.stringify(JSON.parse(json), (key, value) => (STAMPS.has(key) ? undefined : value))
+const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 1 << 28 })
+const changed = git('status', '--porcelain', '--', 'data', 'src/data').split('\n').filter(Boolean)
+const onlyTheStamp = (line) => {
+  const file = line.slice(3)
+  return line.startsWith(' M') && file.endsWith('.json') && withoutStamps(fs.readFileSync(path.join(ROOT, file), 'utf8')) === withoutStamps(git('show', `HEAD:${file}`))
+}
+if (changed.length && changed.every(onlyTheStamp)) {
+  git('checkout', '--', 'data', 'src/data')
+  console.log('\nrefresh: no game the commit doesn\'t have; kept the committed files')
+} else {
+  console.log(`\nrefresh: done, ${changed.length} files changed`)
+}

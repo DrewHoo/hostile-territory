@@ -122,5 +122,10 @@ ${[SITE, ...mergeEras(DATA.coaches, EARLY.coaches).map((c) => `${SITE}coach/${sl
 // llms.txt (llmstxt.org): the site in plain markdown for a language model.
 fs.writeFileSync(path.join(ROOT, 'dist/llms.txt'), llmsText({ site: SITE, title: config.title, description: config.description, generated: DATA.generated, coaches: new Set([...DATA.coaches, ...EARLY.coaches].map((c) => c.n)).size }))
 
+// data.json: which data this build shows, for the deploy's check that it isn't
+// older than the live site's (scripts/check-not-older-than-live.mjs).
+const gameCount = (file) => file.coaches.reduce((n, c) => n + c.g.length, 0)
+fs.writeFileSync(path.join(ROOT, 'dist/data.json'), JSON.stringify({ generated: DATA.generated, games: gameCount(DATA) + gameCount(EARLY) }) + '\n')
+
 const words = appHtml.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length
 console.log(`prerendered ${(appHtml.length / 1024).toFixed(0)}KB into #root (~${words} words); head written for ${SITE}`)

@@ -4,17 +4,28 @@ on:
   push:
     branches: ['main']
   workflow_dispatch:
-  # In-season refresh, August through the January playoff: Sunday 22:00 UTC,
-  # after College Football Streak King's Sunday refresh publishes the week's
-  # games (its 14:00 cron has run as late as 17:30), and Monday 13:00 in case
-  # that one ran later still. The refresh step below pulls the week's games
-  # and poll onto the committed payload before the build.
+  # In season, August through the January playoff, every day at 19:00 and
+  # 23:00 UTC: the running season's games come from College Football Streak
+  # King's published payload, which it refreshes Thursday, Friday and Sunday
+  # around 14:00 UTC (as late as 17:30) and every day in bowl season. A run
+  # that finds no game the commit doesn't have commits and deploys nothing,
+  # so the board follows Streak King a few hours behind without a schedule
+  # of its own to keep in step.
   schedule:
-    - cron: '0 22 * 1,8-12 0'
-    - cron: '0 13 * 1,8-12 1'
+    - cron: '0 19,23 * 1,8-12 *'
 
+# The committed data is the data. A scheduled or manual run refreshes it
+# (scripts/refresh.mjs), builds, commits data/ and src/data/ to main and
+# deploys that commit, the share worker included; a push builds the data main
+# holds and fetches nothing. Nothing ships that isn't committed, so no deploy
+# can put an older week back. Until 2026-11-16 a refresh deployed without
+# committing and fell back to the committed data when it failed: that night
+# Streak King's payload answered 526, the run went green, and the board went
+# back nine days. A push made with the workflow's own token starts no
+# workflow, so the data commit doesn't deploy twice.
 permissions:
-  contents: read
+  contents: write
+  issues: write
   pages: write
   id-token: write
 
@@ -25,8 +36,15 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.built.outputs.sha }}
+      ship: ${{ steps.new.outputs.ship }}
     steps:
+      # main's tip, not the commit that started the run: a push queued behind
+      # a refresh builds the data the refresh just committed
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -35,24 +53,67 @@ jobs:
       # The bulk sources (cfbfastR schedules, jhowell.net, the AP polls) are
       # gitignored and cached between runs; fetch-data.mjs fills whatever the
       # cache lacks, the whole 1936-2026 archive when it is cold. A new entry
-      # is saved every run so the week's files join it.
-      - uses: actions/cache@v4
+      # is saved every refresh so the week's files join it.
+      - if: github.event_name != 'push'
+        uses: actions/cache@v4
         with:
           path: data/raw
           key: raw-sources-${{ github.run_id }}
           restore-keys: raw-sources-
       # Refresh the in-progress season (schedule + AP poll) and rebuild the
-      # ledger (CLAUDE.md's runbook). If a step fails, the committed payload
-      # builds instead.
-      - run: node scripts/refresh.mjs || git checkout -- data src/data
+      # ledger (CLAUDE.md's runbook). A step that fails fails the run: nothing
+      # is committed or deployed, and the site keeps the data it had.
+      - if: github.event_name != 'push'
+        run: node scripts/refresh.mjs
+      # a scheduled run with no new game stops here; a push or a manual run always ships
+      - id: new
+        run: |
+          if [ "${{ github.event_name }}" = schedule ] && [ -z "$(git status --porcelain -- data src/data)" ]; then
+            echo "no game the commit doesn't have; the site keeps what it shows"
+            echo "ship=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ship=true" >> "$GITHUB_OUTPUT"
+          fi
       # If the build dies with "Cannot find module '../lightningcss.linux-x64-gnu.node'"
       # (Tailwind v4, or anything else with a platform binary the macOS lockfile
       # skipped), install the Linux binary explicitly:
       # - run: npm install --no-save lightningcss-linux-x64-gnu
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
+      - if: steps.new.outputs.ship == 'true'
+        run: npm run build
+      # No deploy takes the live site back to older data
+      - if: steps.new.outputs.ship == 'true'
+        run: node scripts/check-not-older-than-live.mjs
+        env:
+          ALLOW_OLDER_DATA: ${{ contains(github.event.head_commit.message, '[older data]') && '1' || '' }}
+      # The refreshed data, committed before it deploys: the next push builds
+      # from it. A commit pushed meanwhile is rebased under; one that rewrote
+      # the data conflicts and fails the run before anything ships.
+      - if: github.event_name != 'push'
+        run: |
+          git add data src/data
+          git diff --quiet --cached && exit 0
+          git -c user.name="the refresh" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -q -m "The data at $(date -u +%Y-%m-%d)"
+          git checkout -- .
+          git pull -q --rebase origin main
+          git push -q origin HEAD:main
+      - id: built
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - if: steps.new.outputs.ship == 'true'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
+      # nobody reads a failed run: a refresh that fails opens an issue, and a
+      # second failure comments on the open one
+      - if: failure() && github.event_name != 'push'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="The data refresh failed"
+          run="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          open=$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$open" ]; then gh issue comment "$open" --body "Failed again. $run"
+          else gh issue create --title "$title" --body "The site keeps the data it had. $run" --assignee DrewHoo; fi
 
   deploy:
     environment:
@@ -60,6 +121,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    if: needs.build.outputs.ship == 'true'
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
@@ -72,6 +134,8 @@ jobs:
     needs: deploy
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -82,11 +146,12 @@ jobs:
   # from the "Edit Cloudflare Workers" template
   # (gh secret set CLOUDFLARE_API_TOKEN --repo DrewHoo/hostile-territory);
   # without it the job skips and the worker stays as last deployed by hand
-  # (npm run worker:deploy). The scheduled refresh commits no data, so it skips.
+  # (npm run worker:deploy). It deploys the commit the site was built from, a
+  # refresh's data commit included, so a coach's card and description show the
+  # same record as the board.
   worker:
     runs-on: ubuntu-latest
-    needs: deploy
-    if: github.event_name != 'schedule'
+    needs: [build, deploy]
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
@@ -94,6 +159,8 @@ jobs:
         run: echo "no CLOUDFLARE_API_TOKEN secret; the worker stays as last deployed"
       - if: env.CLOUDFLARE_API_TOKEN != ''
         uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.build.outputs.sha }}
       - if: env.CLOUDFLARE_API_TOKEN != ''
         uses: actions/setup-node@v4
         with:
