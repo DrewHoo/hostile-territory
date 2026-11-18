@@ -8,8 +8,10 @@ import { useShare } from './useShare.js'
 import { ShareIcon, CoffeeIcon } from './Icons.jsx'
 import { Notes, KOFI_URL } from './Notes.jsx'
 import { setSubject } from './readNext.js'
+import { FindCoach } from './FindCoach.jsx'
 
 const KIFFIN = kiffinRecord(DATA)
+const KIFFIN_25 = kiffinRecord(DATA, 25)
 
 // site-data game row: [date, school, opponent, opp_rank, result, away_pts,
 // home_pts, interim, home_coach|null, overtimes (0 = regulation/unknown),
@@ -120,7 +122,6 @@ export default function App() {
   const [cut, setCut] = useState(10) // opponent ranked within this
   const [minGames, setMinGames] = useState(4)
   const [activeOnly, setActiveOnly] = useState(true)
-  const [query, setQuery] = useState('')
   const [open, setOpen] = useState(null)
   const [pop, setPop] = useState(null)
   const [early, setEarly] = useState(null)
@@ -149,8 +150,6 @@ export default function App() {
     const m = readParam('min')
     if (m && ['1', '4', '10'].includes(m)) setMinGames(+m)
     if (readParam('all') === '1') setActiveOnly(false)
-    const q = readParam('q')
-    if (q) setQuery(q)
     const v = readParam('venue')
     if (VENUES.some(([k]) => k === v && k !== 'road')) setVenue(v)
     const coach = readCoachPath() ?? (readParam('coach') && slugOf(readParam('coach')))
@@ -183,15 +182,13 @@ export default function App() {
   }, [scrollToOpen, open])
 
   // What to read next is about the coach the reader has open, and his school
-  // (the back-bar embed reads it off <html>); with none open, a school the
-  // filter names exactly
-  const schools = useMemo(() => new Map(coaches.flatMap((c) => c.s.map((s) => [s.toLowerCase(), s]))), [coaches])
+  // (the back-bar embed reads it off <html>)
   useEffect(() => {
     // the address's coach, until his row opens: the share worker named him on <html> already
     if (fromAddress && !open) return
     const coach = open ? coaches.find((c) => c.n === open) : null
-    setSubject(coach?.n, coach ? coach.s[coach.s.length - 1] : schools.get(query.trim().toLowerCase()))
-  }, [open, coaches, query, schools, fromAddress])
+    setSubject(coach?.n, coach ? coach.s[coach.s.length - 1] : null)
+  }, [open, coaches, fromAddress])
 
   const setAndWrite = (setter, key, value, defaultValue) => {
     setter(value)
@@ -199,7 +196,6 @@ export default function App() {
   }
 
   const rows = useMemo(() => {
-    const q = query.trim().toLowerCase()
     return coaches
       .map((c) => {
         const games = gamesAt(c, venue, venueGames).filter((g) => g[D_RANK] <= cut)
@@ -208,9 +204,8 @@ export default function App() {
       // the open coach stays whatever the filters say, so his address never lands on an empty board
       .filter((c) => c.n === open || c.gp >= Math.max(minGames, 1))
       .filter((c) => c.n === open || !activeOnly || c.a)
-      .filter((c) => c.n === open || !q || c.n.toLowerCase().includes(q) || c.s.some((s) => s.toLowerCase().includes(q)))
       .sort((a, b) => b.pct - a.pct || b.w - a.w || a.l - b.l || a.n.localeCompare(b.n))
-  }, [coaches, cut, minGames, activeOnly, query, venue, venueGames, open])
+  }, [coaches, cut, minGames, activeOnly, venue, venueGames, open])
 
   // Highlight every OTHER coach's road game at the same host while a game is
   // hovered or selected. The active coach's own row stays unlit.
@@ -220,6 +215,17 @@ export default function App() {
     setOpen(next)
     writeCoachPath(next && slugOf(next))
     window.dhAnalytics?.track('coach_open', { coach: name })
+  }
+  // the search icon's pick: his row opens (it stays whatever the filters say) and scrolls into view
+  const findCoach = (name) => {
+    setOpen(name)
+    setScrollToOpen(true)
+    writeCoachPath(slugOf(name))
+    window.dhAnalytics?.track('coach_open', { coach: name, from: 'find' })
+  }
+  const recordOf = (c) => {
+    const r = tally(gamesAt(c, venue, venueGames).filter((g) => g[D_RANK] <= cut))
+    return `${r.w}–${r.l}${r.t ? `–${r.t}` : ''}`
   }
 
   // The share text is the page's one sentence, or the open coach's record line.
@@ -238,29 +244,30 @@ export default function App() {
 
   return (
     <main>
-      <div className="field-rule" aria-hidden="true"></div>
-      <h1>Hostile Territory</h1>
       <div className="dateline">
-        <span>{DATELINE[venue]} vs the AP Top 10 · 1936 – present<span className="dateline-upd"> · updated {DATA.generated}</span></span>
+        <span>{DATELINE[venue]} vs the AP Top {cut}<span className="dateline-yrs"> · 1936 – present</span><span className="dateline-upd"> · updated {DATA.generated}</span></span>
         <span className="dateline-acts">
-          <button className="ico" onClick={onShare} aria-label="Share"><ShareIcon /></button>
+          <FindCoach coaches={coaches} onPick={findCoach} recordOf={recordOf} />
           <a className="ico" href={KOFI_URL} onClick={() => window.dhAnalytics?.track('kofi', { from: 'icons' })} aria-label="Buy me a coffee"><CoffeeIcon /></a>
+          <button className="ico" onClick={onShare} aria-label="Share"><ShareIcon /></button>
           {copied && <span className="toast">copied</span>}
         </span>
       </div>
-      {/* Pinned to the ESPN factoid that started the site, with the live number from the board beside it. */}
+      <h1>Hostile Territory</h1>
+      {/* Pinned to the ESPN factoid that started the site, with the live number from the board beside it.
+          The factoid is a top-10 number, so the top-25 cut shows Kiffin's live top-25 record alone. */}
       <p className="sub">
-        Lane Kiffin is {(KIFFIN.w !== ESPN.w || KIFFIN.l !== ESPN.l || KIFFIN.t) ? <><s>{ESPN.w}–{ESPN.l}</s>{' '}</> : null}
-        {KIFFIN.w}–{KIFFIN.l}{KIFFIN.t ? `–${KIFFIN.t}` : ''} on the road against top 10 teams. Here's how his record
-        matches up against everyone else.
+        {cut === 10
+          ? <>Lane Kiffin is {(KIFFIN.w !== ESPN.w || KIFFIN.l !== ESPN.l || KIFFIN.t) ? <><s>{ESPN.w}–{ESPN.l}</s>{' '}</> : null}
+            {KIFFIN.w}–{KIFFIN.l}{KIFFIN.t ? `–${KIFFIN.t}` : ''} on the road against top 10 teams.</>
+          : <>Lane Kiffin is {KIFFIN_25.w}–{KIFFIN_25.l}{KIFFIN_25.t ? `–${KIFFIN_25.t}` : ''} on the road against top 25 teams.</>}
+        {' '}Here's how his record matches up against everyone else.
       </p>
 
       <h2>Every coach since 1936</h2>
       <div className="h2-note">
-        {venue === 'road' ? 'Every true road game' : venue === 'home' ? 'Every home game' : venue === 'neutral' ? 'Every neutral-site game' : 'Every game'} against a top-{cut} team, per head coach. Tap a game for details,
-        or the coach for their full record.
-        {venue !== 'road' ? ` Home and neutral-site games are College Football Streak King's ledger, without a receipt each; the road games are this site's own.` : ''}
-        {cut === 25 ? ' The AP ranked 20 teams before 1989 (10 in 1961–67), so earlier seasons stop there.' : ''}
+        {cut === 25 ? 'The AP ranked 20 teams before 1989 (10 in 1961–67), so earlier seasons stop there. ' : ''}
+        Tap a game for details or the coach for the full record.
       </div>
 
       <div className="filters">
@@ -278,11 +285,10 @@ export default function App() {
             <button key={m} className={minGames === m ? 'on' : ''} onClick={() => setAndWrite(setMinGames, 'min', m, 4)}>{m === 1 ? 'all' : `${m}+ games`}</button>
           ))}
         </div>
-        <label>
+        <label className="check">
           <input type="checkbox" checked={activeOnly} onChange={(e) => { setActiveOnly(e.target.checked); writeParam('all', e.target.checked ? null : '1') }} />
           current coaches only
         </label>
-        <input type="search" placeholder="coach or school" value={query} onChange={(e) => { setQuery(e.target.value); writeParam('q', e.target.value || null) }} aria-label="Filter by coach or school" />
       </div>
 
       <div className="board">

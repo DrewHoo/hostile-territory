@@ -5,9 +5,10 @@
 
 export const ESPN = { w: 1, l: 8, games: 9 }
 
-export function kiffinRecord(data) {
+/** `cut`: 10 (the factoid's) or 25, the board's other opponent cut */
+export function kiffinRecord(data, cut = 10) {
   const c = data.coaches.find((c) => c.n === 'Lane Kiffin')
-  const games = c ? c.g.filter((g) => g[3] <= 10) : []
+  const games = c ? c.g.filter((g) => g[3] <= cut) : []
   let w = 0, l = 0, t = 0
   for (const g of games) g[4] === 'W' ? w++ : g[4] === 'L' ? l++ : t++
   return { w, l, t, games: games.length, since: Math.max(0, games.length - ESPN.games) }
