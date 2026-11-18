@@ -1,6 +1,6 @@
 // What to read next, the Ko-fi line, and the Method notes: the page's static copy.
 
-import { SIBLINGS } from './siblings.js'
+import { ReadNext } from './ReadNext.jsx'
 
 export const KOFI_URL = 'https://ko-fi.com/drewhooverdotcom'
 
@@ -12,16 +12,7 @@ export function Notes() {
       {/* Each trailing section is one centered 700px column so the heading
           and its body share a left edge at every width — the board above
           stays full-width. */}
-      <section className="notes">
-        <h2>What to read next</h2>
-        <div className="method">
-          {SIBLINGS.map((s) => (
-            <p key={s.url}>
-              <a href={s.url}>{s.name}</a>{s.links ? ': ' : ' — '}{s.words}{s.links?.map((l, i) => <span key={l.url}>{i ? ' | ' : ' '}<a href={l.url}>{l.name}</a></span>)}
-            </p>
-          ))}
-        </div>
-      </section>
+      <ReadNext />
 
       <section className="notes" id="method" aria-label="Method">
         <h2>Method</h2>

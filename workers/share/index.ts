@@ -28,6 +28,7 @@ import VG from '../../src/data/venue-games.json';
 import IDS from '../../src/data/team-ids.json';
 import * as C from '../../src/coach.js';
 import { renderCoachCard } from './card.ts';
+import { subjectOf } from '../../src/readNext.js';
 
 interface Env { ORIGIN?: string; NO_REPORT?: string }
 
@@ -218,7 +219,10 @@ export default {
       const content = (v: string) => ({ element(e: Element) { e.setAttribute('content', v); } });
       const headers = new Headers(res.headers);
       headers.delete('content-length');
+      // his subject for the back-bar embed's read-next links, there before the app runs (src/readNext.js)
+      const subject = subjectOf(r.name, r.school);
       return new HTMLRewriter()
+        .on('html', { element(e) { e.setAttribute('data-dh-subject', subject.subject!); if (subject.team) e.setAttribute('data-dh-team', subject.team); } })
         .on('title', { element(e) { e.setInnerContent(title); } })
         .on('link[rel="canonical"]', { element(e) { e.setAttribute('href', page); } })
         .on('meta[name="description"]', content(description))

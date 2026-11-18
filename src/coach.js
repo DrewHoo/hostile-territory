@@ -73,7 +73,8 @@ export function coachRecord(coach, venues, field) {
     const tied = ranked.filter((c) => pctOf(c.r) === p).length > 1
     place = { rank: first + 1, tied, last: p === pctOf(ranked[ranked.length - 1].r), of: ranked.length }
   }
-  return { name: coach.n, schools, table, road, place, active: coach.a, games: coach.g, hasVenues: !!venues }
+  // `school`: the last he coached, for the read-next links (src/readNext.js)
+  return { name: coach.n, schools, school: coach.s[coach.s.length - 1], table, road, place, active: coach.a, games: coach.g, hasVenues: !!venues }
 }
 
 const top10 = (r) => r.table.find((x) => x.cut === CUT)

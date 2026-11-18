@@ -7,6 +7,7 @@ import { ESPN, kiffinRecord } from './kiffin.js'
 import { useShare } from './useShare.js'
 import { ShareIcon, CoffeeIcon } from './Icons.jsx'
 import { Notes, KOFI_URL } from './Notes.jsx'
+import { setSubject } from './readNext.js'
 
 const KIFFIN = kiffinRecord(DATA)
 
@@ -180,6 +181,17 @@ export default function App() {
     setScrollToOpen(false)
     document.querySelector('.row-btn[aria-expanded="true"]')?.scrollIntoView({ block: 'start' })
   }, [scrollToOpen, open])
+
+  // What to read next is about the coach the reader has open, and his school
+  // (the back-bar embed reads it off <html>); with none open, a school the
+  // filter names exactly
+  const schools = useMemo(() => new Map(coaches.flatMap((c) => c.s.map((s) => [s.toLowerCase(), s]))), [coaches])
+  useEffect(() => {
+    // the address's coach, until his row opens: the share worker named him on <html> already
+    if (fromAddress && !open) return
+    const coach = open ? coaches.find((c) => c.n === open) : null
+    setSubject(coach?.n, coach ? coach.s[coach.s.length - 1] : schools.get(query.trim().toLowerCase()))
+  }, [open, coaches, query, schools, fromAddress])
 
   const setAndWrite = (setter, key, value, defaultValue) => {
     setter(value)

@@ -4,7 +4,19 @@
 // page says it, nothing more. NBA Comparator's, in shape.
 //
 //   fs.writeFileSync(path.join(ROOT, 'dist', 'llms.txt'), llmsText({ ... }))
-import { SIBLINGS } from '../../src/siblings.js'
+
+// The other sports sites, in the order and words every sports site shares. The
+// page's What to read next is Putting Up Numbers' claims now (src/readNext.js);
+// this list is for llms.txt alone.
+/** Putting Up Numbers (puttingupnumbers.com), where the comparators live now: one link a sport */
+const PUN_SPORTS = [['College Football', 'cfb'], ['NFL', 'nfl'], ['NBA', 'nba'], ['WNBA', 'wnba'], ['NHL', 'nhl'], ['Soccer', 'soccer']].map(([name, id]) => ({ name, url: `https://puttingupnumbers.com/${id}/` }))
+const SIBLINGS = [
+  { name: 'Putting Up Numbers', url: 'https://puttingupnumbers.com/', words: 'compare players, coaches, and teams on wins.', links: PUN_SPORTS },
+  { name: 'College Football Streak King', url: 'https://drewhoover.com/cfb-streak-king/', words: 'the longest active and all-time winning and losing streaks in college football, under any definition, every FBS game since 1936.' },
+  { name: 'How Many Rings?', url: 'https://drewhoover.com/how-many-rings/', words: 'every person on a national-championship staff since 1990, ranked by the number of rings they can claim.' },
+  { name: 'Collegiate Championships', url: 'https://drewhoover.com/collegiate-championships/', words: 'which schools have won the most NCAA championships, across 33 sports.' },
+  { name: 'CFB All-Time Records', url: 'https://drewhoover.com/cfb-all-time-records/', words: 'all-time win-loss, bowl and national-title records for every FBS program.' },
+]
 
 const REPO = 'https://github.com/DrewHoo/hostile-territory'
 

@@ -17,6 +17,7 @@ import DATA from '../src/data/site-data.json' with { type: 'json' }
 import EARLY from '../src/data/site-data-1936.json' with { type: 'json' }
 import { llmsText } from './lib/llms.mjs'
 import { mergeEras, slugOf } from '../src/coach.js'
+import { readNextLinks, bakeReadNext, READ_NEXT_ORIGIN } from './lib/readNext.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SLUG = pkg.name
@@ -35,6 +36,11 @@ const vite = await createServer({
   logLevel: 'warn',
 })
 const { default: App } = await vite.ssrLoadModule('/src/App.jsx')
+// What to read next, baked: the sport's list (scripts/lib/readNext.mjs); a coach's address is this page too, so it gets the same
+const { setBaked } = await vite.ssrLoadModule('/src/readNext.js')
+const readNext = bakeReadNext(await readNextLinks('/cfb/links.json', SLUG))
+console.log(`read next: ${readNext.length} baked from ${READ_NEXT_ORIGIN}/cfb/links.json`)
+setBaked(readNext)
 const appHtml = renderToString(React.createElement(App))
 await vite.close()
 
@@ -84,7 +90,7 @@ const head = `
     <meta name="twitter:image" content="${SITE}og.png" />
 
     <!-- Cross-site chrome served by the index site: back bar, comments, analytics. -->
-    <script src="${ORIGIN}/embed/back-bar.js" data-section="sports" async></script>
+    <script src="${ORIGIN}/embed/back-bar.js" data-section="sports" data-read-next="cfb" async></script>
     <script src="${ORIGIN}/embed/giscus.js" async></script>
     <script src="${ORIGIN}/embed/analytics.js" async></script>
 
@@ -103,7 +109,8 @@ if (!/<title>[^<]*<\/title>/.test(html)) {
 }
 html = html.replace(/<title>[^<]*<\/title>/, `<title>${esc(config.title)}</title>`)
 html = html.replace('</head>', head)
-html = html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
+const readNextData = readNext.length ? `<script type="application/json" id="readnext-data">${JSON.stringify(readNext).replace(/</g, '\\u003c')}</script>` : ''
+html = html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>${readNextData}`)
 fs.writeFileSync(OUT, html)
 
 // The sitemap: the board, and the board with each coach open at his own
