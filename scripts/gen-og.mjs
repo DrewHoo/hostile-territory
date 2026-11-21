@@ -1,4 +1,4 @@
-// Generate the social preview images. Run: npm run gen:og
+// Generate the social preview images. Run: pnpm run gen:og
 //   public/og.png    1200x630, what X/Bluesky/LinkedIn/Reddit/iMessage show
 //   public/card.png  1200x750, the 8:5 cover for the index site's project card
 //

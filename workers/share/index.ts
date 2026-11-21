@@ -17,8 +17,8 @@
 // worker must never be the reason the site is down. A link preview of the
 // board is counted in Mixpanel as `share unfurl`.
 //
-// Deploy: npm run worker:deploy. To see a card locally: npm run build,
-// npm run preview (4173), then npm run worker:dev and open
+// Deploy: pnpm run worker:deploy. To see a card locally: pnpm run build,
+// pnpm run preview (4173), then pnpm run worker:dev and open
 //   http://localhost:8789/hostile-territory/share/coach/lane-kiffin.png
 
 import DATA from '../../src/data/site-data.json';

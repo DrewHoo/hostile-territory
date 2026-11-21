@@ -20,4 +20,4 @@ The pipeline writes `data/games-candidates.json` (every candidate game), `data/r
 
 ## Deploy
 
-`npm run build` is `vite build` plus `scripts/prerender.mjs`, which bakes the rendered page, the head, the sitemap and `llms.txt` into `dist/`. `.github/workflows/deploy.yml` builds and publishes to GitHub Pages on every push to `main`, and every Sunday morning in season it runs the refresh first, with `data/raw/` restored from the Actions cache, so the week's games land without a commit. `npm run dev` serves it locally.
+`pnpm run build` is `vite build` plus `scripts/prerender.mjs`, which bakes the rendered page, the head, the sitemap and `llms.txt` into `dist/`. `.github/workflows/deploy.yml` builds and publishes to GitHub Pages on every push to `main`, and every Sunday morning in season it runs the refresh first, with `data/raw/` restored from the Actions cache, so the week's games land without a commit. `pnpm run dev` serves it locally.

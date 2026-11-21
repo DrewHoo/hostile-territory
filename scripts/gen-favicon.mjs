@@ -1,4 +1,4 @@
-// Generate the favicon set from one SVG. Run: npm run gen:favicon
+// Generate the favicon set from one SVG. Run: pnpm run gen:favicon
 // Outputs are committed; CI does not regenerate them.
 //   public/favicon.svg          modern browsers
 //   public/favicon-32.png       small-pixel fallback
