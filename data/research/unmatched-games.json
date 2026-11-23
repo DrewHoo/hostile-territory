@@ -31392,5 +31392,43 @@
   "venue": null,
   "game_id": null,
   "ot": 0
+ },
+ {
+  "date": "2026-11-21",
+  "season": 2026,
+  "week": null,
+  "away_team": "San Diego State",
+  "home_team": "Boise State",
+  "home_rank_ap": 15,
+  "away_rank_ap": null,
+  "away_points": 22,
+  "home_points": 20,
+  "result": "W",
+  "source": "Streak King",
+  "poll_date": "2026-11-16",
+  "poll_label": "November 16",
+  "season_type": "regular",
+  "venue": null,
+  "game_id": null,
+  "ot": 0
+ },
+ {
+  "date": "2026-11-21",
+  "season": 2026,
+  "week": null,
+  "away_team": "Western Kentucky",
+  "home_team": "Liberty",
+  "home_rank_ap": 22,
+  "away_rank_ap": null,
+  "away_points": 14,
+  "home_points": 45,
+  "result": "L",
+  "source": "Streak King",
+  "poll_date": "2026-11-16",
+  "poll_label": "November 16",
+  "season_type": "regular",
+  "venue": null,
+  "game_id": null,
+  "ot": 0
  }
 ]
