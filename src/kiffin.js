@@ -14,7 +14,25 @@ export function kiffinRecord(data, cut = 10) {
   return { w, l, t, games: games.length, since: Math.max(0, games.length - ESPN.games) }
 }
 
-const rec = ({ w, l, t }, dash = '-') => `${w}${dash}${l}${t ? `${dash}${t}` : ''}`
+export const rec = ({ w, l, t }, dash = '-') => `${w}${dash}${l}${t ? `${dash}${t}` : ''}`
+
+/**
+ * The intro line's records, oldest first: ESPN's factoid, then his record
+ * after each top-10 road game since, the last one live. The page strikes
+ * every one but the last ("1-8 1-9 1-10", Drew's call 2026-11-22), and so
+ * does the og card.
+ */
+export function kiffinSteps(data) {
+  const c = data.coaches.find((c) => c.n === 'Lane Kiffin')
+  const games = c ? c.g.filter((g) => g[3] <= 10) : []
+  const steps = [{ ...ESPN }]
+  let w = ESPN.w, l = ESPN.l, t = 0
+  for (const g of games.slice(ESPN.games)) {
+    g[4] === 'W' ? w++ : g[4] === 'L' ? l++ : t++
+    steps.push({ w, l, t })
+  }
+  return steps
+}
 
 // The search snippet: the searched phrase stays, the live number leads.
 export function kiffinDescription(data) {

@@ -1,16 +1,16 @@
-import { useEffect, useMemo, useState } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
 import DATA from './data/site-data.json'
 import LOGO_IDS from './data/team-ids.json'
 import { readParam, writeParam, writeCoachPath, readCoachPath } from './urlState.js'
 import { slugOf } from './coach.js'
-import { ESPN, kiffinRecord } from './kiffin.js'
+import { kiffinRecord, kiffinSteps, rec } from './kiffin.js'
 import { useShare } from './useShare.js'
 import { ShareIcon, CoffeeIcon } from './Icons.jsx'
 import { Notes, KOFI_URL } from './Notes.jsx'
 import { setSubject } from './readNext.js'
 import { FindCoach } from './FindCoach.jsx'
 
-const KIFFIN = kiffinRecord(DATA)
+const KIFFIN_STEPS = kiffinSteps(DATA)
 const KIFFIN_25 = kiffinRecord(DATA, 25)
 
 // site-data game row: [date, school, opponent, opp_rank, result, away_pts,
@@ -254,12 +254,14 @@ export default function App() {
         </span>
       </div>
       <h1>Hostile Territory</h1>
-      {/* Pinned to the ESPN factoid that started the site, with the live number from the board beside it.
-          The factoid is a top-10 number, so the top-25 cut shows Kiffin's live top-25 record alone. */}
+      {/* Pinned to the ESPN factoid that started the site, then his record after each top-10 road game since,
+          each struck through on its own, the last one live. The factoid is a top-10 number, so the top-25 cut
+          shows Kiffin's live top-25 record alone. */}
       <p className="sub">
         {cut === 10
-          ? <>Lane Kiffin is {(KIFFIN.w !== ESPN.w || KIFFIN.l !== ESPN.l || KIFFIN.t) ? <><s>{ESPN.w}–{ESPN.l}</s>{' '}</> : null}
-            {KIFFIN.w}–{KIFFIN.l}{KIFFIN.t ? `–${KIFFIN.t}` : ''} on the road against top 10 teams.</>
+          ? <>Lane Kiffin is {KIFFIN_STEPS.map((k, i) => (i < KIFFIN_STEPS.length - 1
+              ? <Fragment key={i}><s>{rec(k, '–')}</s>{' '}</Fragment>
+              : <Fragment key={i}>{rec(k, '–')}</Fragment>))} on the road against top 10 teams.</>
           : <>Lane Kiffin is {KIFFIN_25.w}–{KIFFIN_25.l}{KIFFIN_25.t ? `–${KIFFIN_25.t}` : ''} on the road against top 25 teams.</>}
         {' '}Here's how his record matches up against everyone else.
       </p>

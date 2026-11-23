@@ -13,6 +13,7 @@ import { mkdirSync, readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import config from '../site.config.js'
+import { kiffinSteps, rec } from '../src/kiffin.js'
 import pkg from '../package.json' with { type: 'json' }
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
@@ -35,9 +36,10 @@ const data = JSON.parse(readFileSync(resolve(ROOT, 'src/data/site-data.json'), '
 const teamIds = JSON.parse(readFileSync(resolve(ROOT, 'src/data/team-ids.json'), 'utf8'))
 const kiffin = data.coaches.find((c) => c.n === 'Lane Kiffin')
 const GAMES = kiffin.g.filter((g) => g[3] <= 10) // [date, team, opp, oppRank, result, ...]
-const WINS = GAMES.filter((g) => g[4] === 'W').length
-const RECORD = `${WINS}–${GAMES.length - WINS}`
-const WAS = `${WINS}–${GAMES.length - WINS - 1}` // before the latest loss; struck, as on the site
+// the page's records, ESPN's 1-8 first and the live one last: every one but the last struck, as on the site
+const STEPS = kiffinSteps(data).map((k) => rec(k, '–'))
+const RECORD = STEPS.at(-1)
+const WAS = STEPS.slice(0, -1)
 
 // The site tints the black opponent mark with CSS filters; bake the same tints
 // into the pixels: ink on a win, warm gray on a loss.
@@ -59,14 +61,14 @@ function chips(x, y, size, gap) {
     const box = g[4] === 'W'
       ? `<rect x="${cx}" y="${y}" width="${size}" height="${size}" rx="6" fill="${CREAM}"/>`
       : `<rect x="${cx}" y="${y}" width="${size}" height="${size}" rx="6" fill="${LIFT}" stroke="${LINE}" stroke-width="2"/>`
-    // the newest game, the one that made it 1-9, gets the site's rust outline
+    // the newest game, the one that made the live record, gets the site's rust outline
     const ring = last ? `<rect x="${cx - 4}" y="${y - 4}" width="${size + 8}" height="${size + 8}" rx="8" fill="none" stroke="${RUST}" stroke-width="2.5"/>` : ''
     const img = MARKS[i] ? `<image x="${cx + m}" y="${y + m}" width="${size - 2 * m}" height="${size - 2 * m}" href="${MARKS[i]}"/>` : ''
     return box + img + ring
   }).join('\n  ')
 }
 
-// librsvg ignores text-decoration, so the strike through the old record is a
+// librsvg ignores text-decoration, so the strike through each old record is a
 // drawn line. Measure ink widths by rendering the runs alone and trimming.
 const CAPTION = { size: 26, attrs: `font-family="${SERIF}" font-size="26" font-style="italic"` }
 async function inkWidth(str) {
@@ -75,8 +77,11 @@ async function inkWidth(str) {
   return info.width
 }
 const PRE = 'Lane Kiffin is '
-const POST = ` ${RECORD} on the road against the AP top 10`
-const STRIKE = { full: await inkWidth(PRE + WAS + POST), toEnd: await inkWidth(PRE + WAS), was: await inkWidth(WAS) }
+const POST = ' on the road against the AP top 10'
+const FULL = await inkWidth(PRE + STEPS.join(' ') + POST)
+// each struck record: where its ink ends (from the caption's left edge) and how wide it is. A strike
+// spans its record's ink and no more, so two struck records read as two strikes, not one
+const STRIKES = await Promise.all(WAS.map(async (was, i) => ({ toEnd: await inkWidth(PRE + STEPS.slice(0, i + 1).join(' ')), was: await inkWidth(was) })))
 
 function render(W, H) {
   const title = config.ogTitle ?? config.title
@@ -106,8 +111,8 @@ function render(W, H) {
   <text x="${W / 2}" y="${cy - 22}" font-family="${MONO}" font-size="22" fill="${RUST}" letter-spacing="4" text-anchor="middle">${esc(config.ogSubtitle.toUpperCase())}</text>
 
   ${chips(W / 2 - (GAMES.length * 64 - 12) / 2, cy + 30, 52, 12)}
-  <text x="${W / 2}" y="${cy + 135}" ${CAPTION.attrs} fill="${MUTED}" text-anchor="middle">${esc(PRE)}<tspan fill-opacity="0.75">${WAS}</tspan> <tspan fill="${INK}">${RECORD}</tspan>${esc(POST.slice(RECORD.length + 1))}</text>
-  <line x1="${W / 2 - STRIKE.full / 2 + STRIKE.toEnd - STRIKE.was - 2}" x2="${W / 2 - STRIKE.full / 2 + STRIKE.toEnd + 2}" y1="${cy + 123}" y2="${cy + 123}" stroke="${RUST}" stroke-width="2"/>
+  <text x="${W / 2}" y="${cy + 135}" ${CAPTION.attrs} fill="${MUTED}" text-anchor="middle">${esc(PRE)}${WAS.map((was) => `<tspan fill-opacity="0.75">${was}</tspan> `).join('')}<tspan fill="${INK}">${RECORD}</tspan>${esc(POST)}</text>
+  ${STRIKES.map(({ toEnd, was }) => `<line x1="${W / 2 - FULL / 2 + toEnd - was}" x2="${W / 2 - FULL / 2 + toEnd}" y1="${cy + 123}" y2="${cy + 123}" stroke="${RUST}" stroke-width="2"/>`).join('\n  ')}
 
   <text x="${W / 2}" y="${footerY}" font-family="${MONO}" font-size="18" fill="${MUTED}" text-anchor="middle">${esc(config.domain)}/${esc(pkg.name)}</text>
 </svg>`
